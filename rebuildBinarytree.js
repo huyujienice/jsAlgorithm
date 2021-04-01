@@ -25,20 +25,29 @@ c.right = g;
 
 //二叉树前序遍历
 //利用栈结构将需要回溯的节点保存
-function preorderTraversal(node, arr = []) {
-  console.log(`${node.value}`);
-  if (node.left && node.right) {
-    arr.push(node.right);
-    preorderTraversal(node.left, arr);
-  } else if (!node.left && node.right) {
-    preorderTraversal(node.right, arr);
-  } else if (node.left && !node.right) {
-    preorderTraversal(node.left, arr);
-  } else {
-    let point = arr.pop();
-    if (point) {
-      preorderTraversal(point, arr);
-    }
+// function preorderTraversal(node, arr = []) {
+//   console.log(`${node.value}`);
+//   if (node.left && node.right) {
+//     arr.push(node.right);
+//     preorderTraversal(node.left, arr);
+//   } else if (!node.left && node.right) {
+//     preorderTraversal(node.right, arr);
+//   } else if (node.left && !node.right) {
+//     preorderTraversal(node.left, arr);
+//   } else {
+//     let point = arr.pop();
+//     if (point) {
+//       preorderTraversal(point, arr);
+//     }
+//   }
+// }
+//二叉树前序遍历
+//直接递归
+function preorderTraversal(node) {
+  if (node) {
+    console.log(`${node.value}`);
+    preorderTraversal(node.left);
+    preorderTraversal(node.right);
   }
 }
 
