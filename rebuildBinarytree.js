@@ -50,5 +50,17 @@ function preorderTraversal(node) {
     preorderTraversal(node.right);
   }
 }
+// preorderTraversal(a);
 
-preorderTraversal(a);
+//中序遍历
+function middleOrderTraversal(node) {
+  if (node.left) {
+    console.log(`${node.left.value}`);
+  }
+  console.log(`${node.value}`);
+  if (node.right) {
+    console.log(`${node.right.valuet}`);
+  }
+}
+
+middleOrderTraversal(a);
