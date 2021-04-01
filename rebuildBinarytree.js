@@ -23,39 +23,21 @@ d.right = h;
 c.left = f;
 c.right = g;
 
-let ptA = [];
-//前序遍历
-function preorderTraversal(root, type) {
-  let point = root;
-  console.log(`${point.value}`);
-  console.log(ptA);
-  if (type) {
-    if (point.right) {
-      preorderTraversal(point.right);
-    } else {
-      if (!ptA.length) {
-        let lastPoint = ptA.pop();
-        preorderTraversal(lastPoint, 1);
-      } else {
-        return;
-      }
-    }
+//二叉树前序遍历
+//利用栈结构将需要回溯的节点保存
+function preorderTraversal(node, arr = []) {
+  console.log(`${node.value}`);
+  if (node.left && node.right) {
+    arr.push(node.right);
+    preorderTraversal(node.left, arr);
+  } else if (!node.left && node.right) {
+    preorderTraversal(node.right, arr);
+  } else if (node.left && !node.right) {
+    preorderTraversal(node.left, arr);
   } else {
-    if (point.left) {
-      ptA.push(point);
-      preorderTraversal(point.left);
-    } else {
-      if (point.right) {
-        ptA.push(point);
-        preorderTraversal(point.right);
-      } else {
-        if (!ptA.length) {
-          let lastPoint = ptA.pop();
-          preorderTraversal(lastPoint, 1);
-        } else {
-          return;
-        }
-      }
+    let point = arr.pop();
+    if (point) {
+      preorderTraversal(point, arr);
     }
   }
 }
