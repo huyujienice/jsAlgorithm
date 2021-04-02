@@ -25,6 +25,7 @@ c.right = g;
 
 //二叉树前序遍历
 //利用栈结构将需要回溯的节点保存
+//中 → 左 → 右
 // function preorderTraversal(node, arr = []) {
 //   console.log(`${node.value}`);
 //   if (node.left && node.right) {
@@ -53,14 +54,33 @@ function preorderTraversal(node) {
 // preorderTraversal(a);
 
 //中序遍历
-function middleOrderTraversal(node) {
-  if (node.left) {
-    console.log(`${node.left.value}`);
-  }
-  console.log(`${node.value}`);
-  if (node.right) {
-    console.log(`${node.right.valuet}`);
-  }
-}
+//左 → 中 → 右
+// function middleOrderTraversal(node) {
+//   if (node.left) {
+//     middleOrderTraversal(node.left);
+//   }
+//   console.log(node.value);
+//   if (node.right) {
+//     middleOrderTraversal(node.right);
+//   }
+// }
+// middleOrderTraversal(a);
 
-middleOrderTraversal(a);
+//后序遍历
+//左 → 右 → 中
+// function postorderTraveral(node) {
+//   if (node.left) {
+//     postorderTraveral(node.left);
+//   }
+//   if (node.right) {
+//     postorderTraveral(node.right);
+//   }
+//   console.log(node.value);
+// }
+// postorderTraveral(a);
+
+//层序遍历
+function levelTraveral(node) {
+    
+}
+levelTraveral(a);
