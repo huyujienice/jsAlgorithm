@@ -80,7 +80,35 @@ function preorderTraversal(node) {
 // postorderTraveral(a);
 
 //层序遍历
-function levelTraveral(node) {
-    
+function levelTraveral(node, arr = []) {
+  if (arr.length) {
+    let l = arr.length;
+    while (l > 0) {
+      let n = arr.shift();
+      if (n.left) {
+        console.log(`${n.left.value}`);
+        arr.push(n.left);
+      }
+      if (n.right) {
+        console.log(`${n.right.value}`);
+        arr.push(n.right);
+      }
+      l--;
+    }
+    levelTraveral(null, arr);
+  } else {
+    if (node) {
+      console.log(`${node.value}`);
+      if (node.left) {
+        console.log(`${node.left.value}`);
+        arr.push(node.left);
+      }
+      if (node.right) {
+        console.log(`${node.right.value}`);
+        arr.push(node.right);
+      }
+      levelTraveral(null, arr);
+    }
+  }
 }
 levelTraveral(a);
