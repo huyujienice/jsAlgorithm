@@ -7,16 +7,26 @@ class Node {
   }
 }
 
-function rebuildTree(){
-  
+let obj = {};
+function rebuildTree(pA, mA) {
+  //初始化二叉树所有节点
+  if (!rtA.length) {
+    pA.forEach((element) => {
+      let it = new Node(element);
+      obj[element] = it;
+    });
+  }
+  //pA前序遍历数组
+  //mA中序遍历数组
+  let index = mA.indexOf(pA[0]);
+  let m1 = mA.slice(0, index);
+  let m2 = mA.slice(index + 1, mA.length);
+  let p1 = pA.slice(1, m1.length + 1);
+  let p2 = pA.slice(m1.length + 1);
+
+  rebuildTree(p1, m1);
+  rebuildTree(p2, m2);
 }
-
-
-
-
-
-
-
 
 // let a = new Node("A");
 // let b = new Node("B");
