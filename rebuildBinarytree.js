@@ -8,25 +8,43 @@ class Node {
 }
 
 let obj = {};
+let num = 0;
 function rebuildTree(pA, mA) {
   //初始化二叉树所有节点
-  if (!rtA.length) {
+  if (num == 0) {
     pA.forEach((element) => {
       let it = new Node(element);
       obj[element] = it;
     });
+    num++;
   }
   //pA前序遍历数组
   //mA中序遍历数组
   let index = mA.indexOf(pA[0]);
-  let m1 = mA.slice(0, index);
-  let m2 = mA.slice(index + 1, mA.length);
-  let p1 = pA.slice(1, m1.length + 1);
-  let p2 = pA.slice(m1.length + 1);
-
-  rebuildTree(p1, m1);
-  rebuildTree(p2, m2);
+  if (index != -1) {
+    let m1 = mA.slice(0, index);
+    let m2 = mA.slice(index + 1, mA.length);
+    let p1 = pA.slice(1, m1.length + 1);
+    let p2 = pA.slice(m1.length + 1);
+    if (m1.length == 1) {
+      obj[pA[0]].left = obj[m1[0]];
+    }
+    if (m2.length == 1) {
+      obj[pA[0]].right = obj[m2[0]];
+    }
+    if (p1.length) {
+      obj[pA[0]].left = obj[p1[0]];
+    }
+    if (p2.length) {
+      obj[pA[0]].right = obj[p2[0]];
+    }
+    rebuildTree(p1, m1);
+    rebuildTree(p2, m2);
+  }
 }
+rebuildTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]);
+
+console.log(obj);
 
 // let a = new Node("A");
 // let b = new Node("B");
