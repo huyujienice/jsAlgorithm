@@ -1,3 +1,4 @@
+//hard
 class Node {
   constructor(value) {
     this.value = value;
@@ -50,15 +51,23 @@ function mot(node) {
 mot(a);
 
 function nextNode(node) {
-  if (node.parent == null) {
-    //根节点
-    nextNode(node.right);
-  } else {
-    if (node.right) {
-      nextNode(node.right);
-    } else {
+  if (node.right) {
+    //有右子树，则下一个节点是右子树的最左子节点
+    let n1 = node.right;
+    while (n1.left !== null) {
+      n1 = n1.left;
     }
+    console.log(n1.value);
+    return;
+  }
+  while (node.parent !== null) {
+    //没有右子树，找到第一个是父节点左子树的节点
+    if (node.value === node.parent.left.value) {
+      console.log(node.parent.value);
+      return node.parent;
+    }
+    node = node.parent;
   }
 }
-console.log(`b节点之后的节点为`);
-nextNode(b);
+console.log(`g节点之后的节点为`);
+nextNode(g);
