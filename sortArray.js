@@ -47,6 +47,8 @@ function goMS() {
   console.log(arrs);
 }
 
+//https://juejin.cn/post/6844903444365443080
+//看归并排序流程图，记住即可
 //归并排序
 function mergeSort(arr) {
   if (arr.length < 2) {
@@ -67,9 +69,9 @@ function merge(leftArr, rightArr) {
       result.push(rightArr.shift());
     }
   }
+  console.log(`${result.concat(leftArr).concat(rightArr)}`);
   return result.concat(leftArr).concat(rightArr);
 }
 
 goMS();
-
 
