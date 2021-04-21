@@ -49,6 +49,9 @@ function goMS() {
 
 //https://juejin.cn/post/6844903444365443080
 //看归并排序流程图，记住即可
+// <1>.把长度为n的输入序列分成两个长度为n/2的子序列；
+// <2>.对这两个子序列分别采用归并排序；
+// <3>.将两个排序好的子序列合并成一个最终的排序序列。
 //归并排序
 function mergeSort(arr) {
   if (arr.length < 2) {
@@ -73,5 +76,30 @@ function merge(leftArr, rightArr) {
   return result.concat(leftArr).concat(rightArr);
 }
 
-goMS();
+// goMS();
 
+//快速排序
+//快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高! 它是处理大数据最快的排序算法之一了。
+// <1>.从数列中挑出一个元素，称为 "基准"（pivot）；
+// <2>.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；
+// <3>.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
+function quickSort(arr) {
+  if (arr.length < 2) {
+    return arr;
+  }
+  let mid = Math.floor(arr.length / 2);
+  let j = arr[mid]
+  let middle = arr.filter(it => it==j)
+  let left = arr.filter((it) => it < j);
+  let right = arr.filter((it) => it > j);
+  return quickSort(left).concat(middle).concat(quickSort(right));
+}
+
+function goQS() {
+  let arr = createArray(10);
+  console.log(arr);
+  let arrs = quickSort(arr);
+  console.log(arrs);
+}
+
+goQS();
