@@ -1,4 +1,5 @@
 //在 8×8 格的国际象棋上摆放八个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。
+//回溯法解决
 let result = [];
 function judgeRepeat(arr, row, col) {
   for (let i = 0; i < arr.length; i++) {
@@ -6,6 +7,7 @@ function judgeRepeat(arr, row, col) {
       return false;
     }
   }
+  //斜左上方
   let l1 = row - 1;
   let c1 = col - 1;
   while (l1 > -1 && c1 > -1) {
@@ -15,6 +17,7 @@ function judgeRepeat(arr, row, col) {
     c1--;
     l1--;
   }
+  //斜右上方
   let l2 = row - 1;
   let c2 = col + 1;
   while (l2 > -1 && c2 < arr.length) {
