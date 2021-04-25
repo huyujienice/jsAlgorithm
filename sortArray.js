@@ -73,10 +73,10 @@ function merge(leftArr, rightArr) {
     }
   }
   console.log(`${result.concat(leftArr).concat(rightArr)}`);
-  return result.concat(leftArr).concat(rightArr);
+  return result.concat(leftArr,rightArr);
 }
 
-// goMS();
+goMS();
 
 //快速排序
 //快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高! 它是处理大数据最快的排序算法之一了。
@@ -92,7 +92,7 @@ function quickSort(arr) {
   let middle = arr.filter(it => it==j)
   let left = arr.filter((it) => it < j);
   let right = arr.filter((it) => it > j);
-  return quickSort(left).concat(middle).concat(quickSort(right));
+  return quickSort(left).concat(middle,quickSort(right));
 }
 
 function goQS() {
@@ -102,4 +102,4 @@ function goQS() {
   console.log(arrs);
 }
 
-goQS();
+// goQS();
