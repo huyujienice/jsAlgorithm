@@ -5,16 +5,18 @@
 // 3、通过查找出值为1的最长对角线就能找到最长公共子串。
 function findDynamic(st1, st2) {
   let r = [];
-  let mid = 0;
-  let rs = "";
+  let max = 0;
+  let lines = 0;
   for (let i = 0; i < st1.length; i++) {
     r[i] = [];
-    let mid = 0;
-    let rs = "";
     for (let j = 0; j < st2.length; j++) {
       if (st1[i] == st2[j]) {
         if (i > 1 && j > 1 && r[i - 1][j - 1]) {
           r[i][j] = 1 + r[i - 1][j - 1];
+          if (r[i][j] > max) {
+            max = r[i][j];
+            lines = i;
+          }
         } else {
           r[i][j] = 1;
         }
@@ -24,7 +26,9 @@ function findDynamic(st1, st2) {
     }
     console.log(`${r[i]}`);
   }
-
+  console.log(st1.slice(lines - max + 1, lines + 1));
+  console.log(`lines=${lines}`);
+  console.log(`max=${max}`);
   return r;
 }
 
@@ -62,5 +66,5 @@ function hasItem(st, st1, st2) {
   return r1 && r2;
 }
 
-// find("acbcbcef", "abcbced");
+find("acbcbcef", "abcbced");
 findDynamic("acbcbcef", "abcbced");
