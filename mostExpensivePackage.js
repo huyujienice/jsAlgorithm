@@ -10,8 +10,41 @@ function mep(arr1, arr2, all) {
   //先找出所有能够装入背包的组合，再组合里面找到价值最高的商品
   let a1 = arr1.slice(0);
   a1.sort((a, b) => a - b);
-  for(let i=0;i<a1.lengthj;i++){
-      let array = [a1[i]]
-        
+  for (let i = 0; i < a1.lengthj; i++) {
+    let one = a1[i];
+    let leftArr = a1.slice(i);
+  }
+}
+
+function mc(arr1, all) {
+  let result = [];
+  //先找出所有能够装入背包的组合，再组合里面找到价值最高的商品
+  let a1 = arr1.slice(0);
+  a1.sort((a, b) => a - b);
+  for (let i = 0; i < a1.lengthj; i++) {
+    let one = a1[i];
+    let leftArr = a1.slice(i);
+    let leftNum = all - one;
+    let j = 0;
+    let midArr = [];
+    while (j < leftArr.length) {
+        let judge = rd(midArr) + leftArr[j]
+        if(judge > leftNum){
+            
+        }else{
+            midArr.push(leftArr[j])
+            j++
+        }
+    }
+  }
+}
+
+function rd(arr) {
+  if (arr.length) {
+    return arr.reduce((a, c) => {
+      a + c;
+    });
+  } else {
+    return 0;
   }
 }
