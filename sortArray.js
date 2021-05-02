@@ -111,4 +111,41 @@ function goQS() {
   console.log(arrs);
 }
 
-goQS();
+// goQS();
+
+//插入排序
+//新建一个有序数组，只要把原数组取出的数安插在有序数组的合适位置即可保持数组有序，就像打牌整理牌的大小
+// <1>.从第一个元素开始，该元素可以认为已经被排序；
+// <2>.取出下一个元素，在已经排序的元素序列中从后向前扫描；
+// <3>.如果该元素（已排序）大于新元素，将该元素移到下一位置；
+// <4>.重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；
+// <5>.将新元素插入到该位置后；
+// <6>.重复步骤2~5。
+
+function insertSort(arr) {
+  let result = [arr.shift()];
+  while (arr.length > 0) {
+    let it = arr.shift();
+    let j = -1;
+    for (let i = 0; i < result.length; i++) {
+      if (result[i] < it) {
+        j = i;
+      }
+    }
+    if (j == -1) {
+      result.unshift(it);
+    } else {
+      result.splice(j+1, 0, it);
+    }
+  }
+  return result;
+}
+
+function goIS() {
+  let arr = createArray(10);
+  console.log(arr);
+  let arrs = insertSort(arr);
+  console.log(arrs);
+}
+
+goIS();
