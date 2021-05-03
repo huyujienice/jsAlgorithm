@@ -40,13 +40,6 @@ function goBS(nums) {
   binarySearch(arr, nums);
 }
 
-function goMS() {
-  let arr = createArray(10);
-  console.log(arr);
-  let arrs = mergeSort(arr);
-  console.log(arrs);
-}
-
 //https://juejin.cn/post/6844903444365443080
 //看归并排序流程图，记住即可
 // <1>.把长度为n的输入序列分成两个长度为n/2的子序列；
@@ -76,8 +69,6 @@ function merge(leftArr, rightArr) {
   return result.concat(leftArr, rightArr);
 }
 
-// goMS();
-
 //快速排序
 //快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高! 它是处理大数据最快的排序算法之一了。
 // <1>.从数列中挑出一个元素，称为 "基准"（pivot）；
@@ -104,15 +95,6 @@ function quickSort(arr) {
   return quickSort(left).concat(middle, quickSort(right));
 }
 
-function goQS() {
-  let arr = createArray(10);
-  console.log(arr);
-  let arrs = quickSort(arr);
-  console.log(arrs);
-}
-
-// goQS();
-
 //插入排序
 //新建一个有序数组，只要把原数组取出的数安插在有序数组的合适位置即可保持数组有序，就像打牌整理牌的大小
 // <1>.从第一个元素开始，该元素可以认为已经被排序；
@@ -135,17 +117,35 @@ function insertSort(arr) {
     if (j == -1) {
       result.unshift(it);
     } else {
-      result.splice(j+1, 0, it);
+      result.splice(j + 1, 0, it);
     }
   }
   return result;
 }
 
-function goIS() {
+//冒泡排序
+// <1>.比较相邻的元素。如果第一个比第二个大，就交换它们两个；
+// <2>.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；
+// <3>.针对所有的元素重复以上的步骤，除了最后一个；
+// <4>.重复步骤1~3，直到排序完成。
+function bubbleSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        let mid = arr[j];
+        arr[j] = arr[i];
+        arr[i] = mid;
+      }
+    }
+  }
+  return arr;
+}
+
+function goSortArray(fn) {
   let arr = createArray(10);
   console.log(arr);
-  let arrs = insertSort(arr);
+  let arrs = fn(arr);
   console.log(arrs);
 }
 
-goIS();
+goSortArray(bubbleSort);
