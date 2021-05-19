@@ -160,10 +160,14 @@ function selectionSort(arr) {
 }
 
 function goSortArray(fn) {
-  let arr = createArray(10);
-  console.log(arr);
+  console.time("sort");
+  let arr = createArray(50);
   let arrs = fn(arr);
+  console.timeEnd("sort");
+  console.log(arr);
   console.log(arrs);
 }
 
-goSortArray(selectionSort);
+// goSortArray(selectionSort);
+
+module.exports = goSortArray;
