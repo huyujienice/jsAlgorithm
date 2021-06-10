@@ -16,11 +16,7 @@ function judgeEnter(l, c, k) {
   if (r1 !== undefined) {
     return false;
   }
-  let a = String(l).split("");
-  let b = String(c).split("");
-  let r2 =
-    a.reduce((a, b) => Number(a) + Number(b)) +
-    b.reduce((a, b) => Number(a) + Number(b));
+  let r2 = bitSum(l) + bitSum(c);
   if (k < r2) {
     return false;
   } else {
