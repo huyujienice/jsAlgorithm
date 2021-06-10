@@ -1,9 +1,17 @@
-let result = [[35,37]];
+let result = [[35, 37]];
 function area() {}
 
+function bitSum(n) {
+  let r = 0;
+  while (n) {
+    r = r + (n % 10);
+    n = Math.floor(n % 10);
+  }
+  return r;
+}
 function judgeEnter(l, c, k) {
   let r1 = result.find((it) => {
-    return (it[0] == l) && (it[1] == c);
+    return it[0] == l && it[1] == c;
   });
   if (r1 !== undefined) {
     return false;
@@ -17,8 +25,6 @@ function judgeEnter(l, c, k) {
     return false;
   } else {
     result.push([l, c]);
-    console.log(`l=${l}`);
-    console.log(`c=${c}`);
     return true;
   }
 }
