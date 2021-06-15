@@ -9,26 +9,33 @@ const testArr = [
   ["j", "d", "e", "h"],
 ];
 const testString = "bfce";
+let results = [];
+
 function judgeString(arr, str) {
-  let results = [];
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
-      if (arr[i][j] == str.chatAt(0)) {
-        startFind(arr, str, i, j, results);
+      if (arr[i][j] == str[0]) {
+        judgeFind(arr, str, i, j, str.length - 1);
       }
     }
-  }                 
+  }
 }
-function startFind(arr, str, i, j, results) {
-  let mapArr = [];
-  arr.forEach((it) => {
-    let r = [];
-    for (let i = 0; i < it.length; i++) {
-      r.push("0");
-    }
-    mapArr.push(r);
-  });
-  let mapStr = str.slice(1).split("");
+function judgeFind(arr, str, i, j, k) {
+  console.log(`i${i}j${j}k${k}`);
+  if (i < 0 || i > arr.length) return false;
+  if (j < 0 || j > arr[0].length) return false;
+  if (k > str.length - 1) return false;
+  if (arr[i][j] !== str[k]) return false;
+  if (k == str.length - 1) {
+    console.log(`i=${i}`);
+    console.log(`j=${j}`);
+    console.log(`found!`);
+    return false;
+  }
+  judgeFind(arr, str, i - 1, j, k - 1);
+  judgeFind(arr, str, i + 1, j, k - 1);
+  judgeFind(arr, str, i, j - 1, k - 1);
+  judgeFind(arr, str, i, j + 1, k - 1);
 }
 
 judgeString(testArr, testString);
