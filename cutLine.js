@@ -2,19 +2,25 @@
 // 每段绳子的长度记为k[0],k[1],...k[m]。请问k[0]*k[1]*...k[m]可能的最大乘积
 // 是多少？例如，n为8，我们剪成2，3，3的三段，此时最大乘积是18。
 // 边界 状态转移方程 最优子结构
-// 2-1 3-2 4-4 5-6 6-9 7-9 8-18
+// 边界是4，状态转移方程是f(n) = max(f(i)*f(n-i))
+// 2-1 3-2 4-4 5-6 6-9 7-12 8-18
 //  此问题未解决
-let result = [];
 function max(n) {
   if (n < 3) return 1;
   if (n == 3) return 2;
-  let m = 0;
-  for (let i = 1; i < n; i++) {
-    let r = i * (n - i);
-    if (r > m) {
-      m = r;
+  let arr = [1,1,2,3];//计算方程，第i项表示长度为i的绳子的最大乘积
+  for (let i = 4; i < n; i++) {
+    let m = 0;
+    for (let j = 1; j < i; j++) {
+      let r = arr[j] * arr[i - j];
+      if (r > m) {
+        m = r;
+      }
     }
+    arr[i] = m;
+
   }
-  return m;
+  console.log(arr);
 }
-console.log(`max(10)=${max(10)}`);
+
+max(10);
