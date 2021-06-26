@@ -5,21 +5,49 @@
 // arr1表示尺寸数组
 // arr2表示价值数组
 // n表示背包容积
+// 暴力破解法方案已出
+// 动态规划解决方案未出
 let arr1 = [3, 4, 7, 8, 9];
 let arr2 = [4, 5, 10, 11, 13];
-let result = [[]];
-function mep(n, arr) {
-  if (n <= 0) return;
-  if (n < arr[0]) return;
-  for (let i = 0; i < arr.length; i++) {
-    if (n > arr[i]) {
-      result[result.length - 1].push(arr[i]);
-      mep(n - arr[i], arr.slice(i + 1));
-    } else {
-      result.push([]);
-    }
+let result = [];
+function mep(n, arr, arrs = []) {
+  if (n < 0) return;
+  if (arr.length == 0 || n == 0) {
+    result.push([...arrs]);
+    return;
   }
-  console.log(result)
+  for (let i = 0; i < arr.length; i++) {
+    if (n >= arr[i]) {
+      arrs.push(arr[i]);
+      mep(n - arr[i], arr.slice(i + 1), [...arrs]);
+    } else {
+      result.push([...arrs]);
+      break;
+    }
+    arrs.pop();
+  }
 }
 
-mep(16,arr1)
+function countMax(n) {
+  mep(n, arr1);
+  const obj = {};
+  for (let i = 0; i < arr1.length; i++) {
+    obj[arr1[i]] = arr2[i];
+  }
+  let max = 0;
+  let maxArr = [];
+  result.forEach((it) => {
+    let r = 0;
+    it.forEach((res) => {
+      r = r + obj[res];
+    });
+    if (r > max) {
+      max = r;
+      maxArr = it;
+    }
+  });
+  console.log(max);
+  console.log(maxArr);
+  console.log(result);
+}
+countMax(16);
