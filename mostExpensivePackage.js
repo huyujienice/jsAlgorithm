@@ -6,10 +6,13 @@
 // arr2表示价值数组
 // n表示背包容积
 // 暴力破解法方案已出
-// 动态规划解决方案未出
+// 动态规划解决方案已出，需强记忆
+// 动态递归方案得找出最重要的状态转移方程
 let arr1 = [3, 4, 7, 8, 9];
 let arr2 = [4, 5, 10, 11, 13];
 let result = [];
+
+//暴力破解法
 function mep(n, arr, arrs = []) {
   if (n < 0) return;
   if (arr.length == 0 || n == 0) {
@@ -30,7 +33,7 @@ function mep(n, arr, arrs = []) {
 
 function countMax(n) {
   mep(n, arr1);
-  const obj = {};
+  let obj = {};
   for (let i = 0; i < arr1.length; i++) {
     obj[arr1[i]] = arr2[i];
   }
@@ -47,7 +50,55 @@ function countMax(n) {
     }
   });
   console.log(max);
-  console.log(maxArr);
-  console.log(result);
+  // console.log(maxArr);
+  // console.log(result);
 }
+
+//参考链接https://juejin.cn/post/6844903607855251463
+//动态规划解决
+function DPM(n) {
+  let T = [];
+  let val = {};
+  for (let i = 0; i < arr1.length; i++) {
+    val[arr1[i]] = arr2[i];
+  }
+  let w = arr1;
+  for (let i = 0; i < arr1.length; i++) {
+    T[i] = [];
+    for (let j = 0; j <= n; j++) {
+      //状态转移方程
+      // if(j < w[i]){ //容量小于重量，hold不住
+      //   T[i][j] = T[i-1][j]; //所以值等于上一行，同一列。如果i=0,没有上一行，则T[i][j] 取0
+      // }else{
+      //   T[i][j] = max(val[i] + T[i-1][j-w[i]] , T[i-1][j]);  //参照上面 i=2 j=4 和 i=2 j=5 时的填表分析
+      // }
+
+      if (j == 0) {
+        //容量为0
+        T[i][j] = 0;
+      } else {
+        if (j < w[i]) {
+          //容量小于物品重量，本行hold不住
+          if (i == 0) {
+            // i = 0时，不存在i-1，所以T[i][j]取0
+            T[i][j] = 0;
+          } else {
+            T[i][j] = T[i - 1][j];
+          }
+        } else {
+          if (i == 0) {
+            //第0行，不存在 i-1, 最多只能放这一行的那一个物品
+            T[i][j] = val[arr1[i]];
+          } else {
+            T[i][j] = Math.max(val[arr1[i]] + T[i - 1][j - w[i]], T[i - 1][j]);
+          }
+        }
+      }
+      // console.log(T);
+    }
+  }
+  console.log(T);
+}
+
 countMax(16);
+DPM(16);
