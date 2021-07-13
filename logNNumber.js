@@ -40,8 +40,30 @@ function logNumber(n) {
         count = count.slice(0, count.length - 1) + String(judge);
       }
     }
-    console.log(count);
+    // console.log(getCentNumber(count));
+    let re = (Number(count)/100).toFixed(2)
+    let re1 = getCentNumber(count)
+    if(re !== re1){
+      console.error(`re=${re}`)
+      console.error(`re1=${re1}`)
+    }
   }
 }
+console.time("start");
+logNumber(8);
+console.timeEnd("start");
 
-logNumber(4);
+//将一个整数转化为除以100后的小数
+function getCentNumber(num){
+  let s = String(num)
+  let r = ``
+  if(num.length == 1){
+    r = `0.0${s}`
+  }else if(num.length == 2){
+    r = `0.${s}`
+  }else{
+    let len = s.length - 2
+    r = s.slice(0,len) + `.` + s.slice(len)
+  }
+  return r
+}
