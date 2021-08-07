@@ -55,14 +55,30 @@ function formateToInterger(num, len = 2) {
   if (positive === 1) {
     result = `-${result}`;
   }
-  return result;
+  return Number(result);
 }
 //加法
-function add(one, two) {}
+function add(one, two) {
+  let len = Math.max(getDecimalPlaces(one), getDecimalPlaces(two));
+  let result = formateToInterger(one, len) + formateToInterger(two, len);
+  result = formateToInterger(result, -len);
+  return result;
+}
 //减法
-function sub(one, two) {}
+function sub(one, two) {
+  let len = Math.max(getDecimalPlaces(one), getDecimalPlaces(two));
+  let result = formateToInterger(one, len) - formateToInterger(two, len);
+  result = formateToInterger(result, -len);
+  return result;
+}
 //乘法
-function mul(one, two) {}
+function mul(one, two) {
+  let oneL = getDecimalPlaces(one);
+  let twoL = getDecimalPlaces(two);
+  let result = formateToInterger(one, oneL) * formateToInterger(two, twoL);
+  result = formateToInterger(result, -(oneL + twoL));
+  return result;
+}
 //除法
 function divi(one, two) {}
 
@@ -70,3 +86,9 @@ let num = 1;
 let len = 1;
 console.log(`${num}的小数位为${getDecimalPlaces(num)}`);
 console.log(`${num}的小数点位移${len}位为${formateToInterger(num, len)}`);
+
+let one = 35.41;
+let two = 100;
+console.log(`${one}+${two}=${add(one, two)}`);
+console.log(`${one}-${two}=${sub(one, two)}`);
+console.log(`${one}*${two}=${mul(one, two)}`);
