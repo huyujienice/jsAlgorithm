@@ -10,6 +10,9 @@ function getDecimalPlaces(num) {
 }
 //小数点位置挪动
 function formateToInterger(num, len = 2) {
+  if (!Number.isInteger(len)) {
+    return new Error("pararms len must be interger");
+  }
   let s = String(num);
   //数据源小数位数
   let rightL = getDecimalPlaces(num);
@@ -64,6 +67,6 @@ function mul(one, two) {}
 function divi(one, two) {}
 
 let num = 1;
-let len = -1;
+let len = 1;
 console.log(`${num}的小数位为${getDecimalPlaces(num)}`);
 console.log(`${num}的小数点位移${len}位为${formateToInterger(num, len)}`);
