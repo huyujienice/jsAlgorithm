@@ -80,15 +80,23 @@ function mul(one, two) {
   return result;
 }
 //除法
-function divi(one, two) {}
+function divi(one, two) {
+  let oneL = getDecimalPlaces(one);
+  let twoL = getDecimalPlaces(two);
+  let result = formateToInterger(one, oneL) / formateToInterger(two, twoL);
+  result = formateToInterger(result, -(oneL - twoL));
+  return result;
+}
 
 let num = 1;
 let len = 1;
 console.log(`${num}的小数位为${getDecimalPlaces(num)}`);
 console.log(`${num}的小数点位移${len}位为${formateToInterger(num, len)}`);
 
-let one = 35.41;
-let two = 100;
+let one = 0.01;
+let two = 0.1;
 console.log(`${one}+${two}=${add(one, two)}`);
 console.log(`${one}-${two}=${sub(one, two)}`);
 console.log(`${one}*${two}=${mul(one, two)}`);
+console.log(`${one}/${two}=${divi(one, two)}`);
+
