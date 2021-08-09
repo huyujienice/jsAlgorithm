@@ -1,6 +1,6 @@
 //尝试用字符串模拟四则运算，解决一般js中的浮点精度问题
 //获取小数点位
-export function getDecimalPlaces(num) {
+function getDecimalPlaces(num) {
   let s = String(num);
   if (!s.includes(".")) {
     return 0;
@@ -9,7 +9,7 @@ export function getDecimalPlaces(num) {
   }
 }
 //小数点位置挪动
-export function formateToInterger(num, len = 2) {
+function formateToInterger(num, len = 2) {
   if (!Number.isInteger(len)) {
     return new Error("len argument must be interger");
   }
@@ -58,21 +58,21 @@ export function formateToInterger(num, len = 2) {
   return Number(result);
 }
 //加法
-export function add(one, two) {
+function add(one, two) {
   let len = Math.max(getDecimalPlaces(one), getDecimalPlaces(two));
   let result = formateToInterger(one, len) + formateToInterger(two, len);
   result = formateToInterger(result, -len);
   return result;
 }
 //减法
-export function sub(one, two) {
+function sub(one, two) {
   let len = Math.max(getDecimalPlaces(one), getDecimalPlaces(two));
   let result = formateToInterger(one, len) - formateToInterger(two, len);
   result = formateToInterger(result, -len);
   return result;
 }
 //乘法
-export function mul(one, two) {
+function mul(one, two) {
   let oneL = getDecimalPlaces(one);
   let twoL = getDecimalPlaces(two);
   let result = formateToInterger(one, oneL) * formateToInterger(two, twoL);
@@ -80,7 +80,7 @@ export function mul(one, two) {
   return result;
 }
 //除法
-export function divi(one, two) {
+function divi(one, two) {
   let oneL = getDecimalPlaces(one);
   let twoL = getDecimalPlaces(two);
   let result = formateToInterger(one, oneL) / formateToInterger(two, twoL);
@@ -89,7 +89,7 @@ export function divi(one, two) {
 }
 
 //重构toFixed
-export function simpleToFixed(num, len = 2) {
+function simpleToFixed(num, len = 2) {
   if (!Number.isInteger(len)) {
     return new Error("len argument must be interger");
   }
