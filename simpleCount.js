@@ -11,7 +11,7 @@ function getDecimalPlaces(num) {
 //小数点位置挪动
 function formateToInterger(num, len = 2) {
   if (!Number.isInteger(len)) {
-    return new Error("pararms len must be interger");
+    return new Error("len argument must be interger");
   }
   let s = String(num);
   //数据源小数位数
@@ -88,15 +88,67 @@ function divi(one, two) {
   return result;
 }
 
+//重构toFixed
+function simpleToFixed(num, len = 2) {
+  if (!Number.isInteger(len)) {
+    return new Error("len argument must be interger");
+  }
+  if (len < 0) {
+    return new Error("len argument must larger than zero");
+  }
+  let result = String(num);
+  //数据源小数位数
+  let rightL = getDecimalPlaces(num);
+  let positive = 0;
+  if (result[0] === "-") {
+    //负数
+    positive = 1;
+    result = result.slice(1);
+  }
+  if (rightL > len) {
+    const r1 = result.split(".")[0];
+    const r2 = result.split(".")[1].slice(0, len);
+    const judge = Number(result.split(".")[1].slice(len)[0]);
+    if (r2) {
+      result = `${r1}.${r2}`;
+    } else {
+      result = `${r1}`;
+    }
+    if (judge > 4) {
+      const addNum = formateToInterger(1, -len);
+      result = String(add(result, addNum));
+    }
+  }
+  //填补位
+  let w = getDecimalPlaces(result);
+  if (w < len) {
+    let c = len - w;
+    while (c > 0) {
+      if (result.includes(".")) {
+        result = `${result}0`;
+      } else {
+        result = `${result}.0`;
+      }
+      c--;
+    }
+  }
+
+  if (positive === 1) {
+    result = `-${result}`;
+  }
+  return result;
+}
+
 let num = 1;
-let len = 1;
+let len = 2;
+
+let one = 0.5;
+let two = 0.1;
+
 console.log(`${num}的小数位为${getDecimalPlaces(num)}`);
 console.log(`${num}的小数点位移${len}位为${formateToInterger(num, len)}`);
-
-let one = 0.01;
-let two = 0.1;
 console.log(`${one}+${two}=${add(one, two)}`);
 console.log(`${one}-${two}=${sub(one, two)}`);
 console.log(`${one}*${two}=${mul(one, two)}`);
 console.log(`${one}/${two}=${divi(one, two)}`);
-
+console.log(`simpleToFixed(${one},${len})=${simpleToFixed(one, len)}`);
