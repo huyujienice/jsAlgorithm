@@ -55,7 +55,60 @@ function formateToInterger(num, len = 2) {
   if (positive === 1) {
     result = `-${result}`;
   }
-  return Number(result);
+  return result;
+}
+//判断是否在最大安全数范围内
+function judgeCanUse(num) {
+  if (!Number.isSafeInteger(num)) {
+    throw new RangeError("out of max safe number");
+  }
+}
+//无限整数长度加法,返回字符串
+function stringAdd(one, two) {
+  const s1 = String(one).split("");
+  const s2 = String(two).split("");
+  const len = Math.max(s1.length, s2.length);
+  let l = s1.length - s2.length;
+  if (l > 0) {
+    while (l > 0) {
+      s2.unshift("0");
+      l--;
+    }
+  } else {
+    while (l < 0) {
+      s1.unshift("0");
+      l++;
+    }
+  }
+
+  let step = 0;
+  const resultArr = [];
+  for (let i = len - 1; i >= 0; i--) {
+    let r1 = Number(s1[i]);
+    if (!s1[i]) r1 = 0;
+    let r2 = Number(s2[i]);
+    if (!s2[i]) r2 = 0;
+    let r = r1 + r2;
+    if (step !== 0) {
+      r = r + 1;
+      step = 0;
+    }
+    if (r >= 10) {
+      const re = r - 10;
+      resultArr.unshift(re);
+      step = 1;
+    } else {
+      resultArr.unshift(r);
+      step = 0;
+    }
+    if (i === 0) {
+      if (step === 1) {
+        resultArr.unshift("1");
+      }
+    }
+  }
+  const result = resultArr.join("");
+  return result;
 }
 //加法
 function add(one, two) {
@@ -139,11 +192,12 @@ function simpleToFixed(num, len = 2) {
   return result;
 }
 
+
+
 let num = 1;
 let len = 2;
-
-let one = 0.5;
-let two = 0.1;
+let one = Number.MAX_SAFE_INTEGER;
+let two = Number.MAX_SAFE_INTEGER;
 
 console.log(`${num}的小数位为${getDecimalPlaces(num)}`);
 console.log(`${num}的小数点位移${len}位为${formateToInterger(num, len)}`);
@@ -152,3 +206,7 @@ console.log(`${one}-${two}=${sub(one, two)}`);
 console.log(`${one}*${two}=${mul(one, two)}`);
 console.log(`${one}/${two}=${divi(one, two)}`);
 console.log(`simpleToFixed(${one},${len})=${simpleToFixed(one, len)}`);
+
+// const s1 = "9999999999999999";
+// const s2 = "9999999999999999";
+// console.log(`${s1}+${s2}=${stringAdd(s1, s2)}`);
