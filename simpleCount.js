@@ -1,3 +1,4 @@
+//!是否可用BigInt进行优化?
 //尝试用字符串模拟四则运算，解决一般js中的浮点精度问题
 //获取小数点位
 function getDecimalPlaces(num) {
