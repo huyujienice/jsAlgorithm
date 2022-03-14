@@ -1,6 +1,12 @@
 # Number
 
 javascript 的 Number 类型为双精度 IEEE754 64 位浮点类型
+javascript 对整数提供四种进制的表示方法
+
+- 十进制：没有前导 0 ， Decimal system
+- 八进制：有前缀 0o 或者 0O 的数值，或者有前导 0，且只用 0-7 的八个阿拉伯数字，Octal number system
+- 十六进制：有前缀 0x 或者 0X，Hexadecimal
+- 二进制：有前缀 0b 或者 0B，Binary
 
 Number.EPSILON
 表示 2 个数最小的浮点数之间的差值，即 2^-52，可用来测试是否相等
@@ -25,3 +31,30 @@ Number.NEGATIVE_INFINITY
 
 Number.POSITIVE_INFINITY
 表示正无穷大
+
+Number.isFinite()
+检测传入的参数是否是一个有穷数，全局 isFinite()会将参数自动转换为数字
+
+Number.isInteger()
+判断给定的参数是否为整数
+
+Number.isNaN()
+确定传递的值是否为 NaN,并且检查类型是否为 Number，原来全局 isNaN()会将参数自动转换成数字
+
+Number.isSafeInteger()
+传入参数是否为安全整数，安全整数范围为 -(2^53 - 1)到 2^53 - 1 之间的整数，包含 -(2^53 - 1)和 2^53 - 1
+
+Number.parseFloat()
+与全局 parseFloat 表现一致
+
+Number.parseInt()
+与全局 parseInt 表现一致
+
+Number.prototype.toExponential()
+以指数表示法返回该数值字符串表示形式，例如 7.823e+5=782300
+
+Number.prototye.toFixed()
+以定点表示法来格式化一个数值，返回字符串
+
+Number.prototype.toPrecision()
+以指定的精度返回该数值对象的字符串表示,跟上面 toFixed 有啥区别？toPrecision 可能会返回指数写法，不可预期
