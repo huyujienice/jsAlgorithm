@@ -101,3 +101,37 @@ rest 参数（形式为...变量名）,用于获取函数的多余参数，用�
 递归函数改写
 
 尾递归优化
+
+## 数组扩展
+
+扩展运算符
+扩展运算符（spread）是三个点（...）,好比 rest 参数的逆运算，将一个数组转化为用逗号分隔的参数序列，该运算符主要用于函数的调用
+扩展运算符可复制数组，合并数组等
+
+Array.from()
+Array.from 方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）（本质拥有length属性）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
+
+Array.of()
+用于将一组值，转化为数组
+
+Array.prototype.copyWithin()
+数组内部，将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组
+
+Array.prototype.find()
+Array.prototype.findIndex()
+找出成员
+
+Array.prototype.fill()
+强制填充数组
+
+Array.prototype.entries()
+Array.prototype.keys()
+Array.prototype.values()
+用于遍历数组
+
+Array.prototype.includes()
+是否包含给定的值
+
+Array.prototype.flat()
+Array.prototype.flatMap()
+将嵌套数组拉平
