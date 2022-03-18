@@ -1,4 +1,6 @@
-# Number
+# js 内置对象
+
+## Number
 
 javascript 的 Number 类型为双精度 IEEE754 64 位浮点类型
 javascript 对整数提供四种进制的表示方法
@@ -58,3 +60,44 @@ Number.prototye.toFixed()
 
 Number.prototype.toPrecision()
 以指定的精度返回该数值对象的字符串表示,跟上面 toFixed 有啥区别？toPrecision 可能会返回指数写法，不可预期
+
+## Boolean
+
+Boolean(undefined) // false
+
+Boolean(null) // false
+
+Boolean(0) // false
+
+Boolean(NaN) // false
+
+Boolean('') // false
+
+Boolean(new Boolean(false))// Boolean 对象会转成 true
+
+Boolean([]) // 空数组会转成 true
+
+Boolean({}) // 空对象会转成 true
+
+# es6 相关
+
+## 函数扩展
+
+参数默认值
+
+rest 参数
+rest 参数（形式为...变量名）,用于获取函数的多余参数，用来代替 arguments 对象,可直接使用数组相关方法
+
+箭头函数
+箭头函数没有自己的 this 对象，this 指向函数定义生效时上层作用域中的 this
+不可以当作构造函数，即不可以对箭头函数使用 new 命令
+不可以使用 arguments 对象，如果要使用则用 rest 参数代替
+不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数
+
+尾调用优化
+
+尾递归
+
+递归函数改写
+
+尾递归优化
