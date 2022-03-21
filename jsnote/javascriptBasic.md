@@ -109,7 +109,7 @@ rest 参数（形式为...变量名）,用于获取函数的多余参数，用�
 扩展运算符可复制数组，合并数组等
 
 Array.from()
-Array.from 方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）（本质拥有length属性）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
+Array.from 方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）（本质拥有 length 属性）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
 
 Array.of()
 用于将一组值，转化为数组
@@ -135,3 +135,40 @@ Array.prototype.includes()
 Array.prototype.flat()
 Array.prototype.flatMap()
 将嵌套数组拉平
+
+## 对象的扩展
+
+属性简写
+
+属性名表达式
+使用字面量方式定义对象时（使用{}定义），可用[]表示对象的属性名
+
+方法的 name 属性
+
+对象属性的描述符
+对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为
+Object.getOwnPropertyDescriptor 方法可以获取该属性的描述对象
+
+enumerable 属性，称为“可枚举性”，如果该属性为 false，以下四个操作会忽略 enumerable 为 false 的属性
+
+1. for...in 循环：只循环对象自身的和可继承的可枚举的属性
+2. Object.keys():返回对象自身的所有可枚举的属性的键名
+3. JSON.stringify():只串化对象自身的可枚举的属性
+4. Object.assign():忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举属性
+
+引入“可枚举”（enumerable）这个概念的最初目的就是让某些属性可以规避掉for...in操作,不然所有的内部属性和方法都会遍历到
+
+属性的遍历
+ES6一共有5种方法可以遍历对象的属性
+
+1. for...in:循环遍历对象自身的和继承的可枚举属性（不含Symbol属性）
+2. Object.keys(obj):返回一个数组，包含对象自身的所有属性（不含Symbol属性）的键名
+3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含Symbol属性，但是包括不可枚举属性）的键名
+4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的Symbol属性的键名
+5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是Symbol或字符串，也不管是否可枚举
+
+super关键字
+指向当前对象的原型对象，只能用在对象的方法之中，用在其余的地方都会报错
+
+扩展运算符
+
