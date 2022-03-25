@@ -149,6 +149,25 @@ Array.prototype.flatMap()
 对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为
 Object.getOwnPropertyDescriptor 方法可以获取该属性的描述对象
 
+Object.defineProperty():
+
+对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
+
+两种描述符共享 2 个可选键值：
+configurable:当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能够从对应的对象上被删除。默认为 false
+
+enumerable:当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。默认为 false
+
+数据描述符还具有以下 2 个键值：
+value:该属性对应的值
+
+writable:当且仅当该属性的 writable 键值为 true 时，属性的值，也就是上面的 value，才能被赋值运算符改变。默认为 false
+
+存取运算符还具有以下 2 个键值：
+get：属性的 getter 函数，如果没有 getter，则为 undefined,函数执行时不传入任何参数，但是会传入 this 对象
+
+set:属性的 setter 函数，如果没有 setter,则为 undefined,该函数接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象
+
 enumerable 属性，称为“可枚举性”，如果该属性为 false，以下四个操作会忽略 enumerable 为 false 的属性
 
 1. for...in 循环：只循环对象自身的和可继承的可枚举的属性
@@ -156,19 +175,22 @@ enumerable 属性，称为“可枚举性”，如果该属性为 false，以下
 3. JSON.stringify():只串化对象自身的可枚举的属性
 4. Object.assign():忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举属性
 
-引入“可枚举”（enumerable）这个概念的最初目的就是让某些属性可以规避掉for...in操作,不然所有的内部属性和方法都会遍历到
+引入“可枚举”（enumerable）这个概念的最初目的就是让某些属性可以规避掉 for...in 操作,不然所有的内部属性和方法都会遍历到
 
 属性的遍历
-ES6一共有5种方法可以遍历对象的属性
+ES6 一共有 5 种方法可以遍历对象的属性
 
-1. for...in:循环遍历对象自身的和继承的可枚举属性（不含Symbol属性）
-2. Object.keys(obj):返回一个数组，包含对象自身的所有属性（不含Symbol属性）的键名
-3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含Symbol属性，但是包括不可枚举属性）的键名
-4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的Symbol属性的键名
-5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是Symbol或字符串，也不管是否可枚举
+1. for...in:循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
+2. Object.keys(obj):返回一个数组，包含对象自身的所有属性（不含 Symbol 属性）的键名
+3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
+4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名
+5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
 
-super关键字
+super 关键字
 指向当前对象的原型对象，只能用在对象的方法之中，用在其余的地方都会报错
 
 扩展运算符
 
+Object.is()
+用来比较2个值是否严格相等,与严格比较符（===）的行为基本一致
+不同之处只有两个：一是+0不等于-0,二是NaN等于自身

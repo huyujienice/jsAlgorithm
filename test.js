@@ -115,3 +115,19 @@ function fb(n) {
 console.log(`${fbnc(30)}`);
 console.log(`${fb(30)}`);
 
+const obj = {};
+Object.defineProperty(obj, "b", {
+  configurable: true,
+  enumerable: true,
+  get: function () {
+    return this._storeB;
+  },
+  set: function (value) {
+    this._storeB = value;
+  },
+});
+console.log(obj.b)
+obj.b = 1
+console.log(obj.b)
+console.log(obj._storeB)
+
