@@ -192,5 +192,28 @@ super 关键字
 扩展运算符
 
 Object.is()
-用来比较2个值是否严格相等,与严格比较符（===）的行为基本一致
-不同之处只有两个：一是+0不等于-0,二是NaN等于自身
+用来比较 2 个值是否严格相等,与严格比较符（===）的行为基本一致
+不同之处只有两个：一是+0 不等于-0,二是 NaN 等于自身
+
+Object.assign()
+将源对象的所有可枚举(enumerable)属性，复制到目标对象
+
+Object.getOwnPropertyDescriptors()
+返回指定对象所有自身属性（非继承属性）的描述对象
+Object.getOwnPropertyDescriptor()
+返回某个对象属性的描述对象
+
+Object.setPrototypeOf(),写原型操作
+Object.getPrototypeOf()，读原型操作
+Object.create()，生成原型操作
+
+Object.keys()
+返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名
+Object.values()
+返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值
+Object.entries()
+返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组
+Object.entries的基本用途是遍历对象的属性，另一个用处是将对象转为真正的Map结构
+
+Object.fromEntries()
+是Object.entries()的逆操作，用于将一个键值对数组转为对象，因此特别适合将Map结构转为对象
