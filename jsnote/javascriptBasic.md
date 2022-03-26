@@ -250,3 +250,41 @@ x ?? (x = y)
 ## Symbol
 
 原始数据类型 Symbol,表示独一无二的值。
+
+## Set
+
+类似于数组，但是成员值都是唯一的，内部判断是否唯一相等采用类似===算法，区别是 Set 认为 NaN 等于自身
+
+Set.prototype.constructor:构造函数，默认就是 Set 函数
+
+Set.prototype.size:返回 Set 实例的成员总数
+
+Set.prototype.add(value):添加某个值，返回 Set 结构本身
+
+Set.prototype.delete(value):删除某个值，返回一个布尔值，表示删除是否成功
+
+Set.prototype.has(value):返回一个布尔值，表示该值是否为 Set 的成员
+
+Set.prototype.clear():清除所有成员，没有返回值
+
+Set.prototype.keys():返回键名的遍历器
+
+Set.prototype.values():返回键值的遍历器
+
+Set.prototype.entries():返回键值对的遍历器
+
+Set.prototype.forEach():使用回调函数遍历每个成员
+
+Array.from 方法可以将 Set 结构转为数组
+
+## WeakSet
+
+WeakSet结构与Set类似，也是不重复的值的集合
+WeakSet的成员只能是对象，且对象都是弱引用，垃圾回收机制不考虑WeakSet对该对象的引用
+
+WeakSet.prototype.add(value)
+
+WeakSet.prototype.delete(value)
+
+WeakSet.prototype.has(value)
+
