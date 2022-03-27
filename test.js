@@ -126,8 +126,16 @@ Object.defineProperty(obj, "b", {
     this._storeB = value;
   },
 });
-console.log(obj.b)
-obj.b = 1
-console.log(obj.b)
-console.log(obj._storeB)
+console.log(obj.b);
+obj.b = 1;
+console.log(obj.b);
+console.log(obj._storeB);
 
+let testObj = {};
+const registry = new FinalizationRegistry((value) => {
+  alert(value);
+});
+registry.register(testObj, "clear testObj");
+setTimeout(() => {
+  testObj = null;
+}, 1000);
