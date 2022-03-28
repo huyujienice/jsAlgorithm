@@ -362,3 +362,28 @@ setPrototypeOf(target,proto):拦截 Object.setPrototypeOf(proxy,proto),返回一
 apply(target,object,args):拦截 Proxy 实例作为函数调用的操作，比如：proxy(...args),proxy.call(object,...args),proxy.apply(...)
 
 construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，比如:new Proxy(...args)
+
+## Reflect
+
+设计目的：
+
+1. 将 Object 对象的一些明显属于预研内部的方法（比如 Object.defineProperty），放在 Reflect 对象上
+2. 修改某些 Object 方法的返回结果，让其变得更合理
+3. 让 Ojbect 操作都变成函数行为。某些 Object 操作是命令式，比如 name in obj 和 delete obj[name],而 Reflect.has(obj,name)和 Reflect.deleteProperty(obj,name)让它们变成了函数行为
+4. Reflect 对象的方法与 Proxy 对象的方法一一对应，只要是 Proxy 对象的方法，就能在 Reflect 对象上找到对应的方法。这就让 Proxy 对象可以方便地调用对应的 Reflect 方法，完成默认行为，作为修改行为的基础。也就是说，不管 Proxy 怎么修改默认行为，你总可以在 Reflect 上获取默认行为
+
+静态方法：
+
+1. Reflect.apply(target,thisArg,args)
+2. Reflect.construct(target,args)
+3. Reflect.get(target,name,receiver)
+4. Reflect.set(target,name,value,recevier)
+5. Reflect.defineProperty(target,name,desc)
+6. Reflect.deleteProperty(target,name)
+7. Reflect.has(target,name)
+8. Reflect.ownKeys(target)
+9. Reflect.isExtensible(target)
+10. Reflect.preventExtensions(target)
+11. Reflect.getOwnPropertyDescriptor(target,name)
+12. Reflect.getPrototypeOf(target)
+13. Reflect.setPrototypeOf(target,prototype)
