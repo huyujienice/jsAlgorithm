@@ -420,3 +420,19 @@ Promise 是一种异步编程的解决方案
 Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
 
 Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？）
+
+Promise.prototype.finally()
+
+Promise.all():只有当所有条件resolve才最终resolve,如若有一个条件reject则最终reject
+
+Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态resolve/reject
+
+Promise.allSettled():确定所有条件都已改变状态
+
+Promise.any():只有当所有条件reject才最终reject,如若有一个条件resolve则最终resolve
+
+Promise.resolve():将现有对象转为Promise对象
+
+Promise.reject()
+
+Promise.try()
