@@ -139,3 +139,15 @@ registry.register(testObj, "clear testObj");
 setTimeout(() => {
   testObj = null;
 }, 1000);
+
+
+
+
+new Promise((resolve,reject)=>{
+  console.log('throw promise error')
+  reject('promise error')
+})
+.then(()=>{
+  console.log(`then fun`)
+})
+console.log(`continue`)

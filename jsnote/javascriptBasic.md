@@ -1,3 +1,28 @@
+# 执行上下文和执行栈
+
+以下内容只是一个人的说法，原文链接：
+https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
+
+执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
+三种执行上下文
+
+1. 全局执行上下文
+2. 函数执行上下文
+3. Eval 函数执行上下文
+
+执行上下文两个阶段
+
+1. 创建阶段
+2. 执行阶段
+
+创建阶段发生三件事情
+
+1. this 绑定
+   在全局执行上下文中，this 的值指向全局变量，在函数执行上下文中，this 的值取决于该函数式如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined
+
+2. 创建词法环境组件
+3. 创建变量环境组件
+
 # js 内置对象
 
 ## Number
@@ -367,7 +392,7 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 
 设计目的：
 
-1. 将 Object 对象的一些明显属于预研内部的方法（比如 Object.defineProperty），放在 Reflect 对象上
+1. 将 Object 对象的一些明显属于语言内部的方法（比如 Object.defineProperty），放在 Reflect 对象上
 2. 修改某些 Object 方法的返回结果，让其变得更合理
 3. 让 Ojbect 操作都变成函数行为。某些 Object 操作是命令式，比如 name in obj 和 delete obj[name],而 Reflect.has(obj,name)和 Reflect.deleteProperty(obj,name)让它们变成了函数行为
 4. Reflect 对象的方法与 Proxy 对象的方法一一对应，只要是 Proxy 对象的方法，就能在 Reflect 对象上找到对应的方法。这就让 Proxy 对象可以方便地调用对应的 Reflect 方法，完成默认行为，作为修改行为的基础。也就是说，不管 Proxy 怎么修改默认行为，你总可以在 Reflect 上获取默认行为
@@ -387,3 +412,11 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 11. Reflect.getOwnPropertyDescriptor(target,name)
 12. Reflect.getPrototypeOf(target)
 13. Reflect.setPrototypeOf(target,prototype)
+
+## Promise
+
+Promise 是一种异步编程的解决方案
+
+Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
+
+Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？）
