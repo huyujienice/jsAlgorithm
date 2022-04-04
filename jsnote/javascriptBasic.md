@@ -423,16 +423,22 @@ Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejec
 
 Promise.prototype.finally()
 
-Promise.all():只有当所有条件resolve才最终resolve,如若有一个条件reject则最终reject
+Promise.all():只有当所有条件 resolve 才最终 resolve,如若有一个条件 reject 则最终 reject
 
-Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态resolve/reject
+Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态 resolve/reject
 
 Promise.allSettled():确定所有条件都已改变状态
 
-Promise.any():只有当所有条件reject才最终reject,如若有一个条件resolve则最终resolve
+Promise.any():只有当所有条件 reject 才最终 reject,如若有一个条件 resolve 则最终 resolve
 
-Promise.resolve():将现有对象转为Promise对象
+Promise.resolve():将现有对象转为 Promise 对象
 
 Promise.reject()
 
 Promise.try()
+
+## Iterator
+
+遍历器(Iterator)是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理处理该数据结构的所有成员），即 for...of 循环。当使用 for...of 循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口
+ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol.iterator 属性上。
+可使用遍历器实现“链表”结构
