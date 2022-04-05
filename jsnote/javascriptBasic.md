@@ -437,6 +437,20 @@ Promise.reject()
 
 Promise.try()
 
+
+## Generator
+
+Generator函数是ES6提供的一种异步编程的解决方案
+
+两个特征：
+1. function关键字与函数名之间有一个星号(*)
+2. 函数体内部使用yield表达式
+
+
+"协程"，多个线程相互协作，完成异步任务
+
+
+
 ## Iterator
 
 遍历器(Iterator)是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理处理该数据结构的所有成员），即 for...of 循环。当使用 for...of 循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口
