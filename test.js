@@ -140,14 +140,19 @@ setTimeout(() => {
   testObj = null;
 }, 1000);
 
+new Promise((resolve, reject) => {
+  console.log("throw promise error");
+  reject("promise error");
+}).then(() => {
+  console.log(`then fun`);
+});
+console.log(`continue`);
 
-
-
-new Promise((resolve,reject)=>{
-  console.log('throw promise error')
-  reject('promise error')
-})
-.then(()=>{
-  console.log(`then fun`)
-})
-console.log(`continue`)
+try {
+  new Promise(() => {
+    console.log("throw promise error");
+    throw new Error("promise error");
+  });
+} catch (error) {
+  console.log(error);
+}
