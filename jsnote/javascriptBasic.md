@@ -23,6 +23,11 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 2. 创建词法环境组件
 3. 创建变量环境组件
 
+# 继承与原型链
+
+prototype，虐杀原型游戏英文名
+每个实例对象(object)都有一个私有属性(称之为__proto__)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(__proto__)，层层向上直到一个对象(Object.prototype)的原型对象为null。根据定义，null没有原型，并作为这个原型链中的最后一个环节。
+
 # js 内置对象
 
 ## Number
