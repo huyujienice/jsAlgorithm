@@ -27,6 +27,7 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 prototype，虐杀原型游戏英文名
 每个实例对象(object)都有一个私有属性(称之为__proto__)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(__proto__)，层层向上直到一个对象(Object.prototype)的原型对象为null。根据定义，null没有原型，并作为这个原型链中的最后一个环节。
+函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
 
 # js 内置对象
 
