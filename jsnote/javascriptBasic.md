@@ -59,6 +59,10 @@ import packageMain from 'commonjs-package';
 import { method } from 'commonjs-package';
 或使用Node.js内置的module.createRequire()可加载CommonJS模块
 
+
+# ArrayBuffer,TypedArray,DataView
+ArrayBuffer对象，TypedArray视图和DataView视图是JavaScript操作二进制数据的一个接口。
+
 # js 内置对象
 
 ## Number
