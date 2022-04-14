@@ -57,7 +57,7 @@ ES6模块加载CommonJS模块
 import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
-
+或使用Node.js内置的module.createRequire()可加载CommonJS模块
 
 # js 内置对象
 
