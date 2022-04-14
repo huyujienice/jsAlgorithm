@@ -29,6 +29,36 @@ prototype，虐杀原型游戏英文名
 每个实例对象(object)都有一个私有属性(称之为__proto__)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(__proto__)，层层向上直到一个对象(Object.prototype)的原型对象为null。根据定义，null没有原型，并作为这个原型链中的最后一个环节。
 函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
 
+# Module
+
+浏览器环境中，<script>标签带defer或async属性，脚本就会异步加载。
+defer(铁的)会等到整个页面在内存中正常渲染结束(DOM结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行
+async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行
+浏览器加载ES6模块，也使用<script>标签，但是要加入type="module"属性，且渲染完再执行
+
+ES6模块与CommonJS模块的差异
+1. CommonJS模块输出是一个值的拷贝，ES6模块输出的是值的引用
+2. CommonJS模块是运行时加载，ES6模块是编译时输出接口
+3. CommonJS模块的require()是同步加载模块，ES6模块的import命令是异步加载，有一个独立的模块依赖的解析阶段
+
+Node.js中，.mjs文件总是以ES6模块加载，.cjs文件总是以CommonJS模块加载，.js文件的加载取决于package.json里面的type字段的设置。指定type为module则解释.js脚本为ES6模块，若不指定type或者type的字段为commonjs，则.js脚本会被解释成CommonJS模块。
+
+package.json文件中有2个字段可以指定模块的入口文件：main和exports
+简单只使用main字段可以指定模块加载的入口文件
+exports字段优先级高于main字段
+
+CommonJS模块加载ES6模块
+(async () => {
+  await import('./my-app.mjs');
+})();
+ES6模块加载CommonJS模块
+只能整体加载，不能只加载单一输出项
+// 正确
+import packageMain from 'commonjs-package';
+// 报错
+import { method } from 'commonjs-package';
+
+
 # js 内置对象
 
 ## Number
