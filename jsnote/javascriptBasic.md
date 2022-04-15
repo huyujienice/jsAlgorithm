@@ -63,6 +63,9 @@ import { method } from 'commonjs-package';
 # ArrayBuffer,TypedArray,DataView
 ArrayBuffer对象，TypedArray视图和DataView视图是JavaScript操作二进制数据的一个接口。
 
+SharedArrayBuffer，允许Worker线程与主线程共享同一块内存。
+多线程共享内存，最大的问题就是如何防止两个线程同时修改某个地址，或者说，当一个线程修改共享内存以后，必须有一个机制让其他线程同步。SharedArrayBuffer API提供Atomics对象，保证所有共享内存的操作都是“原子性”的，并且可以在所在的线程内同步。
+
 # js 内置对象
 
 ## Number
