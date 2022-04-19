@@ -156,3 +156,53 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+const obj = { test: 1 };
+Object.preventExtensions(obj);
+obj.test = 2;
+console.log(obj.test);
+
+function nextOneDayTimes(days = 1) {
+  function formateTimer(obj) {
+    const nums = ~~obj;
+    if (nums <= 9) {
+      return `0${nums}`;
+    } else {
+      return `${nums}`;
+    }
+  }
+  const time = days * 24 * 60 * 60 * 1000;
+  const now = new Date();
+  const nextDate = new Date(now.getTime() + time);
+  const nextYear = nextDate.getFullYear();
+  const nextMon = formateTimer(nextDate.getMonth() + 1);
+  const nextDay = formateTimer(nextDate.getDate());
+  const nextHour = formateTimer(nextDate.getHours());
+  const nextMin = formateTimer(nextDate.getMinutes());
+  const nextSec = formateTimer(nextDate.getSeconds());
+  const result = `${nextYear}-${nextMon}-${nextDay} ${nextHour}:${nextMin}:${nextSec}`;
+  console.log(`now=${now.toLocaleString()}`);
+  console.log(`nextDate=${nextDate.toLocaleString()}`);
+  console.log(`result=${result}`);
+  return result;
+}
+//使用方法：
+//time变量即写入变量
+//默认执行1天之后,10天之后可以执行nextOneDayTimes(10)
+const time = nextOneDayTimes();
+
+const regTest = `C 3 501 敢3`;
+function trimSpace(str) {
+  const headReg = /^\s*([\w\d\p{Unified_Ideograph}])/gu;
+  const endReg = /([\w\d\p{Unified_Ideograph}])\s*$/;
+  const result = str
+    .replace(headReg, (_, p1) => {
+      return p1;
+    })
+    .replace(endReg, (_, p1) => {
+      return p1;
+    });
+  console.log(result);
+  return result;
+}
+trimSpace(regTest);
