@@ -1,5 +1,25 @@
 尝试理解vue tag 1.0.0源码
 
+api
+
+compiler
+
+directives
+
+filter
+
+fragment
+
+instance
+
+observer
+
+parsers
+
+transition
+转换器?
+
+
 
 
 

@@ -19,3 +19,24 @@ el.addEventListener(type,listener,{capture:true})
 2. function a(){}
    el.setAttribute("onclick", "a()");
 3. el.addEventListener
+
+
+# 伪类，伪元素
+
+可以减轻维护成本。
+数量众多，通常用于明确的目的。
+
+伪类，以:开头,例如：
+:first-child
+:last-child
+:only-child
+:invalid
+:hover
+:focus
+伪元素，以::开头，例如：
+::first-line
+::first-letter
+::before
+::after
+
+::before和::after，可以和content属性一起使用，使用CSS将内容插入到文档中
