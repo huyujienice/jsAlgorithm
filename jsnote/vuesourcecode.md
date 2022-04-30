@@ -17,7 +17,7 @@ observer
 parsers
 
 transition
-转换器?
+动画,使用transition,animation将过渡动画主动分为6个状态，如何组织6个状态？使用transitionend,animationend触发过渡动画回调函数，将6个生命周期函数状态串联起来
 
 
 
