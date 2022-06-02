@@ -43,7 +43,7 @@ Watcher类 watcher实例
    的对象内有dep，可进行相关依赖收集及触发更新
    
 4. 依赖收集？当触发data.foo可完成
-5. 触发更新？
+5. 触发更新？触发所有watcher.run方法，即执行new Watcher初始化的时候传入的cb回调
 
 parsers
 
