@@ -33,6 +33,19 @@
         const result = addDecimalPlacesToString(bigValue, -(oneL + twoL));
         return result;
       }
+      function divi(one, two) {
+        const moreLeft = 2;
+        let oneL = getDecimalPlaces(one);
+        let twoL = getDecimalPlaces(two);
+        const oneBig = addDecimalPlacesToString(one, oneL - moreLeft);
+        const twoBig = addDecimalPlacesToString(two, twoL - moreLeft);
+        const bigValue = convertToBigInt(oneBig) / convertToBigInt(twoBig);
+        const result = addDecimalPlacesToString(
+          bigValue,
+          -(oneL - twoL + 2 * moreLeft)
+        );
+        return result;
+      }
       function getDecimalPlaces(nums) {
         let s = new String(nums);
         if (!s.includes(".")) {
@@ -95,11 +108,12 @@
         }
         return result;
       }
-      const test1 = `9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.9`;
+      const test1 = `9999.9`;
       const test2 = `2`;
       console.log(`${add(test1, test2)}`);
       console.log(`${sub(test1, test2)}`);
       console.log(`${mul(test1, test2)}`);
+      console.log(`${divi(test1, test2)}`);
     </script>
   </body>
 </html>

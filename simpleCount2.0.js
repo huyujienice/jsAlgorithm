@@ -28,7 +28,7 @@ function mul(one, two) {
 }
 //除法
 function divi(one, two) {
-  
+  //TODO
 }
 
 function getDecimalPlaces(nums) {
