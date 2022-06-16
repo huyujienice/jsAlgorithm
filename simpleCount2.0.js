@@ -61,7 +61,7 @@ function divi(one, two, holdNums = 2) {
     originalOneBig = addDecimalPlacesToString(originalOneBig, threeStep);
   }
 
-  //保证精度比l2大2位
+  //保证精度(小数位)比l2大2位
   let fourStep = overload + 2;
   move = move + fourStep;
   originalOneBig = addDecimalPlacesToString(originalOneBig, fourStep);
