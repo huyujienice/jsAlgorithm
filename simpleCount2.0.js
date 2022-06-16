@@ -32,26 +32,69 @@ function divi(one, two, holdNums = 2) {
   if (holdNums < 0) {
     return new Error("can not keep negative decimal point");
   }
-  let oneOriginDL = getDecimalPlaces(one);
-  let twoOriginDL = getDecimalPlaces(two);
-  const holdJudgeNums = holdNums + 1;
-  const originalOneBig = convertToBigInt(one);
-  const twoBig = convertToBigInt(two);
-  const oneBig = addDecimalPlacesToString(originalOneBig, holdJudgeNums);
-  const bigValue = convertToBigInt(oneBig) / convertToBigInt(twoBig);
-  const allExtendL = -holdJudgeNums - oneOriginDL + twoOriginDL;
-  const result = addDecimalPlacesToString(bigValue, allExtendL);
-  const finalResult = simpleToFixed(result, holdNums);
-  console.log(`oneOriginDL=${oneOriginDL}`);
-  console.log(`twoOriginDL=${twoOriginDL}`);
-  console.log(`holdJudgeNums=${holdJudgeNums}`);
+  const d1 = getDecimalPlaces(one);
+  const d2 = getDecimalPlaces(two);
+  let l1 = convertToBigInt(one).toString().length;
+  const l2 = convertToBigInt(two).toString().length;
+  const overload = holdNums + 1;
+
+  let originalOneBig = convertToBigInt(one).toString();
+
+  let move = 0;
+
+  let oneStep = d2 - d1;
+  originalOneBig = addDecimalPlacesToString(originalOneBig, oneStep);
   console.log(`originalOneBig=${originalOneBig}`);
+
+  let twoStep = getDecimalPlaces(originalOneBig);
+  if (twoStep > 0) {
+    move = move + twoStep;
+    originalOneBig = addDecimalPlacesToString(originalOneBig, twoStep);
+  }
+  console.log(`originalOneBig=${originalOneBig}`);
+
+  l1 = originalOneBig.length;
+  //保证l1比l2大1位，才有整数留存
+  let threeStep = l2 + 1 - l1;
+  if (threeStep >= 0) {
+    move = move + threeStep;
+    originalOneBig = addDecimalPlacesToString(originalOneBig, threeStep);
+  }
+
+  //保证精度比l2大2位
+  let fourStep = overload + 2;
+  move = move + fourStep;
+  originalOneBig = addDecimalPlacesToString(originalOneBig, fourStep);
+
+
+  console.log(`originalOneBig=${originalOneBig}`);
+
+  const oneBig = originalOneBig;
+  const twoBig = convertToBigInt(two);
+
+  const bigValue = convertToBigInt(oneBig) / convertToBigInt(twoBig);
+  const result = addDecimalPlacesToString(bigValue, -move);
+  const finalResult = simpleToFixed(result, holdNums);
+
+  console.log(`d1=${d1}`);
+  console.log(`d2=${d2}`);
+  console.log(`l1=${l1}`);
+  console.log(`l2=${l2}`);
+  console.log(`overload=${overload}`);
+
+  console.log(`oneStep=${oneStep}`);
+  console.log(`twoStep=${twoStep}`);
+  console.log(`threeStep=${threeStep}`);
+  console.log(`fourStep=${fourStep}`);
+
+  console.log(`move=${move}`);
+
   console.log(`oneBig=${oneBig}`);
   console.log(`twoBig=${twoBig}`);
   console.log(`bigValue=${bigValue}`);
-  console.log(`allExtendL=${allExtendL}`);
   console.log(`result=${result}`);
   console.log(`finalResult=${finalResult}`);
+
   return finalResult;
 }
 
