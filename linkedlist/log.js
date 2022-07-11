@@ -5,6 +5,13 @@ function ListNode(x) {
   this.next = null;
 }
 
+function logList(node) {
+  while (node) {
+    console.log(node.val);
+    node = node.next;
+  }
+}
+
 let one = new ListNode(1);
 let two = new ListNode(2);
 let three = new ListNode(3);
