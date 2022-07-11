@@ -206,3 +206,6 @@ function trimSpace(str) {
   return result;
 }
 trimSpace(regTest);
+
+
+
