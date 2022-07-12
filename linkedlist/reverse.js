@@ -20,13 +20,16 @@ let two = new ListNode(2);
 let three = new ListNode(3);
 let four = new ListNode(4);
 let five = new ListNode(5);
+let six = new ListNode(6);
 
 one.next = two;
 two.next = three;
 three.next = four;
 four.next = five;
+five.next = six;
 
 // core
+// TODO 没看懂标准答案
 // 标准答案
 var reverseList = function (head) {
   let currentNode = null;
