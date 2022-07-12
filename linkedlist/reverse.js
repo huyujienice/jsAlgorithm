@@ -27,26 +27,40 @@ three.next = four;
 four.next = five;
 
 // core
+// 标准答案
+var reverseList = function (head) {
+  let currentNode = null;
+  let headNode = head;
+  while (head && head.next) {
+    currentNode = head.next;
+    head.next = currentNode.next;
+    currentNode.next = headNode;
+    headNode = currentNode;
+  }
+  logList(headNode);
+  return headNode;
+};
+
 // 较优解法，不会更改节点数据
 function newReverseList(head) {
   let current = head;
-  let middle;
+  let newhead;
   while (current) {
     let nextnode = current.next;
-    if (middle) {
-      current.next = middle;
+    if (newhead) {
+      current.next = newhead;
     } else {
       current.next = null;
     }
-    middle = current;
+    newhead = current;
     current = nextnode;
   }
-  logList(middle);
-  return middle;
+  logList(newhead);
+  return newhead;
 }
 
 // 将prenext指向原来的链接，next则为新链接
-function reverseList(head) {
+function preReverseList(head) {
   let current = head;
   while (current) {
     current.prenext = current.next;
@@ -96,6 +110,8 @@ function reverseLinkedList(head) {
 
 // reverseLinkedList(one);
 
-// reverseList(one);
+// preReverseList(one);
 
-newReverseList(one);
+// newReverseList(one);
+
+reverseList(one);
