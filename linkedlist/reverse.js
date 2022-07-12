@@ -27,6 +27,24 @@ three.next = four;
 four.next = five;
 
 // core
+// 较优解法，不会更改节点数据
+function newReverseList(head) {
+  let current = head;
+  let middle;
+  while (current) {
+    let nextnode = current.next;
+    if (middle) {
+      current.next = middle;
+    } else {
+      current.next = null;
+    }
+    middle = current;
+    current = nextnode;
+  }
+  logList(middle);
+  return middle;
+}
+
 // 将prenext指向原来的链接，next则为新链接
 function reverseList(head) {
   let current = head;
@@ -78,4 +96,6 @@ function reverseLinkedList(head) {
 
 // reverseLinkedList(one);
 
-reverseList(one);
+// reverseList(one);
+
+newReverseList(one);
