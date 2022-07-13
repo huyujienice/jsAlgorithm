@@ -29,20 +29,21 @@ four.next = five;
 five.next = six;
 
 // core
-// TODO 没看懂标准答案
+// TODO 
+// pre指向上一个处理过的节点,head指向当前需要处理的节点
 // 标准答案
 var reverseList = function (head) {
-  let currentNode = null;
-  let headNode = head;
-  while (head && head.next) {
-    currentNode = head.next;
-    head.next = currentNode.next;
-    currentNode.next = headNode;
-    headNode = currentNode;
+  let pre = null
+  while (head) {
+      let next = head.next
+      head.next = pre
+      pre = head
+      head = next
   }
-  logList(headNode);
-  return headNode;
+  logList(pre);
+  return pre
 };
+
 
 // 较优解法，不会更改节点数据
 function newReverseList(head) {

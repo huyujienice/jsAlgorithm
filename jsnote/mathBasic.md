@@ -37,6 +37,32 @@ o(n!):阶乘复杂度
 
 栈，队列，链表，线性表
 
+### 数组
+类列表对象
+
+Array.from()  
+对一个类数组（arguments）或可迭代对象（Map或Set）创建新的，浅拷贝的数组实例。  
+Array.isArray()  
+用来判断某个变量是否是一个数组对象  
+Array.of()  
+根据一组参数来创建新的数组实例，作用类似字面量写法[]  
+
+Array.prototype.length  
+数组中的元素个数，可以通过直接设置lenght实现截断数组  
+Array.prototype.concat()  
+返回一个新数组，用于合并两个或者多个数组，不会更改现有数组  
+Array.prototype.copyWithin()
+  
+
+
+
+
+
+### Set
+
+
+### Map
+
 ### 链表
 
 用一组任意存储的单元来存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。  
