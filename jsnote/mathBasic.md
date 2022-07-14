@@ -52,7 +52,11 @@ Array.prototype.length
 Array.prototype.concat()  
 返回一个新数组，用于合并两个或者多个数组，不会更改现有数组  
 Array.prototype.copyWithin()
-  
+改变原有数组，但是原有数组长度不改变，浅复制数组的一部分到同一个数组的另一个位置 
+Array.prototype.entries()
+返回新的Array Iterator对象，该对象包含数组中每个索引的键值对
+Array.prototype.every()
+返回一个布尔值，测试一个数组内所有元素是否都能通过某个指定函数的测试
 
 
 
