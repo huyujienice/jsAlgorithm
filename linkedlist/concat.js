@@ -27,34 +27,37 @@ let eight = new ListNode(8);
 let nine = new ListNode(9);
 let ten = new ListNode(10);
 
-one.next = three;
-three.next = four;
-four.next = seven;
-seven.next = nine;
+one.next = four;
+four.next = six;
 
-two.next = five;
 five.next = six;
 six.next = eight;
 eight.next = ten;
 
-function sortListArray(one, two) {
-  let onenode = one;
-  let twonode = two;
-  let onelast;
-  while (onenode) {
-    if (!onenode.next) {
-      onelast = onenode;
-    }
-    onenode = onenode.next;
-  }
-  onelast.next = twonode;
 
-  onenode = one;
-  while (onenode) {
-    //todo
+function sortListArray(one, two) {
+  let array = [];
+  while (one) {
+    array.push(one);
+    one = one.next;
   }
-  logList(one);
-  return one;
+  while (two) {
+    array.push(two);
+    two = two.next;
+  }
+  array.sort((a, b) => {
+    return a.val - b.val;
+  });
+  array.forEach((item, index) => {
+    if (index == array.length - 1) {
+      item.next = null;
+    } else {
+      item.next = array[index + 1];
+    }
+  });
+  let head = array[0];
+  logList(head);
+  return head;
 }
 
 sortListArray(one, two);
