@@ -34,7 +34,47 @@ five.next = six;
 six.next = eight;
 eight.next = ten;
 
+//将第一个链表当做标准，将第二个链表的节点查找位置，并插入
+//因为2个链表单调递增，所有可以如此
+function newSortListArray(one, two) {
+  let point = two;
+  let arraynode = one;
+  while (point) {
+    let nextnode = point.next;
 
+    let current = arraynode;
+    if (current.val > point.val) {
+      //当第一个指针都比插入的队列小的时候，第一个指针置为head
+      point.next = current;
+      arraynode = point;
+    } else {
+      while (current) {
+        let afternode = current.next;
+        if (current.next) {
+          //插入2个节点之间
+          if (current.val < point.val && current.next.val > point.val) {
+            let after = current.next;
+            current.next = point;
+            point.next = after;
+          }
+        } else {
+          //最后一个节点
+          if (current.val < point.val) {
+            current.next = point;
+            point.next = null;
+          }
+        }
+        current = afternode;
+      }
+    }
+
+    point = nextnode;
+  }
+  logList(arraynode);
+  return arraynode;
+}
+
+//取巧，通过array结构进行中转排序
 function sortListArray(one, two) {
   let array = [];
   while (one) {
@@ -60,4 +100,5 @@ function sortListArray(one, two) {
   return head;
 }
 
-sortListArray(one, two);
+// sortListArray(one, two);
+newSortListArray(two, one);
