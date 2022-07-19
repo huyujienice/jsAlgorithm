@@ -34,6 +34,22 @@ five.next = six;
 six.next = eight;
 eight.next = ten;
 
+//链表头部节点比较，取较小节点
+//小节点的next等于小节点的next和大节点的较小值，递归
+function arragementArray(one, two) {
+  if (!one) return two;
+  if (!two) return one;
+  let firstnode;
+  if (one.val < two.val) {
+    firstnode = one;
+    one.next = arragementArray(one.next, two);
+  } else {
+    firstnode = two;
+    two.next = arragementArray(one, two.next);
+  }
+  return firstnode;
+}
+
 //将第一个链表当做标准，将第二个链表的节点查找位置，并插入
 //因为2个链表单调递增，所有可以如此
 function newSortListArray(one, two) {
@@ -101,4 +117,8 @@ function sortListArray(one, two) {
 }
 
 // sortListArray(one, two);
-newSortListArray(two, one);
+// newSortListArray(two, one);
+
+const firstnode = arragementArray(one, two);
+
+logList(firstnode);
