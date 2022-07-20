@@ -34,6 +34,9 @@ three.next = four;
 four.next = eight;
 eight.next = one;
 
+//标准解法为较为复杂的数学公式推导出
+//详细可见https://zhuanlan.zhihu.com/p/103626709
+
 function useArray(head) {
   let array = [];
   let currentVal;
