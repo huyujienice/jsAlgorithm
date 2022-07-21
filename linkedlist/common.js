@@ -38,6 +38,26 @@ seven.next = eight;
 eight.next = nine;
 nine.next = ten;
 
+function useSet(one, two) {
+  let set = new Set();
+  let find;
+  while (one) {
+    set.add(one.val);
+    one = one.next;
+  }
+  while (two) {
+    let old = set.size;
+    set.add(two.val);
+    if (old == set.size) {
+      find = two;
+      two = null;
+    } else {
+      two = two.next;
+    }
+  }
+  return find;
+}
+
 //使用指针执行双重遍历，找到指针相等的点
 function usePoint(one, two) {
   let point = one;
@@ -60,3 +80,6 @@ function usePoint(one, two) {
 
 let findnode = usePoint(one, two);
 console.log(`findnode.val=${findnode.val}`);
+
+let findsnode = useSet(one, two);
+console.log(`findsnode.val=${findsnode.val}`);
