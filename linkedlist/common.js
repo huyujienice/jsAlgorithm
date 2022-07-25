@@ -38,6 +38,47 @@ seven.next = eight;
 eight.next = nine;
 nine.next = ten;
 
+//使用双指针
+//每个指针第一次走到终点时，可以从另一个链表重新开始挪动
+//当两个指针经过零次或者一次转换挪动的时候，必定会相交于指针公共节点
+//因为当有公共节点的之后，2个链表公共节点后的内容完全一致，长度也完全一致
+function useConnect(one, two) {
+  let top = one;
+  let bottom = two;
+  let topCount = 0;
+  let bottomCount = 0;
+  let find = null;
+  while (top && bottom) {
+    if (top.val == bottom.val) {
+      find = top;
+      top = null;
+      bottom = null;
+    }
+    if (top?.next) {
+      top = top.next;
+    } else {
+      if (!topCount) {
+        topCount++;
+        top = two;
+      } else {
+        top = null;
+      }
+    }
+    if (bottom?.next) {
+      bottom = bottom.next;
+    } else {
+      if (!bottomCount) {
+        bottomCount++;
+        bottom = one;
+      } else {
+        bottom = null;
+      }
+    }
+  }
+  return find;
+}
+
+//使用set结构辅助
 function useSet(one, two) {
   let set = new Set();
   let find;
@@ -83,3 +124,6 @@ console.log(`findnode.val=${findnode.val}`);
 
 let findsnode = useSet(one, two);
 console.log(`findsnode.val=${findsnode.val}`);
+
+let findssnode = useConnect(one, two);
+console.log(`findssnode.val=${findssnode.val}`);
