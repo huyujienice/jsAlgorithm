@@ -6,12 +6,21 @@ function ListNode(x) {
   this.next = null;
 }
 function logList(node) {
+  let set = new Set();
   while (node) {
-    console.log(`node.val=${node.val}`);
-    node = node.next;
+    let oldLength = set.size;
+    set.add(node.val);
+    if (oldLength == set.size) {
+      node = null;
+    } else {
+      console.log(`node.val=${node.val}`);
+      node = node.next;
+    }
   }
 }
-//使用链表
+//使用链表，通过set判断链表是否已经遍历过一圈
+//1.生成链表，将链表首尾相连生成环
+//2.每次删除链表中的第m个节点，当链表中的节点不超过m的时候，删除停止
 function getLinkedList(n) {
   let start = 1;
   let current;
@@ -36,8 +45,43 @@ function getLinkedList(n) {
 
 function useLinkedList(n, m) {
   let { head, last } = getLinkedList(n);
-  last.next = head
-  //todo
+  last.next = head;
+
+  let current = head;
+  let find;
+  while (current) {
+    let deleteLeft = current;
+    let leftIndex = m - 2;
+    while (leftIndex) {
+      deleteLeft = deleteLeft.next;
+      leftIndex--;
+    }
+    let deleteRight = current;
+    let index = m;
+    while (index) {
+      deleteRight = deleteRight.next;
+      index--;
+    }
+    console.log(`deleteLeft.val=${deleteLeft.val}`);
+    console.log(`deleteRight.val=${deleteRight.val}`);
+    deleteLeft.next = deleteRight;
+    current = deleteRight;
+
+    //todo
+    let judge = current;
+    let judgeCount = m;
+    let set = new Set();
+    while (judgeCount) {
+      set.add(judge.val);
+      judge = judge.next;
+      judgeCount--;
+    }
+    if (set.size < m) {
+      find = current;
+      current = null;
+    }
+  }
+  return find;
 }
 
 //使用数组
@@ -69,5 +113,5 @@ function deleteArray(n, m) {
 // let left = deleteArray(41, 3);
 // console.log(left);
 
-let { head, last } = getLinkedList(41);
-logList(head);
+let find = useLinkedList(41, 3);
+logList(find);
