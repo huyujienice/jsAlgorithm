@@ -18,6 +18,20 @@ function logList(node) {
     }
   }
 }
+
+//快捷标准做法
+//使用数学推导法
+//f(n,m) = (f(n-1,m) + m) % n
+//f(n,m)表示n个人报数，每报m人时杀掉那个人，最终胜利者的下标
+//每杀掉一个人，下一个人成为头，相当于把数组向前移动m位。若已知n-1个人时，
+//胜利者的下标位置在f(n-1,m)，则n个人的时候，就是向后移动m位，因为有可能
+//数组越界，超过的部分会接到头上，所以还要对n取模，即f(n,m) = (f(n-1,m)+m)%n
+
+function useMath(n, m) {
+  if (n == 1) return 0;
+  return (useMath(n - 1, m) + m) % n;
+}
+
 //使用链表，通过set判断链表是否已经遍历过一圈
 //1.生成链表，将链表首尾相连生成环
 //2.每次删除链表中的第m个节点，当链表中的节点不超过m的时候，删除停止
@@ -115,3 +129,6 @@ function deleteArray(n, m) {
 
 let find = useLinkedList(41, 3);
 logList(find);
+
+let mathfind = useMath(41, 3);
+console.log(`mathfind=${mathfind}`);
