@@ -1,6 +1,7 @@
 //删除链表中重复的节点
 //todo
 //如何重复？重复如何next?
+//重复表示val值相等，但是对象是多个对象，跟next没有关系,next指向对象的内存地址
 
 function ListNode(x) {
   this.val = x;
