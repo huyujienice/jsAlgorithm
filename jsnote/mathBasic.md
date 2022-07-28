@@ -78,7 +78,7 @@ Array.prototype.forEach()
 Array.prototype.includes()  
 返回true或false,用来判断数组是否包含一个指定的值  
 Array.prototype.indexOf()  
-返回索引，返回在数组中科院找到一个给定元素的第一个索引，如果不存在则返回-1  
+返回索引，返回在数组中找到一个给定元素的第一个索引，如果不存在则返回-1  
 Array.prototype.join()  
 返回字符串，将一个数组的所有元素连接成一个字符串并返回，所有数组元素被转换成字符串，再用一个传入的分隔符将这些字符串连接起来  
 Array.prototype.keys()  
@@ -94,7 +94,7 @@ Array.prototype.push()
 Array.prototype.reduce()  
 返回函数调用值，对数组中的每个元素按序执行一个提供的函数，每次运行此函数将会将之前的计算结果作为参数传入，最后将其结果汇总为单个返回值  
 Array.prototype.reduceRight()  
-返回函数调用值，使用方法与reduce()类似，不过执行顺序为从尾到头，从右到左
+返回函数调用值，使用方法与reduce()类似，不过执行顺序为从尾到头，从右到左  
 Array.prototype.reverse()  
 返回原数组，数组中元素位置颠倒，会改变原数组  
 Array.prototype.shift()  
@@ -134,9 +134,46 @@ Array.prototype.values()
 
 
 ### Set
+Set对象是值的集合，你可以按照插入的顺序迭代它的元素。Set中的元素是唯一的。
++0，-0算相同值  
+NaN与NaN算相同值  
+undefined与undefined算相同值  
+  
+Set.prototype.size()  
+返回Set对象中的值的个数  
+Set.prototype.add(value)  
+在Set尾部添加一个元素  
+Set.prototype.clear()  
+移除Set内的所有元素  
+Set.prototype.delete(value)  
+移除值为value的元素  
+Set.prototype.entries()  
+返回一个键值对的迭代器对象，每个值的键和值相等  
+Set.prototype.forEach()  
+按照插入顺序，为Set对象的每一个值都调用一次回调  
+Set.prototype.has(value)  
+返回布尔值，表示该值在Set中存在与否  
+Set.prototype.keys()  
+Set.prototype.values()  
+返回值的迭代器对象  
+
 
 
 ### Map
+Map对象保存键值对，并且能够记住键的原生插入顺序。任何值（对象或者基本类型）都可以作为一个键或一个值  
+
+Map.prototype.size  
+返回Map对象中的键值对数量  
+Map.prototype.clear()  
+Map.prototype.delete(key)  
+Map.prototype.get(key)  
+Map.prototype.has(key)  
+Map.prototype.set(key,value)  
+Map.prototype.keys()  
+Map.prototype.values()  
+Map.prototype.entries()  
+Map.prototype.forEach() 
+
 
 ### 链表
 
