@@ -113,9 +113,11 @@ function deleteArray(n, m) {
   let index = 0;
   while (ring.length >= m) {
     deleteIndex = index + m - 1;
-    if (deleteIndex > ring.length - 1) {
-      deleteIndex = deleteIndex - ring.length;
-    }
+    // if (deleteIndex > ring.length - 1) {
+    //   deleteIndex = deleteIndex - ring.length;
+    // }
+    // 使用求余解决超出数组的问题
+    deleteIndex = deleteIndex % ring.length;
     index = deleteIndex;
     let deleteItem = ring.splice(deleteIndex, 1);
 
@@ -124,11 +126,11 @@ function deleteArray(n, m) {
   return ring;
 }
 
-// let left = deleteArray(41, 3);
-// console.log(left);
+let left = deleteArray(41, 3);
+console.log(left);
 
-let find = useLinkedList(41, 3);
-logList(find);
+// let find = useLinkedList(41, 3);
+// logList(find);
 
-let mathfind = useMath(41, 3);
-console.log(`mathfind=${mathfind}`);
+// let mathfind = useMath(41, 3);
+// console.log(`mathfind=${mathfind}`);
