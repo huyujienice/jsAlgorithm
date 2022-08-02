@@ -14,5 +14,5 @@ function Node(data, left, right) {
 // N叉树前序遍历 leetcode 589  done  
 // 翻转二叉树 leetcode 226  done   
 // 层序遍历二叉树 leetcode 剑指offer 32  done    
-// 二叉树的层序遍历 leetcode 107  done
+// 二叉树的层序遍历 leetcode 107  done  
 
