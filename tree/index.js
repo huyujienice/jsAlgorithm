@@ -10,9 +10,9 @@ function Node(data, left, right) {
 //所以，求一个结点的父结点：i/2即可
 //https://www.jianshu.com/p/a04d73417f7c
 
-// 二叉树前序遍历 leetcode 144  
-// N叉树前序遍历 leetcode 589  
-// 翻转二叉树 leetcode 226   
-// 层序遍历二叉树 leetcode 剑指offer 32
-// 二叉树的层序遍历 leetcode 107
+// 二叉树前序遍历 leetcode 144  done    
+// N叉树前序遍历 leetcode 589  done  
+// 翻转二叉树 leetcode 226  done   
+// 层序遍历二叉树 leetcode 剑指offer 32  done    
+// 二叉树的层序遍历 leetcode 107  done
 
