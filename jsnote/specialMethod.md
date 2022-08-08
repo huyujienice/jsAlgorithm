@@ -11,4 +11,4 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 
 ### vue-router的分包预加载策略  
 
-### 瀑布流场景算法优化
+### 场景算法优化，策略模式使用（如瀑布流）
