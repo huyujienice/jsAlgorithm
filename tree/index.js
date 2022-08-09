@@ -23,8 +23,8 @@ function Node(data, left, right) {
 // leetcode 105  done check   
 // leetcode 222  done check     
 // leetcode 剑指offer 54  done  check  
-// leetcode 剑指offer 26  todo
-// leetcode 662  todo
+// leetcode 剑指offer 26  done check
+// leetcode 662  done check
 // leetcode 968  
 
 
