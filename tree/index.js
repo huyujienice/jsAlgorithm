@@ -26,7 +26,7 @@ function Node(data, left, right) {
 // leetcode 剑指offer 26  done check
 // leetcode 662  done check
 // TODO
-// leetcode 968  
+// leetcode 968
 
 // 堆
 class Heap {
@@ -70,9 +70,9 @@ class Heap {
     while (2 * n + 1 < this.data.length) {
       let a = n;
       if (2 * n + 2 < this.data.length) {
-        const l = this.data[2 * n + 1];
-        const r = this.data[2 * n + 2];
-        const j = this.judge(l, r) ? 2 * n + 2 : 2 * n + 1;
+        const j = this.judge(this.data[2 * n + 1], this.data[2 * n + 2])
+          ? 2 * n + 2
+          : 2 * n + 1;
         if (this.judge(this.data[n], this.data[j])) {
           this.swap(n, j);
           a = j;
@@ -94,7 +94,7 @@ class Heap {
   }
 }
 
-const heap = new Heap(2);
+const heap = new Heap(1);
 heap.push(0);
 heap.push(1);
 heap.push(1);
