@@ -25,7 +25,8 @@ function Node(data, left, right) {
 // leetcode 剑指offer 54  done  check
 // leetcode 剑指offer 26  done check
 // leetcode 662  done check
-// leetcode 968  todo
+// TODO
+// leetcode 968  
 
 // 堆
 class Heap {
