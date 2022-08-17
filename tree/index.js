@@ -121,10 +121,13 @@ heap.pop();
 // leetcode 1046 done check
 // leetcode 703 done check
 // leetcode 215 done
-// leetcode 373 todo
-// leetcode 692 done
-// leetcode 295
+// TODO
+// leetcode 373 基本相同结题思路，c++可过，js超过时间限制
+// leetcode 692 done check
+// TODO
+// leetcode 295 
 // leetcode 面试题17.20
+// TODO
 // leetcode 264
 // leetcode 313
 // leetcode 1753
