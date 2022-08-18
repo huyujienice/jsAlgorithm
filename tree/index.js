@@ -125,10 +125,10 @@ heap.pop();
 // leetcode 373 基本相同结题思路，c++可过，js超过时间限制
 // leetcode 692 done check
 // TODO
-// leetcode 295 
-// leetcode 面试题17.20
+// leetcode 295 对顶堆 check
+// leetcode 面试题17.20 done check
 // TODO
-// leetcode 264
+// leetcode 264 check
 // leetcode 313
 // leetcode 1753
 // leetcode 1801
