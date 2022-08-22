@@ -120,9 +120,9 @@ heap.pop();
 // leetcode 剑指offer 40  done check
 // leetcode 1046 done check
 // leetcode 703 done check
-// leetcode 215 done
+// leetcode 215 done check
 // TODO
-// leetcode 373 基本相同结题思路，c++可过，js超过时间限制
+// leetcode 373 done check   heap解法c++可过，js超过时间限制,舍弃sort方法，利用数组有序优化了插入排序算法
 // leetcode 692 done check
 // TODO
 // leetcode 295 对顶堆 check
