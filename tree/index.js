@@ -140,3 +140,13 @@ heap.pop();
 // 连通性问题
 // Quick-Find算法，染色方法，查找快
 // Quick-Union算法，利用树形结构，快速合并
+
+
+// leetcode 547
+// leetcode 200
+// leetcode 990
+// leetcode 684
+// leetcode 1319
+// leetcode 128 
+// leetcode 947
+// leetcode 1202
