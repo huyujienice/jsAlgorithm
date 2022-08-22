@@ -132,3 +132,11 @@ heap.pop();
 // leetcode 313 check
 // leetcode 1753 done check
 // leetcode 1801 done check
+
+
+
+
+// 并查集
+// 连通性问题
+// Quick-Find算法，染色方法，查找快
+// Quick-Union算法，利用树形结构，快速合并
