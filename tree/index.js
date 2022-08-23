@@ -142,7 +142,7 @@ heap.pop();
 // Quick-Union算法，利用树形结构，快速合并
 
 
-// leetcode 547
+// leetcode 547 done
 // leetcode 200
 // leetcode 990
 // leetcode 684
