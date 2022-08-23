@@ -143,8 +143,8 @@ heap.pop();
 
 
 // leetcode 547 done
-// leetcode 200
-// leetcode 990
+// leetcode 200 done
+// leetcode 990 
 // leetcode 684
 // leetcode 1319
 // leetcode 128 
