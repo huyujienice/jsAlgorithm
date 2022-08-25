@@ -139,7 +139,7 @@ Set对象是值的集合，你可以按照插入的顺序迭代它的元素。Se
 NaN与NaN算相同值  
 undefined与undefined算相同值  
   
-Set.prototype.size()  
+Set.prototype.size    
 返回Set对象中的值的个数  
 Set.prototype.add(value)  
 在Set尾部添加一个元素  
