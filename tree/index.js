@@ -145,7 +145,7 @@ heap.pop();
 // leetcode 547 done
 // leetcode 200 done
 // leetcode 990 done
-// leetcode 684
+// leetcode 684 done
 // leetcode 1319
 // leetcode 128 
 // leetcode 947
