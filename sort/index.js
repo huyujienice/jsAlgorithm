@@ -5,6 +5,24 @@
 
 const array = [1, 9, 8, 3, 6, 4, 9, 9, 2, 0, 12, 10, 2, 87, 3, 6, 1];
 
+//最简单写法的快排，快速易懂，但是有额外的损耗
+const simpleQuickSort = function (arr) {
+  if (arr.length <= 1) return arr;
+  const left = [],
+    right = [],
+    base = arr[0],
+    arrs = arr.slice(1);
+
+  for (let i = 0; i < arrs.length; i++) {
+    if (arrs[i] >= base) {
+      right.push(arrs[i]);
+    } else {
+      left.push(arrs[i]);
+    }
+  }
+  return simpleQuickSort(left).concat([base], simpleQuickSort(right));
+};
+
 //基本快排，填坑法
 //https://segmentfault.com/a/1190000004410119
 const quickSortV1 = function (arr, l, r) {
@@ -26,5 +44,7 @@ const quickSortV1 = function (arr, l, r) {
   return arr;
 };
 
-const r = quickSortV1(array);
-console.log(r);
+// const r = quickSortV1(array);
+// console.log(r);
+const r1 = simpleQuickSort(array);
+console.log(r1);
