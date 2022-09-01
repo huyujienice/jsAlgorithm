@@ -2,10 +2,16 @@
 //分区思想
 //选择一个基准值，小于基准值的放基准值左边，大于基准值放基准值右边
 
-//leetcode 912
-//leetcode 面试题17.14
-//leetcode 148
+//leetcode 912 done
+//leetcode 面试题17.14 done
+//leetcode 148 done
 //leetcode 剑指Offer 21
+//leetcode 75
+//leetcode 95
+//leetcode 394
+//leetcode 11
+//leetcode 470
+//leetcode 239
 
 const array = [1, 9, 8, 3, 6, 4, 9, 9, 2, 0, 12, 10, 2, 87, 3, 6, 1];
 
@@ -32,7 +38,7 @@ const simpleQuickSort = function (arr) {
 const quickSortV1 = function (arr, l, r) {
   if (l === undefined) l = 0;
   if (r === undefined) r = arr.length - 1;
-  if (l >= r) return;
+  if (l >= r) return arr;
   let x = l,
     y = r,
     base = arr[x];
@@ -52,7 +58,7 @@ const quickSortV1 = function (arr, l, r) {
 const quickSortV2 = function (arr, l, r) {
   if (l === undefined) l = 0;
   if (r === undefined) r = arr.length - 1;
-  if (l >= r) return;
+  if (l >= r) return arr;
 
   while (l < r) {
     let x = l,
@@ -73,11 +79,30 @@ const quickSortV2 = function (arr, l, r) {
 };
 
 //3点取中法
+const swap = function (arr, i, j) {
+  const m = arr[i];
+  arr[i] = arr[j];
+  arr[j] = m;
+};
+const getMid = function (arr) {
+  if (arr.length > 2) {
+    const mid = Math.floor(arr.length / 2);
+    if (arr[0] > arr[arr.length - 1]) swap(0, arr.length - 1);
+    if (arr[mid] > arr[arr.length - 1]) swap(mid, arr.length - 1);
+    if (arr[0] > arr[mid]) swap(0, mid);
+  }
+  return arr
+};
+const quickSortV3 = function (arr) {};
 
 // const r = quickSortV1(array);
 // console.log(r);
 // const r1 = simpleQuickSort(array);
 // console.log(r1);
 
-const r2 = quickSortV2(array)
-console.log(r2)
+const r2 = quickSortV2(array);
+console.log(r2);
+
+
+const r3 = getMid(array)
+
