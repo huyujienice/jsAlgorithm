@@ -141,8 +141,7 @@ const getMid = function (arr, l, r) {
   const mid = Math.floor((r - l) / 2);
   if (arr[l] > arr[r]) swap(arr, l, r);
   if (arr[mid] > arr[r]) swap(arr, mid, r);
-  if (arr[l] > arr[mid]) swap(arr, l, mid);
-  return arr[mid];
+  if (arr[l] < arr[mid]) swap(arr, l, mid);
 };
 //todo
 const quickSortV3 = function (arr, l, r) {
@@ -151,12 +150,9 @@ const quickSortV3 = function (arr, l, r) {
   if (l >= r) return arr;
 
   getMid(arr, l, r);
-  if (l - r < 3) return arr;
-  const mid = Math.floor((r - l) / 2);
-  swap(arr, l + 1, mid);
 
-  let x = l + 1,
-    y = r - 1;
+  let x = l,
+    y = r;
   base = arr[x];
   while (x < y) {
     while (x < y && arr[y] >= base) y--;
@@ -170,7 +166,7 @@ const quickSortV3 = function (arr, l, r) {
   return arr;
 };
 
-const array = getRandomArray(10);
+const array = getRandomArray(5);
 console.log(`array=${array}`);
 
 // const heap = new Heap();
@@ -181,8 +177,8 @@ console.log(`array=${array}`);
 //   console.log(heap.pop());
 // }
 
-const simpleQuickSortArray = simpleQuickSort(array);
-console.log(`simpleQuickSortArray=${simpleQuickSortArray}`);
+// const simpleQuickSortArray = simpleQuickSort(array);
+// console.log(`simpleQuickSortArray=${simpleQuickSortArray}`);
 
 // const v1Array = quickSortV1(array);
 // console.log(`v1Array=${v1Array}`);
@@ -190,5 +186,5 @@ console.log(`simpleQuickSortArray=${simpleQuickSortArray}`);
 // const v2Array = quickSortV2(array);
 // console.log(`v2Array=${v2Array}`);
 
-// const v3Array = quickSortV3(array);
-// console.log(`v3Array=${v3Array}`);
+const v3Array = quickSortV3(array);
+console.log(`v3Array=${v3Array}`);

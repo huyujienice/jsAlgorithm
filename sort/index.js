@@ -84,16 +84,31 @@ const swap = function (arr, i, j) {
   arr[i] = arr[j];
   arr[j] = m;
 };
-const getMid = function (arr) {
-  if (arr.length > 2) {
-    const mid = Math.floor(arr.length / 2);
-    if (arr[0] > arr[arr.length - 1]) swap(0, arr.length - 1);
-    if (arr[mid] > arr[arr.length - 1]) swap(mid, arr.length - 1);
-    if (arr[0] > arr[mid]) swap(0, mid);
-  }
-  return arr
+const getMid = function (arr, l, r) {
+  const m = Math.floor((r - l) / 2);
+  if (arr[l] > arr[r]) swap(arr, l, r);
+  if (arr[m] > arr[r]) swap(arr, m, r);
+  if (arr[l] < arr[m]) swap(arr, l, m);
 };
-const quickSortV3 = function (arr) {};
+const quickSortV3 = function (arr, l, r) {
+  if (l === undefined) l = 0;
+  if (r === undefined) r = arr.length - 1;
+  if (l >= r) return arr;
+  getMid(arr, l, r);
+  let x = l,
+    y = r,
+    base = arr[x];
+  while (x < y) {
+    while (x < y && arr[y] >= base) y--;
+    if (x < y) arr[x++] = arr[y];
+    while (x < y && arr[x] < base) x++;
+    if (x < y) arr[y--] = arr[x];
+  }
+  arr[x] = base;
+  quickSortV3(arr, l, x - 1);
+  quickSortV3(arr, x + 1, r);
+  return arr;
+};
 
 // const r = quickSortV1(array);
 // console.log(r);
@@ -103,6 +118,4 @@ const quickSortV3 = function (arr) {};
 const r2 = quickSortV2(array);
 console.log(r2);
 
-
-const r3 = getMid(array)
-
+const r3 = getMid(array);
