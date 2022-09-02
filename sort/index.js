@@ -5,7 +5,7 @@
 //leetcode 912 done
 //leetcode 面试题17.14 done
 //leetcode 148 done
-//leetcode 剑指Offer 21
+//leetcode 剑指Offer 21 done
 //leetcode 75
 //leetcode 95
 //leetcode 394
