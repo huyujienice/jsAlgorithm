@@ -78,7 +78,7 @@ const quickSortV2 = function (arr, l, r) {
   return arr;
 };
 
-//3点取中法
+//3点取中法,leetcode刷题实测执行速度比V1,V2缩短近一倍
 const swap = function (arr, i, j) {
   const m = arr[i];
   arr[i] = arr[j];
