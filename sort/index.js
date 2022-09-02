@@ -8,7 +8,7 @@
 //leetcode 剑指Offer 21 done
 //leetcode 75 done
 //leetcode 95
-//leetcode 394
+//leetcode 394 done
 //leetcode 11
 //leetcode 470
 //leetcode 239
