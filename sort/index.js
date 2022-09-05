@@ -9,9 +9,9 @@
 //leetcode 75 done
 //leetcode 95
 //leetcode 394 done
-//leetcode 11
+//leetcode 11 done 
 //leetcode 470
-//leetcode 239
+//leetcode 239 done
 
 const array = [1, 9, 8, 3, 6, 4, 9, 9, 2, 0, 12, 10, 2, 87, 3, 6, 1];
 
