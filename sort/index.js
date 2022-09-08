@@ -1,3 +1,27 @@
+//归并排序
+//分治思想
+//2个有序数组合并成1个有序数组（核心思想）
+const mergeSortV1 = function (arr, l, r) {
+  if (l >= r) return arr;
+  const mid = Math.floor((r + l) / 2);
+  mergeSortV1(arr, l, mid);
+  mergeSortV1(arr, mid + 1, r);
+  let temp = [],
+    p1 = l,
+    p2 = mid + 1;
+  while (p1 <= mid || p2 <= r) {
+    if ((p1 <= mid && arr[p1] < arr[p2]) || p2 > r) {
+      temp.push(arr[p1++]);
+    } else {
+      temp.push(arr[p2++]);
+    }
+  }
+  for (let i = l; i <= r; i++) {
+    arr[i] = temp[i - l];
+  }
+  return arr;
+};
+
 //快速排序
 //分区思想
 //选择一个基准值，小于基准值的放基准值左边，大于基准值放基准值右边
@@ -10,7 +34,7 @@
 //TODO
 //leetcode 95 check 递归法?
 //leetcode 394 done
-//leetcode 11 done 
+//leetcode 11 done
 //TODO
 //leetcode 470
 //leetcode 239 done
@@ -87,7 +111,7 @@ const swap = function (arr, i, j) {
   arr[j] = m;
 };
 const getMid = function (arr, l, r) {
-  const m = Math.floor((r - l) / 2);
+  const m = Math.floor((r + l) / 2);
   if (arr[l] > arr[r]) swap(arr, l, r);
   if (arr[m] > arr[r]) swap(arr, m, r);
   if (arr[l] < arr[m]) swap(arr, l, m);

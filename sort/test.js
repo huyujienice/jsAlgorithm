@@ -12,6 +12,27 @@ function getRandomArray(n) {
   return arr;
 }
 
+function mergeSortV1(arr, l, r) {
+  if (l >= r) return arr;
+  const mid = Math.floor((r + l) / 2);
+  mergeSortV1(arr, l, mid);
+  mergeSortV1(arr, mid + 1, r);
+  let temp = [],
+    p1 = l,
+    p2 = mid + 1;
+  while (p1 <= mid || p2 <= r) {
+    if ((p1 <= mid && arr[p1] < arr[p2]) || p2 > r) {
+      temp.push(arr[p1++]);
+    } else {
+      temp.push(arr[p2++]);
+    }
+  }
+  for (let i = l; i <= r; i++) {
+    arr[i] = temp[i - l];
+  }
+  return arr;
+}
+
 class Heap {
   data = [];
   type;
@@ -138,7 +159,7 @@ const swap = function (arr, i, j) {
   arr[j] = m;
 };
 const getMid = function (arr, l, r) {
-  const mid = Math.floor((r - l) / 2);
+  const mid = Math.floor((r + l) / 2);
   if (arr[l] > arr[r]) swap(arr, l, r);
   if (arr[mid] > arr[r]) swap(arr, mid, r);
   if (arr[l] < arr[mid]) swap(arr, l, mid);
@@ -166,7 +187,7 @@ const quickSortV3 = function (arr, l, r) {
   return arr;
 };
 
-const array = getRandomArray(5);
+const array = getRandomArray(11);
 console.log(`array=${array}`);
 
 // const heap = new Heap();
@@ -186,5 +207,8 @@ console.log(`array=${array}`);
 // const v2Array = quickSortV2(array);
 // console.log(`v2Array=${v2Array}`);
 
-const v3Array = quickSortV3(array);
-console.log(`v3Array=${v3Array}`);
+// const v3Array = quickSortV3(array);
+// console.log(`v3Array=${v3Array}`);
+
+const v1MergeSortArray = mergeSortV1(array, 0, array.length - 1);
+console.log(`v1MergeSortArray=${v1MergeSortArray}`);
