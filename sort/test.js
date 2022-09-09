@@ -13,7 +13,7 @@ function getRandomArray(n) {
 }
 
 function mergeSortV1(arr, l, r) {
-  if (l >= r) return;
+  if (l >= r) return arr;
   const m = Math.floor((l + r) / 2);
   mergeSortV1(arr, l, m);
   mergeSortV1(arr, m + 1, r);
