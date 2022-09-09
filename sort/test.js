@@ -14,14 +14,14 @@ function getRandomArray(n) {
 
 function mergeSortV1(arr, l, r) {
   if (l >= r) return;
-  const mid = Math.floor((r + l) / 2);
-  mergeSortV1(arr, l, mid);
-  mergeSortV1(arr, mid + 1, r);
+  const m = Math.floor((l + r) / 2);
+  mergeSortV1(arr, l, m);
+  mergeSortV1(arr, m + 1, r);
   let temp = [],
     p1 = l,
-    p2 = mid + 1;
-  while (p1 <= mid || p2 <= r) {
-    if ((p1 <= mid && arr[p1] < arr[p2]) || p2 > r) {
+    p2 = m + 1;
+  while (p1 <= m || p2 <= r) {
+    if (p2 > r || (p1 <= m && arr[p1] < arr[p2])) {
       temp.push(arr[p1++]);
     } else {
       temp.push(arr[p2++]);
