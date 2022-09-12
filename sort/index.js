@@ -1,6 +1,18 @@
 //归并排序
 //分治思想
 //2个有序数组合并成1个有序数组（核心思想）
+//temp可以使用外部存储空间，如文件系统
+
+//leetcode 剑指offer 51
+//leetcode 23
+//leetcode 148
+//leetcode 1305
+//leetcode 327
+//leetcode 315
+//leetcode 53
+//leetcode 1508
+//leetcode 面试题04.08
+//leetcode 1302
 const mergeSortV1 = function (arr, l, r) {
   if (l >= r) return arr;
   const mid = Math.floor((r + l) / 2);
