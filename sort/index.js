@@ -13,7 +13,7 @@
 //leetcode 53 done
 //leetcode 1508 done
 //leetcode 面试题04.08 done
-//leetcode 1302
+//leetcode 1302 done
 const mergeSortV1 = function (arr, l, r) {
   if (l >= r) return arr;
   const mid = Math.floor((r + l) / 2);
