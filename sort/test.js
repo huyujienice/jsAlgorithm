@@ -190,6 +190,49 @@ const quickSortV3 = function (arr, l, r) {
 const array = getRandomArray(11);
 console.log(`array=${array}`);
 
+const radixSortV1 = function (arr) {
+  const radixSort = function (arr, n) {
+    const obj = {};
+    for (let i = 0; i < arr.length; i++) {
+      let s = String(arr[i]);
+      if (arr[i] < 0) {
+        s = s.slice(1);
+      }
+      const l = s.length;
+      const m = l >= n ? s[l - n] : "0";
+      if (obj[m]) {
+        obj[m].push(arr[i]);
+      } else {
+        obj[m] = [arr[i]];
+      }
+    }
+    const r = [];
+    for (let i = 0; i < 10; i++) {
+      if (obj[String(i)]) {
+        r.push(...obj[String(i)]);
+      }
+    }
+    return r;
+  };
+  let f = [],
+    z = [];
+  for (let i = 0; i <= arr.length; i++) {
+    if (arr[i] < 0) {
+      f.push(arr[i]);
+    } else {
+      z.push(arr[i]);
+    }
+  }
+  for (let i = 1; i < 6; i++) {
+    f = radixSort(f, i);
+    z = radixSort(z, i);
+  }
+  let r = [];
+  f.reverse();
+  r = r.concat(f, z);
+  return r;
+};
+
 // const heap = new Heap();
 // array.forEach((it) => {
 //   heap.push(it);
@@ -210,5 +253,8 @@ console.log(`array=${array}`);
 // const v3Array = quickSortV3(array);
 // console.log(`v3Array=${v3Array}`);
 
-const v1MergeSortArray = mergeSortV1(array, 0, array.length - 1);
-console.log(`v1MergeSortArray=${v1MergeSortArray}`);
+// const v1MergeSortArray = mergeSortV1(array, 0, array.length - 1);
+// console.log(`v1MergeSortArray=${v1MergeSortArray}`);
+
+const radixSortArray = radixSortV1(array);
+console.log(`radixSortArray=${radixSortArray}`);
