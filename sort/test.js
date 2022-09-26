@@ -190,48 +190,45 @@ const quickSortV3 = function (arr, l, r) {
 const array = getRandomArray(11);
 console.log(`array=${array}`);
 
-const radixSortV1 = function (arr) {
-  const radixSort = function (arr, n) {
-    const obj = {};
-    for (let i = 0; i < arr.length; i++) {
-      let s = String(arr[i]);
+const baseRadixSort = function (arr, n) {
+  const obj = {}
+  for (let i = 0; i < arr.length; i++) {
+      let s = String(arr[i])
       if (arr[i] < 0) {
-        s = s.slice(1);
+          s = s.slice(1)
       }
-      const l = s.length;
-      const m = l >= n ? s[l - n] : "0";
+      const l = s.length
+      const m = n <= l ? s[l - n] : "0"
       if (obj[m]) {
-        obj[m].push(arr[i]);
+          obj[m].push(arr[i])
       } else {
-        obj[m] = [arr[i]];
+          obj[m] = [arr[i]]
       }
-    }
-    const r = [];
-    for (let i = 0; i < 10; i++) {
-      if (obj[String(i)]) {
-        r.push(...obj[String(i)]);
+  }
+  const r = []
+  for (let i = 0; i < 10; i++) {
+      if (obj[i]) {
+          r.push(...obj[i])
       }
-    }
-    return r;
-  };
-  let f = [],
-    z = [];
-  for (let i = 0; i <= arr.length; i++) {
-    if (arr[i] < 0) {
-      f.push(arr[i]);
-    } else {
-      z.push(arr[i]);
-    }
+  }
+  return r
+}
+const radixSortV1 = function (arr) {
+  let f = [], z = []
+  for (let i = 0; i < arr.length; i++) {
+      if (arr[i] >= 0) {
+          z.push(arr[i])
+      } else {
+          f.push(arr[i])
+      }
   }
   for (let i = 1; i < 6; i++) {
-    f = radixSort(f, i);
-    z = radixSort(z, i);
+      f = baseRadixSort(f, i)
+      z = baseRadixSort(z, i)
   }
-  let r = [];
-  f.reverse();
-  r = r.concat(f, z);
-  return r;
-};
+  f.reverse()
+  return f.concat(z)
+}
 
 // const heap = new Heap();
 // array.forEach((it) => {
