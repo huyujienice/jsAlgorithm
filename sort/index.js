@@ -14,7 +14,7 @@
 //leetcode 274 done
 //leetcode 207 done needcheck
 //leetcode 210
-//leetcode 56
+//leetcode 56 done
 //leetcode 491
 //leetcode 面试题04.12
 
