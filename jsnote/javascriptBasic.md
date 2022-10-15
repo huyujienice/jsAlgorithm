@@ -1,3 +1,31 @@
+# js类型判断
+
+## 使用 typeof 判断
+
+Undefined,Null,Boolean,Number,String,BigInt,Symbol,Object,Function,other Object  
+undefined,object,boolean,number,string,bigint,symbol,object,function,object
+
+## instanceof判断
+instanceof无法判断基本数据类型，对于引用类型数据，返回其其对应类型  
+
+## 使用 Object.prototype.toString.call()判断
+
+console.log(Object.prototype.toString.call(1)); // [object Number]  
+console.log(Object.prototype.toString.call('123')); // [object String]  
+console.log(Object.prototype.toString.call(true)); // [object Boolean]  
+console.log(Object.prototype.toString.call(undefined)); // [object Undefined]    
+console.log(Object.prototype.toString.call(null)); // [object Null]  
+console.log(Object.prototype.toString.call({})); // [object Object]  
+console.log(Object.prototype.toString.call([])); // [object Array]  
+console.log(Object.prototype.toString.call(new Date())); // [object Date]  
+console.log(Object.prototype.toString.call(new Error())); // [object Error]  
+console.log(Object.prototype.toString.call(/a/g)); // [object RegExp]  
+console.log(Object.prototype.toString.call(()=>{})); // [object Function]  
+console.log(Object.prototype.toString.call(123n)); // [object BigInt]  
+console.log(Object.prototype.toString.call(Symbol())); // [object Symbol]  
+console.log(Object.prototype.toString.call(Math)); // [object Math]  
+console.log(Object.prototype.toString.call(JSON)); // [object JSON]
+
 # 执行上下文和执行栈
 
 以下内容只是一个人的说法，原文链接：
@@ -26,51 +54,55 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 # 继承与原型链
 
 prototype，虐杀原型游戏英文名
-每个实例对象(object)都有一个私有属性(称之为__proto__)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(__proto__)，层层向上直到一个对象(Object.prototype)的原型对象为null。根据定义，null没有原型，并作为这个原型链中的最后一个环节。
+每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
 函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
 
 # new 方法底层逻辑
-通过new调用构造函数实际会经历以下4个步骤
+
+通过 new 调用构造函数实际会经历以下 4 个步骤
+
 1. 创建一个新对象
 2. 将构造函数的原型挂到新对象的原型上（this 指向 新对象）
 3. 执行构造函数，完成新对象的创建初始化
 4. 返回新对象
+
 # Module
 
-浏览器环境中，<script>标签带defer或async属性，脚本就会异步加载。
-defer(铁的)会等到整个页面在内存中正常渲染结束(DOM结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行
-async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行
-浏览器加载ES6模块，也使用<script>标签，但是要加入type="module"属性，且渲染完再执行
+浏览器环境中，<script>标签带 defer 或 async 属性，脚本就会异步加载。
+defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行
+async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行
+浏览器加载 ES6 模块，也使用<script>标签，但是要加入 type="module"属性，且渲染完再执行
 
-ES6模块与CommonJS模块的差异
-1. CommonJS模块输出是一个值的拷贝，ES6模块输出的是值的引用
-2. CommonJS模块是运行时加载，ES6模块是编译时输出接口
-3. CommonJS模块的require()是同步加载模块，ES6模块的import命令是异步加载，有一个独立的模块依赖的解析阶段
+ES6 模块与 CommonJS 模块的差异
 
-Node.js中，.mjs文件总是以ES6模块加载，.cjs文件总是以CommonJS模块加载，.js文件的加载取决于package.json里面的type字段的设置。指定type为module则解释.js脚本为ES6模块，若不指定type或者type的字段为commonjs，则.js脚本会被解释成CommonJS模块。
+1. CommonJS 模块输出是一个值的拷贝，ES6 模块输出的是值的引用
+2. CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+3. CommonJS 模块的 require()是同步加载模块，ES6 模块的 import 命令是异步加载，有一个独立的模块依赖的解析阶段
 
-package.json文件中有2个字段可以指定模块的入口文件：main和exports
-简单只使用main字段可以指定模块加载的入口文件
-exports字段优先级高于main字段
+Node.js 中，.mjs 文件总是以 ES6 模块加载，.cjs 文件总是以 CommonJS 模块加载，.js 文件的加载取决于 package.json 里面的 type 字段的设置。指定 type 为 module 则解释.js 脚本为 ES6 模块，若不指定 type 或者 type 的字段为 commonjs，则.js 脚本会被解释成 CommonJS 模块。
 
-CommonJS模块加载ES6模块
+package.json 文件中有 2 个字段可以指定模块的入口文件：main 和 exports
+简单只使用 main 字段可以指定模块加载的入口文件
+exports 字段优先级高于 main 字段
+
+CommonJS 模块加载 ES6 模块
 (async () => {
-  await import('./my-app.mjs');
+await import('./my-app.mjs');
 })();
-ES6模块加载CommonJS模块
+ES6 模块加载 CommonJS 模块
 只能整体加载，不能只加载单一输出项
 // 正确
 import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
-或使用Node.js内置的module.createRequire()可加载CommonJS模块
-
+或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
 # ArrayBuffer,TypedArray,DataView
-ArrayBuffer对象，TypedArray视图和DataView视图是JavaScript操作二进制数据的一个接口。
 
-SharedArrayBuffer，允许Worker线程与主线程共享同一块内存。
-多线程共享内存，最大的问题就是如何防止两个线程同时修改某个地址，或者说，当一个线程修改共享内存以后，必须有一个机制让其他线程同步。SharedArrayBuffer API提供Atomics对象，保证所有共享内存的操作都是“原子性”的，并且可以在所在的线程内同步。
+ArrayBuffer 对象，TypedArray 视图和 DataView 视图是 JavaScript 操作二进制数据的一个接口。
+
+SharedArrayBuffer，允许 Worker 线程与主线程共享同一块内存。
+多线程共享内存，最大的问题就是如何防止两个线程同时修改某个地址，或者说，当一个线程修改共享内存以后，必须有一个机制让其他线程同步。SharedArrayBuffer API 提供 Atomics 对象，保证所有共享内存的操作都是“原子性”的，并且可以在所在的线程内同步。
 
 # js 内置对象
 
@@ -486,22 +518,20 @@ Promise.reject()
 
 Promise.try()
 
-
 ## Generator
 
-Generator函数是ES6提供的一种异步编程的解决方案
+Generator 函数是 ES6 提供的一种异步编程的解决方案
 
 两个特征：
-1. function关键字与函数名之间有一个星号(*)
-2. 函数体内部使用yield表达式
 
-yield表达式本身没有返回值，或者说总是返回undefined。next()方法可以带一个参数，该参数就会被当做上一个yield表达式的返回值
+1. function 关键字与函数名之间有一个星号(\*)
+2. 函数体内部使用 yield 表达式
+
+yield 表达式本身没有返回值，或者说总是返回 undefined。next()方法可以带一个参数，该参数就会被当做上一个 yield 表达式的返回值
 
 协程（coroutine）是一种程序运行方式，可以理解成“协作的线程”或“协作的函数”。协程即可以用单线程实现，也可以用多线程实现。前者是一种特殊的子线程，后者是一种特殊的线程
 
-Generator函数是ES6对协程的实现，但属于不完全实现。Generator函数被称为“半协程”,意思是只有Generator函数的调用者，才能将程序的执行权还给Generator函数。如果是完全执行的协程，任何函数都可以让暂停的协程继续执行。
-
-
+Generator 函数是 ES6 对协程的实现，但属于不完全实现。Generator 函数被称为“半协程”,意思是只有 Generator 函数的调用者，才能将程序的执行权还给 Generator 函数。如果是完全执行的协程，任何函数都可以让暂停的协程继续执行。
 
 ## Iterator
 
