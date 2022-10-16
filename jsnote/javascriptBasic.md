@@ -8,7 +8,7 @@ undefined,object,boolean,number,string,bigint,symbol,object,function,object
 ## instanceof判断
 instanceof无法判断基本数据类型，对于引用类型数据，返回其其对应类型  
 
-## 使用 Object.prototype.toString.call()判断
+## 使用 Object.prototype.toString.call()判断（使用apply()效果一致）
 
 console.log(Object.prototype.toString.call(1)); // [object Number]  
 console.log(Object.prototype.toString.call('123')); // [object String]  
@@ -47,9 +47,14 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 1. this 绑定
    在全局执行上下文中，this 的值指向全局变量，在函数执行上下文中，this 的值取决于该函数式如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined
+   this不是运行时绑定的吗？bind,call,apply,箭头函数都可以改变this指向
 
 2. 创建词法环境组件
 3. 创建变量环境组件
+
+## this
+this是当前执行上下文(global,function或eval)的一个属性  
+globalThis可获取不同环境下的全局this对象，也就是全局对象自身  
 
 # 继承与原型链
 
