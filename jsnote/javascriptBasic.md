@@ -24,9 +24,9 @@ console.log(Object.prototype.toString.call(()=>{})); // [object Function]
 console.log(Object.prototype.toString.call(123n)); // [object BigInt]  
 console.log(Object.prototype.toString.call(Symbol())); // [object Symbol]  
 console.log(Object.prototype.toString.call(Math)); // [object Math]  
-console.log(Object.prototype.toString.call(JSON)); // [object JSON]
+console.log(Object.prototype.toString.call(JSON)); // [object JSON]  
 
-# 执行上下文和执行栈
+# 执行上下文和执行上下文栈
 
 以下内容只是一个人的说法，原文链接：
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
@@ -38,19 +38,24 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 2. 函数执行上下文
 3. Eval 函数执行上下文
 
-执行上下文两个阶段
+执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
+## VO
+VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数
 
-1. 创建阶段
-2. 执行阶段
+## AO
+AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments
 
-创建阶段发生三件事情
+## Scope
+Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**
+Scope关联[[scope]]  
+[[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的AO，若为全局函数，则保存全局上下文的VO
 
-1. this 绑定
-   在全局执行上下文中，this 的值指向全局变量，在函数执行上下文中，this 的值取决于该函数式如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined
-   this不是运行时绑定的吗？bind,call,apply,箭头函数都可以改变this指向
+Scope定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
+fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 
-2. 创建词法环境组件
-3. 创建变量环境组件
+### 闭包
+本质就是返回并使用内部函数的[[scope]],即创建时候的作用域
+
 
 ## this
 this是当前执行上下文(global,function或eval)的一个属性  
