@@ -32,11 +32,13 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
 执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
-三种执行上下文
+4种情况会创建新的执行上下文
+1.进入全局代码
+2.进入function函数体代码
+3.进入eval函数参数指定的代码
+4.进入module代码
 
-1. 全局执行上下文
-2. 函数执行上下文
-3. Eval 函数执行上下文
+
 
 执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
 ## VO
@@ -46,7 +48,7 @@ VO即Variable Object变量对象，定义在全局执行上下文（globalEC）�
 AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments
 
 ## Scope
-Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**
+Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**，即***词法作用域**，用来查找可使用的变量
 Scope关联[[scope]]  
 [[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的AO，若为全局函数，则保存全局上下文的VO
 
