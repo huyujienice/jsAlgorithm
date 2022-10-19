@@ -32,11 +32,11 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
 执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
-4种情况会创建新的执行上下文
-1.进入全局代码
-2.进入function函数体代码
-3.进入eval函数参数指定的代码
-4.进入module代码
+4种情况会创建新的执行上下文  
+1.进入全局代码  
+2.进入function函数体代码  
+3.进入eval函数参数指定的代码  
+4.进入module代码  
 
 
 
@@ -50,7 +50,7 @@ AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）
 ## Scope
 Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**，即***词法作用域**，用来查找可使用的变量
 Scope关联[[scope]]  
-[[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的AO，若为全局函数，则保存全局上下文的VO
+[[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的AO，若为全局函数，则保存全局上下文的VO  
 
 Scope定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
 fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
@@ -68,7 +68,17 @@ globalThis可获取不同环境下的全局this对象，也就是全局对象自
 
 prototype，虐杀原型游戏英文名
 每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
-函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
+
+函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。  
+函数拥有prototype及__proto__属性  
+例如：  
+function a(){}   
+a.prototype.__proto__ 指向Object.prototype,Object.prototype.__proto__ 指向null  
+a.__proto__ 指向 Function.prototype,Function.prototype.__proto__ 指向 Object.prototype,Object.prototype.__proto__ 指向null
+如果要查找a为构造函数生成新的实例的属性，关注a.prototype，若查找a自身的属性，关注a.__proto__   
+a可以使用Function.prototype.call方法原理即是通过a.__proto__ 查找到Funtion.prototype
+
+
 
 # new 方法底层逻辑
 
