@@ -310,11 +310,11 @@ enumerable 属性，称为“可枚举性”，如果该属性为 false，以下
 属性的遍历
 ES6 一共有 5 种方法可以遍历对象的属性
 
-1. for...in:循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
-2. Object.keys(obj):返回一个数组，包含对象自身的所有可枚举属性（不含 Symbol 属性）的键名
-3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
-4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名
-5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
+1. for...in:循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）  
+2. Object.keys(obj):返回一个数组，包含对象自身的所有可枚举属性（不含 Symbol 属性）的键名   
+3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名  
+4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名  
+5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举   
 
 super 关键字
 指向当前对象的原型对象，只能用在对象的方法之中，用在其余的地方都会报错
