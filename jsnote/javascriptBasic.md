@@ -1,3 +1,10 @@
+# js中核弹方法
+eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6可以使用rest参数)    
+eval直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
+
+有类似方法的有new Function,setTimeout,setInterval等方法，但是没有eval好用  
+
+
 # js类型判断
 
 ## 使用 typeof 判断
@@ -41,7 +48,7 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 
 执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
-## VO
+## VO  
 VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数
 
 ## AO
@@ -91,10 +98,10 @@ a可以使用Function.prototype.call方法原理即是通过a.__proto__ 查找�
 
 # Module
 
-浏览器环境中，<script>标签带 defer 或 async 属性，脚本就会异步加载。
+浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。
 defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行
 async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行
-浏览器加载 ES6 模块，也使用<script>标签，但是要加入 type="module"属性，且渲染完再执行
+浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行
 
 ES6 模块与 CommonJS 模块的差异
 
@@ -119,6 +126,10 @@ import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
+
+CommonJS底层加载原理：
+Node.js自带Module构造函数，会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息  
+模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用eval执行，所以在模块内能够直接使用exports, require, module
 
 # ArrayBuffer,TypedArray,DataView
 
