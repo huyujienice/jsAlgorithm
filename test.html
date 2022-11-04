@@ -280,13 +280,14 @@
       //实现小程序window无法使用的效果
       const ctx = {
         window: null,
+        globalThis: undefined,
       };
       function runCode(code, ctx) {
         with (ctx) {
           eval(code);
         }
       }
-      const code = `console.log(window)`;
+      const code = `console.log(window);console.log(globalThis);`;
       runCode(code, ctx);
     </script>
   </body>
