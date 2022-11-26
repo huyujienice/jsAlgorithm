@@ -67,8 +67,8 @@ fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域  
 
 
-## this
-this是当前执行上下文(global,function或eval)的一个属性，在非严格模式下，总是指向一个对象    
+## this  
+this是当前执行上下文(global,function或eval)的一个属性，在非严格模式下，总是指向一个对象     
 globalThis可获取不同环境下的全局this对象，也就是全局对象自身  
 
 # 继承与原型链
