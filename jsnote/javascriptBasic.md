@@ -49,10 +49,10 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
 ## VO  
-VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数
+VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数  
 
 ## AO
-AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments
+AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments  
 
 ## Scope
 Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**，即***词法作用域**，用来查找可使用的变量

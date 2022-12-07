@@ -157,3 +157,17 @@ el.addEventListener(type,listener,{capture:true})
 ::after
 
 ::before和::after，可以和content属性一起使用，使用CSS将内容插入到文档中
+
+
+# CSS生效是通过计算权重来实现的，权重最高就生效
+
+1.Browser declarations  
+2.User normal declarations  
+3.Author normal declarations  
+4.Author important declarations  
+5.User important declarations  
+
+a style  
+b id attributes  
+c other attributes  
+d element names
