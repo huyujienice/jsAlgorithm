@@ -171,3 +171,30 @@ a style
 b id attributes  
 c other attributes  
 d element names
+
+# 页面生命周期
+1.DOMContentLoaded  
+浏览器已完全加载HTML,并构建了DOM树，但像<img>和样式表之类的外部资源可能尚未加载完成  
+DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SPA无法查找，因为此时SPA只有一个ID为root的div元素）  
+
+2.load  
+浏览器不仅加载完成了HTML,还加载完成了所有外部资源：图片，样式等  
+外部资源已加载完成，样式已被应用，图片大小也已知了  
+
+3.beforeunloaded  
+用户正在离开  
+我们可以检查用户是否保存了更改，并询问他是否真的要离开  
+
+4.unload  
+用户几乎已经离开  
+我们仍然可以启动一些操作，例如发送统计数据  
+
+# css,js加载顺序
+
+1.外联和内联的css是所有渲染的前提条件，因为  
+dom tree->cssom tree->layout->paint  
+js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前解析执行完毕  
+
+2.js内联及不带属性的外联会中断解析渲染，立即下载执行  
+带defer属性的会异步有序执行，不会阻止HTML解析，会在DOMContentLoaded事件前执行  
+带async属性的会异步无序执行，    
