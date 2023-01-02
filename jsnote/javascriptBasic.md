@@ -49,10 +49,10 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
 ## VO  
-VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数
+VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数  
 
 ## AO
-AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments
+AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments  
 
 ## Scope
 Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**，即***词法作用域**，用来查找可使用的变量
@@ -67,8 +67,8 @@ fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域  
 
 
-## this
-this是当前执行上下文(global,function或eval)的一个属性，在非严格模式下，总是指向一个对象    
+## this  
+this是当前执行上下文(global,function或eval)的一个属性，在非严格模式下，总是指向一个对象     
 globalThis可获取不同环境下的全局this对象，也就是全局对象自身  
 
 # 继承与原型链
@@ -130,6 +130,11 @@ CommonJS底层加载原理：
 
 Node.js自带Module构造函数，会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息  
 模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用eval执行，所以在模块内能够直接使用exports, require, module
+
+ES6 模块底层原理：  
+import命令会被js引擎进行静态分析，先于模块内其他模块执行。commonjs类似Node.js自行实现的一个轮子，而es6 module则是js引擎进行处理  
+import()类似于Node.js的require加载，可以执行  
+按需加载，条件加载，动态的模块路径
 
 # ArrayBuffer,TypedArray,DataView
 
