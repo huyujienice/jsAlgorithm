@@ -126,8 +126,8 @@ import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
-
 CommonJS底层加载原理：
+
 Node.js自带Module构造函数，会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息  
 模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用eval执行，所以在模块内能够直接使用exports, require, module
 

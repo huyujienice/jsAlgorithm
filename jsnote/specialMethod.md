@@ -12,3 +12,9 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ### vue-router的分包预加载策略    
 
 ### 场景算法优化，策略模式使用（如瀑布流）
+
+
+### UI组件，如全局加载动画,toast,上拉加载,下拉刷新
+
+
+### vue simplehtmllayout 模式,vue loader
