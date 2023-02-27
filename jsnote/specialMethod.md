@@ -17,4 +17,8 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ### UI组件，如全局加载动画,toast,上拉加载,下拉刷新
 
 
-### vue simplehtmllayout 模式,vue loader
+### vue simplehtmllayout 模式,vue loader  
+
+### simplehtmllayout 快速开发模式，支持uniapp,vue2.0  
+
+### windows中bat语言备份单机文件存档  
