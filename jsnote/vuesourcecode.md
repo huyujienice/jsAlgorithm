@@ -64,11 +64,35 @@ transition
 app.config.errorHandler  
 用于为应用内抛出的未捕获错误指定一个全局处理函数  
 
-## vue3生命周期  
+## vue生命周期  
+beforeCreate  
+在组件实例初始化完成,props解析之后,data和computed等选项处理之前立即调用   
+setup钩子会在beforeCreate之前调用，是最先调用的生命周期钩子函数  
+
+created  
+在这个钩子被调用时，以下内容已经设置完成：响应式数据，计算属性，方法和侦听器。未挂载实际DOM  
+
+beforeMount  
+组件被挂载前调用  
+
+mounted  
+组件被挂载之后调用  
+1.所有同步子组件都已经被挂载(不包含异步组件或<Suspense>树内组件)  
+2.其自身的DOM树已经创建完成并插入了父容器中  
+
+## 异步组件
+1.defineAsyncComponent()  
+2.async setup  
+<Suspense>组件可以包裹异步组件并协调多层组件加载的处理  
+
+
+## vue3生命周期setup相关  
 https://cn.vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram  
 onMounted()注册一个回调函数，在组件挂载完成后执行    
 onUpdated()注册一个回调函数，在组件因为响应式状态变更而更新其DOM树之后调用  
 onUnmounted()注册一个回调函数，在组件实例被卸载之后调用  
 onActivated()注册一个回调函数，若组件是<KeepAlive>缓存树的一部分，当组件被插入到DOM中时调用  
+
+
 
 父子组件生命周期执行顺序简易版:父created->子created->子mounted->父mounted
