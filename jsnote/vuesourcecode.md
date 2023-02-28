@@ -60,6 +60,17 @@ transition
 
 
 # vue3.0
+
+## vue3 特性
+1.向下兼容,vue3支持大多数vue2特性  
+2.性能提升  
+3.Composition API  
+4.teleport瞬移组件 Suspense异步组件解决  
+5.更好TypeScript支持  
+
+## vue diff算法
+
+
 ## vue3全局api
 app.config.errorHandler  
 用于为应用内抛出的未捕获错误指定一个全局处理函数  
