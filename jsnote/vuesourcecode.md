@@ -68,6 +68,14 @@ transition
 4.teleport瞬移组件 Suspense异步组件解决  
 5.更好TypeScript支持  
 
+## vue3性能提升
+1.vue3 Proxy实现响应式，vue2 Object.defineProperty性能较差，需递归执行  
+2.PatchFlag优化diff算法  
+3.HoistStatic静态节点缓存优化  
+4.CacheHandler缓存事件优化  
+5.SSR优化  
+6.tree-shaking  
+
 ## vue diff算法
 
 
