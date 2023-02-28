@@ -59,3 +59,16 @@ transition
 
 
 
+# vue3.0
+## vue3全局api
+app.config.errorHandler  
+用于为应用内抛出的未捕获错误指定一个全局处理函数  
+
+## vue3生命周期  
+https://cn.vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram  
+onMounted()注册一个回调函数，在组件挂载完成后执行    
+onUpdated()注册一个回调函数，在组件因为响应式状态变更而更新其DOM树之后调用  
+onUnmounted()注册一个回调函数，在组件实例被卸载之后调用  
+onActivated()注册一个回调函数，若组件是<KeepAlive>缓存树的一部分，当组件被插入到DOM中时调用  
+
+父子组件生命周期执行顺序简易版:父created->子created->子mounted->父mounted
