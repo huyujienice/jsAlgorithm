@@ -58,6 +58,12 @@ transition
 3. 虚拟节点如何实现
 
 # vue 渲染流程  
+示例：https://juejin.cn/post/6844904031983239181#heading-19  
+render  
+调用compile函数，生成render函数字符串，编译过程如下：   
+1.parse函数解析template,生成ast(抽象语法树)   
+2.optimize函数标记静态节点(diff算法跳过静态节点)   
+3.generate函数生成render函数字符串      
 
 # vue nextTick
 nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在下次dom更新循环结束之后执行延迟回调。  
