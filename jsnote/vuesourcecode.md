@@ -61,14 +61,14 @@ transition
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
 render  
 调用compile函数，生成render函数字符串，编译过程如下：   
-1.parse函数解析template,生成ast(抽象语法树)   
-2.optimize函数标记静态节点(diff算法跳过静态节点)   
+1.parse函数解析template,生成ast(抽象语法树)    
+2.optimize函数标记静态节点(diff算法跳过静态节点)       
 3.generate函数生成render函数字符串      
 
 # vue nextTick
 nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在下次dom更新循环结束之后执行延迟回调。  
 ***操作dom节点是同步操作***     
-更新dom是同步操作，vue框架为了效率更高采用了异步执行。    
+更新dom是同步操作，vue框架为了效率更高采用了异步执行更新dom。    
 当监听到数据变化，vue将开启一个队列，并缓冲在同一个事件循环中所发生的所有数据的变更。如果同一个副作用函数被多次触发，   
 只会被推入到队列中一次。这种缓冲时去除重复数据对于避免不必要的计算和dom操作是非常重要的。   
 在下一个的事件循环中，vue刷新队列并执行实际（已去重）的副作用函数。   
