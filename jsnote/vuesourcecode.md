@@ -57,6 +57,20 @@ transition
 
 3. 虚拟节点如何实现
 
+# vue中的双向绑定
+vue中的v-model可以用在表单的input输入框，完成视图和数据的双向绑定   
+```
+<input v-model="xxx">
+
+<!-- 上面的代码等价于 -->
+<input :value="xxx" @input="xxx = $event.target.value">
+<!-- 双向绑定 = 单向绑定 + UI事件监听 -->
+```
+
+MVC：Model-View-Controller(模型-视图-控制器)是一种分层架构的思想   
+MVVM:Model-View-ViewModel(模型-视图-控制器)是一种双向数据绑定模式，用ViewModel来建立起Model数据层和View视图层的连接，    
+数据改变会影响视图，视图改变会影响数据       
+
 # vue 渲染流程  
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
 render  
