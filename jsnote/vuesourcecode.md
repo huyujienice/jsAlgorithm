@@ -72,8 +72,8 @@ nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在
 当监听到数据变化，vue将开启一个队列，并缓冲在同一个事件循环中所发生的所有数据的变更。如果同一个副作用函数被多次触发，   
 只会被推入到队列中一次。这种缓冲时去除重复数据对于避免不必要的计算和dom操作是非常重要的。   
 在下一个的事件循环中，vue刷新队列并执行实际（已去重）的副作用函数。   
-实现异步队列尝试使用原生的Promise.then(),MutationObserver和setImmediate，若都不支持则采用setTimeout代替   
-有一个全局队列存储副作用函数，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行   
+实现异步队列尝试使用宿主环境的Promise.then(),MutationObserver和setImmediate，若都不支持则采用setTimeout代替   
+有一个全局队列存储副作用函数，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行    
 pending为false的时候直接新增一个执行队列并返回一个Promise执行    
 
 # 纯函数
