@@ -59,6 +59,9 @@ transition
 
 # vue中的双向绑定
 vue中的v-model可以用在表单的input输入框，完成视图和数据的双向绑定   
+v-model其实是双向绑定的语法糖，input相当于vue自带的组件  
+浏览器<input>标签可以注册oninput事件，在元素值发生变化时立即触发     
+  
 ```
 <input v-model="xxx">
 
