@@ -78,6 +78,8 @@ chunk有2种形式：
 默认情况下，non-initial chunk没有名称，因此会使用唯一ID来代替。在使用动态导入时，我们可以使用    
 magic comment(魔术注释)来显示指定chunk名称,例如：       
 /* webpackChunkName: "app" */ （vue-router的配置中使用了）    
+/* webpackPrefetch: true */ 会在浏览器闲暇时下载文件      
+/* webpackPreload: true */ 会在父chunk加载时并行下载文件    
 
 
 ### webpack运行流程   
@@ -88,4 +90,4 @@ magic comment(魔术注释)来显示指定chunk名称,例如：
 从entry出发，针对每个module串行调用对应的loader去翻译文件内容，再找到该module依赖的module，递归地进行编译处理    
 
 3.输出流程   
-对编译后的module组合成chunk,把chunk转换成文件，输出到文件系统   
+对编译后的module组合成chunk,把chunk转换成文件bundle，输出到文件系统   
