@@ -65,3 +65,14 @@ optimization: {
 ```
 
 3.import
+
+
+### webpack运行流程   
+1.初始化流程    
+从配置文件和Shell语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数     
+     
+2.编译构建流程     
+从entry出发，针对每个module串行调用对应的loader去翻译文件内容，再找到该module依赖的module，递归地进行编译处理    
+
+3.输出流程   
+对编译后的module组合成chunk,把chunk转换成文件，输出到文件系统   
