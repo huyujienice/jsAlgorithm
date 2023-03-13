@@ -40,14 +40,18 @@ postLoader
 
 # 插件
 
-插件可以执行很多任务，包括：打包优化，资源管理，注入环境变量
+插件可以执行很多任务，包括：打包优化，资源管理，注入环境变量   
+
+
+### runtime manifest  
+当compiler开始执行，解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，   
+runtime会通过manifest来解析和加载模块。    
 
 ### webpack 单独生成 chunk 方法
 
 1.多入口指定
 
 ```
-  // 多入口：有一个入口，最终输出就有一个bundle
 entry: {
     main: './src/js/index.js',
     test: './src/js/test.js'
@@ -64,7 +68,16 @@ optimization: {
 }
 ```
 
-3.import
+3.import 动态导入   
+
+### chunk
+chunk有2种形式：    
+1.initial(初始化)是入口起点的main chunk。此chunk包含为入口起点指定的所有模块及依赖项    
+2.non-initial是可以延迟加载的块。会出现在使用import动态导入或者splitChunks配置中   
+
+默认情况下，non-initial chunk没有名称，因此会使用唯一ID来代替。在使用动态导入时，我们可以使用    
+magic comment(魔术注释)来显示指定chunk名称,例如：       
+/* webpackChunkName: "app" */ （vue-router的配置中使用了）    
 
 
 ### webpack运行流程   
