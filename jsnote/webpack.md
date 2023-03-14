@@ -42,6 +42,17 @@ postLoader
 
 插件可以执行很多任务，包括：打包优化，资源管理，注入环境变量   
 
+## 自定义插件  
+一个class类，定义apply方法，以compiler为参数，指定挂载到webpack自身的事件钩子    
+
+### Compiler和Compilation
+compiler是webpack底层编译对象的引用   
+webpack从开始执行到结束，compiler只会实例化一次。compiler对象记录了webpack运行环境的所有信息，   
+插件可以通过它获取到webpack的配置信息，如entry,output,module等配置，所以可以通过compiler.hooks挂载钩子回调        
+           
+compilation对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息    
+
+
 
 ### runtime manifest  
 当compiler开始执行，解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，   
