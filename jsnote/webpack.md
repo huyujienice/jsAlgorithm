@@ -157,3 +157,12 @@ speed-measure-webpack-plugin分析分析打包速度
     4.1 使用terser-webpack-plugin代替uglifyjs-webpack-plugin    
     4.2 optimize-css-assets-webpack-plugin:对css进行压缩   
     4.3 splitChunks代码分割   
+    4.4 runtimeChunk:创建一个额外的文件或者chunk,减少entry chunk体积，提高性能   
+5.Plugin优化：    
+    5.1 eslint-webpack-plugin:eslint-loader替代方案，可以配置自动fix和多核编译    
+    5.2 mini-css-extract-plugin:抽离css，可上传CDN  
+6.多线程打包：
+    6.1 Happypack    
+    6.2 thread-loader   
+7.purgecss-webpack-plugin:对css文件进行tree-shaking  
+
