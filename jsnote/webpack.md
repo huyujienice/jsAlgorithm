@@ -15,7 +15,7 @@ ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何�
 
 # loader
 
-webpack 开箱自带解析 js 和 JSON 文件。loader 处理其他类型的文件，并将其转换为有效模块，已供程序使用，以及被添加到依赖图中
+webpack 开箱自带解析 js 和 JSON 文件。loader 处理其他类型的文件，并将其转换为有效模块，已供程序使用，以及被添加到依赖图中   
 
 ```
 module.exports = {
@@ -48,8 +48,10 @@ aLoader.pitch = function (remainingRequest, precedingRequest, data) {
 module.exports = aLoader;
 ```
 
+loader正常的处理顺序：pre,normal,inline,post    
+
 Normal Loader 执行顺序通过配置决定     
-Pitching Loader 可提前执行，且返回非 undefined 值的时候会出现熔断效果    
+Pitching Loader 可提前或延后Normal Loader执行处理，在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给前置的Normal Loader      
 
 Loader可以分为同步Loader和异步Loader
 同步Loader可以通过return语句或者this.callback的方式来同步地返回转换后的结果    
@@ -132,3 +134,26 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 
 2.代码分离(code spliting)    
 动态加载代码，按需加载    
+
+
+### webpack性能优化策略
+https://juejin.cn/post/6997227418113032200#heading-11   
+
+webpack-bundle-analyzer分析包大小    
+speed-measure-webpack-plugin分析分析打包速度    
+
+
+1.设置cache属性（默认生产模式为false，开发模式为true）   
+2.resolve部分优化：   
+    2.1 externals:对第三方包进行公共包CDN引用，降低包大小   
+    2.2 resolve.alias:使用别名缩短模块路径，降低文件解析成本    
+    2.3 resolve.mainFieds:减少第三方模块搜索步骤   
+    3.4 resolve.extensions:合理配置类型   
+3.module优化   
+    3.1 include和exclude:排除不需要处理的loader文件     
+    3.2 cache-loader:对loader解析过的文件进行缓存     
+    3.3 设置noParse:与external类似，但无法共存。主要作用就是跳过编译环节，区别在于是否提取到CDN进行异步加载    
+4.optimization优化    
+    4.1 使用terser-webpack-plugin代替uglifyjs-webpack-plugin    
+    4.2 optimize-css-assets-webpack-plugin:对css进行压缩   
+    4.3 splitChunks代码分割   
