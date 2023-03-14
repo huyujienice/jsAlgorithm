@@ -49,7 +49,8 @@ postLoader
 compiler是webpack底层编译对象的引用   
 webpack从开始执行到结束，compiler只会实例化一次。compiler对象记录了webpack运行环境的所有信息，   
 插件可以通过它获取到webpack的配置信息，如entry,output,module等配置，所以可以通过compiler.hooks挂载钩子回调        
-           
+
+compilation对象，提供了webpack大部分生命周期Hook API供自定义扩展处理使用                
 compilation对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息    
 
 
