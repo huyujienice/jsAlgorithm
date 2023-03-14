@@ -110,7 +110,9 @@ chunk 有 2 种形式：
 magic comment(魔术注释)来显示指定 chunk 名称,例如：  
 /_ webpackChunkName: "app" _/ （vue-router 的配置中使用了）  
 /_ webpackPrefetch: true _/ 会在浏览器闲暇时下载文件  
-/_ webpackPreload: true _/ 会在父 chunk 加载时并行下载文件
+/_ webpackPreload: true _/ 会在父 chunk 加载时并行下载文件    
+
+optimization.splitChunks.cacheGroups 允许自定义规则分离chunk    
 
 ### webpack 运行流程
 
@@ -122,3 +124,11 @@ magic comment(魔术注释)来显示指定 chunk 名称,例如：
 
 3.输出流程  
 对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统
+
+
+### webpack优化H5项目策略   
+1.打包分离(bundle spliting)    
+为了浏览器更好的缓存，合适得创建更多更小的文件     
+
+2.代码分离(code spliting)    
+动态加载代码，按需加载    
