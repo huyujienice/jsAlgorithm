@@ -125,7 +125,11 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 从 entry 出发，针对每个 module 串行调用对应的 loader 去翻译文件内容，再找到该 module 依赖的 module，递归地进行编译处理
 
 3.输出流程  
-对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统
+对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统  
+
+### webpack如何实现tree-shaking
+
+### webpack如何实现HMR
 
 
 ### webpack优化H5项目策略   
