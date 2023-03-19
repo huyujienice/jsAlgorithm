@@ -122,15 +122,39 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 从配置文件和 Shell 语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数
 
 2.编译构建流程  
-从 entry 出发，针对每个 module 串行调用对应的 loader 去翻译文件内容，再找到该 module 依赖的 module，递归地进行编译处理
+从 entry 出发，针对每个 module 串行调用对应的 loader 将模块转译为标准JS内容，调用JS解释器将内容转换为AST对象   
+，从中找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过本步骤的处理    
 
 3.输出流程  
 对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统  
 
-### webpack如何实现tree-shaking
+### webpack如何实现tree-shaking   
+tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用，并将其删除      
+实现前提条件：     
+1.使用ESM规范编写模块代码    
+2.配置optimization.usedExports为true,启动标记功能    
+3.启动代码优化功能，可以通过如下方式实现：     
+  3.1 配置mode=production
+  3.2 配置optimization.minimize=true
+  3.3 提供optimization.minimizer 数组   
 
+实现原理：    
+先标记出模块导出值中哪些没有被用过，再使用Terser插件删掉这些没有被用到的导出语句    
+1.Make阶段，收集模块导出变量并记录到模块依赖图ModudleGraph变量中     
+2.Seal阶段，遍历ModuleGraph标记模块导出变量有没有被使用    
+3.生成产物时，若变量没有被其他模块使用则删除对应的导出语句    
+
+webpack的tree shaking逻辑停留在代码静态分析层面，只判断    
+1.模块导出变量是否被其他模块引用    
+2.引用模块的主体代码中有没有出现这个变量   
 ### webpack如何实现HMR
-
+核心流程：     
+1.使用webpack-dev-server(WDS)托管静态资源，同时以Runtime方式注入HMR客户端代码    
+2.浏览器加载页面后，与WDS建立WebSocket连接    
+3.Webpack监听到文件变化后，增量构建发生变更的模块，并通过WebSocket发送hash事件    
+4.浏览器接收到hash事件，请求manifest资源文件，确认增量变更范围   
+5.浏览器加载发生变更的增量模块    
+6.Webpack运行时触发变更模块的module.hot.accept回调，执行代码变更逻辑     
 
 ### webpack优化H5项目策略   
 1.打包分离(bundle spliting)    
