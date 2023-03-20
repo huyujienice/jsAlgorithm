@@ -9,6 +9,8 @@ entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部�
 1.分离 app(应用程序)和 vendor(第三方库)入口  
 2.多页面应用程序   
 
+通过在entry配置中包含runtime值，则会在entry chunk之外再增加一个专门容纳runtime的chunk对象，多个entry间可共享runtime chunk    
+
 # 输出
 
 ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件
@@ -121,12 +123,15 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 1.初始化流程  
 从配置文件和 Shell 语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数
 
-2.编译构建流程  
+2.编译构建make  
 从 entry 出发，针对每个 module 串行调用对应的 loader 将模块转译为标准JS内容，调用JS解释器将内容转换为AST对象   
 ，从中找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过本步骤的处理    
 
-3.输出流程  
-对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统  
+3.生成阶段seal   
+根据dependency graph,module.exports.optimization.splitChunks等配置构建chunk graph,将module组合成chunk
+
+4.输出流程emit     
+把 chunk 转换成文件 bundle，输出到文件系统  
 
 ### webpack如何实现tree-shaking   
 tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用或者引用，并将其删除      
