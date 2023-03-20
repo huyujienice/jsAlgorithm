@@ -13,7 +13,15 @@ entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部�
 
 # 输出
 
-ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件
+ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件    
+output占位符：    
+1.[id] 返回模块id    
+2.[path] 返回文件路径    
+3.[name] 返回文件名    
+4.[ext] 返回扩展名    
+5.[hash] 返回整个构建hash     
+6.[chunkhash] 返回入口指定模块的hash     
+7.[contenehash] 返回文件内容hash    
 
 # loader
 
