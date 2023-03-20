@@ -1,5 +1,5 @@
 webpack 是一个静态模块打包工具  
-当 webpack 处理应用程序时，它会从内部从一个或多个入口构建一个依赖图，然后将你项目中所需的每一个模块组合成一个或者多个 bundles
+当 webpack 处理应用程序时，它会从内部从一个或多个入口构建一个依赖图，然后将你项目中所需的每一个模块组合成一个或者多个 chunk
 
 # 入口
 
@@ -15,7 +15,7 @@ ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何�
 
 # loader
 
-webpack 开箱自带解析 js 和 JSON 文件。loader 处理其他类型的文件，并将其转换为有效模块，已供程序使用，以及被添加到依赖图中   
+webpack 开箱自带解析 js 和 JSON 文件。loader 处理其他类型的文件，并将其转换为有效模块，供程序使用，以及被添加到依赖图中   
 
 ```
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
 ```
 
 test 属性识别哪些文件会被转换  
-use 属性定义使用哪个 loader 进行转换
+use 属性定义使用哪个 loader 进行转换   
 
 有两种使用 loader 方式：  
 1.配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)  
@@ -105,7 +105,7 @@ optimization: {
 ### chunk
 
 chunk 有 2 种形式：  
-1.initial(初始化)是入口起点的 main chunk。此 chunk 包含为入口起点指定的所有模块及依赖项  
+1.initial(初始化)是入口起点的 main chunk。此 chunk 包含入口起点指定的所有模块及依赖项  
 2.non-initial 是可以延迟加载的块。会出现在使用 import 动态导入或者 splitChunks 配置中
 
 默认情况下，non-initial chunk 没有名称，因此会使用唯一 ID 来代替。在使用动态导入时，我们可以使用  
@@ -129,7 +129,7 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 对编译后的 module 组合成 chunk,把 chunk 转换成文件 bundle，输出到文件系统  
 
 ### webpack如何实现tree-shaking   
-tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用，并将其删除      
+tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用或者引用，并将其删除      
 实现前提条件：     
 1.使用ESM规范编写模块代码    
 2.配置optimization.usedExports为true,启动标记功能    
@@ -141,7 +141,7 @@ tree-shaking是指在运行过程中静态分析模块之间的导入导出，�
 实现原理：    
 先标记出模块导出值中哪些没有被用过，再使用Terser插件删掉这些没有被用到的导出语句    
 1.Make阶段，收集模块导出变量并记录到模块依赖图ModudleGraph变量中     
-2.Seal阶段，遍历ModuleGraph标记模块导出变量有没有被使用    
+2.Seal阶段，遍历ModuleGraph标记模块并判断导出变量有没有被使用    
 3.生成产物时，若变量没有被其他模块使用则删除对应的导出语句    
 
 webpack的tree shaking逻辑停留在代码静态分析层面，只判断    
@@ -149,7 +149,7 @@ webpack的tree shaking逻辑停留在代码静态分析层面，只判断
 2.引用模块的主体代码中有没有出现这个变量   
 ### webpack如何实现HMR
 核心流程：     
-1.使用webpack-dev-server(WDS)托管静态资源，同时以Runtime方式注入HMR客户端代码    
+1.使用webpack-dev-server(WDS)在本地建立静态资源服务器，同时以Runtime方式注入HMR客户端代码    
 2.浏览器加载页面后，与WDS建立WebSocket连接    
 3.Webpack监听到文件变化后，增量构建发生变更的模块，并通过WebSocket发送hash事件    
 4.浏览器接收到hash事件，请求manifest资源文件，确认增量变更范围   
