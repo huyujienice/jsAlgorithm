@@ -205,6 +205,7 @@ speed-measure-webpack-plugin分析分析打包速度
 5.Plugin优化：    
     5.1 eslint-webpack-plugin:eslint-loader替代方案，可以配置自动fix和多核编译    
     5.2 mini-css-extract-plugin:抽离css，可上传CDN  
+    5.3 DLLPlugin:提前将不会更改的框架公共代码打包，减少打包体积（VUE CLI可以使用）       
 6.多线程打包：
     6.1 Happypack    
     6.2 thread-loader   
