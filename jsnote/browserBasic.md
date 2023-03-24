@@ -189,6 +189,12 @@ DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SP
 用户几乎已经离开  
 我们仍然可以启动一些操作，例如发送统计数据  
 
+# 页面性能分析
+Lighthouse工具分析   
+重要指标：   
+   1.FCP(First Contentful Paint):页面首次绘制文本，图片的时间   
+   2.TTI(Time to Interactive):页面首次可交互可流程的交互时间   
+
 # css,js加载顺序
 
 1.外联和内联的css是所有渲染的前提条件，因为  
