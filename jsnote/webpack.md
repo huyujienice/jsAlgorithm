@@ -47,6 +47,11 @@ import 语句中，使用!将资源中的 loader 分开
 ## 自定义 loader
 
 ```
+/**
+ * @param {string|Buffer} content 源文件的内容
+ * @param {object} [map] 可以被 https://github.com/mozilla/source-map 使用的 SourceMap 数据
+ * @param {any} [meta] meta 数据，可以是任何内容
+ */
 function aLoader(content, map, meta) {
   // 省略部分代码
 }
