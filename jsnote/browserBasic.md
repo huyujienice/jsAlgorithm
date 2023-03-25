@@ -195,6 +195,19 @@ Lighthouse工具分析
    1.FCP(First Contentful Paint):页面首次绘制文本，图片的时间   
    2.TTI(Time to Interactive):页面首次可交互可流程的交互时间   
 
+# H5 performance
+通过浏览器performance信息获取页面完整加载的时间信息   
+浏览器从卸载旧页面开始，到新页面加载完成，整个过程一共被分为九个小块：    
+   1.提示卸载旧文档/卸载       
+   2.重定向    
+   3.应用缓存   
+   4.DNS解析   
+   5.TCP握手    
+   6.HTTP请求处理    
+   7.HTTP响应处理   
+   8.DOM处理   
+   9.文档装载完成    
+
 # css,js加载顺序
 
 1.外联和内联的css是所有渲染的前提条件，因为  
