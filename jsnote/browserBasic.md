@@ -217,3 +217,6 @@ js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前�
 2.js内联及不带属性的外联会中断解析渲染，立即下载执行  
 带defer属性的会异步有序执行，不会阻止HTML解析，会在DOMContentLoaded事件前执行  
 带async属性的会异步无序执行，    
+
+
+# preload prefetch
