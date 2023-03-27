@@ -224,6 +224,7 @@ onActivated()注册一个回调函数，若组件是<KeepAlive>缓存树的一�
 hash模式，默认模式，url带#，通过hashchange方法监听url的变化    
 优点兼容性好，不需要服务端进行配置，hash的变化会在浏览器history中新增记录，可实现浏览器前进后退功能    
 缺点是url展示及传递参数不够直观     
-history模式，通过pushState和replaceState方法修改url地址，通过popstate兼容url变化    
+history模式，通过pushState和replaceState方法修改url地址     
+popstate只能监听浏览器前进后退改变url，如果是a调整可以拦截a标签的点击事件来监听url变化    
 有点解决了url及参数传递不够直观问题，需要服务端进行配置，将路由都重新定位到根目录    
 
