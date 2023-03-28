@@ -535,8 +535,10 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 13. Reflect.setPrototypeOf(target,prototype)
 
 ## Promise
+Promise 是一种异步编程的解决方案     
 
-Promise 是一种异步编程的解决方案
+Promise 必须为3种状态之一，pending,resolve,reject。一旦Promise变为resolve或reject，不能再变成其他状态   
+
 
 Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
 
