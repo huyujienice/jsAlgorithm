@@ -131,6 +131,15 @@ magic comment(魔术注释)来显示指定 chunk 名称,例如：
 
 optimization.splitChunks.cacheGroups 允许自定义规则分离chunk    
 
+
+### source map
+source map是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的     
+通过webpack.config.js中devtool字段配置    
+在开发环境可使用eval开头的sourcemap加快编译速度   
+在生产环境可以考虑使用：      
+  1.nosources-source-map:只会显示具体行数以及查看源代码的错误栈。安全性比source-map高    
+  2.source-map:通过ngnix设置.map文件只对白名单开放       
+
 ### webpack 运行流程
 
 1.初始化流程  
@@ -145,6 +154,20 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离chunk
 
 4.输出流程emit     
 把 chunk 转换成文件 bundle，输出到文件系统  
+
+### webpack 常用生命周期函数
+1.compile:创建compilation前     
+2.compilation:创建compilation后        
+3.make:编译完成时触发     
+4.emit:输出资源到output目录之前触发      
+5.done:编译完成时触发   
+
+### webpack常用Plugin
+1.define-plugin:注入自定义环境变量    
+2.clean-webpack-plugin:目录清理    
+3.speed-measure-webpack-plugin:整体编译流程执行耗时    
+4.webpack-bundle-analyzer:编译完毕输出chunk分析
+
 
 ### webpack如何实现tree-shaking   
 tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用或者引用，并将其删除      
@@ -223,4 +246,5 @@ speed-measure-webpack-plugin分析分析打包速度
     6.1 Happypack    
     6.2 thread-loader   
 7.purgecss-webpack-plugin:对css文件进行tree-shaking  
+8.通过devtool配置合适的sourcemap:开发环境可配置eval开头的sourcemap加快编译速度    
 
