@@ -220,3 +220,33 @@ js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前�
 
 
 # preload prefetch
+
+
+### V8引擎内存管理 
+分为2个部分，Heap和stack     
+
+Heap:        
+堆内存，存储对象和动态数据的地方,其中GC也发生在这里         
+Heap主要构成：     
+1.new space    
+2.old space    
+3.large object space    
+4.code space    
+5.cell space,property cell space,map space    
+
+
+Stack:
+栈内存，存放静态数据，如框架函数，原型对象的值，执行栈指针     
+
+
+### V8 GC
+将对象分别放置于新生代（短命），老生代（长命），对不同区域采取不同算法        
+
+对新生代采用置换算法    
+1.将堆空间内存分成大小相同的2块，同时只有1块在使用中    
+2.使用中的为from空间，未使用的为to空间    
+3.当需进行置换算法时，将from标记正在使用的变量，并将其复制移动到to，from空间释放变为to，原to变为from    
+
+对老生代
+1.标记清除，直接情况无用对象，此时内存中有许多非连续空间        
+2.标记整理，整理内存碎片       
