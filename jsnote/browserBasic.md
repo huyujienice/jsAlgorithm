@@ -231,22 +231,27 @@ Heap主要构成：
 1.new space    
 2.old space    
 3.large object space    
-4.code space    
+4.code space:这是即时编译器(JIT)存储已经编译的代码块的地方         
 5.cell space,property cell space,map space    
+
+每个空间（除了large object space）都由一组Page组成，一个Page是由操作系统分配的一个连续内存块，大小为1MB    
+
 
 
 Stack:
 栈内存，存放静态数据，如框架函数，原型对象的值，执行栈指针     
+Stack内存由操作系统进行管理，不是由V8进行管理          
 
 
 ### V8 GC
 将对象分别放置于新生代（短命），老生代（长命），对不同区域采取不同算法        
 
-对新生代采用置换算法    
+对新生代采用置换算法(Minor GC)(Scavenger)    
 1.将堆空间内存分成大小相同的2块，同时只有1块在使用中    
 2.使用中的为from空间，未使用的为to空间    
-3.当需进行置换算法时，将from标记正在使用的变量，并将其复制移动到to，from空间释放变为to，原to变为from    
+3.当from空间堆满时执行Minor GC，将from标记正在使用的变量，并将其复制移动到to，from空间释放变为to，原to变为from    
 
-对老生代
-1.标记清除，直接情况无用对象，此时内存中有许多非连续空间        
-2.标记整理，整理内存碎片       
+对老生代(Major GC)
+1.标记(Marking):标识哪些对象为活的，可通过Stack指针进行递归遍历，可访问的对象为活的     
+2.清扫(Sweeping):遍历Heap,将所有未被标记为活的对象进行内存地址释放    
+3.压缩(Conpacting):将不连续存活的内存地址对象移动到一起，减少内存碎片，提高性能      
