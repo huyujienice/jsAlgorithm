@@ -133,15 +133,18 @@ Node.js的模块分为：
 2.文件模块：开发者自己写的模块，包括node_modules下面的模块    
     
 
-1.Nodejs中有个类似全局的对象，以文件路径为键值，以生成的module为键值对     
-2.Nodejs会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息     
-3.模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用vim内置模块(类似eval)执行将生成的module传入函数中执行，所以require可加载module.exports中的对象，模块内能够直接使用exports, require, module         
+1.Nodejs会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息    
+2.Nodejs中有个类似全局的对象，以文件路径名为键值，以生成的module为键值对     
+3.模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(exports, require, module, __filename, __dirname)的函数，并用vm内置模块(类似eval，但不能用eval，因为eval执行可以引用外部全局函数)将生成的module等信息传入函数中执行，所以require可加载module.exports中的对象，模块内能够直接使用exports, require, module          
 
 
 ES6 模块底层原理：  
 import命令会被js引擎进行静态分析，先于模块内其他模块执行。commonjs类似Nodejs自行实现的一个轮子，而es6 module则是js引擎进行处理  
 import()类似于Node.js的require加载，可以执行  
-按需加载，条件加载，动态的模块路径
+按需加载，条件加载，动态的模块路径    
+
+### commonjs解决循环引用
+为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的exports    
 
 # ArrayBuffer,TypedArray,DataView
 
