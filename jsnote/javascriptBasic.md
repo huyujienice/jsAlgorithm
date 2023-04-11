@@ -125,11 +125,17 @@ ES6 模块加载 CommonJS 模块
 import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
-或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
+或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块    
+
 CommonJS底层加载原理：
+Node.js的模块分为：   
+1.内置模块：Nodejs原生提供的功能，如fs,http。这些模块在Nodejs进程起来时就加载了    
+2.文件模块：开发者自己写的模块，包括node_modules下面的模块    
+    
+
 
 Node.js自带Module构造函数，会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息  
-模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用eval执行，所以在模块内能够直接使用exports, require, module
+模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(content, exports, require ,module)的函数，并用vim内置模块(类似eval)执行，所以在模块内能够直接使用exports, require, module
 
 ES6 模块底层原理：  
 import命令会被js引擎进行静态分析，先于模块内其他模块执行。commonjs类似Node.js自行实现的一个轮子，而es6 module则是js引擎进行处理  
