@@ -5,7 +5,7 @@
 
 ## github flow    
 1.根据需求，从master拉出新分支    
-2.新分支开发完毕，或者需要讨论，向master发起一个pull request(PR)    
+2.新分支开发完毕，或者需要讨论，向master发起一个push request(PR)    
 3.PR是一个通知也是个对话，大家一起评审和讨论代码    
 4.PR被接受，合并至master    
 
