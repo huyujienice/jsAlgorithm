@@ -158,9 +158,9 @@ source map是将编译打包压缩过后的代码映射回源代码的文件，�
 ### webpack 常用生命周期函数
 1.compile:创建compilation前     
 2.compilation:创建compilation后        
-3.make:编译完成时触发     
+3.make:loader处理编译完成时触发     
 4.emit:输出资源到output目录之前触发      
-5.done:编译完成时触发   
+5.done:整体编译完成时触发   
 
 ### webpack常用Plugin
 1.define-plugin:注入自定义环境变量    
