@@ -170,3 +170,23 @@ IP选址及路由选择
 
 
 
+
+
+### websocket
+websocket是基于TCP的一种新的持久化应用层网络协议。它实现了客户端与服务端全双工通信，即服务器主动发送消息给客户端   
+
+特点：   
+1.与HTTP协议有良好兼容性，握手阶段使用HTTP协议进行握手，复用HTTP服务器进行协议升级     
+2.较小的开销，因websocket有状态，建立连接后不需要携带大量状态标识信息       
+3.没有同源政策    
+
+主要流程：    
+1.客户端发起HTTP协议完成单次握手,协议新增请求头       
+    1.1 Upgrade:websocket   
+    1.2 Connection:Upgrade    
+2.服务端返回101,表示成功建立websocket协议   
+3.全双工websocket通讯     
+
+
+### HTTP1.1 HTTP2.0 HTTP3.0
+
