@@ -203,7 +203,8 @@ webpack的tree shaking逻辑停留在代码静态分析层面，只判断
 2.启用资源gzip压缩    
 3.改善服务器响应时间   
 4.使用浏览器缓存    
-5.优化图片    
+5.优化图片     
+6.升级http2,http3       
 
 前端可做：    
 1.打包分离(bundle spliting)    
