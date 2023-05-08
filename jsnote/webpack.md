@@ -65,6 +65,7 @@ module.exports = aLoader;
 
 loader正常的处理顺序：pre,normal,inline,post    
 
+pre loader和post loader,可以通过rule对象内的enforce属性来指定    
 Normal Loader 执行顺序通过配置决定     
 Pitching Loader 可提前或延后Normal Loader执行处理，在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给前置的Normal Loader      
 
@@ -92,7 +93,7 @@ compilation 对象记录了一次构建到生成资源过程中的信息，它�
 ### runtime manifest
 
 当 compiler 开始执行，解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
-runtime 会通过 manifest 来解析和加载模块。
+runtime 会通过 manifest 来解析和加载模块。    
 
 ### webpack 单独生成 chunk 方法
 
@@ -190,9 +191,9 @@ webpack的tree shaking逻辑停留在代码静态分析层面，只判断
 2.引用模块的主体代码中有没有出现这个变量   
 ### webpack如何实现HMR
 核心流程：     
-1.使用webpack-dev-server(WDS)在本地建立静态资源服务器，同时以Runtime方式注入HMR客户端代码    
-2.浏览器加载页面后，与WDS建立WebSocket连接    
-3.Webpack监听到文件变化后，增量构建发生变更的模块，并通过WebSocket发送hash事件    
+1.使用webpack-dev-server(WDS)在本地建立静态资源服务器，同时以Runtime方式注入HMR客户端(浏览器)代码       
+2.浏览器加载页面后，与WDS建立WebSocket连接      
+3.Webpack通过chokidar监听到文件变化后，增量构建发生变更的模块，并通过WebSocket发送hash事件      
 4.浏览器接收到hash事件，请求manifest资源文件，确认增量变更范围   
 5.浏览器加载发生变更的增量模块    
 6.Webpack运行时触发变更模块的module.hot.accept回调，执行代码变更逻辑     
