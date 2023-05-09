@@ -35,6 +35,8 @@ module.exports = {
 };
 ```
 
+test为字符串时筛选匹配资源的绝对路径，为函数时，入参为资源的绝对路径，返回boolean      
+
 test 属性识别哪些文件会被转换  
 use 属性定义使用哪个 loader 进行转换   
 
