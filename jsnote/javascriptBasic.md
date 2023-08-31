@@ -1,33 +1,50 @@
-# js中核弹方法
-eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6可以使用rest参数)    
-eval直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
+# js 中核弹方法
 
-有类似方法的有new Function,setTimeout,setInterval等方法，但是没有eval好用  
+eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6 可以使用 rest 参数)  
+eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域
 
-# curry   
-柯里化    
-对一个函数进行柯里化包装，当接收到的参数与原函数的形参数量相同时，执行原函数     
-当接收到的参数数量小于原函数的形参数量时，返回一个函数用于接收剩余的参数     
-柯理化用途   
-问题复杂化，降低通用性，提高适用性    
+有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用
 
+# curry
 
-# js类型判断
+柯里化  
+是一种函数的高级技术，对一个函数进行柯里化包装，当接收到的参数与原函数的形参数量相同时，执行原函数  
+当接收到的参数数量小于原函数的形参数量时，返回一个函数用于接收剩余的参数  
+柯理化用途  
+问题复杂化，降低通用性，提高适用性  
+实现    
+
+```js
+function curry(func) {
+  return function curried(...args) {
+    if (args.length >= func.length) {
+      return func.apply(this, args);
+    } else {
+      return function (...args2) {
+        return curried.apply(this, args.concat(args2));
+      };
+    }
+  };
+}
+```
+
+# js 类型判断
 
 ## 使用 typeof 判断
 
 Undefined,Null,Boolean,Number,String,BigInt,Symbol,Object,Function,other Object  
 undefined,object,boolean,number,string,bigint,symbol,object,function,object
 
-## instanceof判断
-instanceof无法判断基本数据类型，对于引用类型数据，返回其其对应类型  
+## instanceof 判断
 
-## 使用 Object.prototype.toString.call()判断（使用apply()效果一致）
+instanceof 无法判断基本数据类型，对于引用类型数据，返回其其对应类型
+
+## 使用 Object.prototype.toString.call()判断（使用 apply()效果一致）
 
 console.log(Object.prototype.toString.call(1)); // [object Number]  
 console.log(Object.prototype.toString.call('123')); // [object String]  
 console.log(Object.prototype.toString.call(true)); // [object Boolean]  
-console.log(Object.prototype.toString.call(undefined)); // [object Undefined]    
+console.log(Object.prototype.toString.call(undefined)); // [object Undefined]  
 console.log(Object.prototype.toString.call(null)); // [object Null]  
 console.log(Object.prototype.toString.call({})); // [object Object]  
 console.log(Object.prototype.toString.call([])); // [object Array]  
@@ -38,7 +55,7 @@ console.log(Object.prototype.toString.call(()=>{})); // [object Function]
 console.log(Object.prototype.toString.call(123n)); // [object BigInt]  
 console.log(Object.prototype.toString.call(Symbol())); // [object Symbol]  
 console.log(Object.prototype.toString.call(Math)); // [object Math]  
-console.log(Object.prototype.toString.call(JSON)); // [object JSON]  
+console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 
 # 执行上下文和执行上下文栈
 
@@ -46,37 +63,40 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
 执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
-4种情况会创建新的执行上下文  
+4 种情况会创建新的执行上下文  
 1.进入全局代码  
-2.进入function函数体代码  
-3.进入eval函数参数指定的代码  
-4.进入module代码  
+2.进入 function 函数体代码  
+3.进入 eval 函数参数指定的代码  
+4.进入 module 代码
 
+执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出
 
+## VO
 
-执行上下文负责存储VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
-## VO  
-VO即Variable Object变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数  
+VO 即 Variable Object 变量对象，定义在全局执行上下文（globalEC）中，存储全局变量和函数
 
 ## AO
-AO即Activation Object活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及arguments  
+
+AO 即 Activation Object 活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及 arguments
 
 ## Scope
-Scope就是所谓作用域，存储在其中的一个个AO和VO按队列顺序链接成了所谓的**作用域链**，即***词法作用域**，用来查找可使用的变量
-Scope关联[[scope]]  
-[[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的AO，若为全局函数，则保存全局上下文的VO  
 
-Scope定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
+Scope 就是所谓作用域，存储在其中的一个个 AO 和 VO 按队列顺序链接成了所谓的**作用域链**，即**\*词法作用域**，用来查找可使用的变量
+Scope 关联[[scope]]  
+[[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的 AO，若为全局函数，则保存全局上下文的 VO
+
+Scope 定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
 fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 
 ### 闭包
+
 本质就是返回并使用内部函数的[[scope]],即创建时候的作用域  
-通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域  
+通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域
 
+## this
 
-## this  
-this是当前执行上下文(global,function或eval)的一个属性，在非严格模式下，总是指向一个对象     
-globalThis可获取不同环境下的全局this对象，也就是全局对象自身  
+this 是当前执行上下文(global,function 或 eval)的一个属性，在非严格模式下，总是指向一个对象  
+globalThis 可获取不同环境下的全局 this 对象，也就是全局对象自身
 
 # 继承与原型链
 
@@ -84,15 +104,13 @@ prototype，虐杀原型游戏英文名
 每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
 
 函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。  
-函数拥有prototype及__proto__属性  
+函数拥有 prototype 及**proto**属性  
 例如：  
-function a(){}   
-a.prototype.__proto__ 指向Object.prototype,Object.prototype.__proto__ 指向null  
-a.__proto__ 指向 Function.prototype,Function.prototype.__proto__ 指向 Object.prototype,Object.prototype.__proto__ 指向null
-如果要查找a为构造函数生成新的实例的属性，关注a.prototype，若查找a自身的属性，关注a.__proto__   
-a可以使用Function.prototype.call方法原理即是通过a.__proto__ 查找到Funtion.prototype
-
-
+function a(){}  
+a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null  
+a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null
+如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**  
+a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype
 
 # new 方法底层逻辑
 
@@ -132,26 +150,25 @@ ES6 模块加载 CommonJS 模块
 import packageMain from 'commonjs-package';
 // 报错
 import { method } from 'commonjs-package';
-或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块       
+或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
-CommonJS底层加载原理：     
-Node.js的模块分为：   
-1.内置模块：Nodejs原生提供的功能，如fs,http。这些模块在Nodejs进程起来时就加载了    
-2.文件模块：开发者自己写的模块，包括node_modules下面的模块    
-    
+CommonJS 底层加载原理：  
+Node.js 的模块分为：  
+1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了  
+2.文件模块：开发者自己写的模块，包括 node_modules 下面的模块
 
-1.Nodejs会为每个文件生成一个module实例，module实例中会有关于整个模块文件的所有信息，包括id,exports,parent,children,filename,paths,loaded等信息    
-2.Nodejs中有个类似全局的对象，以文件路径名为键值，以生成的module为键值对     
-3.模块实例通过file.readFileSync等方法读取文件内容字符串，如果是后缀为.js则将其处理成function(exports, require, module, __filename, __dirname)的函数，并用vm内置模块(类似eval，但不能用eval，因为eval执行可以引用外部全局函数)将生成的module等信息传入函数中执行，所以require可加载module.exports中的对象，模块内能够直接使用exports, require, module          
-
+1.Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息  
+2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对  
+3.模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
 
 ES6 模块底层原理：  
-import命令会被js引擎进行静态分析，先于模块内其他模块执行。commonjs类似Nodejs自行实现的一个轮子，而es6 module则是js引擎进行处理  
-import()类似于Node.js的require加载，可以执行  
-按需加载，条件加载，动态的模块路径    
+import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理  
+import()类似于 Node.js 的 require 加载，可以执行  
+按需加载，条件加载，动态的模块路径
 
-### commonjs解决循环引用
-为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的exports    
+### commonjs 解决循环引用
+
+为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的 exports
 
 # ArrayBuffer,TypedArray,DataView
 
@@ -317,9 +334,9 @@ Object.defineProperty():
 数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
 
 两种描述符共享 2 个可选键值：  
-configurable:当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能够从对应的对象上被删除。默认为 false  
+configurable:当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能够从对应的对象上被删除。默认为 false
 
-enumerable:当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。默认为 false  
+enumerable:当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。默认为 false
 
 数据描述符还具有以下 2 个键值：
 value:该属性对应的值
@@ -343,11 +360,11 @@ enumerable 属性，称为“可枚举性”，如果该属性为 false，以下
 属性的遍历
 ES6 一共有 5 种方法可以遍历对象的属性
 
-1. for...in:循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）  
-2. Object.keys(obj):返回一个数组，包含对象自身的所有可枚举属性（不含 Symbol 属性）的键名   
-3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名  
-4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名  
-5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举   
+1. for...in:循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）
+2. Object.keys(obj):返回一个数组，包含对象自身的所有可枚举属性（不含 Symbol 属性）的键名
+3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
+4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名
+5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
 
 super 关键字
 指向当前对象的原型对象，只能用在对象的方法之中，用在其余的地方都会报错
@@ -552,10 +569,10 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 13. Reflect.setPrototypeOf(target,prototype)
 
 ## Promise
-Promise 是一种异步编程的解决方案     
 
-Promise 必须为3种状态之一，pending,resolve,reject。一旦Promise变为resolve或reject，不能再变成其他状态   
+Promise 是一种异步编程的解决方案
 
+Promise 必须为 3 种状态之一，pending,resolve,reject。一旦 Promise 变为 resolve 或 reject，不能再变成其他状态
 
 Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
 
