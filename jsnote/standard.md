@@ -24,3 +24,21 @@ rebase是复位基底的意思，rebasse操作不会生成新的节点，而是�
 # 内网穿透
 内网的数据映射到公共网络上，即公共网络可以直接访问内网数据   
 可以使用ngrok,蒲公英等实现    
+
+
+# 版本号   
+npm版本号X.Y.Z    
+X主版本号，升级表示无法与低版本做兼容     
+Y次版本号，做了向下兼容的功能性新增时升级    
+Z修订号，做了向下兼容的问题修正（bugfix）时升级     
+
+先行版本   
+alpha:预览版，内部测试版    
+beta:测试版，公开测试版      
+rc(release candidate):最终测试版    
+
+npm的tag   
+发布定义好dist-tag来实现线上内测，控制用户下载       
+latest:最后稳定版本，npm install时就是下载这个    
+beta:测试版本，需要指定版本或使用 npm install packageName@beta 来下载    
+next:先行版本,下个版本，使用 npm install packageName@next 安装    
