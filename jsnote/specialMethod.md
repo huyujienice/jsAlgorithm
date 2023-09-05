@@ -19,7 +19,7 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 
 ### webpack plugin 实现uniapp内微信小程序实现独立分包
 
-### vue simplehtmllayout 模式,vue loader，支持uniapp,vue2.0     
+### vue simplehtmllayout 模式,vue loader，支持uniapp,vue2.0 ,css原子化思想实践        
 
 
 ### windows中bat语言备份单机文件存档  
