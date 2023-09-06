@@ -6,6 +6,8 @@ fs.watchFile采用轮询方式有性能问题
 fs.watch操作系统差异明显且会多次触发    
 chokidar插件结合fs.watch,抹平了操作系统间的差异，加入了额外的校验与延时机制，分清楚了操作系统预期及用户预期，可开箱即用（vscode底层也是使用此插件）  
 
+# stdout,stdin,stderr   
+
 
 # SSR  
 
