@@ -9,6 +9,16 @@ chokidar插件结合fs.watch,抹平了操作系统间的差异，加入了额外
 # stdout,stdin,stderr   
 
 
+## process.stdout.write与console.log   
+1. process.stdout.write和console.log都是用于向标准输出流stdout打印输出的方法      
+2. node中的console.log方法内部就是使用process.stdout.write实现的       
+3. process.stdout.write写入是异步的,stdout传给了管道(pipe)，写入会阻塞直到输出消费者读取数据         
+4. process.stdout.write是块缓冲的，调用process.stdout.write并不会总是立即打印到终端    
+5. process.stdout.write提供了底层的写操作控制，支持流动态写入，但是需要自己管理缓冲和编码处理    
+6. console.log提供更加方便的格式化输出，自动管理缓冲，支持复杂数据打印，非常适合日常debug
+
+
+
 # SSR  
 
 ## web1.0服务端渲染 
