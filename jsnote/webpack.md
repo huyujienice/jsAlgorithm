@@ -250,5 +250,9 @@ speed-measure-webpack-plugin分析分析打包速度
     6.1 Happypack    
     6.2 thread-loader   
 7.purgecss-webpack-plugin:对css文件进行tree-shaking  
-8.通过devtool配置合适的sourcemap:开发环境可配置eval开头的sourcemap加快编译速度    
+8.通过devtool配置合适的sourcemap:开发环境可配置eval开头的sourcemap加快编译速度   
+
+
+### webpack模块联邦    
+模块联邦能达到线上Runtime效果,让代码直接在项目间利用CDN直接共享，不再需要本地安装Npm包  
 
