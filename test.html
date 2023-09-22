@@ -282,6 +282,7 @@
         window: null,
         globalThis: undefined,
       };
+      //with扩展了作用域，使得在with内找到的是ctx.window的变量   
       function runCode(code, ctx) {
         with (ctx) {
           eval(code);

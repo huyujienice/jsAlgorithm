@@ -1,18 +1,19 @@
 # js 中核弹方法
 
 eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6 可以使用 rest 参数)  
-eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域
+eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
+将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域
 
 有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用
 
 # curry
 
 柯里化  
-是一种函数的高级技术，对一个函数进行柯里化包装返回一个新函数，当新函数的实参大于等于原函数的形参数量，则将新函数的实参传入原函数执行      
+是一种函数的高级技术，对一个函数进行柯里化包装返回一个新函数，当新函数的实参大于等于原函数的形参数量，则将新函数的实参传入原函数执行  
 当新函数的实参数量小于原函数的形参数量时，返回一个函数用于接收剩余的参数  
 柯理化用途  
-建议只用于纯函数(pure function)，可使问题复杂化，降低通用性，提高适用性    
-实现    
+建议只用于纯函数(pure function)，可使问题复杂化，降低通用性，提高适用性  
+实现
 
 ```js
 function curry(func) {
@@ -79,9 +80,7 @@ VO 即 Variable Object 变量对象，定义在全局执行上下文（globalEC�
 
 AO 即 Activation Object 活跃对象，定义在函数执行上下文中（fnEC）中（准确来说，在函数开始执行时才创建），存储局部变量和子函数以及 arguments
 
-## Scope 
-
-作用域是一套设计良好的规则，用来存储变量及找到变量   
+## Scope
 
 Scope 就是所谓作用域，存储在其中的一个个 AO 和 VO 按队列顺序链接成了所谓的**作用域链**，即**\*词法作用域**，用来查找可使用的变量
 Scope 关联[[scope]]  
@@ -90,28 +89,60 @@ Scope 关联[[scope]]
 Scope 定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
 fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 
-## 编译原理/步骤       
-1. 分词/词法分析(Tokenizing/Lexing)   
-将字符串分解成有意义的代码块        
+## 作用域
 
-2. 解析/语法分析(Parsing)       
-将词法单元流数组转换为由元素逐层嵌套所组成的代表了程序语法结构的树，这个数被称为 抽象语法树 (AST)    
+作用域是一套设计良好的规则,用来管理引擎如何在当前作用域以及嵌套的子作用域根据标识符名称进行变量查找
 
-3. 代码生成    
-将AST转换为可执行代码的过程称为代码生成   
+### eval,with 可以运行时改变作用域
 
-## LHS,RHS 
-当变量出现在赋值操作的左侧时进行LHS查询，出现在右侧时进行RHS查询     
-LHS->赋值查找    RHS->源查找     
+eval 动态执行代码  
+with 本质上是通过将一个对象的引用当做作用域来处理，将对象的属性当做作用域中的标识符来处理，从而创建了一个新的词法作用域
+
+with (expression)
+statement  
+将给定的 expression 添加到在 statement 语句时使用的作用域链上   
+
+````js
+//实现小程序window无法使用的效果
+const ctx = {
+  window: null,
+  globalThis: undefined,
+};
+function runCode(code, ctx) {
+  with (ctx) {
+    eval(code);
+  }
+}
+```
+
+
+## 编译原理/步骤
+
+1. 分词/词法分析(Tokenizing/Lexing)  
+   将字符串分解成有意义的代码块,这些代码块被称为词法单元(token)
+
+2. 解析/语法分析(Parsing)  
+   将词法单元流数组转换为由元素逐层嵌套所组成的代表了程序语法结构的树，这个数被称为 抽象语法树 (AST)
+
+3. 代码生成  
+   将 AST 转换为可执行代码的过程称为代码生成
+
+## LHS,RHS
+
+当变量出现在赋值操作的左侧时进行 LHS 查询，出现在右侧时进行 RHS 查询  
+LHS->Left Hand Side RHS->Right Hand Side  
+LHS->赋值查找 RHS->简单查找
+
+
 
 ### 闭包
 
-本质就是返回并使用内部函数的[[scope]],即创建时候的作用域  
+本质就是返回并使用内部函数的[[scope]],即创建时候的作用域
 通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域
 
 ## this
 
-this 是当前执行上下文(global,function 或 eval)的一个属性，在非严格模式下，总是指向一个对象  
+this 是当前执行上下文(global,function 或 eval)的一个属性，在非严格模式下，总是指向一个对象
 globalThis 可获取不同环境下的全局 this 对象，也就是全局对象自身
 
 # 继承与原型链
@@ -119,13 +150,13 @@ globalThis 可获取不同环境下的全局 this 对象，也就是全局对象
 prototype，虐杀原型游戏英文名
 每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
 
-函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。  
-函数拥有 prototype 及**proto**属性  
-例如：  
-function a(){}  
-a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null  
+函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
+函数拥有 prototype 及**proto**属性
+例如：
+function a(){}
+a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null
 a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null
-如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**  
+如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**
 a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype
 
 # new 方法底层逻辑
@@ -168,18 +199,18 @@ import packageMain from 'commonjs-package';
 import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
-CommonJS 底层加载原理：  
-Node.js 的模块分为：  
-1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了  
+CommonJS 底层加载原理：
+Node.js 的模块分为：
+1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了
 2.文件模块：开发者自己写的模块，包括 node_modules 下面的模块
 
-1.Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息  
-2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对  
+1.Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
+2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对
 3.模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
 
-ES6 模块底层原理：  
-import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理  
-import()类似于 Node.js 的 require 加载，可以执行  
+ES6 模块底层原理：
+import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
+import()类似于 Node.js 的 require 加载，可以执行
 按需加载，条件加载，动态的模块路径
 
 ### commonjs 解决循环引用
@@ -346,10 +377,10 @@ Object.getOwnPropertyDescriptor 方法可以获取该属性的描述对象
 
 Object.defineProperty():
 
-对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。  
+对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。
 数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
 
-两种描述符共享 2 个可选键值：  
+两种描述符共享 2 个可选键值：
 configurable:当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能够从对应的对象上被删除。默认为 false
 
 enumerable:当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。默认为 false
@@ -632,6 +663,8 @@ ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol.iterator �
 可使用遍历器实现“链表”结构
 
 ## Decorator
-装饰器    
-用来增强class的功能     
-装饰器是一种函数，写成 @ + 函数名    
+
+装饰器
+用来增强 class 的功能
+装饰器是一种函数，写成 @ + 函数名
+````
