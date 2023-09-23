@@ -113,7 +113,21 @@ function runCode(code, ctx) {
     eval(code);
   }
 }
-```
+````
+
+### 多种作用域  
+
+1. Global:全局作用域      
+2. Local:函数作用域    
+3. Block:块级作用域    
+4. Script:浏览器Script作用域    
+5. Catch:try/catch中catch块作用域  
+6. With   
+7. Eval   
+8. Closure   
+9. Nodejs module:本质上是Local作用域       
+
+
 
 
 ## 编译原理/步骤
