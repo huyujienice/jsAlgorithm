@@ -100,9 +100,9 @@ with 本质上是通过将一个对象的引用当做作用域来处理，将对
 
 with (expression)
 statement  
-将给定的 expression 添加到在 statement 语句时使用的作用域链上   
+将给定的 expression 添加到在 statement 语句时使用的作用域链上
 
-````js
+```js
 //实现小程序window无法使用的效果
 const ctx = {
   window: null,
@@ -113,22 +113,19 @@ function runCode(code, ctx) {
     eval(code);
   }
 }
-````
+```
 
-### 多种作用域  
+### 多种作用域
 
-1. Global:全局作用域      
-2. Local:函数作用域    
-3. Block:块级作用域    
-4. Script:浏览器Script作用域    
-5. Catch:try/catch中catch块作用域  
-6. With   
-7. Eval   
-8. Closure   
-9. Nodejs module:本质上是Local作用域       
-
-
-
+1. Global:全局作用域
+2. Local:函数作用域
+3. Block:块级作用域
+4. Script:浏览器 Script 作用域
+5. Catch:try/catch 中 catch 块作用域
+6. With
+7. Eval
+8. Closure
+9. Nodejs module:本质上是 Local 作用域
 
 ## 编译原理/步骤
 
@@ -141,13 +138,35 @@ function runCode(code, ctx) {
 3. 代码生成  
    将 AST 转换为可执行代码的过程称为代码生成
 
+### 提升原理
+
+js 引擎会在解释 js 代码之前首先对其进行编译。编译阶段的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来  
+包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理
+
+### Error
+
+1. EvalError  
+   错误原因:与 eval()相关
+2. RangeError  
+   错误原因:数值变量或参数超出其有效范围
+3. ReferenceError  
+   错误原因:无效引用。如:未找到变量或者函数（标识符）
+4. SyntaxError
+   错误原因:语法错误
+5. TypeError
+   错误原因:变量或者参数不属于有效类型。如:调用 null 进行函数执行
+6. URIError  
+   错误原因:给 encodeURI()或 decodeURI()传递的参数无效
+7. AggregateError  
+   包裹了由一个操作产生且需要报告的多个错误。如:Promise.any()产生的错误
+8. InternalError  
+   js 引擎内部错误的异常抛出的实例。如：递归太多
+
 ## LHS,RHS
 
 当变量出现在赋值操作的左侧时进行 LHS 查询，出现在右侧时进行 RHS 查询  
 LHS->Left Hand Side RHS->Right Hand Side  
 LHS->赋值查找 RHS->简单查找
-
-
 
 ### 闭包
 
@@ -214,13 +233,10 @@ import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
 CommonJS 底层加载原理：
-Node.js 的模块分为：
-1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了
-2.文件模块：开发者自己写的模块，包括 node_modules 下面的模块
+Node.js 的模块分为： 1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了 2.文件模块：开发者自己写的模块，包括 node_modules 下面的模块
 
 1.Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
-2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对
-3.模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
+2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对 3.模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
 
 ES6 模块底层原理：
 import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
@@ -681,4 +697,7 @@ ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol.iterator �
 装饰器
 用来增强 class 的功能
 装饰器是一种函数，写成 @ + 函数名
-````
+
+```
+
+```
