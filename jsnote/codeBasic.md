@@ -1,5 +1,6 @@
 # 正则表达式速记
 
+```
 *通配符，匹配 0,1,2,3...任意次 
 +匹配 1,2,3...匹配一次或者多次
 ?是否存在，匹配 0,1 次
@@ -12,6 +13,7 @@
 \W 匹配一个非单字字符
 ^匹配输入开始
 $匹配输入结束
+```
 
 # 进程，线程，协程
 
@@ -95,6 +97,23 @@ Unicode
 UTF-8  
 UTF-8是互联网上使用最广的一种Unicode的实现方式。UTF-8是Unicode的实现方式之一，其他方式还包括UTF-16,UTF-32，但基本不使用
 UTF-8是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度  
+
+### Base64
+将二进制的信息流转化为编码为Base64的编码的ASCII字符串（这种字符串可以显示打印出来也可以通过字符串传播）   
+window.btoa 转码   
+window.atob 解码   
+如何Unicode字符串需要转码解码（例如中文），则需要特殊处理，详见 https://developer.mozilla.org/zh-CN/docs/Web/API/btoa  
+
+### encodeURIComponent decodeURIComponent
+将特定的字符转换为UTF-8编码,常用于URL转义，当URL中包含中文的时候可以使用   
+
+
+### encodeURI decodeURI
+转码，鸡肋，用处较少    
+
+
+
+
 
 
 
