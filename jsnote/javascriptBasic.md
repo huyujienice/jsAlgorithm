@@ -6,6 +6,7 @@ eval 直接调用是使用的是当前作用域，间接调用使用的是全局
 
 有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用
 
+
 # curry
 
 柯里化  
@@ -30,6 +31,17 @@ function curry(func) {
 ```
 
 # js 类型判断
+
+## js中基本类型
+基本类型是一种既非对象也无方法或属性的数据 
+1. string   
+2. number  
+3. bigint
+4. boolean
+5. undefined
+6. symbol
+7. null   
+
 
 ## 使用 typeof 判断
 
