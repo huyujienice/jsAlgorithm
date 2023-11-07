@@ -4,7 +4,12 @@ eval 可直接执行字符串，把字符串当成代码来执行，就相当于
 eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
 将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域
 
-有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用
+有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用  
+
+# vm模块
+nodejs中vm模块提供了一组用于在虚拟机环境中执行js代码的API(创建新的js上下文)       
+vm模块允许在一个隔离的上下文中编译和执行代码，可以用于实现一些动态代码执行，沙箱环境和代码片段运行      
+vm模块是非安全的，需防止执行不安全的代码    
 
 
 # curry
@@ -265,11 +270,16 @@ import packageMain from 'commonjs-package';
 import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
-CommonJS 底层加载原理：
-Node.js 的模块分为： 1.内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了 2.文件模块：开发者自己写的模块，包括 node_modules 下面的模块
+Node.js 的模块分为：   
+1. 内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了 
+2. 文件模块：开发者自己写的模块，包括 node_modules 下面的模块
 
-1.Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
-2.Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对 3.模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
+CommonJS 底层加载原理：   
+将每个文件视为一个独立的模块，使用Local函数作用域及闭包特性包装开发者代码块，营造出模块作用域      
+
+1. Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
+2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对 
+3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module,__filename, __dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
 
 ES6 模块底层原理：
 import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
@@ -680,29 +690,29 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 
 ## Promise
 
-Promise 是一种异步编程的解决方案
+Promise 是一种异步编程的解决方案    
 
-Promise 必须为 3 种状态之一，pending,resolve,reject。一旦 Promise 变为 resolve 或 reject，不能再变成其他状态
+Promise 必须为 3 种状态之一，pending,resolve,reject。一旦 Promise 变为 resolve 或 reject，不能再变成其他状态    
 
-Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
+Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法   
 
-Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？）
+Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？）    
 
-Promise.prototype.finally()
+Promise.prototype.finally()    
 
-Promise.all():只有当所有条件 resolve 才最终 resolve,如若有一个条件 reject 则最终 reject
+Promise.all():只有当所有条件 resolve 才最终 resolve,如若有一个条件 reject 则最终 reject    
 
-Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态 resolve/reject
+Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态 resolve/reject    
 
-Promise.allSettled():确定所有条件都已改变状态
+Promise.allSettled():确定所有条件都已改变状态    
 
-Promise.any():只有当所有条件 reject 才最终 reject,如若有一个条件 resolve 则最终 resolve
+Promise.any():只有当所有条件 reject 才最终 reject,如若有一个条件 resolve 则最终 resolve   
 
-Promise.resolve():将现有对象转为 Promise 对象
+Promise.resolve():将现有对象转为 Promise 对象   
 
-Promise.reject()
+Promise.reject()    
 
-Promise.try()
+Promise.try()    
 
 ## Generator
 
