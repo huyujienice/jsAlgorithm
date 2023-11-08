@@ -322,6 +322,39 @@
       console.log(originWords);
       console.log(transWords);
       console.log(transOriginWords);
+
+      class MyPromise {
+        constructor(excutor) {
+          this.status = "pending";
+          this.value = undefined;
+          this.onFulfilledCallbacks = [];
+          const resolve = (value) => {
+            if (this.status === "pending") {
+              this.status = "fulfilled";
+              this.value = value;
+              this.onFulfilledCallbacks.forEach((callback) => {
+                callback(this.value);
+              });
+            }
+          };
+          excutor(resolve);
+        }
+        then(onFulfilled) {
+          return new MyPromise((resolve) => {
+            if (this.status === "fulfilled") {
+              setTimeout(() => {
+                const result = onFulfilled(this.value);
+                resolve(result);
+              });
+            } else {
+              this.onFulfilledCallbacks.push(() => {
+                const result = onFulfilled(this.value);
+                resolve(result);
+              });
+            }
+          });
+        }
+      }
     </script>
   </body>
 </html>
