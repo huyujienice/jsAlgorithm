@@ -1,3 +1,14 @@
+# event loop
+
+## process.nextTick setImmediate setTimeout
+
+1. process.nextTick:用于在当前操作完成后，立即在当前事件循环的末尾执行回调函数。    
+回调函数会在当前事件循环迭代中执行，而不会等待到下一个迭代。       
+优先级高于setImmediate及setTimeout。    
+
+2. setTimeout:用于在指定延迟的时间后将回调函数添加到事件队列。    
+
+3. setImmediate:用于在事件循环的下一个迭代中执行回调函数。创建异步函数优先考虑使用setImmediate。          
 # 异步I/O
 node实现异步I/O是通过多线程模拟实现线程池来实现的
 # 如何实现文件监听（热更新基础）
