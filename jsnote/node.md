@@ -9,6 +9,24 @@
 2. setTimeout:用于在指定延迟的时间后将回调函数添加到事件队列。    
 
 3. setImmediate:用于在事件循环的下一个迭代中执行回调函数。创建异步函数优先考虑使用setImmediate。          
+
+## process
+1. process.nextTick()
+2. process.env
+3. process.cwd()
+4. process.stdin,process.stdout,process.stderr
+
+## Child process
+child_process模块用于在nodejs中创建和操作子线程，执行外部的脚本或者命令    
+1. spawn()
+2. exec()
+3. execFile()
+4. fork()
+
+## Cluster
+Cluster是常见的nodejs利用多核的办法，它是基于child_process.fork()实现的     
+cluster模块用于创建多个nodejs进程，实现负载均衡和并行处理    
+cluster模块适用于在同一个nodejs应用程序中处理并行任务，而child_process模块适用于与外部进程交互    
 # 异步I/O
 node实现异步I/O是通过多线程模拟实现线程池来实现的
 # 如何实现文件监听（热更新基础）
@@ -21,6 +39,7 @@ chokidar插件结合fs.watch,抹平了操作系统间的差异，加入了额外
 stdout标准输出,stdin标准输入,stderr标准错误    
 当进程被创建的时候，系统会自动为该进程创建三个数据流，就是stdin,stdout,stderr      
 对于这三个数据流来说，默认是表现在用户终端上     
+可以通过process.stdout.write模拟console.log功能   
 
 ## process.stdout.write与console.log   
 1. process.stdout.write和console.log都是用于向标准输出流stdout打印输出的方法      
