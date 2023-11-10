@@ -12,7 +12,13 @@
     2.2 promise
 
 执行顺序为：     
-1->2->1->2
+1.N->2->1.N->2   
+
+当一个macrotask中phase的切换，叫一个tick,每个tick之间会执行一次microtask
+
+当进入poll phase中，若没有任何callbacks则持续等待I/0回调直致超时       
+若有setImmediate则进入check phase     
+若设定了timer且poll phase为空，则进入timer phase    
 
 ## process.nextTick setImmediate setTimeout
 
