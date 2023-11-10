@@ -23,4 +23,7 @@ setTimeout(() => {
   f1.then(() => {
     console.log(`promise 1`);
   });
+  process.nextTick(()=>{
+    console.log(`nextTick 1`)
+  })
 });
