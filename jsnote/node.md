@@ -47,6 +47,18 @@ child_process模块用于在nodejs中创建和操作子线程，执行外部的�
 Cluster是常见的nodejs利用多核的办法，它是基于child_process.fork()实现的     
 cluster模块用于创建多个nodejs进程，实现负载均衡和并行处理    
 cluster模块适用于在同一个nodejs应用程序中处理并行任务，而child_process模块适用于与外部进程交互    
+
+## IPC
+IPC进程间通信,常用技术有：
+1. child_process
+2. EventEmitter
+3. messageChannel
+4. pipe
+5. 文件系统
+6. 共享内存SharedArrayBuffer
+7. 消息队列,RabbitMQ,Redis
+
+
 # 异步I/O
 node实现异步I/O是通过多线程模拟实现线程池来实现的
 # 如何实现文件监听（热更新基础）
