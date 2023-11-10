@@ -1,4 +1,18 @@
 # event loop
+1. macrotask
+    1.1 timers:执行setTimeout和setInterval的回调函数
+    1.2 I/O callbacks:处理非setTimeout,setInterval,setImmediate,close的回调之外的所有I/O回调       
+    1.3 idle,prepare:libuv内部调用
+    1.4 poll:轮询等待新I/O，如服务器回应，用户移动鼠标等
+    1.5 check:执行setImmediate的回调
+    1.6 close callbacks:执行关闭请求(close)的回调
+
+2. microtask
+    2.1 process.nextTick
+    2.2 promise
+
+执行顺序为：     
+1->2->1->2
 
 ## process.nextTick setImmediate setTimeout
 

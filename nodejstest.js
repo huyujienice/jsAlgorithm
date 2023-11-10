@@ -1,13 +1,8 @@
-const EventEmitter = require('events');
-
-let emitter = new EventEmitter();
-
-emitter.on('myEvent', () => {
-  console.log('hi 1');
+setTimeout(() => {
+  setImmediate(() => {
+    console.log(`setImmediate 1`);
+  });
+  setTimeout(() => {
+    console.log(`setTimeout 1`);
+  });
 });
-
-emitter.on('myEvent', () => {
-  console.log('hi 2');
-});
-
-emitter.emit('myEvent');
