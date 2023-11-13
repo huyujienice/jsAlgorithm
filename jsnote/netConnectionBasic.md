@@ -37,9 +37,26 @@ HTTP协议，超文本传输协议，它允许将超文本标记语言HTML文档
 3. 3xx:重定向
 4. 4xx:客户端错误
 5. 5xx:服务器错误
+例：
+301:永久重定向    
+302:临时重定向       
+304:未修改，可使用协商缓存     
+401:要求用户授权      
+431:请求头太大    
 
 ### HTTP content-type
 文件类型，决定浏览器已什么形式，什么编码读取这个文件（有些网页点击结果下载图片或者文件的原因）    
+MIME类型是描述消息内容的标准，用来表示文档，文件或字节流的性质和格式       
+通用结构：type/subtype      
+例:    
+1. text/html:超文本标记语言.html
+2. text/plain:普通文本.txt
+3. image/gif:GIF图形.gif
+4. image/jpeg:JPEG图形.jpeg .jpg
+5. application/x-gzip:GZIP文件.gz
+6. application/x-tar:TAR文件.tar
+
+
 
 
 ## 表示层  
