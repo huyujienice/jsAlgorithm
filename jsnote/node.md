@@ -1,18 +1,24 @@
 # event loop
-1. macrotask
-    1.1 timers:执行setTimeout和setInterval的回调函数
-    1.2 I/O callbacks:处理非setTimeout,setInterval,setImmediate,close的回调之外的所有I/O回调       
-    1.3 idle,prepare:libuv内部调用
-    1.4 poll:轮询等待新I/O，如服务器回应，用户移动鼠标等
-    1.5 check:执行setImmediate的回调
-    1.6 close callbacks:执行关闭请求(close)的回调
+js实现单线程异步执行的关键    
+1. 主线程存在一个执行栈(execution context stack)，同步切不停执行任务    
+2. 存在执行队列(task queue)，执行队列中的任务在合适的时刻可放入执行栈中执行        
+    2.1. macrotask       
+         
+        2.1.1 timers:执行setTimeout和setInterval的回调函数    
+        2.1.2 I/O callbacks:处理非setTimeout,setInterval,setImmediate,close的回调之外的所有I/O回调          
+        2.1.3 idle,prepare:libuv内部调用      
+        2.1.4 poll:轮询等待新I/O，如服务器回应，用户移动鼠标等     
+        2.1.5 check:执行setImmediate的回调     
+        2.1.6 close callbacks:执行关闭请求(close)的回调     
 
-2. microtask
-    2.1 process.nextTick
-    2.2 promise
+    2.2. microtask       
+         
+        2.2.1 process.nextTick    
+        2.2.2 promise    
 
 执行顺序为：     
-1.N->2->1.N->2   
+1.N->2->1.N->2
+会不断循环重复        
 
 当一个macrotask中phase的切换，叫一个tick,每个tick之间会执行一次microtask
 
@@ -37,7 +43,7 @@
 4. process.stdin,process.stdout,process.stderr
 
 ## Child process
-child_process模块用于在nodejs中创建和操作子线程，执行外部的脚本或者命令    
+child_process模块用于在nodejs中创建和操作子进程，执行外部的脚本或者命令      
 1. spawn()
 2. exec()
 3. execFile()
