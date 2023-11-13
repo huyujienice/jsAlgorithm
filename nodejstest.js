@@ -23,7 +23,11 @@ setTimeout(() => {
   f1.then(() => {
     console.log(`promise 1`);
   });
-  process.nextTick(()=>{
-    console.log(`nextTick 1`)
-  })
+  process.nextTick(() => {
+    console.log(`nextTick 1`);
+  });
 });
+
+console.log(process.stdin.fd);
+console.log(process.stdout.fd);
+console.log(process.stderr.fd);
