@@ -1,6 +1,6 @@
 # event loop
 js实现单线程异步执行的关键    
-1. 主线程存在一个执行栈(execution context stack)，同步切不停执行任务    
+1. 主线程存在一个执行栈(execution context stack)，同步且不停执行任务    
 2. 存在执行队列(task queue)，执行队列中的任务在合适的时刻可放入执行栈中执行      
 
     2.1. macrotask       
@@ -16,7 +16,7 @@ js实现单线程异步执行的关键
          
         2.2.1 process.nextTick    
         2.2.2 promise    
-
+ 
 执行顺序为：     
 1.N->2->1.N->2
 会不断循环重复        
@@ -51,7 +51,7 @@ child_process模块用于在nodejs中创建和操作子进程，执行外部的�
 4. fork()
 
 ## Cluster
-Cluster是常见的nodejs利用多核的办法，它是基于child_process.fork()实现的     
+cluster是常见的nodejs利用多核的办法，它是基于child_process.fork()实现的     
 cluster模块用于创建多个nodejs进程，实现负载均衡和并行处理    
 cluster模块适用于在同一个nodejs应用程序中处理并行任务，而child_process模块适用于与外部进程交互    
 
@@ -94,7 +94,7 @@ stdout标准输出,stdin标准输入,stderr标准错误
     3.2 TTY终端:在Windows上异步，在POSIX上同步
     3.3 管道(和套接字):在Windows上同步，在POSIX上异步     
 5. process.stdout.write提供了底层的写操作控制，支持流动态写入，但是需要自己管理缓冲和编码处理    
-6. console.log提供更加方便的格式化输出，自动管理缓冲，支持复杂数据打印，非常适合日常debug  
+6. console.log提供更加方便的格式化输出，字符串模版解析，自动管理缓冲，支持复杂数据打印，非常适合日常debug  
 
 # HTTP Referer
 HTTP中Referer字段标识当前网页来源于哪里，格式为URL。
