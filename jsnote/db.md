@@ -62,11 +62,16 @@ SELECT 列名称 FROM 表名称 UNION ALL SELECT 列名称 FROM 表名称 ORDER 
 ### ORDER BY 排序   
 ASC升序DESC降序，默认升序
 
+### GROUP BY 分组
+对查询出来的结果按照某个字段或者表达式进行分组，获得一组组的集合，然后从每组中取出一个指定字段或者表达式的值     
+SELECT column_name,function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name    
 
+function可以选择COUNT,SUM,AVG等函数    
 
+### JOIN 多表查询
+1. INNER JOIN(内连接，或等值连接)(可省略INNER使用JOIN):获取两个表中字段匹配关系的记录    
+2. LEFT JOIN(左连接):获取左表所有记录，即右表没有对应匹配的记录
+3. RIGHT JOIN(右连接):与LEFT JOIN相反
 
-
-
-#### GROUP BY
-对查询出来的结果按照某个字段或者表达式进行分组，获得一组组的集合，然后从每组中取出一个指定字段或者表达式的值
+当RIGHT JOIN对比的2个表行数不相等时，对比行数以左表结构来还是以右表结构来？
 
