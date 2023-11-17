@@ -1,3 +1,7 @@
+## sessionStorage,localStorage,cookie
+
+使用sessionStorage和直接在window上挂载属性有何区别？   
+页面刷新,sessionStorage属性还存在，window上属性刷新丢失    
 # EventTarget Node Element
 
 Node继承至其祖先EventTarget,Element继承至其祖先Node
