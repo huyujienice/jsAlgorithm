@@ -124,3 +124,10 @@ utf8可以节省空间
 DML:数据库操作语言，包括INSERT,DELETE,UPDATE,SELECT    
 DDL:用来定义表或者更改表结构，数据类型，表之间的链接和约束等初始化工作，包括CREATE,ALTER,DROP    
 DCL:数据控制语言，用来控制数据库用户和角色的权限，包括GRANT,REVOKE   
+
+
+### JOIN UNION
+JOIN用于将多个表中的数据根据一定关系进行组合      
+UNION用于将多个SELECT语句的结果合并成为一个结果集,UNION要求SELECT语句中的列名，数据类型和顺序必须相同       
+
+日常使用JOIN情况较多         
