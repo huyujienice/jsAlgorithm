@@ -11,6 +11,7 @@ RDBMS:Relational Database Management System,关系型数据库管理系统
 6. 复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引
 7. 完整性参照：参照的完整性要求关系中不允许引用不存在的实体。与实体的完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性  
 
+
 ## 数据类型
 1. 数值类型
 常用的有tinyint	(0，255),int(0，4 294 967 295),decimal(存储金额，如decimal(5,2)表示范围为-999.99到999.99)   
@@ -111,3 +112,15 @@ ALTER用于修改数据库，表和索引等对象的结构
 
 PRIMARY KEY必须为NOT NULL    
 一个表只能有一个PRIMARY KEY,但可以有多个UNIQUE KEY      
+
+
+### utf8 utf8mb4
+正常情况下数据库编码集用utf8mb4    
+utf8缺少部分字符集，比如Emoji表情，很多不常用的汉字，以及任何新增的Unicode字符等     
+utf8可以节省空间    
+
+
+### DML,DDL,DCL
+DML:数据库操作语言，包括INSERT,DELETE,UPDATE,SELECT    
+DDL:用来定义表或者更改表结构，数据类型，表之间的链接和约束等初始化工作，包括CREATE,ALTER,DROP    
+DCL:数据控制语言，用来控制数据库用户和角色的权限，包括GRANT,REVOKE   
