@@ -57,7 +57,11 @@ import 语句中，使用!将资源中的 loader 分开
 function aLoader(content, map, meta) {
   // 省略部分代码
 }
-
+/**
+ * @param {string|Buffer}
+ * @param {object}
+ * @param {any} [data] 在pitch阶段和normal阶段之间共享的对象
+ */
 aLoader.pitch = function (remainingRequest, precedingRequest, data) {
 
 };
@@ -65,15 +69,18 @@ aLoader.pitch = function (remainingRequest, precedingRequest, data) {
 module.exports = aLoader;
 ```
 
-
-pre loader和post loader,可以通过rule对象内的enforce属性来指定    
-Normal Loader 执行顺序通过配置决定     
-Pitching Loader 可提前或延后Normal Loader执行处理，在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给前置的Normal Loader      
-
-Loader可以分为同步Loader和异步Loader
-同步Loader可以通过return语句或者this.callback的方式来同步地返回转换后的结果    
-异步Loader通过const callback = this.async()方法来获取callback函数    
-
+loader函数中的this会指向webpack，可以使用this.callback,this.async等访问一些方法或者属性        
+loader配置了options对象的话，this.query就指向这个对象，可以通过options传递配置参数    
+        
+Loader在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给前置的Normal Loader,即可跳过剩下的Loader    
+Loader在pitch阶段传递给pitch函数的data,在normal执行阶段也会暴露在this.data之中，可用于捕获共享pitch阶段的信息         
+ 
+Loader可以分为同步Loader和异步Loader     
+同步Loader可以通过return语句或者this.callback的方式来同步地返回转换后的结果      
+异步Loader通过const callback = this.async()方法来获取callback函数       
+  
+    
+pre loader和post loader,可以通过rule对象内的enforce属性来指定     
 正常loader执行顺序
 1. 不同阶段之间：pre->normal->post
 2. 每个阶段内部：use数组中，从右往左，从下到上
