@@ -72,7 +72,7 @@ Pitching Loader 可提前或延后Normal Loader执行处理，在pitch阶段如�
 
 Loader可以分为同步Loader和异步Loader
 同步Loader可以通过return语句或者this.callback的方式来同步地返回转换后的结果    
-异步Loader通过this.async方法来获取callback函数    
+异步Loader通过const callback = this.async()方法来获取callback函数    
 
 正常loader执行顺序
 1. 不同阶段之间：pre->normal->post
