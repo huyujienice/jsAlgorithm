@@ -22,6 +22,12 @@ RDBMS:Relational Database Management System,关系型数据库管理系统
 常用的有varchar,变长字符串，0-65535     
 varchar(32)，表示可以存储32个字符    
 
+### char varchar text 对比
+1. 存储定长数据可使用char(0-255),索引速度极快（例如：手机号，身份证号）
+2. 长度255以上只能使用varchar或text,能用varchar尽量不要用text
+3. char(N)是定长的，不足使用空格补齐，超过N被截断丢弃。varchar(N)是不定长的，不足不会补齐，超过N被截断丢弃 
+4. 查找效率相比:char>varchar>text,text在效率和安全性上都存在问题  
+
 ## 查询数据
 SELECT column_name,column_name FROM table_name,table_name [WHERE Clause] [LIMIT N] [OFFSET M]   
 
