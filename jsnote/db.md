@@ -104,7 +104,10 @@ ALTER用于修改数据库，表和索引等对象的结构
 ### 索引
 索引被用来快速找出在一个列上用一特定值的行。如果没有索引，MySQL必须从第一条记录开始一直读到相关行       
 
-1. KEY
-2. PRIMARY KEY
-3. UNIQUE KEY
+1. KEY:索引
+2. PRIMARY KEY:主键索引,主键且唯一
+3. UNIQUE KEY:唯一索引
 4. FOREIGN KEY
+
+PRIMARY KEY必须为NOT NULL    
+一个表只能有一个PRIMARY KEY,但可以有多个UNIQUE KEY      
