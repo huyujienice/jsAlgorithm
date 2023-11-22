@@ -17,7 +17,7 @@ RDBMS:Relational Database Management System,关系型数据库管理系统
 常用的有tinyint	(0，255),int(0，4 294 967 295),decimal(存储金额，如decimal(5,2)表示范围为-999.99到999.99)   
 
 2. 日期和时间类型
-常用的有datetime(YYYY-MM-DD hh:mm:ss)
+常用的有datetime(YYYY-MM-DD hh:mm:ss)    
 
 3. 字符串类型
 常用的有varchar,变长字符串，0-65535     

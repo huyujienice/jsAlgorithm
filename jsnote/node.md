@@ -56,14 +56,21 @@ cluster模块用于创建多个nodejs进程，实现负载均衡和并行处理
 cluster模块适用于在同一个nodejs应用程序中处理并行任务，而child_process模块适用于与外部进程交互    
 
 ## IPC
-IPC进程间通信,常用技术有：
-1. child_process
-2. EventEmitter
-3. messageChannel
-4. pipe
-5. 文件系统
-6. 共享内存SharedArrayBuffer
-7. 消息队列,RabbitMQ,Redis
+IPC进程间通信,操作系统进程间通信方式主要有：
+1. 共享内存
+2. 消息传递
+3. 信号量
+4. 管道
+
+nodejs中实现IPC通道的是管道(pipe)技术   
+child_process.fork()创建node进程，父子进程自带IPC通信机制      
+on监听消息send发送消息     
+父进程在实际创建子进程之前，会创建IPC通道并监听它，然后才真正创建出子进程，并通过环境变量（NODE_CHANNEL_FD）告诉子进程这个IPC通道的文件描述符fd。子进程再启动过程中，根据fd去连接这个已经存在的IPC通道，从而完成父子进程之间的连接          
+
+除了nodejs内置IPC通信外,其他常用的进程间通信技术有：
+1. stdin/stdout
+2. Sockets
+3. 消息队列，RabbitMQ，Redis
 
 
 # 异步I/O
