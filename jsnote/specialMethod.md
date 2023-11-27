@@ -10,6 +10,7 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ### js浮点数simplecount计算模块化
 
 ### vue-router的分包预加载策略    
+浏览器环境内通过navigator.connection.type判断是否wifi环境    
 
 ### 场景算法优化，策略模式使用（如瀑布流）
 
@@ -25,4 +26,4 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ### windows中bat语言备份单机文件存档  
 
 
-### SSR nuxt3
+### SSR nuxt3 nuxt3-winston-log
