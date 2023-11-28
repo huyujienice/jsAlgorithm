@@ -18,6 +18,9 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 ### sitemap.json
 用来配置小程序及其页面是否允许被微信爬虫索引     
 
+### initialRenderingCache
+可配置initialRenderingCache进行静态初始渲染缓存，第二次进来页面View Thread直接渲染data中的内容信息（效果有限）    
+
 
 ### 神策自定义埋点实现
 
