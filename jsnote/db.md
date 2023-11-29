@@ -69,11 +69,16 @@ SELECT 列名称 FROM 表名称 UNION ALL SELECT 列名称 FROM 表名称 ORDER 
 ### ORDER BY 排序   
 ASC升序DESC降序，默认升序
 
-### GROUP BY 分组
+### GROUP BY 将数据集合分组
 对查询出来的结果按照某个字段或者表达式进行分组，获得一组组的集合，然后从每组中取出一个指定字段或者表达式的值     
 SELECT column_name,function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name    
 
 function可以选择COUNT,SUM,AVG等函数    
+
+### DISTINCT
+SELECT DISTINCT语句用于返回唯一不同的值，类似返回字段的set集合          
+SELECT DISTINCT column1,column2 FROM table_name     
+
 
 ### JOIN 多表查询
 1. INNER JOIN(内连接，或等值连接)(可省略INNER使用JOIN):获取两个表中字段匹配关系的记录    
