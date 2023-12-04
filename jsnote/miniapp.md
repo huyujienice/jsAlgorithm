@@ -12,9 +12,17 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 
 总的来说就是逻辑层初始化完毕等待渲染层初始化完毕通知，逻辑层将逻辑传递给渲染层执行，渲染层执行完毕之后会通知逻辑层     
 
+### 小程序运行环境
+1. 在iOS,iPadOS和Mac OS上，小程序逻辑层代码运行在JavaScriptCore中，视图层由WKWebview来渲染的
+2. 在Android上，小程序逻辑层代码运行在V8中，视图层由微信自研XWeb引擎来渲染的
+3. 在windows上，小程序逻辑层和视图层都是用Chromium内核
+4. 在开发工具上，小程序逻辑层代码运行在NW.js中，视图层由Chromium Webview来渲染的    
 
 
+JavaScriptCore无法开启JIT编译（Just-In-Time Compiler），同等条件下的运行性能要明显低于其他平台     
 
+### 光栅化 Rasterization
+https://zhuanlan.zhihu.com/p/78758247
 ### sitemap.json
 用来配置小程序及其页面是否允许被微信爬虫索引     
 
