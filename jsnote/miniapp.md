@@ -18,6 +18,11 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 3. 在windows上，小程序逻辑层和视图层都是用Chromium内核
 4. 在开发工具上，小程序逻辑层代码运行在NW.js中，视图层由Chromium Webview来渲染的    
 
+### 条件编译
+使用webpack可参考js-conditional-compile-loader      
+uni-app也自带了条件编译实现    
+
+
 
 JavaScriptCore无法开启JIT编译（Just-In-Time Compiler），同等条件下的运行性能要明显低于其他平台     
 
