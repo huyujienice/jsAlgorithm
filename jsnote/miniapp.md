@@ -23,6 +23,12 @@ JavaScriptCore无法开启JIT编译（Just-In-Time Compiler），同等条件下
 
 ### 光栅化 Rasterization
 https://zhuanlan.zhihu.com/p/78758247
+
+### OAuth 2.0
+OAuth的作用就是让客户端安全可控的获取用户的授权，与服务提供商进行互动    
+思路：   
+设置授权层（authorization layer）。客户端不能直接登录服务提供商，只能登录授权层。将普通用户与客户端区分开来    
+客户端登录授权层使用的令牌（token），与用户密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期         
 ### sitemap.json
 用来配置小程序及其页面是否允许被微信爬虫索引     
 
