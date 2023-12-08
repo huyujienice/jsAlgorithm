@@ -61,7 +61,14 @@ OAuth的作用就是让客户端安全可控的获取用户的授权，与服务
 用来配置小程序及其页面是否允许被微信爬虫索引     
 
 ### initialRenderingCache
-可配置initialRenderingCache进行静态初始渲染缓存，第二次进来页面View Thread直接渲染data中的内容信息（效果有限）    
+可配置initialRenderingCache进行静态初始渲染缓存，第二次进来页面View Thread直接渲染data中的内容信息（效果有限）   
+
+
+#### handleWebviewPreload
+配置handleWebviewPreload可手动控制页面预加载资源（preloadRule）的触发时机
+1. static:默认值，在当前页面onReady触发200ms后触发预加载
+2. auto:渲染线程空闲时进行预加载。由基础库根据一段时间内requestAnimationFrame的触发频率算法判断
+3. manual:由开发者通过调用wx.preloadWebview触发    
 
 
 ### 神策自定义埋点实现
