@@ -1,4 +1,5 @@
 ## 项目优化
+指标量化
 
 ### 微信小程序底层原理简介
 https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f803b0086831c75140a  
