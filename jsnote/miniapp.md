@@ -4,6 +4,18 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ## 生命周期
 https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life-cycle.html    
 
+1. onLoad -> 页面创建
+2. onShow -> 页面出现在前台
+3. onReady -> 页面首次渲染完毕
+4. onHide -> 页面从前台变为后台
+5. onUnload -> 页面销毁
+6. onPullDownRefresh -> 触发下拉刷新
+7. onReachBottom -> 页面触底
+8. onShareAppMessage -> 页面被用户分享
+9. onPageScroll -> 页面滚动
+10. onResize -> 页面尺寸变化
+11. onTabItemTap -> tab点击时
+
 简单来说就是2个线程，
 1. 用户逻辑在AppService Thread中执行，当初始化完毕后，等待View Thread初始化完毕通知
 2. View Thread初始化完毕后通知AppService Thread，AppService Thread将onLoad,onShow逻辑传递至AppService Thread进行执行渲染      
