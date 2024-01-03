@@ -292,3 +292,47 @@ Netty
 2. WebSocket
 3. CORS:服务端设置响应头Access-Control-Allow-Origin:*
 
+
+### XMLHttpRequest Fetch
+
+```js
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "/service");
+
+// state change event
+xhr.onreadystatechange = () => {
+  // is request complete?
+  if (xhr.readyState !== 4) return;
+
+  if (xhr.status === 200) {
+    // request successful
+    console.log(JSON.parse(xhr.responseText));
+  } else {
+    // request not successful
+    console.log("HTTP error", xhr.status, xhr.statusText);
+  }
+};
+
+// start request
+xhr.send();
+
+```
+
+```js
+fetch("/service", { method: "GET" })
+  .then((res) => res.json())
+  .then((json) => console.log(json))
+  .catch((err) => console.error("error:", err));
+
+```
+
+区别：
+1. Fetch支持设置浏览器缓存，XMLHttpRequest只能通过附加随机查询字符串绕过浏览器缓存 
+2. 服务器未设置Access-Control-Allow-Origin，Fetch和XMLHttpRequest都会失效，但是Fetch有'no-cors'模式，可配合service worker获取静态资源
+3. Fetch可设置是否发送cookie,XMLHttpRequst总是发送cookie
+4. Fetch可设置是否遵循服务器重定向命令，XMLHttpRequest不可设置
+5. Fetch支持流式请求和响应，XMLHttpRequest不支持
+6. Fetch不支持获取上传进度，XMLHttpRequest支持
+   
+
+
