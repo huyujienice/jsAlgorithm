@@ -232,3 +232,10 @@ history模式，通过pushState和replaceState方法修改url地址
 popstate只能监听浏览器前进后退改变url，如果是a调整可以拦截a标签的点击事件来监听url变化     
 优点解决了url及参数传递不够直观问题，需要服务端进行配置，通过nginx将路由都重新定位到根目录      
 
+
+### vue2.0强制更新
+vue2.0不允许在已经创建的实例上动态添加新的响应式属性   
+若想实现数据与视图同步更新，可采取以下方案：
+1. Vue.set()
+2. Object.assign()
+3. $forceUpdate    
