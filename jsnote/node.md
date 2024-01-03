@@ -108,6 +108,10 @@ HTTP中Referer字段标识当前网页来源于哪里，格式为URL。
 浏览器默认设置，html网页通过meta设置，元素级设置referrerpolicy(a,img,iframe...)    
 
 
+# 给SPA做SEO
+1. SSR服务端渲染
+2. 页面静态化
+3. 使用Phantomjs针对爬虫处理   
 
 # SSR  
 
