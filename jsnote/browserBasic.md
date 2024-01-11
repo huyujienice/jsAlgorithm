@@ -162,6 +162,17 @@ el.addEventListener(type,listener,{capture:true})
 
 ::before和::after，可以和content属性一起使用，使用CSS将内容插入到文档中
 
+# CSS盒子模型
+1. 标准盒子模型:
+box-sizing:content-box;         
+盒子总宽度 = width + padding + border + margin;盒子总高度 = height + padding + border + margin        
+设置width,height不包括padding,border,margin    
+
+
+2. IE盒子模型
+box-sizing:border-box;   
+盒子总宽度 = width + margin;盒子总高度 = height + margin;     
+设置width,height包括padding,border     
 
 # CSS生效是通过计算权重来实现的，权重最高就生效
 
@@ -175,6 +186,38 @@ a style
 b id attributes  
 c other attributes  
 d element names
+
+# DP，DIP，PPI，DPR
+DP:物理像素，代表屏幕上面有多少个物理点，物理级别概念，单位pt    
+DIP:逻辑像素，操作系统级概念，单位px，Retina高清屏幕1个px可对应2个或者3个pt       
+DPR:设备像素比，dp/dip，window.devicePixelRatio可获取DPR               
+PPI:屏幕像素密度，每英寸有多少个物理像素，PPI越高屏幕越清晰    
+
+```js
+// 获取设备PPI,in表示英寸
+// 获取设备的像素比
+const devicePixelRatio = window.devicePixelRatio || 1;
+
+// 创建一个测试元素
+const testElem = document.createElement('div');
+testElem.style.width = '1in';
+
+// 插入测试元素
+const body = document.getElementsByTagName('body')[0];
+body.appendChild(testElem);
+
+// 测试元素在屏幕上所占像素
+const pixels = testElem.offsetWidth;
+
+// 将测试元素从 DOM 中移除
+body.removeChild(testElem);
+
+// 计算原始像素密度
+const actualPixelDensity = pixels * devicePixelRatio;
+
+console.log(`准确的原始像素密度为：${actualPixelDensity} PPI`);
+
+```
 
 # 页面生命周期
 1.DOMContentLoaded  
