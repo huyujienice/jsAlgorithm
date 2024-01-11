@@ -187,6 +187,15 @@ b id attributes
 c other attributes  
 d element names
 
+# BFC
+BFC就是页面一个独立容器的规则，里面的子元素不影响外面的元素    
+可用来解决margin重叠等问题     
+如何添加BFC:   
+1. 设置overflow为auto,scroll,hidden
+2. 设置float为left,right
+3. 设置display为flex,inline-block,grid
+4. 设置position为absolute,fixed   
+
 # DP，DIP，PPI，DPR
 DP:物理像素，代表屏幕上面有多少个物理点，物理级别概念，单位pt    
 DIP:逻辑像素，操作系统级概念，单位px，Retina高清屏幕1个px可对应2个或者3个pt       
