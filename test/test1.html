@@ -8,20 +8,29 @@
   <body>
     <p id="testp">test</p>
     <script>
-      // 模拟点击事件
+      // 模拟click点击事件
       function logE(e) {
         console.log(e);
       }
       function setEvent() {
-        const ev = new Event("click");
+        const ev = new MouseEvent("click", {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        });
         const p = document.querySelector("#testp");
         p.dispatchEvent(ev);
+      }
+      function setClick() {
+        const p = document.querySelector("#testp");
+        p.click();
       }
       function main() {
         const p = document.querySelector("#testp");
         p.addEventListener("click", logE);
         setTimeout(() => {
           setEvent();
+          setClick();
         }, 2000);
       }
       main();

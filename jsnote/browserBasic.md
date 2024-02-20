@@ -34,109 +34,32 @@ event对象包含了与事件相关的所有信息,例如：
 12. timestamp
 
 ## Node
-Node.baseURI     
-Node.baseURIOjbect     
+
 Node.childNodes 返回一个包含了该节点所有子节点的实时的NodeList。NodeList是动态变化的      
 Node.firstChild 返回该节点的第一个子节点Node,如果该节点没有子节点则返回null     
-Node.isConnected      
 Node.lastChild 返回该节点的最后一个子节点Node，如果该节点没有子节点则返回null     
 Node.nextSibling 返回与该节点同级的下一个节点Node，如果没有则返回null     
-Node.nodeName    
 Node.nodeType ELEMENT_NODE -> 1 TEXT_NODE -> 3     
-Node.nodeValue       
-Node.ownerDocument      
 Node.parentNode 返回一个当前节点Node的父节点。如果没有这样的节点，比如说像这个节点是树结构的顶端或者没有插入一棵树中，这个属性返回null       
 Node.parentElement 返回一个当前节点的父节点Element。如果当前节点没有父节点或者说父节点不是一个元素（Element），这个属性返回null      
 Node.previousSibling 返回一个当前节点同辈的前一个节点Node，或者返回null（如果不存在这么一个节点的话）    
 Node.textContent 返回或设置一个元素内所有子节点及其后代的文本内容      
-
 Node.appendChild() 将指定的childNode参数作为最后一个子元素添加到当前节点。如果参数引用了DOM树上的现有节点，则节点将从当前位置分离，并附加到新位置    
 Node.cloneNode() 克隆一个Node，并且可以选择是否克隆这个节点下的所有内容。默认情况下，节点下的内容会被克隆    
 Node.compareDocumentPosition() 比较当前节点与文档中的另一个节点的位置      
 Node.contains() 返回一个Boolean布尔值，来表示传入的节点是否为改节点的后代节点     
-Node.getRootNode()    
 Node.hasChildNodes() 返回一个Boolean布尔值，来表示该元素是否包含有子节点     
 Node.insertBefore() 在当前节点下新增一个子节点Node，并使该节点位于参考节点的前面      
-Node.isDefaultNamespace()    
-Node.isEqualNode()    
-Node.isSameNode()   
-Node.lookupPrefix()    
-Node.lookupNamespaceURI()    
-Node.normalize()    
 Node.removeChild() 移除当前节点的一个子节点。这个子节点必须存在于当前节点中     
-Node.replaceChild()    
 
 ## Element
-Element.attributes 返回一个与该元素相关的所有属性集合NamedNodeMap
-Element.classList 返回该元素包含的class属性
-Element.className
-Element.clientHeight
-Element.clientLeft
-Element.clientTop
-Element.clientWidth
-Element.computedName
-Element.computedRole
-Element.id
-Element.innerHTML
-Element.localName
-Element.namespaceURI
-NonDocumentTypeChildNode.nextElementSibling 是一个Element，该元素下一个兄弟节点，如果为null表示不存在
-Element.outerHTML
-Element.prefix
-NonDocumentTypeChildNode.previousElementSibling 是一个Element，该元素上一个兄弟节点，如果为null表示不存在
-Element.scrollHeight 返回类型为：Number，表示元素的滚动视图高度
-Element.scrollLeft
-Element.scrollLeftMax
-Element.scrollTop 返回类型为：Number，表示该元素纵向滚动距离
-Element.scrollTopMax
-Element.scrollWidth
-Element.shadowRoot
-Element.openOrClosedShadowRoot
-Element.slot
-Element.tabStop
-Element.tagName
-Element.undoManager
-Element.undoScope
-
-Element.attachShadow()
-Element.animate()
-Element.closest()
-Element.createShadowRoot()
-Element.computedStyleMap()
-Element.getAnimations()
-Element.getAttribute()
-Element.getAttributeNames()
-Element.getAttributeNS()
-Element.getBoundingClientRect() 返回元素的大小及其相对与视口的位置
-Element.getClientRects()
-Element.getElementsByClassName()
-Element.getElementsByTagName()
-Element.getElementsByTagNameNS()
-Element.hasAttribute()
-Element.hasAttributeNS()
-Element.hasAttributes()
-Element.hasPointerCapture()
-Element.insertAdjacentElement()
-Element.insertAdjacentHTML()
-Element.insertAdjacentText()
-Element.matches()
-Element.pseudo()
-Element.querySelector()
-Element.querySelectorAll()
-Element.releasePointerCapture()
-Element.removeAttribute()
-Element.removeAttributeNS()
-Element.requestFullscreen()
-Element.requestPointerLock()
-Element.scroll()
-Element.scrollBy()
-Element.scrollIntoView()
-Element.scrollTo()
-Element.setAttribute()
-Element.setAttributeNS()
-Element.setCapture()
-Element.setPointerCapture()
-Element.toggleAttribute()
+Element.attributes 返回一个与该元素相关的所有属性集合NamedNodeMap    
+Element.classList 返回该元素包含的class属性    
+NonDocumentTypeChildNode.nextElementSibling 是一个Element，该元素下一个兄弟节点，如果为null表示不存在     
+NonDocumentTypeChildNode.previousElementSibling 是一个Element，该元素上一个兄弟节点，如果为null表示不存在     
+Element.scrollHeight 返回类型为：Number，表示元素的滚动视图高度     
+Element.scrollTop 返回类型为：Number，表示该元素纵向滚动距离     
+Element.getBoundingClientRect() 返回元素的大小及其相对与视口的位置     
 
 # 捕获，冒泡
 
@@ -161,7 +84,29 @@ el.addEventListener(type,listener,{capture:true})
 1. el.onclick = function(){}
 2. function a(){}
    el.setAttribute("onclick", "a()");
-3. el.addEventListener
+3. el.addEventListener     
+
+### 网页禁止复制如何实现
+不能完全防止复制，用户手机即可使用OCR      
+
+重写网页复制和剪切事件：   
+// 禁止右键菜单   
+document.oncontextmenu = function(){ return false; };     
+// 禁止文字选择   
+document.onselectstart = function(){ return false; };     
+// 禁止复制    
+document.oncopy = function(){ return false; };    
+// 禁止剪切   
+document.oncut = function(){ return false; };    
+
+恢复网页复制剪切事件：    
+document.body.oncopy = null;    
+document.body.oncut = null;     
+document.body.onselectstart = null;     
+document.body.oncontextmenu = null;     
+
+
+
 
 ### preventDefault
 取消默认操作，使用peventDefault   
