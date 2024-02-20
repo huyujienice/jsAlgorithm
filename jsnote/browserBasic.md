@@ -1,51 +1,70 @@
-## sessionStorage,localStorage,cookie
+# DOM
+Document Object Modal,文档对象模型      
+DOM代表操作页面接口，接口以便js程序可以改变文档的结构，风格和内容         
+DOM模型用逻辑树来表示一个文档，树的每一个分支终点都是一个节点node     
 
-使用sessionStorage和直接在window上挂载属性有何区别？   
-页面刷新,sessionStorage属性还存在，window上属性刷新丢失    
-# EventTarget Node Element
+## EventTarget Node Element
 
-Node继承至其祖先EventTarget,Element继承至其祖先Node
-平时使用html上的元素，即Element，是类型为ELEMENT_NODE的Node
+Element->Node->EventTarget    
+     
+Node继承至其祖先EventTarget,Element继承至其祖先Node       
+平时使用html上的元素，即Element，是类型为ELEMENT_NODE的Node     
 
 ## EventTarget
-EventTarget.addEventListener() 在EventTarget上注册特定事件类型的事件处理程序
-EventTarget.removeEventListener() 在EventTarget中删除事件侦听器
-EventTarget.dispatchEvent() 将事件分派到此EventTarget
-可参考创建和触发events:
-https://developer.mozilla.org/zh-CN/docs/Web/Events/Creating_and_triggering_events
+EventTarget.addEventListener() 在EventTarget上注册特定事件类型的事件处理程序      
+EventTarget.removeEventListener() 在EventTarget中删除事件侦听器      
+EventTarget.dispatchEvent() 将事件分派到此EventTarget       
+可参考创建和触发events:     
+https://developer.mozilla.org/zh-CN/docs/Web/Events/Creating_and_triggering_events      
+
+当EventTarget对象接收到浏览器事件后，会生成一个event对象来描述该次交互事件         
+event对象会被作为第一个参数传递给事件监听的回调函数       
+event对象包含了与事件相关的所有信息,例如：    
+1. type
+2. target
+3. currentTarget
+4. bubbles
+5. preventDefault
+6. stopPropagation
+7. stopImmediatePropagation
+8. cancelable
+9. defaultPrevented
+10. isTrusted
+11. eventPhase
+12. timestamp
 
 ## Node
-Node.baseURI
-Node.baseURIOjbect
-Node.childNodes 返回一个包含了该节点所有子节点的实时的NodeList。NodeList是动态变化的
-Node.firstChild 返回该节点的第一个子节点Node,如果该节点没有子节点则返回null
-Node.isConnected 
-Node.lastChild 返回该节点的最后一个子节点Node，如果该节点没有子节点则返回null
-Node.nextSibling 返回与该节点同级的下一个节点Node，如果没有则返回null
-Node.nodeName
-Node.nodeType ELEMENT_NODE -> 1 TEXT_NODE -> 3
-Node.nodeValue
-Node.ownerDocument
-Node.parentNode 返回一个当前节点Node的父节点。如果没有这样的节点，比如说像这个节点是树结构的顶端或者没有插入一棵树中，这个属性返回null
-Node.parentElement 返回一个当前节点的父节点Element。如果当前节点没有父节点或者说父节点不是一个元素（Element），这个属性返回null
-Node.previousSibling 返回一个当前节点同辈的前一个节点Node，或者返回null（如果不存在这么一个节点的话）
-Node.textContent 返回或设置一个元素内所有子节点及其后代的文本内容
+Node.baseURI     
+Node.baseURIOjbect     
+Node.childNodes 返回一个包含了该节点所有子节点的实时的NodeList。NodeList是动态变化的      
+Node.firstChild 返回该节点的第一个子节点Node,如果该节点没有子节点则返回null     
+Node.isConnected      
+Node.lastChild 返回该节点的最后一个子节点Node，如果该节点没有子节点则返回null     
+Node.nextSibling 返回与该节点同级的下一个节点Node，如果没有则返回null     
+Node.nodeName    
+Node.nodeType ELEMENT_NODE -> 1 TEXT_NODE -> 3     
+Node.nodeValue       
+Node.ownerDocument      
+Node.parentNode 返回一个当前节点Node的父节点。如果没有这样的节点，比如说像这个节点是树结构的顶端或者没有插入一棵树中，这个属性返回null       
+Node.parentElement 返回一个当前节点的父节点Element。如果当前节点没有父节点或者说父节点不是一个元素（Element），这个属性返回null      
+Node.previousSibling 返回一个当前节点同辈的前一个节点Node，或者返回null（如果不存在这么一个节点的话）    
+Node.textContent 返回或设置一个元素内所有子节点及其后代的文本内容      
 
-Node.appendChild() 将指定的childNode参数作为最后一个子元素添加到当前节点。如果参数引用了DOM树上的现有节点，则节点将从当前位置分离，并附加到新位置
-Node.cloneNode() 克隆一个Node，并且可以选择是否克隆这个节点下的所有内容。默认情况下，节点下的内容会被克隆
-Node.compareDocumentPosition() 比较当前节点与文档中的另一个节点的位置
-Node.contains() 返回一个Boolean布尔值，来表示传入的节点是否为改节点的后代节点
-Node.getRootNode() 
-Node.hasChildNodes() 返回一个Boolean布尔值，来表示该元素是否包含有子节点
-Node.insertBefore() 在当前节点下新增一个子节点Node，并使该节点位于参考节点的前面
-Node.isDefaultNamespace()
-Node.isEqualNode()
-Node.isSameNode()
-Node.lookupPrefix()
-Node.lookupNamespaceURI()
-Node.normalize()
-Node.removeChild() 移除当前节点的一个子节点。这个子节点必须存在于当前节点中
-Node.replaceChild()
+Node.appendChild() 将指定的childNode参数作为最后一个子元素添加到当前节点。如果参数引用了DOM树上的现有节点，则节点将从当前位置分离，并附加到新位置    
+Node.cloneNode() 克隆一个Node，并且可以选择是否克隆这个节点下的所有内容。默认情况下，节点下的内容会被克隆    
+Node.compareDocumentPosition() 比较当前节点与文档中的另一个节点的位置      
+Node.contains() 返回一个Boolean布尔值，来表示传入的节点是否为改节点的后代节点     
+Node.getRootNode()    
+Node.hasChildNodes() 返回一个Boolean布尔值，来表示该元素是否包含有子节点     
+Node.insertBefore() 在当前节点下新增一个子节点Node，并使该节点位于参考节点的前面      
+Node.isDefaultNamespace()    
+Node.isEqualNode()    
+Node.isSameNode()   
+Node.lookupPrefix()    
+Node.lookupNamespaceURI()    
+Node.normalize()    
+Node.removeChild() 移除当前节点的一个子节点。这个子节点必须存在于当前节点中     
+Node.replaceChild()    
 
 ## Element
 Element.attributes 返回一个与该元素相关的所有属性集合NamedNodeMap
@@ -124,8 +143,11 @@ Element.toggleAttribute()
 DOM 事件标准描述了事件传播的 3 个阶段：
 
 1. 捕获阶段（Capturing phase）- 事件（从 windows）向下走进元素
-2. 目标阶段（Target phase）- 事件达到目标元素
-3. 冒泡阶段（Bubbling phase）- 事件从元素上开始冒泡
+2. 目标阶段（Target phase）- 事件达到目标元素  
+3. 冒泡阶段（Bubbling phase）- 事件从元素上开始冒泡    
+
+v字模型，window在最高点，触发元素在最低点       
+详见：https://www.w3.org/TR/DOM-Level-3-Events/#event-flow      
 
 一般事件处理会选择冒泡模型，因为符合常识；
 
@@ -141,6 +163,14 @@ el.addEventListener(type,listener,{capture:true})
    el.setAttribute("onclick", "a()");
 3. el.addEventListener
 
+### preventDefault
+取消默认操作，使用peventDefault   
+比如点击a链接打开外部链接就是默认操作    
+
+### sessionStorage,localStorage,cookie
+
+使用sessionStorage和直接在window上挂载属性有何区别？   
+页面刷新,sessionStorage属性还存在，window上属性刷新丢失    
 
 # 伪类，伪元素
 
