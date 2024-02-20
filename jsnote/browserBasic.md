@@ -107,7 +107,6 @@ document.body.oncontextmenu = null;
 
 
 
-
 ### preventDefault
 取消默认操作，使用peventDefault   
 比如点击a链接打开外部链接就是默认操作    
@@ -122,20 +121,20 @@ document.body.oncontextmenu = null;
 可以减轻维护成本。
 数量众多，通常用于明确的目的。
 
-伪类，以:开头,例如：
-:first-child
-:last-child
-:only-child
-:invalid
-:hover
-:focus
-伪元素，以::开头，例如：
-::first-line
-::first-letter
-::before
-::after
+伪类，以:开头,例如：    
+:first-child    
+:last-child    
+:only-child    
+:invalid    
+:hover   
+:focus   
+伪元素，以::开头，例如：   
+::first-line    
+::first-letter    
+::before    
+::after    
 
-::before和::after，可以和content属性一起使用，使用CSS将内容插入到文档中
+::before和::after，可以和content属性一起使用，使用CSS将内容插入到文档中    
 
 # CSS盒子模型
 1. 标准盒子模型:
