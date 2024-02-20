@@ -250,6 +250,8 @@ js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前�
 
 
 # preload prefetch
+preload用于在页面加载期间提前下载需要渲染的关键资源   
+prefetch用于加载用户可能下次需要的资源，但不影响当前页面，为了优化后续用户体验     
 
 
 ### V8引擎内存管理 
