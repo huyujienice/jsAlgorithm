@@ -82,12 +82,15 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
 4 种情况会创建新的执行上下文  
-1.进入全局代码  
-2.进入 function 函数体代码  
-3.进入 eval 函数参数指定的代码  
-4.进入 module 代码
+1.进入全局代码    
+2.进入 function 函数体代码    
+3.进入 eval 函数参数指定的代码     
+4.进入 module 代码       
 
-执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出
+执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出   
+执行上下文分为2个阶段创建：
+1. 创建
+2. 执行
 
 ## VO
 
