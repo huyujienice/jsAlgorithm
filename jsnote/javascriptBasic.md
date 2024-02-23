@@ -366,7 +366,8 @@ Number.prototype.toExponential()
 以指数表示法返回该数值字符串表示形式，例如 7.823e+5=782300
 
 Number.prototye.toFixed()
-以定点表示法来格式化一个数值，返回字符串
+以定点表示法来格式化一个数值，返回字符串   
+toFixed会有四舍五入精度问题，可通过转为字符串做比较来解决      
 
 Number.prototype.toPrecision()
 以指定的精度返回该数值对象的字符串表示,跟上面 toFixed 有啥区别？toPrecision 可能会返回指数写法，不可预期
