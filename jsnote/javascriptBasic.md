@@ -160,8 +160,8 @@ function runCode(code, ctx) {
 
 ### 提升原理
 
-js 引擎会在解释 js 代码之前首先对其进行编译。编译阶段的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来  
-包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理
+js 引擎会在执行 js 代码之前首先对其进行编译。      
+编译阶段的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来，包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理      
 
 ### Error
 
@@ -225,33 +225,35 @@ ES6中箭头函数并不会使用上诉规则，箭头函数会继承外层函�
 
 # 继承与原型链
 
-prototype，虐杀原型游戏英文名
-每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
+prototype，虐杀原型游戏英文名    
+每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。      
 
-函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。
-函数拥有 prototype 及**proto**属性
-例如：
-function a(){}
-a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null
-a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null
-如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**
-a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype
+函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。     
+函数拥有 prototype 及**proto**属性       
+例如：       
+function a(){}     
+a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null    
+a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null    
+如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**       
+a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype       
+      
+a->Function.prototype->Object.prototype->null     
 
 # new 方法底层逻辑
 
 通过 new 调用构造函数实际会经历以下 4 个步骤
 
 1. 创建一个新对象
-2. 将构造函数的原型挂到新对象的原型上（this 指向 新对象）
-3. 执行构造函数，完成新对象的创建初始化
+2. 将构造函数的原型挂到新对象的原型上
+3. 执行构造函数，this指向新对象，完成新对象的创建初始化
 4. 返回新对象
 
 # Module
 
-浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。
-defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行
-async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行
-浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行
+浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。     
+defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行     
+async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行       
+浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行       
 
 ES6 模块与 CommonJS 模块的差异
 
@@ -296,6 +298,8 @@ import()类似于 Node.js 的 require 加载，可以执行
 ### commonjs 解决循环引用
 
 为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的 exports
+
+ES6不关心是否发生循环引用，只是生成了一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值      
 
 # ArrayBuffer,TypedArray,DataView
 
