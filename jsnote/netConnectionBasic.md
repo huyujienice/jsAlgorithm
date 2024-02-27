@@ -94,7 +94,7 @@ Cross-Site Scripting,XSS 代码注入
 恶意js脚本上传攻击服务器，或者恶意钓鱼网站进行脚本视觉欺骗等     
 
 如何解决：
-1. 不信任客户端操作，关键节点校验
+1. 不信任客户端操作，业务主流程关键节点校验
 2. CSP策略,"内容安全策略"，提供加载外部资源白名单          
 ### CSRF
 Cross-Site Request Forgery,伪造跨站请求
@@ -105,6 +105,7 @@ Cross-Site Request Forgery,伪造跨站请求
     1.2 Referer Header
 
 2. CSRF Token
+3. 业务主流程关键节点校验     
 
 ### 中间人攻击
 Man-in-the-middle attack MITM  
