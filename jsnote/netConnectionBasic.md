@@ -31,6 +31,15 @@ HTTP协议，超文本传输协议，它允许将超文本标记语言HTML文档
 8. PATCH:是对PUT方法的补充，用来对已知资源进行局部更新  
 9. CONNECT:HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器  
 
+#### GET和POST区别
+1. 数据位置，GET传参附加在url上，POST传参附加在Body上
+2. 数据长度限制，GET由于在url上传参，url有长度限制，POST没有
+3. 数据安全性，GET在url上能看得到，POST看不到
+4. 缓存，GET会被浏览器缓存，POST不可缓存   
+
+GET和POST都属于HTTP请求方法，没有本质区别，只是一种规范     
+有个浏览器级别的区别就是，GET产生一个TCP数据包，POST产生两个TCP数据包        
+
 ### HTTP状态码
 1. 1xx:服务器收到请求，需要请求者继续执行操作
 2. 2xx:成功
@@ -46,7 +55,7 @@ HTTP协议，超文本传输协议，它允许将超文本标记语言HTML文档
 431:请求头太大    
 
 ### HTTP content-type
-文件类型，决定浏览器已什么形式，什么编码读取这个文件（有些网页点击结果下载图片或者文件的原因）    
+文件类型，决定浏览器以什么形式，什么编码读取这个文件（有些网页点击结果下载图片或者文件的原因）    
 MIME类型是描述消息内容的标准，用来表示文档，文件或字节流的性质和格式       
 通用结构：type/subtype      
 例:    
@@ -55,7 +64,15 @@ MIME类型是描述消息内容的标准，用来表示文档，文件或字节�
 3. image/gif:GIF图形.gif
 4. image/jpeg:JPEG图形.jpeg .jpg
 5. application/x-gzip:GZIP文件.gz
-6. application/x-tar:TAR文件.tar
+6. application/x-tar:TAR文件.tar   
+    
+设置content-type:application/octet-stream，响应为字节流，浏览器处理字节流的默认方式就是下载    
+配合设置Content-Disposition来实现图片文件下载（网页内联还是下载到本地）   
+例如：     
+Content-Type: application/octet-stream     
+Content-Disposition: attachment; filename="picture.png"    
+
+
 
 ### HTTP URL
 
