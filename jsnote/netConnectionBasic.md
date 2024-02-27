@@ -95,7 +95,7 @@ Cross-Site Scripting,XSS 代码注入
 
 如何解决：
 1. 不信任客户端操作，关键节点校验
-2. CPS策略     
+2. CSP策略,"内容安全策略"，提供加载外部资源白名单          
 ### CSRF
 Cross-Site Request Forgery,伪造跨站请求
 
