@@ -152,23 +152,6 @@ Set 对象是值的集合，你可以按照插入的顺序迭代它的元素。S
 NaN 与 NaN 算相同值  
 undefined 与 undefined 算相同值
 
-Set.prototype.size  
-返回 Set 对象中的值的个数  
-Set.prototype.add(value)  
-在 Set 尾部添加一个元素  
-Set.prototype.clear()  
-移除 Set 内的所有元素  
-Set.prototype.delete(value)  
-移除值为 value 的元素  
-Set.prototype.entries()  
-返回一个键值对的迭代器对象，每个值的键和值相等  
-Set.prototype.forEach()  
-按照插入顺序，为 Set 对象的每一个值都调用一次回调  
-Set.prototype.has(value)  
-返回布尔值，表示该值在 Set 中存在与否  
-Set.prototype.keys()  
-Set.prototype.values()  
-返回值的迭代器对象
 
 Set 无法获取集合内单独的一个元素
 
@@ -176,17 +159,6 @@ Set 无法获取集合内单独的一个元素
 
 Map 对象保存键值对，并且能够记住键的原生插入顺序。任何值（对象或者基本类型）都可以作为一个键或一个值
 
-Map.prototype.size  
-返回 Map 对象中的键值对数量  
-Map.prototype.clear()  
-Map.prototype.delete(key)  
-Map.prototype.get(key)  
-Map.prototype.has(key)  
-Map.prototype.set(key,value)  
-Map.prototype.keys()  
-Map.prototype.values()  
-Map.prototype.entries()  
-Map.prototype.forEach()
 
 ### 链表
 
@@ -244,8 +216,8 @@ Map.prototype.forEach()
 ### 二叉树
 
 满足以下两个条件的树就是二叉树：  
-1.本身是有序树  
-2.树中包含的各个结点
+1. 本身是有序树  
+2. 每个节点最多有两个子节点    
 
 #### 二叉树的性质
 
