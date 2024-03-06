@@ -60,9 +60,9 @@ transition
 # vue中的双向绑定
 vue中的v-model可以用在表单的input输入框，完成视图和数据的双向绑定   
 v-model其实是双向绑定的语法糖，input相当于vue自带的组件  
-浏览器<input>标签可以注册oninput事件，在元素值发生变化时立即触发     
+浏览器 &lt; input &gt; 标签可以注册oninput事件，在元素值发生变化时立即触发     
   
-```
+```html
 <input v-model="xxx">
 
 <!-- 上面的代码等价于 -->
@@ -78,20 +78,22 @@ MVVM:Model-View-ViewModel(模型-视图-控制器)是一种双向数据绑定模
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
 render  
 调用compile函数，生成render函数字符串，编译过程如下：   
-1.parse函数解析template,生成ast(抽象语法树)    
-2.optimize函数标记静态节点(diff算法跳过静态节点)       
-3.generate函数生成render函数字符串      
+1. parse函数解析template,生成ast(抽象语法树)    
+2. optimize函数标记静态节点(diff算法跳过静态节点)       
+3. generate函数生成render函数字符串      
 
 # vue nextTick
 nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在下次dom更新循环结束之后执行延迟回调。  
-***操作dom节点是同步操作***     
+***操作dom节点是同步阻塞操作***     
 更新dom是同步操作，vue框架为了效率更高采用了异步执行更新dom。    
 当监听到数据变化，vue将开启一个队列，并缓冲在同一个事件循环中所发生的所有数据的变更。如果同一个副作用函数被多次触发，   
 只会被推入到队列中一次。这种缓冲时去重数据对于避免不必要的计算和dom操作是非常重要的。   
 在下一个的事件循环中，vue刷新队列并执行实际（已去重）的副作用函数。   
 实现异步队列尝试使用宿主环境的Promise.then(),MutationObserver和setImmediate，若都不支持则采用setTimeout代替   
 有一个全局队列存储副作用函数，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行    
-pending为false的时候副作用函数加入当前执行队列并返回一个Promise执行    
+pending为false的时候副作用函数加入当前执行队列并返回一个Promise执行      
+
+window.setImmediate 除了高版本IE支持，主流浏览器都不支持     
 
 # 纯函数
 特点：  

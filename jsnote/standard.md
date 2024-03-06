@@ -50,6 +50,7 @@ npm发布现行版流程
 1.拉出开发分支,更改本地version,执行 npm version preminor --preid=beta,将本地版本号更改为1.1.0-beta.0        
 2.如果后续要提升本地版本,执行 npm version prerelease         
 3.如果需要发版公测版本，使用dist-tag来标记公测版本语义化tag，假设公测版本为beta.1.1.0，执行 npm publish --tag beta.1.1.0 进行发布,用户执行 npm install packageName@beta.1.1.0 进行安装       
-4.公测版本可推最后稳定版本,执行npm version minor更新本地版本号，执行npm publish发布latest发布最后稳定版本         
+4.公测版本可推最后稳定版本,执行npm version minor更新本地版本号，执行npm publish发布latest发布最后稳定版本   
+      
 
 
