@@ -82,6 +82,9 @@ render
 2. optimize函数标记静态节点(diff算法跳过静态节点)       
 3. generate函数生成render函数字符串      
 
+render函数会返回虚拟DOM    
+
+
 # vue nextTick
 nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在下次dom更新循环结束之后执行延迟回调。  
 ***操作dom节点是同步阻塞操作***     
@@ -90,26 +93,26 @@ nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在
 只会被推入到队列中一次。这种缓冲时去重数据对于避免不必要的计算和dom操作是非常重要的。   
 在下一个的事件循环中，vue刷新队列并执行实际（已去重）的副作用函数。   
 实现异步队列尝试使用宿主环境的Promise.then(),MutationObserver和setImmediate，若都不支持则采用setTimeout代替   
-有一个全局队列存储副作用函数，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行    
+有一个全局队列存储副作用函数队列，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行    
 pending为false的时候副作用函数加入当前执行队列并返回一个Promise执行      
 
 window.setImmediate 除了高版本IE支持，主流浏览器都不支持     
 
 # 纯函数
 特点：  
-1.每一次调用时传入相同的参数，返回的都是同样的结果；它不会改变参数的值，也不会改变外部变量的值  
-2.纯函数没有其他副作用函数  
+1. 每一次调用时传入相同的参数，返回的都是同样的结果；它不会改变参数的值，也不会改变外部变量的值  
+2. 纯函数没有其他副作用函数  
 # vue响应式原理
 Proxy用于创建一个对象的代理，从而实现基本操作的拦截和自定义  
-1.注册副作用函数的时候使用了obj对象的值，会触发其读取操作(依赖收集操作，所以需更新视图等操作需要提前注册副作用函数)      
-2.当obj对象的值发生改变的时候，会触发其设置操作(派发更新操作)     
+1. 注册副作用函数的时候使用了obj对象的值，会触发其读取操作(依赖收集操作，所以需更新视图等操作需要提前注册副作用函数)      
+2. 当obj对象的值发生改变的时候，会触发其设置操作(派发更新操作)     
 
 一个响应式系统有多个响应式对象，一个对象可以有多个属性，一个对应的属性可以有多个副作用函数  
 vuejs选择weakMap,Map,Set三个数据结构当做容器  
 weakMap特点  
-1.只能是以对象作为键    
-2.对值是弱引用，不会对GC造成影响  
-3.不能循环遍历   
+1. 只能是以对象作为键    
+2. 对值是弱引用，不会对GC造成影响  
+3. 不能循环遍历   
 
 容器结构：  
 ```
@@ -139,22 +142,34 @@ computed及watch均是以此而来
 # vue3.0
 
 ## vue3 特性
-1.向下兼容,vue3支持大多数vue2特性  
-2.性能提升  
-3.Composition API  
-4.teleport瞬移组件 Suspense异步组件解决  
-5.更好TypeScript支持  
+1. 向下兼容,vue3支持大多数vue2特性  
+2. 性能提升  
+3. Composition API  
+4. teleport瞬移组件 Suspense异步组件解决  
+5. 更好TypeScript支持  
 
 ## vue3性能提升
-1.vue3 Proxy实现响应式，vue2 Object.defineProperty性能较差，需递归执行  
-2.PatchFlag优化diff算法  
-3.HoistStatic静态节点缓存优化    
-4.CacheHandler缓存事件优化  
-5.SSR优化  
-6.tree-shaking  
+1. vue3 Proxy实现响应式，vue2 Object.defineProperty性能较差，需递归执行  
+2. PatchFlag优化diff算法
+3. HoistStatic静态节点缓存优化    
+4. CacheHandler缓存事件优化  
+5. SSR优化  
+6. tree-shaking  
+
+## PatchFlag
+PatchFlag是一个标识，是一个枚举ID
+用途：
+1. 用来标记当前节点需要更新，静态节点没有这个参数，更新的时候直接略过
+2. 进行组合更新
 
 ## HoistStatic静态节点缓存优化
 在编译器编译的过程中，将一些静态的节点或者属性提升到渲染函数之外。它能够减少更新时创建虚拟dom带来的性能开销和内存占用  
+
+## CacheHandle
+开启CacheHandle事件缓存后，render函数将绑定的事件生成固定的内联函数，由内联参数传递代替上下文对象进行传参，避免了生成vnode重复渲染      
+
+## tree-shaking
+框架代码会按需引入     
 
 ## vue diff算法
 diff算法适用于容器内容为子节点数组的比较。如果不采用diff算法，最简单的操作就是先将之前的dom全部卸载，再将当前的新节点全部挂载  
