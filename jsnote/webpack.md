@@ -25,7 +25,7 @@ output占位符：
 
 # loader
 
-webpack 开箱自带解析 js 和 JSON 文件。loader 处理其他类型的文件，并将其转换为有效模块，供程序使用，以及被添加到依赖图中   
+webpack 开箱自带解析 js 和 JSON 文件的功能。loader 处理其他类型的文件，并将其转换为有效模块，供程序使用，以及被添加到依赖图中   
 
 ```
 module.exports = {
