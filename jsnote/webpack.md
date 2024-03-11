@@ -99,7 +99,7 @@ pitch执行顺序跟正常loader执行顺序完全相反
 
 一个 class 类，定义 apply 方法，以 compiler 为参数，指定挂载到 webpack 自身的事件钩子
 
-### Compiler 和 Compilation
+### Compiler 和 Compilation  
 
 compiler 是 webpack 底层编译对象的引用  
 webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对象记录了 webpack 运行环境的所有信息，  
