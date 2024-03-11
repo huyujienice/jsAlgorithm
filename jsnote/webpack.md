@@ -163,20 +163,20 @@ source map是将编译打包压缩过后的代码映射回源代码的文件，�
   1.nosources-source-map:只会显示具体行数以及查看源代码的错误栈。安全性比source-map高    
   2.source-map:通过ngnix设置.map文件只对白名单开放       
 
-### webpack 运行流程
+### webpack 运行流程   
 
 1. 初始化流程  
-从配置文件和 Shell 语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数
+从配置文件和 Shell 语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数     
 
 2. 编译构建make  
-从 entry 出发，针对每个 module 串行调用对应的 loader 将模块转译为标准JS内容，调用JS解释器将内容转换为AST对象   
-，从中找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过本步骤的处理    
+从 entry 出发，针对每个 module 串行调用对应的 loader 将模块转译为标准JS内容，调用JS解释器将内容转换为AST对象     
+，从中找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过本步骤的处理      
 
 3. 生成阶段seal   
-根据dependency graph,module.exports.optimization.splitChunks等配置构建chunk graph,将module组合成chunk
+根据dependency graph,module.exports.optimization.splitChunks等配置构建chunk graph,将module组合成chunk    
 
 4. 输出流程emit     
-把 chunk 转换成文件 bundle，输出到文件系统  
+把 chunk 转换成文件 bundle，输出到文件系统    
 
 ### webpack 常用生命周期函数
 1. compile:创建compilation前     
@@ -193,7 +193,7 @@ source map是将编译打包压缩过后的代码映射回源代码的文件，�
 
 
 ### webpack如何实现tree-shaking   
-tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值未被使用或者引用，并将其删除      
+tree-shaking是指在运行过程中静态分析模块之间的导入导出，确定ESM模块中哪些导出值及引用未被使用，在输出的文件内将其物理删除      
 实现前提条件：     
 1. 使用ESM规范编写模块代码    
 2. 配置optimization.usedExports为true,启动标记功能    
@@ -205,8 +205,8 @@ tree-shaking是指在运行过程中静态分析模块之间的导入导出，�
 实现原理：    
 先标记出模块导出值中哪些没有被用过，再使用Terser插件删掉这些没有被用到的导出语句    
 1. Make阶段，收集模块导出变量并记录到模块依赖图ModudleGraph变量中     
-2. Seal阶段，遍历ModuleGraph标记模块并判断导出变量有没有被使用    
-3. 生成产物时，若变量没有被其他模块使用则删除对应的导出语句    
+2. Seal阶段，遍历ModuleGraph标记模块并判断导出变量是否有被其他模块引用且在其他模块正文中是否出现，如果没有则进行标记    
+3. 生成产物时，根据Seal阶段的标记，删除对应的导出语句    
 
 webpack的tree shaking逻辑停留在代码静态分析层面，只判断    
 1. 模块导出变量是否被其他模块引用    
@@ -221,12 +221,15 @@ webpack的tree shaking逻辑停留在代码静态分析层面，只判断
 6. Webpack运行时触发变更模块的module.hot.accept回调，执行代码变更逻辑     
 
 ### 优化H5项目策略   
+技术提供业务建议：   
+1. 确定项目核心功能，非核心功能后置     
+
 服务端可做：   
 1. 减少重定向    
 2. 启用资源gzip压缩    
 3. 改善服务器响应时间   
-4. 使用浏览器静态资源缓存    
-5. 优化图片     
+4. 使用浏览器静态资源缓存       
+5. 优化图片等静态资源          
 6. 升级http2,http3       
 
 客户端可做：    
