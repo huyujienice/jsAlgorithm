@@ -252,19 +252,17 @@ speed-measure-webpack-plugin分析分析打包速度
 
 1. 设置cache属性（默认生产模式为false，开发模式为true）   
 2. resolve部分优化(模块解析)：   
-    2.1 externals:对第三方包进行公共包CDN引用，降低包大小   
+    2.1 resolve.externals:对第三方包进行公共包CDN引用，降低包大小   
     2.2 resolve.alias:使用别名缩短模块路径，降低文件解析成本    
-    2.3 resolve.mainFields:减少第三方模块搜索步骤   
-    3.4 resolve.extensions:合理配置类型   
+    2.3 resolve.mainFields:使用npm包中package.json中那个字段来导入npm包，减少第三方模块搜索步骤   
+    3.4 resolve.extensions:为未标明后缀的文件引入提供解析文件的后缀
 3. module优化:   
     3.1 include和exclude:排除不需要处理的loader文件     
     3.2 cache-loader:对loader解析过的文件进行缓存     
-    3.3 noParse:与external类似，但无法共存。主要作用就是防止webpack解析，跳过编译环节，忽略大型的library可以提高构建性能        
+    3.3 noParse:与external功能类似，且无法共存。主要作用就是防止webpack解析，跳过编译环节，忽略大型的library可以提高构建性能        
 4. optimization优化:    
-    4.1 使用terser-webpack-plugin代替uglifyjs-webpack-plugin    
-    4.2 optimize-css-assets-webpack-plugin:对css进行压缩   
-    4.3 splitChunks代码分割   
-    4.4 runtimeChunk:创建一个额外的文件或者chunk,减少entry chunk体积，提高性能   
+    4.1 splitChunks代码分割   
+    4.2 runtimeChunk:创建一个额外的文件或者chunk,减少entry chunk体积，提高性能   
 5. Plugin优化：    
     5.1 eslint-webpack-plugin:eslint-loader替代方案，可以配置自动fix和多核编译    
     5.2 mini-css-extract-plugin:抽离css，可上传CDN  
