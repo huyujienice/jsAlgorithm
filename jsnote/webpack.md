@@ -264,8 +264,8 @@ speed-measure-webpack-plugin分析分析打包速度
     4.1 splitChunks代码分割   
     4.2 runtimeChunk:创建一个额外的文件或者chunk,减少entry chunk体积，提高性能   
 5. Plugin优化：    
-    5.1 eslint-webpack-plugin:eslint-loader替代方案，可以配置自动fix和多核编译    
-    5.2 mini-css-extract-plugin:抽离css，可上传CDN  
+    5.1 eslint-webpack-plugin:可以配置eslint自动fix和多核编译    
+    5.2 mini-css-extract-plugin:抽离css至单独文件，可上传CDN  
     5.3 DLLPlugin:提前将不会更改的框架公共代码打包，减少打包体积（VUE CLI可以使用）       
 6. 多线程打包：
     6.1 Happypack    
