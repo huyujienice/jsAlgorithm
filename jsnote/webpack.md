@@ -98,7 +98,10 @@ pitch执行顺序跟正常loader执行顺序完全相反
 
 ## 自定义插件
 
-一个 class 类，定义 apply 方法，以 compiler 为参数，指定挂载到 webpack 自身的事件钩子
+一个 class 类，定义 apply 方法，以 compiler 为参数，指定挂载到 webpack 自身的事件钩子    
+自定义插件举例：https://webpack.docschina.org/contribute/writing-a-plugin/#example    
+assets是一个包含compilation中所有静态资源的对象，该对象的键是资源路径，值是文件的源码     
+compilation.emitAsset   可以向 compilation 添加新的资源    
 
 ### Compiler 和 Compilation  
 
