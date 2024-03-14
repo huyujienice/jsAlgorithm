@@ -3,11 +3,11 @@ webpack 是一个静态模块打包工具
 
 # 入口
 
-entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部依赖图(dependency graph)的开始  
-使用对象语法可以扩展入口定义  
-常见场景：  
-1. 分离 app(应用程序)和 vendor(第三方库)入口  
-2. 多页面应用程序   
+entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部依赖图(dependency graph)的开始     
+使用对象语法可以扩展入口定义     
+常见场景：     
+1. 分离 app(应用程序)和 vendor(第三方库)入口     
+2. 多页面应用程序      
 
 通过在entry配置中包含runtime值，则会在entry chunk之外再增加一个专门容纳runtime的chunk对象，多个entry间可共享runtime chunk    
 
@@ -112,6 +112,7 @@ webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对
 compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用  
 compilation 对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息    
 
+
 ### 异步插件
 同步用tap来绑定，异步可以用tapAsync或tapPromise来绑定    
 
@@ -182,11 +183,18 @@ source map是将编译打包压缩过后的代码映射回源代码的文件，�
 把 chunk 转换成文件 bundle，输出到文件系统    
 
 ### webpack 常用生命周期函数
-1. compile:创建compilation前     
-2. compilation:创建compilation后        
-3. make:loader处理编译完成时触发     
-4. emit:输出资源到output目录之前触发      
-5. done:整体编译完成时触发   
+1. compiler.compile:创建compilation前     
+2. compiler.compilation:创建compilation后        
+3. compiler.make:loader处理编译完成时触发     
+4. compiler.emit:输出assets到output目录之前执行      
+5. compiler.done:整体编译完成时执行   
+
+
+compilation   
+1. compilation.buildModule:在模块创建开始之前触发，可修改模块
+2. compilation.successdModule:模块构建成功时执行
+3. compilation.seal:compilation对象停止接收新的模块时触发
+4. compilation.processAssets:ssset处理
 
 ### webpack常用Plugin
 1. define-plugin:注入自定义环境变量    
