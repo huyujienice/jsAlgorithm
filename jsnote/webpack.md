@@ -194,7 +194,7 @@ compilation
 1. compilation.buildModule:在模块创建开始之前触发，可修改模块
 2. compilation.successdModule:模块构建成功时执行
 3. compilation.seal:compilation对象停止接收新的模块时触发
-4. compilation.processAssets:ssset处理
+4. compilation.processAssets:asset处理
 
 ### webpack常用Plugin
 1. define-plugin:注入自定义环境变量    
