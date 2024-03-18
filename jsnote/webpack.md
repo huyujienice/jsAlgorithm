@@ -72,7 +72,7 @@ module.exports = aLoader;
 loader函数中的this会指向webpack，可以使用this.callback,this.async等访问一些方法或者属性        
 loader配置了options对象的话，this.query就指向这个对象，可以通过options传递配置参数    
         
-Loader在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给前置的Normal Loader,即可跳过剩下的Loader    
+Loader在pitch阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本Normal阶段的下一个Loader，类似于“在我之前处理的结果都不算，以我返回的结果为准，将我的结果交给原来的下一个处理者”      
 Loader在pitch阶段传递给pitch函数的data,在normal执行阶段也会暴露在this.data之中，可用于捕获共享pitch阶段的信息         
  
 Loader可以分为同步Loader和异步Loader     
@@ -107,7 +107,7 @@ compilation.emitAsset   可以向 compilation 添加新的资源
 
 compiler 是 webpack 底层编译对象的引用  
 webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对象记录了 webpack 运行环境的所有信息，  
-插件可以通过它获取到 webpack 的配置信息，如 entry,output,module 等配置，所以可以直接通过 compiler.hooks 挂载生命周期钩子回调     
+插件可以通过它获取到 webpack 的配置信息，如 entry,output,module 等配置(通过compiler.options获取完整的配置对象)，也可以直接通过 compiler.hooks 挂载生命周期钩子回调       
 
 compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用  
 compilation 对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息    
@@ -118,7 +118,7 @@ compilation 对象记录了一次构建到生成资源过程中的信息，它�
 
 ### runtime manifest
 
-当 compiler 开始执行，解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
+当 compiler 开始执行，解析和映射时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
 runtime 会通过 manifest 来解析和加载模块。    
 
 ### webpack 单独生成 chunk 方法
@@ -210,18 +210,17 @@ tree-shaking是指在运行过程中静态分析模块之间的导入导出，�
 2. 配置optimization.usedExports为true,启动标记功能    
 3. 启动代码优化功能，可以通过如下方式实现：     
   3.1 配置mode=production
-  3.2 配置optimization.minimize=true
-  3.3 提供optimization.minimizer 数组   
+  3.2 配置optimization.minimize=true   
 
 实现原理：    
 先标记出模块导出值中哪些没有被用过，再使用Terser插件删掉这些没有被用到的导出语句    
 1. Make阶段，收集模块导出变量并记录到模块依赖图ModudleGraph变量中     
-2. Seal阶段，遍历ModuleGraph标记模块并判断导出变量是否有被其他模块引用且在其他模块正文中是否出现，如果没有则进行标记    
+2. Seal阶段，遍历ModuleGraph标记模块并判断导出变量是否有被其他模块引用且在其他模块正文中是否出现及使用，如果没有则进行标记    
 3. 生成产物时，根据Seal阶段的标记，删除对应的导出语句    
 
 webpack的tree shaking逻辑停留在代码静态分析层面，只判断    
 1. 模块导出变量是否被其他模块引用    
-2. 引用模块的主体代码中有没有出现这个变量   
+2. 引用模块的主体代码中有没有出现及引用这个变量   
 ### webpack如何实现HMR
 核心流程：     
 1. 使用webpack-dev-server(WDS)在本地建立静态资源服务器，同时以Runtime方式注入HMR客户端(浏览器)代码       
