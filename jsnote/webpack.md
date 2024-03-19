@@ -42,7 +42,7 @@ use 属性定义使用哪个 loader 进行转换
 
 有两种使用 loader 方式：  
 1. 配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)  
-2. 内联方式：在每个 import 语句中显示指定 loader   
+2. 内联(inline)方式：在每个 import 语句中显示指定 loader   
 
 import 语句中，使用!将资源中的 loader 分开
 
@@ -82,15 +82,20 @@ Loader可以分为同步Loader和异步Loader
     
 pre loader和post loader,可以通过rule对象内的enforce属性来指定     
 正常loader执行顺序
-1. 不同阶段之间：pre->normal->post
+1. 不同阶段之间：pre->normal->inline->post
 2. 每个阶段内部：use数组中，从右往左，从下到上
 
 pitch执行顺序跟正常loader执行顺序完全相反
-1. 不同阶段之间：post->normal->pre
+1. 不同阶段之间：post->inline->normal->pre
 2. 每个阶段内部：use数组中，从左往右，从上到下
 
+
 类似中间件洋葱模型
-或者说类似浏览器事件传输capture phase和bubbing phase     
+或者说类似浏览器事件传输capture phase和bubbing phase
+
+enforce和webpack.config.js中loader配置执行顺序怎么确定？
+enforce相对于rule来说的，先根据enforce和书写方式对rule进行排序，然后对rule中的loader进行排序               
+rule中的loader不会进行去重    
 
 # 插件
 
