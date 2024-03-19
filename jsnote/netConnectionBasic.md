@@ -299,6 +299,24 @@ Connection: keep-alive是顺序处理多个请求
 多路复用可以同时传输多个请求
 
 
+### 浏览器缓存
+浏览器缓存分为4种，当依次查找以下缓存且都没有命中的时候，才会去请求网络
+1. service worker
+2. memory cache  --内存
+3. disk cache  --硬盘
+4. push cache  --HTTP2推送缓存
+
+
+强缓存：不会向服务器发送请求，直接从缓存中读取数据     
+1. Expires设置强缓存过期时间
+2. Cache-Control设置缓存命令
+
+协商缓存：强缓存失效后，向服务器发送获取资源请求    
+HTTP状态码304表示缓存有效，无需更新    
+HTTP状态码200表示缓存失效，返回资源结果        
+1. Last-Modified和If-Modified-Since:资源更新时间
+2. ETag和If-None-Match：资源的唯一标识
+
 ### 数据传输安全
 可以基于TCP协议实现私有协议通讯?    
 Netty   
