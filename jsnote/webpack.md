@@ -105,8 +105,13 @@ rule中的loader不会进行去重
 
 一个 class 类，定义 apply 方法，以 compiler 为参数，指定挂载到 webpack 自身的事件钩子    
 自定义插件举例：https://webpack.docschina.org/contribute/writing-a-plugin/#example    
+
+compilation常用方法：
+
 assets是一个包含compilation中所有静态资源的对象，该对象的键是资源路径，值是文件的源码     
-compilation.emitAsset   可以向 compilation 添加新的资源    
+1. compilation.emitAsset:可以向 compilation 添加新的资源    
+2. compilation.addModule:添加自定义模块
+3. compilation.addEntry:添加入口，功能上与直接定义entry配置相同
 
 ### Compiler 和 Compilation  
 
@@ -190,7 +195,7 @@ source map是将编译打包压缩过后的代码映射回源代码的文件，�
 ### webpack 常用生命周期函数
 1. compiler.compile:创建compilation前     
 2. compiler.compilation:创建compilation后        
-3. compiler.make:loader处理编译完成时触发     
+3. compiler.make:loader处理编译开始时触发     
 4. compiler.emit:输出assets到output目录之前执行      
 5. compiler.done:整体编译完成时执行   
 
