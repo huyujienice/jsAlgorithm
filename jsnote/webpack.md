@@ -205,7 +205,7 @@ compilation
 1. define-plugin:注入自定义环境变量    
 2. clean-webpack-plugin:目录清理    
 3. speed-measure-webpack-plugin:整体编译流程执行耗时    
-4. webpack-bundle-analyzer:编译完毕输出chunk分析
+4. webpack-bundle-analyzer:编译完毕输出bundle分析
 
 
 ### webpack如何实现tree-shaking   
@@ -276,7 +276,7 @@ speed-measure-webpack-plugin分析分析打包速度
     3.2 cache-loader:对loader解析过的文件进行缓存     
     3.3 noParse:与external功能类似，且无法共存。主要作用就是防止webpack解析，跳过编译环节，忽略大型的library可以提高构建性能        
 4. optimization优化:    
-    4.1 splitChunks代码分割   
+    4.1 splitChunks:代码分割   
     4.2 runtimeChunk:创建一个额外的文件或者chunk,减少entry chunk体积，提高性能   
 5. Plugin优化：    
     5.1 eslint-webpack-plugin:可以配置eslint自动fix和多核编译    
