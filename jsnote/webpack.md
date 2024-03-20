@@ -211,6 +211,7 @@ compilation
 2. clean-webpack-plugin:目录清理    
 3. speed-measure-webpack-plugin:整体编译流程执行耗时    
 4. webpack-bundle-analyzer:编译完毕输出bundle分析
+5. UnusedWebpackPlugin:根据webpack编译信息反向查找项目内哪些文件没有被用到   
 
 
 ### webpack如何实现tree-shaking   
