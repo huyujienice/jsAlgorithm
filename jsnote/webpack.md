@@ -135,8 +135,8 @@ compiler 是 webpack 底层编译对象的引用
 webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对象记录了 webpack 运行环境的所有信息，  
 插件可以通过它获取到 webpack 的配置信息，如 entry,output,module 等配置(通过 compiler.options 获取完整的配置对象)，也可以直接通过 compiler.hooks 挂载生命周期钩子回调
 
-compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用  
-compilation 对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息
+compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用    
+compilation 对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息      
 
 ### 异步插件
 
@@ -303,7 +303,7 @@ speed-measure-webpack-plugin 分析分析打包速度
 2. resolve 部分优化(模块解析)：  
    2.1 resolve.externals:对第三方包进行公共包 CDN 引用，降低包大小  
    2.2 resolve.alias:使用别名缩短模块路径，降低文件解析成本  
-   2.3 resolve.mainFields:使用 npm 包中 package.json 中那个字段来导入 npm 包，减少第三方模块搜索步骤  
+   2.3 resolve.mainFields:使用 npm 包中 package.json 中哪个字段来导入 npm 包，减少第三方模块搜索步骤  
    3.4 resolve.extensions:为未标明后缀的文件引入提供解析文件的后缀
 3. module 优化:  
    3.1 include 和 exclude:排除不需要处理的 loader 文件  
