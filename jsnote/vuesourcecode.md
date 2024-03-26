@@ -1,7 +1,7 @@
 # vue中的双向绑定
 vue中的v-model可以用在表单的input输入框，完成视图和数据的双向绑定   
 v-model其实是双向绑定的语法糖，input相当于vue自带的组件  
-浏览器 &lt; input &gt; 标签可以注册oninput事件，在元素值发生变化时立即触发     
+浏览器 \<input\> 标签可以注册oninput事件，在元素值发生变化时立即触发     
   
 ```html
 <input v-model="xxx">
@@ -12,8 +12,7 @@ v-model其实是双向绑定的语法糖，input相当于vue自带的组件
 ```
 
 MVC：Model-View-Controller(模型-视图-控制器)是一种分层架构的思想   
-MVVM:Model-View-ViewModel(模型-视图-控制器)是一种双向数据绑定模式，用ViewModel来建立起Model数据层和View视图层的连接，       
-数据改变会影响视图，视图改变会影响数据       
+MVVM:Model-View-ViewModel(模型-视图-视图控制器)是一种双向数据绑定模式，用ViewModel来建立起Model数据层和View视图层的连接，数据改变会影响视图，视图改变会影响数据       
 
 # vue 渲染流程  
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
