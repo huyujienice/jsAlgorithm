@@ -63,7 +63,7 @@ import "style-loader!css-loader!stylus-loader?a=b!../../common.css";
 
 ## 自定义 loader
 
-```
+```js
 /**
  * @param {string|Buffer} content 源文件的内容
  * @param {object} [map] 可以被 https://github.com/mozilla/source-map 使用的 SourceMap 数据
@@ -73,9 +73,9 @@ function aLoader(content, map, meta) {
   // 省略部分代码
 }
 /**
- * @param {string|Buffer}
- * @param {object}
- * @param {any} [data] 在pitch阶段和normal阶段之间共享的对象
+ * @param {string} loader链剩余部分及资源文件的绝对路径的字符串,类似inline写法
+ * @param {object} loader链前置部分绝对路径字符串   
+ * @param {any} [data] 在pitch阶段和normal阶段之间共享的对象    
  */
 aLoader.pitch = function (remainingRequest, precedingRequest, data) {
 
