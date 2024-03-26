@@ -33,8 +33,8 @@ nextTick本质就是执行延迟回调的钩子，接受一个回调函数，在
 只会被推入到队列中一次。这种缓冲时去重数据对于避免不必要的计算和dom操作是非常重要的。   
 在下一个的事件循环中，vue刷新队列并执行实际（已去重）的副作用函数。   
 实现异步队列尝试使用宿主环境的Promise.then(),MutationObserver和setImmediate，若都不支持则采用setTimeout代替   
-有一个全局队列存储副作用函数队列，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个Promise执行    
-pending为false的时候副作用函数加入当前执行队列并返回一个Promise执行      
+有一个全局队列存储副作用函数队列，一个全局pending标识，当pending为true的时候，副作用函数放入下一次的队列中，并且返回一个执行的Promise命令     
+pending为false的时候副作用函数加入当前执行队列并返回一个执行的Promise命令           
 
 window.setImmediate 除了高版本IE支持，主流浏览器都不支持     
 
@@ -44,8 +44,22 @@ window.setImmediate 除了高版本IE支持，主流浏览器都不支持
 2. 纯函数没有其他副作用函数  
 # vue响应式原理
 Proxy用于创建一个对象的代理，从而实现基本操作的拦截和自定义  
-1. 注册副作用函数的时候使用了obj对象的值，会触发其读取操作(依赖收集操作，所以需更新视图等操作需要提前注册副作用函数)      
-2. 当obj对象的值发生改变的时候，会触发其设置操作(派发更新操作)     
+1. 注册副作用函数的时候使用了响应式对象的值，会触发其读取操作(依赖收集操作，所以需更新视图等操作需要提前注册副作用函数)      
+2. 当响应式对象的值发生改变的时候，会触发其设置操作(派发更新操作)    
+
+可以将拦截操作设置在Prototype对象上，如果读取实例对象的属性，拦截会生效   
+```js
+let proto = new Proxy({}, {
+  get(target, propertyKey, receiver) {
+    console.log('GET ' + propertyKey);
+    return target[propertyKey];
+  }
+});
+
+let obj = Object.create(proto);
+obj.foo // "GET foo"
+
+```
 
 一个响应式系统有多个响应式对象，一个对象可以有多个属性，一个对应的属性可以有多个副作用函数  
 vuejs选择weakMap,Map,Set三个数据结构当做容器  
