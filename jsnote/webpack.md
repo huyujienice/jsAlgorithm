@@ -87,14 +87,14 @@ module.exports = aLoader;
 loader 函数中的 this 会指向 webpack，可以使用 this.callback,this.async 等访问一些方法或者属性  
 loader 配置了 options 对象的话，this.query 就指向这个对象，可以通过 options 传递配置参数
 
-Loader 在 pitch 阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本 Normal 阶段的下一个 Loader，类似于“在我之前处理的结果都不算，以我返回的结果为准，将我的结果交给原来的下一个处理者”  
+Loader 在 pitch 阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本 Normal 阶段的下一个 Loader，类似于“不需要执行处理在我之前的Loader，以我返回的结果为准，将我的结果交给原来的下一个处理者”  
 Loader 在 pitch 阶段传递给 pitch 函数的 data,在 normal 执行阶段也会暴露在 this.data 之中，可用于捕获共享 pitch 阶段的信息
 
 Loader 可以分为同步 Loader 和异步 Loader  
 同步 Loader 可以通过 return 语句或者 this.callback 的方式来同步地返回转换后的结果  
 异步 Loader 通过 const callback = this.async()方法来获取 callback 函数
 
-pre loader 和 post loader,可以通过 rule 对象内的 enforce 属性来指定  
+pre loader 和 post loader,可以通过 rule 数组对象内的子项 enforce 属性来指定  
 正常 loader 执行顺序
 
 1. 不同阶段之间：pre->normal->inline->post
@@ -109,7 +109,7 @@ pitch 执行顺序跟正常 loader 执行顺序完全相反
 或者说类似浏览器事件传输 capture phase 和 bubbing phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
-enforce 相对于 rule 来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
+enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
 rule 中的 loader 不会进行去重
 
 # 插件
@@ -204,7 +204,7 @@ source map 是将编译打包压缩过后的代码映射回源代码的文件，
    ，从中找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过本步骤的处理
 
 3. 生成阶段 seal  
-   根据 dependency graph,module.exports.optimization.splitChunks 等配置构建 chunk graph,将 module 组合成 chunk
+   根据 dependency graph,optimization.splitChunks 等配置构建 chunk graph,将 module 组合成 chunk
 
 4. 输出流程 emit  
    把 chunk 转换成文件 bundle，输出到文件系统
