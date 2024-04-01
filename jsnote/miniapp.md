@@ -22,7 +22,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 3. View Thread进行First Render完毕之后通知AppService Thread，AppService Thread将onReady逻辑传递至View Thread进行执行渲染        
 4. onHide,onShow,onUnload都是通过AppService Thread传递至View Thread进行执行渲染      
 
-总的来说就是逻辑层初始化完毕等待渲染层初始化完毕通知，逻辑层将逻辑传递给渲染层执行，渲染层执行完毕之后会通知逻辑层  
+总的来说就是逻辑层初始化完毕等待渲染层初始化完毕通知，逻辑层将逻辑执行结果传递给渲染层执行，渲染层执行完毕之后会通知逻辑层  
 
 
 ### 小程序启动流程
@@ -38,6 +38,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 1. 视图层进行部分UI和系统组件的创建，WebView部分初始化,小程序基础库注入
 2. 逻辑层进行JS引擎初始化和域创建，小程序基础库注入   
 3. Native（安卓）进行小程序进程和微信基础模块初始化   
+4. Native会缓存开发者代码包，按照缓存规则进行复用    
 
 #### 安卓和iOS的启动耗时差异
 1. iOS设备的平均性能要好于安卓   
