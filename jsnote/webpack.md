@@ -136,7 +136,7 @@ webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对
 插件可以通过它获取到 webpack 的配置信息，如 entry,output,module 等配置(通过 compiler.options 获取完整的配置对象)，也可以直接通过 compiler.hooks 挂载生命周期钩子回调
 
 compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用    
-compilation 对象记录了一次构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息      
+compilation 对象记录了单次从源码构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息      
 
 ### 异步插件
 
