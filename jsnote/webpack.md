@@ -219,7 +219,7 @@ source map 是将编译打包压缩过后的代码映射回源代码的文件，
 
 compilation
 
-1. compilation.buildModule:在模块创建开始之前触发，可修改模块
+1. compilation.buildModule:在模块构建开始之前触发，可修改模块
 2. compilation.successdModule:模块构建成功时执行
 3. compilation.seal:compilation 对象停止接收新的模块时触发
 4. compilation.processAssets:asset 处理
