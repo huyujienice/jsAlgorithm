@@ -10,7 +10,7 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
 
 1. setState
 2. forceUpdate():调用自身 render 方法重新渲染组件
-3. findDOMNode():获取 DOM 元素
+3. findDOMNode():获取 DOM 元素(或直接使用Ref)
 
 ## React 生命周期
 
