@@ -16,14 +16,14 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
 
 函数组件没有生命周期，只有类组件才有
 
-1. 挂载
+1. Mounting(挂载):已插入真实DOM    
 
    1.1 constructor()：调用挂载前，会调用它的构造函数  
    1.2 getDerivedStateFromProps()  
    1.3 render():是 class 组件中唯一必须实现的方法  
    1.4 componentDidMount():在组件挂载后（插入 Dom 树中）立即调用
 
-2. 更新
+2. Updating(更新)：正在被重新渲染    
 
    2.1 getDerivedStateFromProps()  
    2.2 shouldComponentUpdate()  
@@ -31,7 +31,7 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
    2.4 getSnapshotBeforeUpdate()  
    2.5 componentDidUpdate()：在更新后会被立即调用
 
-3. 卸载
+3. Unmounting(卸载)：已移出真实 DOM     
 
    3.1 componentWillUnmount(): 在组件卸载及销毁之前直接调用
 
