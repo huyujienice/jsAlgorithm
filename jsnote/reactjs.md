@@ -12,6 +12,31 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
 2. forceUpdate():调用自身 render 方法重新渲染组件
 3. findDOMNode():获取 DOM 元素(或直接使用Ref)
 
+## Diff算法
+预设条件：   
+1. 同层diff
+2. 类型不同直接删除新建node
+3. key可暗示可复用node    
+
+整体逻辑：   
+        
+双层遍历:
+1. 第一层遍历根据key值找到可复用的node并记录    
+2. 第二层遍历根据第一层遍历找到可复用的node，不可复用直接删除新增node，处理所有node   
+
+Reactjs中 Fiber 架构可实现多阶段渲染，提高性能和响应性    
+
+## Reactjs diff vs Vue diff
+相同点：
+1. 预设条件类似，都是同层diff，类型和key可作为是否可复用node的依据    
+
+
+不同点：   
+1. 整体逻辑不同，reactjs实现双层遍历，vue实现双端diff及预处理diff 
+2. 提高性能方式不同，reactjs引入Fiber架构实现多阶段渲染，vue引入nexttick渲染队列实现延迟去重渲染     
+
+
+
 ## React 生命周期
 
 函数组件没有生命周期，只有类组件才有
