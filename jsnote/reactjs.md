@@ -81,3 +81,14 @@ function MyComponent() {
   return <div>My Component</div>;
 }
 ```
+
+### 受控组件，非受控组件
+受控组件：只能通过React修改数据或者组件状态    
+非受控组件：input,textarea,select,checkbox等，本身能控制数据和状态的变更       
+怎么将非受控组件变为受控组件？将状态变更交给React来操作    
+例如：    
+input组件，通过定义state,设置表单元素的value属性，处理表单元素的onChange事件来实现         
+
+
+### 组件懒加载
+React提供了lazy和Suspence来实现懒加载      
