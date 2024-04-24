@@ -210,7 +210,7 @@ vue2.0不允许在已经创建的实例上动态添加新的响应式属性
 若想实现数据与视图同步更新，可采取以下方案：
 1. Vue.set()
 2. Object.assign()
-3. $forceUpdate    
+3. this.forceUpdate()    
 
 ### $attrs
 inheritAttrs默认为true,默认将未声明为props或emit的attribute或者v-on监听器自动传递给子组件     
