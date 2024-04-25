@@ -28,30 +28,30 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 ### 小程序启动流程
 分为Native微信端，视图层View Thread，逻辑层AppService Thread      
 
-1. Native从微信后台或者本地缓存获取小程序基本信息(头像名称版本配置权限)及代码包，然后进行代码包下载与校验，视图层同时进行Activity初始化，系统初始化和UI初始化，Webview容器和UI的初始化，逻辑层同时进行资源准备   
-2. Native代码包准备完成之后，将代码包分别派发至视图层和逻辑层，视图层和逻辑层进行前端框架初始化，插件，扩展库代码注入，开发者代码注入   
-3. 逻辑层经过App.onLaunch,App.onShow,路由事件navigationStart,初始化后将初始化数据传入等待中的视图层进行页面初始化渲染   
-4. 逻辑层页面onLoad,onShow生命周期，将对应的事件传入视图层进行页面渲染，当渲染完毕后通知逻辑层执行页面onReady    
+1. Native从微信后台或者本地缓存获取小程序基本信息(头像名称版本配置权限)及代码包，然后进行代码包下载与校验，View Thread同时进行Activity初始化，系统初始化和UI初始化，Webview容器和UI的初始化，AppService Thread同时进行资源准备   
+2. Native代码包准备完成之后，将代码包分别派发至View Thread和AppService Thread，进行前端框架初始化，插件，扩展库代码注入，开发者代码注入     
+3. AppService Thread经过App.onLaunch,App.onShow,路由事件navigationStart,初始化后等待View Thread初始化完毕通知，将结果数据传入View Thread进行页面初始化渲染   
+4. AppService Thread经过onLoad,onShow生命周期，将对应的渲染结果传入View Thread进行页面渲染，当渲染完毕后通知逻辑层，接收AppService Thread onReady渲染结果    
 
 #### 小程序启动环境预加载
 微信客户端会依照一定策略在小程序启动前对运行环境进行部分预加载，以降低启动耗时   
-1. 视图层进行部分UI和系统组件的创建，WebView部分初始化,小程序基础库注入
-2. 逻辑层进行JS引擎初始化和域创建，小程序基础库注入   
+1. View Thread进行部分UI和系统组件的创建，WebView部分初始化,小程序基础库注入
+2. AppService Thread进行JS引擎初始化和域创建，小程序基础库注入   
 3. Native（安卓）进行小程序进程和微信基础模块初始化   
 4. Native会缓存开发者代码包，按照缓存规则进行复用    
 
 #### 安卓和iOS的启动耗时差异
-1. iOS设备的平均性能要好于安卓   
-2. iOS小程序和微信公用进程，而Android上小程序运行在独立进程，需要额外的进程创建和一些基础模块的初始化流程
-3. iOS上需要使用使用系统提供的WebView和JavaScript Core，初始化开销几乎可以忽略
-4. 安卓UI和系统组件的创建开销远高于iOS
+iOS设备的平均性能要好于安卓   
+1. iOS小程序和微信公用进程，而Android上小程序运行在独立进程，需要额外的进程创建和一些基础模块(通信基础模块，网络基础模块)的初始化流程    
+2. iOS上需要使用使用系统提供的WebView和JavaScript Core，初始化开销几乎可以忽略    
+3. Android UI和系统组件的创建开销远高于iOS   
 
 
 ### 小程序运行环境
-1. 在iOS,iPadOS和Mac OS上，小程序逻辑层代码运行在JavaScriptCore中，视图层由WKWebview来渲染的
-2. 在Android上，小程序逻辑层代码运行在V8中，视图层由微信自研XWeb引擎来渲染的
-3. 在windows上，小程序逻辑层和视图层都是用Chromium进行运行及渲染    
-4. 在开发工具上，小程序逻辑层代码运行在NW.js中，视图层由Chromium Webview来渲染的    
+1. 在iOS,iPadOS和Mac OS上，小程序AppService Thread代码运行在JavaScriptCore中，View Thread由WKWebview来渲染的
+2. 在Android上，小程序AppService Thread代码运行在V8中，View Thread由微信自研XWeb引擎来渲染的
+3. 在windows上，小程序AppService Thread和View Thread都是用Chromium V8及Webview进行运行及渲染    
+4. 在开发工具上，小程序AppService Thread代码运行在NW.js中，View Thread由Chromium Webview来渲染的    
 
 ### 条件编译
 使用webpack可参考js-conditional-compile-loader      
