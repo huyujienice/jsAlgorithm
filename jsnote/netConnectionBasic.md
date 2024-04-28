@@ -1,10 +1,3 @@
-# OSI七层网络模型  
-Open System Interconnect,开放式系统互联
-
-## 应用层
-为应用程序提供服务  
-HTTP协议，超文本传输协议，它允许将超文本标记语言HTML文档从web服务器传送到客户端的浏览器    
-
 ### HTTP协议结构
 客户端发出的消息称为HTTP请求，服务端返回的消息称为HTTP响应  
 
@@ -122,6 +115,12 @@ Man-in-the-middle attack MITM
 2. 相互认证
 3. 延迟测试，通讯延迟异常则可能存在第三方中间人    
 
+# OSI七层网络模型  
+Open System Interconnect,开放式系统互联
+
+## 应用层
+为应用程序提供服务  
+HTTP协议，超文本传输协议，它允许将超文本标记语言HTML文档从web服务器传送到客户端的浏览器    
 
 ## 表示层  
 数据格式转化，数据加密  
@@ -287,13 +286,13 @@ websocket是基于TCP的一种新的持久化应用层网络协议。它实现�
 http1.1       
 1. http1.1基于文本解析，把所有请求和响应作为纯文本    
 2. http1.1加入缓处理(强缓存和协商缓存)    
-3. http1.1拥有长连接(Connection:keep-alive)        
+3. http1.1拥有长连接(Connection:keep-alive)，同一个TCP连接上串行传输多个HTTP请求与响应             
 4. http1.1基于tcp连接     
 
 http2    
 1. 不同于http1.1文本传输，http2采用二进制传输，将内容进行分流     
 1. 头部字段压缩     
-2. 多路复用，同一TCP连接同时并行传输多个HTTP请求和响应，请求数据无序，浏览器组装    
+2. 多路复用，同一TCP连接可并行传输多个HTTP请求和响应，请求数据无序，浏览器组装    
 3. 服务端主动推送缓存    
 
 http3     
@@ -301,8 +300,8 @@ http3
 2. 放弃tcp,通过QUIC(udp)建立，解决了队头堵塞问题等问题      
 
 ### Connection: keep-alive和多路复用区别
-Connection: keep-alive是顺序处理多个请求      
-多路复用可以同时传输多个请求
+Connection: keep-alive是同一个TCP连接串行处理多个HTTP请求        
+多路复用是并行传输多个请求     
 
 
 ### 浏览器缓存
