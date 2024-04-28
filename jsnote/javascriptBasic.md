@@ -2,7 +2,7 @@
 
 eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6 可以使用 rest 参数)  
 eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
-将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域
+将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域       
 
 有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用  
 
@@ -38,14 +38,15 @@ function curry(func) {
 # js 类型判断
 
 ## js中基本类型
-基本类型是一种既非对象也无方法或属性的数据 
-1. string   
-2. number  
-3. bigint
-4. boolean
+基本类型是一种既非对象也无方法或属性的数据    
+    
+1. string
+2. number
+3. boolean
+4. null
 5. undefined
-6. symbol
-7. null   
+6. bigint
+7. symbol
 
 
 ## 使用 typeof 判断
