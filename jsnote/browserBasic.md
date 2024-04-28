@@ -150,7 +150,7 @@ box-sizing:border-box;
 
 # CSS生效是通过计算权重来实现的，权重最高就生效
 
-1.Browser declarations  
+1.Browser normal declarations  
 2.User normal declarations  
 3.Author normal declarations  
 4.Author important declarations  
