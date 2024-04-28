@@ -98,15 +98,20 @@ Cross-Site Scripting,XSS 代码注入
 2. CSP策略,"内容安全策略"，提供加载外部资源白名单        
 
 ### CSRF
-Cross-Site Request Forgery,伪造跨站请求
+Cross-Site Request Forgery,伪造跨站请求    
+利用浏览器会话保持的特性，借用用户登陆信息，以用户身份模拟发送各种请求     
 
 如何解决：
 1. API同源检查
     1.1 Origin Header
     1.2 Referer Header
 
-2. CSRF Token校验，取代不安全js可读写cookie校验          
+2. CSRF Token校验，取代Cookie校验          
 3. 业务主流程关键节点校验     
+
+Cookie虽然存在同源策略，但是CSRF利用了Web浏览器的一个特性：   
+浏览器会自动将Cookie和其他会话标识随着HTTP请求发送到同一个域，即使这个请求是由另一个域上的页面发起的。    
+这是因为浏览器认为，如果用户已经登陆了一个网站，那么用户可能希望在同一个浏览器窗口或标签页中进行会话保持      
 
 ### 中间人攻击
 Man-in-the-middle attack MITM  
