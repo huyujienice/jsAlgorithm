@@ -327,7 +327,7 @@ HTTP状态码200表示缓存失效，返回资源结果
 Netty   
 
 
-### 浏览器跨域  
+### 浏览器跨域 CORS  
 
 同源政策是浏览器独有核心安全策略，协议，域名，端口号任意不同则非同源    
 非同源以下行为收到限制：  
@@ -338,7 +338,7 @@ Netty
 如何解决浏览器跨域问题:  
 1. JSONP:通过在html加入script元素，向服务器请求JSON数据，只支持get请求
 2. WebSocket
-3. CORS:服务端设置响应头Access-Control-Allow-Origin:*
+3.（速记ACAO）服务端设置响应头Access-Control-Allow-Origin:*
 
 
 ### XMLHttpRequest Fetch
