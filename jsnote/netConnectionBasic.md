@@ -94,18 +94,18 @@ Cross-Site Scripting,XSS 代码注入
 恶意js脚本上传攻击服务器，或者恶意钓鱼网站进行脚本视觉欺骗等     
 
 如何解决：
-1. 不信任客户端操作，业务主流程关键节点校验，用户输入及操作api校验    
+1. 不信任客户端操作，业务主流程关键节点校验，用户输入及操作API校验    
 2. CSP策略,"内容安全策略"，提供加载外部资源白名单        
 
 ### CSRF
 Cross-Site Request Forgery,伪造跨站请求
 
 如何解决：
-1. 同源检查
+1. API同源检查
     1.1 Origin Header
     1.2 Referer Header
 
-2. CSRF Token
+2. CSRF Token校验，取代不安全js可读写cookie校验          
 3. 业务主流程关键节点校验     
 
 ### 中间人攻击
