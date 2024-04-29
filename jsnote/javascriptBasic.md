@@ -289,12 +289,14 @@ CommonJS 底层加载原理：
 将每个文件视为一个独立的模块，使用Local函数作用域及闭包特性包装开发者代码块，营造出模块作用域      
 
 1. Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
-2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对 
-3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, __filename, __dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module
+2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对，保存所有模块信息       
+3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, __filename, __dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module     
+(ermfd->exports require module __filename __dirname)        
+
 
 ES6 模块底层原理：
 import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
-import()类似于 Node.js 的 require 加载，可以执行
+import()是webpack提供的类似于 Node.js 的 require 加载，可以执行
 按需加载，条件加载，动态的模块路径
 
 ### commonjs 解决循环引用
