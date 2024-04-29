@@ -303,7 +303,7 @@ speed-measure-webpack-plugin 分析分析打包速度
 2. resolve 部分优化(模块解析)：  
    2.1 resolve.externals:对第三方包进行公共包 CDN 引用，降低包大小  
    2.2 resolve.alias:使用别名缩短模块路径，降低文件解析成本  
-   2.3 resolve.mainFields:使用 npm 包中 package.json 中哪个字段来导入 npm 包，减少第三方模块搜索步骤  
+   2.3 resolve.mainFields:使用 npm 包中 package.json 中哪个字段(main || exports)来导入 npm 包，减少第三方模块搜索步骤  
    3.4 resolve.extensions:为未标明后缀的文件引入提供解析文件的后缀
 3. module 优化:  
    3.1 include 和 exclude:排除不需要处理的 loader 文件  
