@@ -84,8 +84,8 @@ aLoader.pitch = function (remainingRequest, precedingRequest, data) {
 module.exports = aLoader;
 ```
 
-loader 函数中的 this 会指向 webpack，可以使用 this.callback,this.async 等访问一些方法或者属性  
-loader 配置了 options 对象的话，this.query 就指向这个对象，可以通过 options 传递配置参数
+loader 函数中的 this 会指向 webpack，可以使用 this.callback,this.async 等访问一些方法或者属性     
+loader 配置了 options 对象的话，this.query 就指向这个对象，可以通过 options 传递配置参数    
 
 Loader 在 pitch 阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本 Normal 阶段的下一个 Loader，类似于“不需要执行处理在我之前的Loader，以我返回的结果为准，将我的结果交给原来的下一个处理者”  
 Loader 在 pitch 阶段传递给 pitch 函数的 data,在 normal 执行阶段也会暴露在 this.data 之中，可用于捕获共享 pitch 阶段的信息
@@ -106,7 +106,7 @@ pitch 执行顺序跟正常 loader 执行顺序完全相反
 2. 每个阶段内部：use 数组中，从左往右，从上到下
 
 类似中间件洋葱模型
-或者说类似浏览器事件传输 capture phase 和 bubbing phase
+或者说类似浏览器事件传输 capture phase , target phase ,  bubbing phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
 enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
