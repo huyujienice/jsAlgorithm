@@ -2,15 +2,15 @@
 
 eval 可直接执行字符串，把字符串当成代码来执行，就相当于人在写，可以解决一些特殊的问题,比如可变参数等问题(es6 可以使用 rest 参数)  
 eval 直接调用是使用的是当前作用域，间接调用使用的是全局作用域  
-将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域       
+将 eval 复制给变量（或者 window.eval 调用，但是会有浏览器兼容性问题），间接调用，使用的是全局作用域
 
-有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用  
+有类似方法的有 new Function,setTimeout,setInterval 等方法，但是没有 eval 好用
 
-# vm模块
-nodejs中vm模块提供了一组用于在虚拟机环境中执行js代码的API(创建新的js上下文)       
-vm模块允许在一个隔离的上下文中编译和执行代码，可以用于实现一些动态代码执行，沙箱环境和代码片段运行      
-vm模块是非安全的，需防止执行不安全的代码    
+# vm 模块
 
+nodejs 中 vm 模块提供了一组用于在虚拟机环境中执行 js 代码的 API(创建新的 js 上下文)  
+vm 模块允许在一个隔离的上下文中编译和执行代码，可以用于实现一些动态代码执行，沙箱环境和代码片段运行  
+vm 模块是非安全的，需防止执行不安全的代码
 
 # curry
 
@@ -37,9 +37,10 @@ function curry(func) {
 
 # js 类型判断
 
-## js中基本类型
-基本类型是一种既非对象也无方法或属性的数据    
-    
+## js 中基本类型
+
+基本类型是一种既非对象也无方法或属性的数据
+
 1. string
 2. number
 3. boolean
@@ -47,7 +48,6 @@ function curry(func) {
 5. undefined
 6. bigint
 7. symbol
-
 
 ## 使用 typeof 判断
 
@@ -83,13 +83,14 @@ https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-ja
 
 执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
 4 种情况会创建新的执行上下文  
-1.进入全局代码    
-2.进入 function 函数体代码    
-3.进入 eval 函数参数指定的代码     
-4.进入 module 代码       
+1.进入全局代码  
+2.进入 function 函数体代码  
+3.进入 eval 函数参数指定的代码  
+4.进入 module 代码
 
-执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出   
-执行上下文分为2个阶段创建：
+执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
+执行上下文分为 2 个阶段创建：
+
 1. 创建
 2. 执行
 
@@ -161,15 +162,15 @@ function runCode(code, ctx) {
 
 ### 提升原理
 
-js 引擎会在执行 js 代码之前首先对其进行编译。      
-编译阶段的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来，包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理      
+js 引擎会在执行 js 代码之前首先对其进行编译。  
+编译阶段的一部分工作就是找到所有的声明，并用合适的作用域将它们关联起来，包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理
 
 ### Error
 
 1. EvalError  
    错误原因:与 eval()相关
 2. RangeError  
-   错误原因:数值变量或参数超出其有效范围,数组越界 如：将数组长度置为-1        
+   错误原因:数值变量或参数超出其有效范围,数组越界 如：将数组长度置为-1
 3. ReferenceError  
    错误原因:无效引用。如:未找到变量或者函数（标识符）
 4. SyntaxError
@@ -183,9 +184,7 @@ js 引擎会在执行 js 代码之前首先对其进行编译。
 8. InternalError  
    js 引擎内部错误的异常抛出的实例。如：递归太多
 
-verror包可以更加方便记录及定位错误    
-
-
+verror 包可以更加方便记录及定位错误
 
 ## LHS,RHS
 
@@ -195,50 +194,53 @@ LHS->赋值查找 RHS->简单查找
 
 ### 闭包
 
-本质是函数可以访问所在词法作用域，但是函数在当前词法作用域之外执行，这个时候就产生了闭包           
+本质是函数可以访问所在词法作用域，但是函数在当前词法作用域之外执行，这个时候就产生了闭包
 
-无论通过何种手段将内部函数传递到所在词法作用域之外(直接返回或者当做函数参数类型传播等)，      
-内部函数都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包       
+无论通过何种手段将内部函数传递到所在词法作用域之外(直接返回或者当做函数参数类型传播等)，  
+内部函数都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包
 
-通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域(父函数AO及Scope)    
+通常的表现形式是返回一个函数，这个函数可以引用到创建时父级函数的参数及作用域(父函数 AO 及 Scope)
 
 ## this
 
 this 是当前执行上下文(global,function 或 eval)的一个属性，在非严格模式下，总是指向一个对象
-globalThis 可获取不同环境下的全局 this 对象，也就是全局对象自身    
+globalThis 可获取不同环境下的全局 this 对象，也就是全局对象自身
 
-### this绑定
-如果要判断一个运行中函数的this绑定，就需要找到这个函数的直接调用位置。找到之后按照顺序应用下面规则判断this的绑定对象     
-1. 由new调用？绑定到new创建的新的对象    
-2. 由call,apply,bind调用？绑定到指定对象   
-3. 由上下文对象调用？绑定到那个上下文对象    
-4. 默认：在函数内严格模式下绑定到undefined，否则绑定到全局对象    
+### this 绑定
 
-ES6中箭头函数并不会使用上诉规则，箭头函数会继承外层函数调用的this绑定      
+如果要判断一个运行中函数的 this 绑定，就需要找到这个函数的直接调用位置。找到之后按照顺序应用下面规则判断 this 的绑定对象
 
+1. 由 new 调用？绑定到 new 创建的新的对象
+2. 由 call,apply,bind 调用？绑定到指定对象
+3. 由上下文对象调用？绑定到那个上下文对象
+4. 默认：在函数内严格模式下绑定到 undefined，否则绑定到全局对象
 
-### 指针与引用的区别(js中没有指针类型)            
-指针和引用在C++中都用于简介访问变量    
-1. 指针是一个变量，保存了另外一个变量的内存地址；引用是一个变量的别名，与原变量共享内存地址     
-2. 指针可以被重新赋值，指向不同的变量；引用在初始化后不能更改，始终指向同一个变量     
-3. 指针可以为nullptr,表示不指向任何变量；引用必须绑定一个变量，不能为nullptr    
-4. 使用指针需要对其引用以获取或修改其指向变量的值；引用可以直接使用，无需解引用     
+ES6 中箭头函数并不会使用上诉规则，箭头函数会继承外层函数调用的 this 绑定
+
+### 指针与引用的区别(js 中没有指针类型)
+
+指针和引用在 C++中都用于简介访问变量
+
+1. 指针是一个变量，保存了另外一个变量的内存地址；引用是一个变量的别名，与原变量共享内存地址
+2. 指针可以被重新赋值，指向不同的变量；引用在初始化后不能更改，始终指向同一个变量
+3. 指针可以为 nullptr,表示不指向任何变量；引用必须绑定一个变量，不能为 nullptr
+4. 使用指针需要对其引用以获取或修改其指向变量的值；引用可以直接使用，无需解引用
 
 # 继承与原型链
 
-prototype，虐杀原型游戏英文名    
-每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。      
+prototype，虐杀原型游戏英文名  
+每个实例对象(object)都有一个私有属性(称之为**proto**)指向它的构造函数的原型对象(prototype)。它的构造函数的原型对象也有自己的原型对象(因为构造函数也是对象)(**proto**)，层层向上直到一个对象(Object.prototype)的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
 
-函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。     
-函数拥有 prototype 及**proto**属性       
-例如：       
-function a(){}     
-a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null    
-a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null    
-如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**       
-a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype       
-      
-a->Function.prototype->Object.prototype->null     
+函数(function)是拥有属性的。所有的函数都会有一个特别的属性-prototype。  
+函数拥有 prototype 及**proto**属性  
+例如：  
+function a(){}  
+a.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null  
+a.**proto** 指向 Function.prototype,Function.prototype.**proto** 指向 Object.prototype,Object.prototype.**proto** 指向 null  
+如果要查找 a 为构造函数生成新的实例的属性，关注 a.prototype，若查找 a 自身的属性，关注 a.**proto**  
+a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查找到 Funtion.prototype
+
+a->Function.prototype->Object.prototype->null
 
 # new 方法底层逻辑
 
@@ -246,16 +248,15 @@ a->Function.prototype->Object.prototype->null
 
 1. 创建一个新对象
 2. 将构造函数的原型挂到新对象的原型上
-3. 执行构造函数，this指向新对象，完成新对象的创建初始化
+3. 执行构造函数，this 指向新对象，完成新对象的创建初始化
 4. 返回新对象
 
 # Module
 
-浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。     
-defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行     
-async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行       
-浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行       
-
+浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。  
+defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行  
+async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行  
+浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行
 
 ES6 模块与 CommonJS 模块的差异
 
@@ -281,29 +282,58 @@ import packageMain from 'commonjs-package';
 import { method } from 'commonjs-package';
 或使用 Node.js 内置的 module.createRequire()可加载 CommonJS 模块
 
-Node.js 的模块分为：   
-1. 内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了 
+Node.js 的模块分为：
+
+1. 内置模块：Nodejs 原生提供的功能，如 fs,http。这些模块在 Nodejs 进程起来时就加载了
 2. 文件模块：开发者自己写的模块，包括 node_modules 下面的模块
 
-CommonJS 底层加载原理：   
-将每个文件视为一个独立的模块，使用Local函数作用域及闭包特性包装开发者代码块，营造出模块作用域      
+CommonJS 底层加载原理：  
+将每个文件视为一个独立的模块，使用 Local 函数作用域及闭包特性包装开发者代码块，营造出模块作用域
 
 1. Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
-2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对，保存所有模块信息       
-3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, __filename, __dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module     
-(ermfd->exports require module __filename __dirname)        
-
+2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对，保存所有模块信息
+3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行，所以 require 可加载 module.exports 中的对象，模块内能够直接使用 exports, require, module  
+   (ermfd->exports require module **filename **dirname)
 
 ES6 模块底层原理：
 import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
-import()是webpack提供的类似于 Node.js 的 require 加载，可以执行
+import()是 webpack 提供的类似于 Node.js 的 require 加载，可以执行
 按需加载，条件加载，动态的模块路径
 
 ### commonjs 解决循环引用
 
 为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的 exports
 
-ES6不关心是否发生循环引用，只是生成了一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值      
+ES6 不关心是否发生循环引用，只是生成了一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值
+
+### 如何解决深拷贝循环引用
+
+直接使用 JSON.parse(JSON.stringify(obj))的方式会抛出错误,因为 stringify 遇到循序引用会抛异常  
+需要手动实现深拷贝函数
+
+1. 使用 WeakMap 来做缓存
+2. 当对象为对象类型时，提前存入空对象，防止递归拷贝时循环引用
+
+```js
+function deepCopy(obj, map = new Map()) {
+  if (typeof obj != "object") return;
+  let newObj = Array.isArray(obj) ? [] : {};
+  if (map.get(obj)) {
+    return map.get(obj);
+  }
+  map.set(obj, newObj);
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] == "object") {
+        newObj[key] = deepCopy(obj[key], map);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  return newObj;
+}
+```
 
 # ArrayBuffer,TypedArray,DataView
 
@@ -370,8 +400,8 @@ Number.prototype.toExponential()
 以指数表示法返回该数值字符串表示形式，例如 7.823e+5=782300
 
 Number.prototye.toFixed()
-以定点表示法来格式化一个数值，返回字符串   
-toFixed会有四舍五入精度问题，可通过转为字符串做比较来解决      
+以定点表示法来格式化一个数值，返回字符串  
+toFixed 会有四舍五入精度问题，可通过转为字符串做比较来解决
 
 Number.prototype.toPrecision()
 以指定的精度返回该数值对象的字符串表示,跟上面 toFixed 有啥区别？toPrecision 可能会返回指数写法，不可预期
@@ -484,9 +514,8 @@ get：属性的 getter 函数，如果没有 getter，则为 undefined,函数执
 
 set:属性的 setter 函数，如果没有 setter,则为 undefined,该函数接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象
 
-configurable enumerable value writable        
-configureble enumerable get set       
-
+configurable enumerable value writable  
+configureble enumerable get set
 
 enumerable 属性，称为“可枚举性”，如果该属性为 false，以下四个操作会忽略 enumerable 为 false 的属性
 
@@ -504,13 +533,13 @@ ES6 一共有 5 种方法可以遍历对象的属性
 2. Object.keys(obj):返回一个数组，包含对象自身的所有可枚举属性（不含 Symbol 属性）的键名
 3. Object.getOwnPropertyNames(obj):返回一个数组，包含对象的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
 4. Object.getOwnPropertySymbols(obj):返回一个数组，包含对象自身的所有的 Symbol 属性的键名
-5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举     
+5. Reflect.ownKeys(obj):返回一个数组，包含对象自身的（不含继承的）所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举
 
 上述遍历，都遵守同样的属性遍历的次序规则：
+
 1. 首先遍历所有数值键，按照数值升序排列
 2. 其次遍历所有字符串键，按照加入时间升序排列
-3. 最后遍历所有Symbol键，按照加入时间升序排列   
-
+3. 最后遍历所有 Symbol 键，按照加入时间升序排列
 
 super 关键字
 指向当前对象的原型对象，只能用在对象的方法之中，用在其余的地方都会报错
@@ -546,31 +575,32 @@ Object.fromEntries()
 
 ## 运算符扩展
 
-指数运算符（**）     
-// 相当于 2 ** (3 ** 2)     
-2 ** 3 \*\* 2    
-// 512    
+指数运算符（**）  
+// 相当于 2 ** (3 ** 2)  
+2 ** 3 \*\* 2  
+// 512
 
 链判断运算符(?.)
 
-null及undefined 空值合并判断运算符(??)    
+null 及 undefined 空值合并判断运算符(??)
 
 逻辑赋值运算符
+
 ```js
 // 或赋值运算符
-x ||= y
+x ||= y;
 // 等同于
-x || (x = y)
+x || (x = y);
 
 // 与赋值运算符
-x &&= y
+x &&= y;
 // 等同于
-x && (x = y)
+x && (x = y);
 
 // 空值合并运算符
-x ??= y
+x ??= y;
 // 等同于
-x ?? (x = y)
+x ?? (x = y);
 ```
 
 可以为变量或属性设置默认值
@@ -718,29 +748,29 @@ construct(target,args):拦截 Proxy 实例作为构造函数调用的操作，�
 
 ## Promise
 
-Promise 是一种异步编程的解决方案    
+Promise 是一种异步编程的解决方案
 
-Promise 必须为 3 种状态之一，pending,resolve,reject。一旦 Promise 变为 resolve 或 reject，不能再变成其他状态    
+Promise 必须为 3 种状态之一，pending,resolve,reject。一旦 Promise 变为 resolve 或 reject，不能再变成其他状态
 
-Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法   
+Promise.prototype.then():then 方法返回的是一个新的 Promise 实例，因此可以采用链式写法，在 then 里面 return 一个 Promise，然后在 then 方法后面再次调用另一个 then 方法
 
-Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？因为Promise是异步的，所以不会中断当前线程操作）        
+Promise.prototype.catch():方法是.then(null,rejection)或.then(undefined,rejection)的别名，用于指定发生错误时的回调函数。（在 Promise 内，throw new Error 等各种异常的抛出，与直接使用 reject 效果一致，都会走进 catch 中，而且 catch 完毕之后 then 又可以执行新的 Promise，每个 Promise 正常来说都需要 catch 错误，不然异常会抛出到最外层显示，但是抛出到最外层的异常不会阻塞中断线程，这个即“Promise 会吃掉错误”,这种情况是否跟微任务队列有关系？因为 Promise 是异步的，所以不会中断当前线程操作）
 
-Promise.prototype.finally()    
+Promise.prototype.finally()
 
-Promise.all():只有当所有条件 resolve 才最终 resolve,如若有一个条件 reject 则最终 reject    
+Promise.all():只有当所有条件 resolve 才最终 resolve,如若有一个条件 reject 则最终 reject
 
-Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态 resolve/reject    
+Promise.race():只要有一个条件率先改变状态,则最终改变相同的状态 resolve/reject
 
-Promise.allSettled():确定所有条件都已改变状态    
+Promise.allSettled():确定所有条件都已改变状态
 
-Promise.any():只有当所有条件 reject 才最终 reject,如若有一个条件 resolve 则最终 resolve   
+Promise.any():只有当所有条件 reject 才最终 reject,如若有一个条件 resolve 则最终 resolve
 
-Promise.resolve():将现有对象转为 Promise 对象   
+Promise.resolve():将现有对象转为 Promise 对象
 
-Promise.reject()    
+Promise.reject()
 
-Promise.try()    
+Promise.try()
 
 ## Generator
 
