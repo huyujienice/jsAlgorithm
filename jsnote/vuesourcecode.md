@@ -16,8 +16,8 @@ MVVM:Model-View-ViewModel(模型-视图-视图控制器)是一种双向数据绑
 
 # vue 渲染流程  
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
-render  
-调用compile函数，生成render函数字符串，编译过程如下：   
+diff算法预编译过程，render过程:       
+调用compile函数，生成render函数字符串，编译过程如下：     
 1. parse函数解析template,生成ast(抽象语法树)    
 2. optimize函数标记静态节点(diff算法跳过静态节点)       
 3. generate函数生成render函数字符串      
