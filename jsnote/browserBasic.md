@@ -240,7 +240,7 @@ Lighthouse工具分析
 
 # css,js加载顺序
 
-1.外联和内联的css是所有渲染的前提条件，因为  
+1.css没有原生异步渲染方法，外联和内联的css是所有渲染的前提条件，因为    
 dom tree->cssom tree->layout->paint  
 js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前解析执行完毕  
 
