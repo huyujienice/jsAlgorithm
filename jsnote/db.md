@@ -86,7 +86,7 @@ SELECT DISTINCT column1,column2 FROM table_name
 3. RIGHT JOIN(右连接):与LEFT JOIN相反
 
 当RIGHT JOIN对比的2个表行数不相等时，对比行数以左表结构来还是以右表结构来？
-经过测试，显示结构会以长的表来，不会以左右来，左右只表示数据是否显示
+经过测试，显示结构会以长的表来，不会以左右来，左右只表示数据是否显示？是否有问题？ 
 
 一般默认小库撞大库，即小库是a,大库是b，用LEFT JOIN
 

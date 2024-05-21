@@ -106,6 +106,8 @@ stdout标准输出,stdin标准输入,stderr标准错误
 当进程被创建的时候，系统会自动为该进程创建三个数据流，就是stdin,stdout,stderr      
 对于这三个数据流来说，默认是表现在用户终端上     
 可以通过process.stdout.write模拟console.log功能   
+process.stdin.on -> 监听输入     
+process.stdout.write -> 输出      
 
 ## process.stdout.write与console.log   
 1. process.stdout.write和console.log都是用于向标准输出流stdout打印输出的方法      
