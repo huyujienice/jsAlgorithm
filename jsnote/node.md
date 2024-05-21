@@ -21,7 +21,7 @@ js实现单线程异步执行的关键
 1.N->2->1.N->2
 会不断循环重复        
 
-当一个macrotask中phase的切换，叫一个tick,每个tick之间会执行一次microtask
+当一个macrotask中phase的切换，叫一个tick,每个tick之间会执行清空一次microtask
 
 当进入poll phase中，若没有任何callbacks则持续等待I/0回调直致超时       
 若有setImmediate则进入check phase     
@@ -58,19 +58,24 @@ cluster模块适用于在同一个nodejs应用程序中处理并行任务，而c
 ## IPC
 IPC进程间通信,操作系统进程间通信方式主要有：
 1. 共享内存
-2. 消息传递
-3. 信号量
-4. 管道
+2. 文件或者临时文件进行消息传递    
+3. 信号   
+4. 管道/反向管道
+5. Sockets
 
-nodejs中实现IPC通道的是管道(pipe)技术   
+nodejs中实现IPC通道的是管道(Pipe)技术   
 child_process.fork()创建node进程，父子进程自带IPC通信机制      
 on监听消息send发送消息     
-父进程在实际创建子进程之前，会创建IPC通道并监听它，然后才真正创建出子进程，并通过环境变量（NODE_CHANNEL_FD）告诉子进程这个IPC通道的文件描述符fd。子进程再启动过程中，根据fd去连接这个已经存在的IPC通道，从而完成父子进程之间的连接          
+父进程在实际创建子进程之前，会创建通道并监听它，然后才真正创建出子进程，并通过环境变量（NODE_CHANNEL_FD）告诉子进程这个通道的文件描述符fd。子进程再启动过程中，根据fd去连接这个已经存在的通道，从而完成父子进程之间的连接          
+
+### Pipe
+Pipe允许两个进程通过一个半双工的通道来交互数据，其中数据只能从一端（生产者进程）流向另一端（消费者进程）。管道通常用于父子进程之间的通讯    
+管道单向，半双工(不能同时进行读写)，固定大小，临时性，内核管理        
+
 
 除了nodejs内置IPC通信外,其他常用的进程间通信技术有：
-1. stdin/stdout
-2. Sockets
-3. 消息队列，RabbitMQ，Redis
+1. stdin/stdout    
+2. 消息队列，RabbitMQ，Redis      
 
 
 # 异步I/O
