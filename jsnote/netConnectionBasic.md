@@ -322,6 +322,9 @@ HTTP状态码200表示缓存失效，返回资源结果
 1. Last-Modified和If-Modified-Since:资源更新时间
 2. ETag和If-None-Match：资源的唯一标识
 
+### 强制刷新强缓存
+入口html文件设置no-cache,其他资源设置max-cache
+
 ### 数据传输安全
 可以基于TCP协议实现私有协议通讯?    
 Netty   
