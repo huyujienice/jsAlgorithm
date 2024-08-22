@@ -323,3 +323,10 @@ function f(n,m){
 双指针技巧适用于数组和字符串的遍历与查找问题，尤其是在需要高效处理对称性或前后关系时   
 
 # 拓扑排序
+
+
+
+# random
+Math.random() -> [0,1)       
+Math.floor(Math.random() * 3) -> 0,1,2      
+Math.floor(Math.random() * 3 + 10) -> 10,11,12      
