@@ -27,9 +27,18 @@ $
 $
 
 ```js
-//js中求乘方
+// js中求乘方
 const a = 2 ** 3;
 console.log(a); //-> 8
+
+// 平方根
+const b = Math.sqrt(9); //->3
+
+// 立方根
+const c = Math.cbrt(a); //->2
+
+// 2为指数求开方
+const d = Math.log2(a); //->3
 ```
 
 # 时间复杂度
