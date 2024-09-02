@@ -1,7 +1,7 @@
 webpack 是一个静态模块打包工具  
 当 webpack 处理模块打包时，它会从内部从一个或多个入口构建一个依赖图，然后将你项目中所需的每一个模块组合成一个或者多个 chunk
 
-# 入口
+# 入口 entry
 
 entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部依赖图(dependency graph)的开始  
 使用对象语法可以扩展入口定义  
@@ -18,9 +18,9 @@ entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部�
 runtime 和 dependOn 不应该在同一入口上使用，因为提前加载顺序问题冲突         
 
 
-# 输出
+# 输出 output
 
-ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件  
+ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件(使用path及filename属性)     
 output 占位符：
 
 1. [id] 返回模块 id
@@ -31,11 +31,23 @@ output 占位符：
 6. [chunkhash] 返回入口指定模块的 hash
 7. [contenehash] 返回文件内容 hash
 
+# 模块 module
+module属性选项决定了如何处理项目中不同类型的模块
+
+module.generator： 配置所有生成器选项    
+可以配置不同位置的模块生成不同的publicPath和outputPath,对于将资源文件放置在特定位置的场景非常有用      
+
+module.parser：集中配置所有解析器的选项     
+例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为      
+
+module.rules: 配置不同模块需要不同的loader进行处理    
+
+
 # loader
 
 webpack 开箱自带解析 js 和 JSON 文件的功能。loader 处理其他类型的文件，并将其转换为有效模块，供程序使用，以及被添加到依赖图中
 
-```
+```js
 module.exports = {
   module: {
     rules: [{ test: /\.txt$/, use: 'raw-loader' }],
