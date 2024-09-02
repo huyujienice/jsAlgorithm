@@ -229,18 +229,18 @@ source map 是将编译打包压缩过后的代码映射回源代码的文件，
 
 ### webpack 常用生命周期函数
 
-1. compiler.compile:创建 compilation 前
-2. compiler.compilation:创建 compilation 后
-3. compiler.make:loader 处理编译开始时触发
-4. compiler.emit:输出 assets 到 output 目录之前执行
-5. compiler.done:整体编译完成时执行
+1. compiler.hooks.compile: 创建 compilation 前
+2. compiler.hooks.compilation: 创建 compilation 后
+3. compiler.hooks.make: loader 处理编译开始时触发
+4. compiler.hooks.emit: 输出 assets 到 output 目录之前执行
+5. compiler.hooks.done: 整体编译完成时执行
 
 compilation
 
-1. compilation.buildModule:在模块构建开始之前触发，可修改模块
-2. compilation.successdModule:模块构建成功时执行
-3. compilation.seal:compilation 对象停止接收新的模块时触发
-4. compilation.processAssets:asset 处理
+1. compilation.hooks.buildModule: 在模块构建开始之前触发，可修改模块
+2. compilation.hooks.successdModule: 模块构建成功时执行
+3. compilation.hooks.seal: compilation 对象停止接收新的模块时触发
+4. compilation.hooks.processAssets: asset 处理
 
 ### webpack 常用 Plugin
 
