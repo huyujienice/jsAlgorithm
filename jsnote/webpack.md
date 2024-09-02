@@ -10,8 +10,11 @@ entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部�
 1. 分离 app(应用程序)和 vendor(第三方库)入口
 2. 多页面应用程序
 
-通过在 entry 对象语法配置 runtime 的属性，则会在 entry chunk 之外再增加一个专门容纳 runtime 的 chunk 对象，多个 entry 间可共享 runtime chunk 
-在entry 对象语法配置 dependOn 的属性，会设置当前入口所依赖的入口。它会在该入口被加载前加载     
+在entry中使用对象语法：
+1. import: 需要加载的模块地址   
+2. runtime: 则会在 entry chunk 之外再增加一个专门容纳 runtime 的 chunk 对象，多个 entry 间可共享 runtime chunk 
+3. dependOn: 会设置当前入口所依赖的入口。它会在该入口被加载前加载       
+
 runtime 和 dependOn 不应该在同一入口上使用，因为提前加载顺序问题冲突         
 
 
