@@ -55,15 +55,15 @@ module.exports = {
 };
 ```
 
-test 为字符串时筛选匹配资源的绝对路径，为函数时，入参为资源的绝对路径，返回 boolean
+test 为字符串时筛选匹配资源的绝对路径，为函数时，入参为资源的绝对路径，返回 boolean      
 
 test 属性识别哪些文件会被转换  
-use 属性定义使用哪个 loader 进行转换
+use 属性定义使用哪个 loader 进行转换     
 
-有两种使用 loader 方式：
+有两种使用 loader 方式：     
 
-1. 配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)
-2. 内联(inline)方式：在每个 import 语句中显示指定 loader
+1. 配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)        
+2. 内联(inline)方式：在每个 import 语句中显示指定 loader           
 
 import 语句中，使用!将资源中的 loader 分开  
 例如：
@@ -121,14 +121,14 @@ pre loader 和 post loader,可以通过 rule 数组对象内的子项 enforce �
 pitch 执行顺序跟正常 loader 执行顺序完全相反
 
 1. 不同阶段之间：post->inline->normal->pre
-2. 每个阶段内部：use 数组中，从左往右，从上到下
+2. 每个阶段内部：use 数组中，从左往右，从上到下    
 
-类似中间件洋葱模型
+类似中间件洋葱模型     
 或者说类似浏览器事件传输 capture phase , target phase ,  bubbing phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
 enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
-rule 中的 loader 不会进行去重
+rule 中的 loader 不会进行去重     
 
 # 插件
 
@@ -186,7 +186,7 @@ optimization: {
 }
 ```
 
-3. import 动态导入
+3. import 动态导入(或使用Webpack专属语法require.ensure)   
 
 ### chunk
 
