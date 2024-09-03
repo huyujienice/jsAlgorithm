@@ -271,7 +271,7 @@ tree-shaking 是指在运行过程中静态分析模块之间的导入导出，�
 webpack 的 tree shaking 逻辑停留在代码静态分析层面，只判断
 
 1. 模块导出变量是否被其他模块引用
-2. 引用模块的主体代码中有没有出现及引用这个变量
+2. 引用模块的主体代码中有没有出现及使用这个变量
 
 ### webpack 如何实现 HMR
 
@@ -279,18 +279,18 @@ webpack 的 tree shaking 逻辑停留在代码静态分析层面，只判断
 
 1. 使用 webpack-dev-server(WDS)在本地建立静态资源服务器，同时以 Runtime 方式注入客户端(浏览器)HMR 代码
 2. 浏览器加载页面后，与 WDS 建立 WebSocket 连接
-3. Webpack 通过 chokidar 监听到文件变化后，增量构建发生变更的模块，并通过 WebSocket 发送 hash 事件
+3. webpack 通过 chokidar 监听到文件变化后，增量构建发生变更的模块，并通过 WebSocket 发送 hash 事件
 4. 浏览器接收到 hash 事件，请求 manifest 资源文件，确认增量变更范围
 5. 浏览器加载发生变更的增量模块
-6. Webpack 运行时触发变更模块的 module.hot.accept 回调，执行代码变更逻辑
+6. webpack 运行时触发变更模块的 module.hot.accept 回调，执行代码变更逻辑
 
 ### 优化项目策略
 
-技术提供业务建议：
+产品方向：    
 
 1. 确定项目核心功能，非核心功能后置
 
-服务端可做：
+服务端方向：    
 
 1. 减少重定向
 2. 启用资源 gzip 压缩
@@ -299,7 +299,7 @@ webpack 的 tree shaking 逻辑停留在代码静态分析层面，只判断
 5. 优化图片等静态资源
 6. 升级 http2,http3
 
-客户端可做：
+客户端方向：    
 
 1. 打包分离(bundle spliting)  
    为了浏览器更好的缓存，合适地创建更多更小的文件
