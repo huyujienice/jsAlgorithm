@@ -343,3 +343,11 @@ speed-measure-webpack-plugin 分析分析打包速度
 ### webpack 模块联邦
 
 模块联邦能达到线上 Runtime 效果,让代码直接在项目间利用 CDN 直接共享，不再需要本地安装 Npm 包
+
+
+### webpack 运行时
+webpack 底层框架代码，包括模块化，异步加载，HMR等    
+编译结果bundle，整体是由一个IIFE包裹，包括
+1. __webpack_modules_ 对象，即所有模块对象，key为模块path,value为模块源码
+2. __webpack_module_cache__ 对象，存储已使用过的模块对象
+3. __webpack_require__ 函数，实现模块引用require逻辑    
