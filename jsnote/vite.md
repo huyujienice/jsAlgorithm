@@ -12,7 +12,7 @@ vite是新一代打包构建工具，专注于快速开发体验和优化的构�
 ### 为什么说vite比webpack要快
 vite的冷启动，热更新会比webpack要快    
 主要原因是因为底层编译逻辑不同   
-vite冷启动过程：  
+vite开发阶段冷启动过程：  
 1. 使用esbuild预构建依赖，提前将第三方依赖格式化为ESM模块
 2. 本地启动node dev server服务
 3. 打开浏览器，访问index.html
@@ -30,7 +30,20 @@ vite冷启动过程：
 2. webpack支持面更广，兼容性更加强
 
 ### vite如何配置代码拆分
+vite的代码拆分是生产构建阶段，基于Rollup的
 1. 动态导入import()
 2. 配置拆分,build.rollupOptions.output.manualChunks   
 3. 使用vite插件，例如vite-plugin-chunk-split  
+
+
+### vite生命周期
+常见生命周期函数：
+1. config:vite读取配置文件后调用，可以用来修改配置
+2. configureServer:在开发阶段调用，用于配置开发服务器，如添加自定义中间件  
+3. transformIndexHtml:用于转换index.html的内容
+4. resolveId:用于解析模块的标识符，返回模块ID
+5. load:当resolvedId返回有效模块ID后，load来加载模块内容
+6. transform:当模块内容被加载时，对模块源码进行转换    
+7. handleHotUpdate:处理HMR逻辑    
+8. renderChunk:生产构建阶段对chunk进行最后处理       
 
