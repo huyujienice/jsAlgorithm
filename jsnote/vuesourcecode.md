@@ -218,3 +218,11 @@ vue2.0不允许在已经创建的实例上动态添加新的响应式属性
 ### $attrs
 inheritAttrs默认为true,默认将未声明为props或emit的attribute或者v-on监听器自动传递给子组件     
 将inheritAttrs设置为false,$attrs 可透传多级未声明props及emit,直接在模板中使用v-bind="$attrs"传递给有需要的组件或$attrs.onClick获取@click事件监听器          
+
+
+### slot插槽
+父组件通过props传递模板提供给子组件进行渲染    
+使用作用域插槽v-slot,子组件在渲染时将一部分数据提供给插槽，父组件可以在表达式中使用    
+
+### 依赖注入
+provide，inject解决props逐级透传问题    

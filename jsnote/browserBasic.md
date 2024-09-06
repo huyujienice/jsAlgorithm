@@ -222,8 +222,10 @@ DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SP
 # 页面性能分析
 Lighthouse工具分析   
 重要指标：   
-   1.FCP(First Contentful Paint):页面首次绘制文本，图片的时间   
-   2.TTI(Time to Interactive):页面首次可交互可流程的交互时间   
+   1. FCP(First Contentful Paint):页面首次绘制文本，图片的时间   
+   2. TTI(Time to Interactive):页面首次可交互可流程的交互时间   
+   3. LCP(Largest Contentful Paint):最大内容绘制   
+   4. FID(First Input Delay):首次输入延迟    
 
 # H5 performance
 通过浏览器performance信息获取页面完整加载的时间信息   
@@ -301,6 +303,15 @@ Just-In-Time编译，提升js代码的执行效率
 1. 在代码加载和解释阶段开始收集Profile
 2. 在解释阶段结束后，分析Profile选择需要优化的热点代码
 3. 对热点代码进行JIT编译优化，生产本地代码替换原字节码执行    
+
+
+### 虚拟列表滚动
+长列表优化常用的方法主要是虚拟列表滚动   
+虚拟列表的原理是通过仅渲染规定区域的列表项来优化渲染性能。减少DOM操作和内存消耗，从而提高滚动性能和用户体验    
+实现步骤：
+1. 确定渲染窗口大小  
+2. 通过用户滚动高度计算可见区域第一项及最后一项数据的startIndex,endIndex  
+3. 获取第一项及最后一项数据遮罩层的startOffset及endOffset，通过设置transform的translateY实现部分内容遮挡效果     
 
 
 
