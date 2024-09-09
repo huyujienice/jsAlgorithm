@@ -103,6 +103,7 @@ function MyComponent() {
 例如：  
 input 组件，通过定义 state,设置表单元素的 value 属性，处理表单元素的 onChange 事件来实现
 
-### 组件懒加载
+### 组件懒加载（异步组件）
 
-React 提供了 lazy 和 Suspence 来实现懒加载
+React 提供了 lazy 和 Suspence 来实现懒加载   
+lazy接受一个回调函数，回调函数内部使用import()方法异步加载组件    
