@@ -81,15 +81,14 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 以下内容只是一个人的说法，原文链接：
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
-执行上下文是评估和执行 JavaScript 代码的环境的抽象概念   
+执行上下文是评估和执行 JavaScript 代码的环境的抽象概念  
 4 种情况会创建新的执行上下文  
 1.进入全局代码  
 2.进入 function 函数体代码  
 3.进入 eval 函数参数指定的代码  
 4.进入 module 代码
 
-执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出  
-
+执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出
 
 ## VO
 
@@ -106,11 +105,9 @@ Scope 关联[[scope]]
 [[scope]]定义在函数中，在函数**创建**时会保存当前父级函数的[[scope]]以及父级函数执行上下文的 AO，若为全局函数，则保存全局上下文的 VO
 
 Scope 定义在执行上下文，[[scope]]定义在函数中，二者关系如下：
-fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]        
+fnEC.Scope = [ fnEC.AO, ...fn.[[scope]] ]
 
-
-
-Scope作用域是一套设计良好的规则,用来管理引擎如何在当前作用域以及嵌套的子作用域根据标识符名称进行变量查找
+Scope 作用域是一套设计良好的规则,用来管理引擎如何在当前作用域以及嵌套的子作用域根据标识符名称进行变量查找
 
 ### eval,with 可以运行时改变作用域
 
@@ -158,7 +155,8 @@ function runCode(code, ctx) {
    将 AST 转换为可执行代码的过程称为代码生成
 
 ### 变量提升
-js执行前会将变量和函数声明提升到他们所在作用域顶部
+
+js 执行前会将变量和函数声明提升到他们所在作用域顶部
 原理：
 执行上下文分为 2 个阶段：
 
@@ -244,6 +242,39 @@ a 可以使用 Function.prototype.call 方法原理即是通过 a.**proto** 查�
 
 a->Function.prototype->Object.prototype->null
 
+# ES6 class 类与继承
+
+```js
+class Parent {
+  #count = 0; // 类私有属性
+  static staticProp = 42; // 类静态属性
+  prop = "hello"; // 实例属性
+  constructor() {
+    // 构造方法
+  }
+  toString() {
+    // 实例方法
+    // 统一挂在到Parent.prototype对象上
+  }
+  static classMethod() {
+    // 类静态方法
+    // Parent.classMethod()直接调用
+  }
+  #getCount() {
+    // 类私有方法
+    // 类内部调用私有属性的时候要带上#
+    return this.#count;
+  }
+}
+class Child extends Parent {
+  constructor(...args) {
+    // 必须引用父类初始化逻辑
+    super(...args);
+  }
+  // 子类除父类私有属性和方法外所有属性和方法都能基础，包括静态方法属性
+}
+```
+
 # new 方法底层逻辑
 
 通过 new 调用构造函数实际会经历以下 4 个步骤
@@ -294,19 +325,18 @@ CommonJS 底层加载原理：
 
 1. Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
 2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对，保存所有模块信息
-3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行， require方法最终获取到的是 module.exports 对象（初始化新module实例对象或者获取缓存），模块内能够直接使用 exports, require, module  
+3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行， require 方法最终获取到的是 module.exports 对象（初始化新 module 实例对象或者获取缓存），模块内能够直接使用 exports, require, module  
    (ermfd->exports require module **filename **dirname)
 
-
-
 ES6 模块底层原理：
-import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理
+import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。  
+commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理  
 import()是 webpack 提供的类似于 Node.js 的 require 加载，可以执行
 按需加载，条件加载，动态的模块路径
 
 ### commonjs 解决循环引用
 
-为了解决循环引用，模块在加载前会被加入缓存，下次再加载会直接返回缓存，如果这个时候模块还没有加载完毕，可能会拿到未完成的 exports
+为了解决循环引用，模块在加载前会被加入空对象引用，如果这个时候模块还没有加载完毕，可能会拿空的 exports 对象
 
 ES6 不关心是否发生循环引用，只是生成了一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值
 
@@ -803,7 +833,7 @@ ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol.iterator �
 用来增强 class 的功能
 装饰器是一种函数，写成 @ + 函数名
 
-nestjs 使用装饰器完成自动注入等功能    
+nestjs 使用装饰器完成自动注入等功能
 
 ```
 
