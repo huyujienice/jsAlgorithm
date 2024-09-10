@@ -81,7 +81,7 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 以下内容只是一个人的说法，原文链接：
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
-执行上下文是评估和执行 JavaScript 代码的环境的抽象概念。每当 JavaScript 代码在运行的时候，它都是在执行上下文中运行
+执行上下文是评估和执行 JavaScript 代码的环境的抽象概念   
 4 种情况会创建新的执行上下文  
 1.进入全局代码  
 2.进入 function 函数体代码  
