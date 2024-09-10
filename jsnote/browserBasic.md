@@ -35,7 +35,6 @@ event对象包含了与事件相关的所有信息,例如：
 12. timestamp
 
 ## Node
-
 Node是DOM中所有节点的基类接口，包括元素节点属性节点文本节点等     
 它提供了节点树结构相关的属性和方法，如parentNode,childNode,nextSibling,previousSibling等      
 Node继承自EventTarget,它意味着所有节点都可以接受事件       
@@ -48,12 +47,11 @@ Element也继承自EventTarget，因此元素节点同样可以接收事件
  
 
 
-
 # 捕获，冒泡
 
 DOM 事件标准描述了事件传播的 3 个阶段：
 
-1. 捕获阶段（Capturing phase）- 事件（从 windows）向下走进元素
+1. 捕获阶段（Capturing phase）- 事件（从 window.document）向下走进元素
 2. 目标阶段（Target phase）- 事件达到目标元素  
 3. 冒泡阶段（Bubbling phase）- 事件从元素上开始冒泡    
 
