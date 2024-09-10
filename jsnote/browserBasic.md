@@ -11,6 +11,7 @@ Node继承至其祖先EventTarget,Element继承至其祖先Node
 平时使用html上的元素，即Element，是类型为ELEMENT_NODE的Node     
 
 ## EventTarget
+EventTarget是一个接口，它提供了一个标注的方法来处理事件     
 EventTarget.addEventListener() 在EventTarget上注册特定事件类型的事件处理程序      
 EventTarget.removeEventListener() 在EventTarget中删除事件侦听器      
 EventTarget.dispatchEvent() 将事件分派到此EventTarget       
@@ -35,31 +36,18 @@ event对象包含了与事件相关的所有信息,例如：
 
 ## Node
 
-Node.childNodes 返回一个包含了该节点所有子节点的实时的NodeList。NodeList是动态变化的      
-Node.firstChild 返回该节点的第一个子节点Node,如果该节点没有子节点则返回null     
-Node.lastChild 返回该节点的最后一个子节点Node，如果该节点没有子节点则返回null     
-Node.nextSibling 返回与该节点同级的下一个节点Node，如果没有则返回null     
-Node.nodeType ELEMENT_NODE -> 1 TEXT_NODE -> 3     
-Node.parentNode 返回一个当前节点Node的父节点。如果没有这样的节点，比如说像这个节点是树结构的顶端或者没有插入一棵树中，这个属性返回null       
-Node.parentElement 返回一个当前节点的父节点Element。如果当前节点没有父节点或者说父节点不是一个元素（Element），这个属性返回null      
-Node.previousSibling 返回一个当前节点同辈的前一个节点Node，或者返回null（如果不存在这么一个节点的话）    
-Node.textContent 返回或设置一个元素内所有子节点及其后代的文本内容      
-Node.appendChild() 将指定的childNode参数作为最后一个子元素添加到当前节点。如果参数引用了DOM树上的现有节点，则节点将从当前位置分离，并附加到新位置    
-Node.cloneNode() 克隆一个Node，并且可以选择是否克隆这个节点下的所有内容。默认情况下，节点下的内容会被克隆    
-Node.compareDocumentPosition() 比较当前节点与文档中的另一个节点的位置      
-Node.contains() 返回一个Boolean布尔值，来表示传入的节点是否为改节点的后代节点     
-Node.hasChildNodes() 返回一个Boolean布尔值，来表示该元素是否包含有子节点     
-Node.insertBefore() 在当前节点下新增一个子节点Node，并使该节点位于参考节点的前面      
-Node.removeChild() 移除当前节点的一个子节点。这个子节点必须存在于当前节点中     
+Node是DOM中所有节点的基类接口，包括元素节点属性节点文本节点等     
+它提供了节点树结构相关的属性和方法，如parentNode,childNode,nextSibling,previousSibling等      
+Node继承自EventTarget,它意味着所有节点都可以接受事件       
+
 
 ## Element
-Element.attributes 返回一个与该元素相关的所有属性集合NamedNodeMap    
-Element.classList 返回该元素包含的class属性    
-NonDocumentTypeChildNode.nextElementSibling 是一个Element，该元素下一个兄弟节点，如果为null表示不存在     
-NonDocumentTypeChildNode.previousElementSibling 是一个Element，该元素上一个兄弟节点，如果为null表示不存在     
-Element.scrollHeight 返回类型为：Number，表示元素的滚动视图高度     
-Element.scrollTop 返回类型为：Number，表示该元素纵向滚动距离     
-Element.getBoundingClientRect() 返回元素的大小及其相对与视口的位置     
+Element是Node的一个子接口，它代表着DOM中的一个元素节点，例如<div>,<span>,<input>等      
+它提供了HTML元素相关的属性和方法，如id,className,tagName,getAttribute,setAttribute等      
+Element也继承自EventTarget，因此元素节点同样可以接收事件     
+ 
+
+
 
 # 捕获，冒泡
 
