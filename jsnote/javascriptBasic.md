@@ -271,7 +271,15 @@ class Child extends Parent {
     // 必须引用父类初始化逻辑
     super(...args);
   }
-  // 子类除父类私有属性和方法外所有属性和方法都能基础，包括静态方法属性
+  // 子类除父类私有属性和方法外所有属性和方法都能继承，包括静态方法属性
+  childToString(){
+    // 调用父类实例方法
+    super.toString()
+  }
+  static childClassMethod(){
+    // 调用父类静态方法
+    super.classMethod()
+  }
 }
 ```
 
