@@ -364,6 +364,9 @@ source.addEventListener(
 
 服务端向浏览器发送SSE数据，必须是UTF-8的文本，设置Content-type:text/event-stream    
 
+### 逐字渲染效果
+将字符串拆分成单个字符，使用settimeout或requestAnimationFrame引入渲染队列，结合CSS3中transition的opacity实现逐个出现的效果       
+
 ### HTTP1.1 HTTP2.0 HTTP3.0
 
 http1.1
