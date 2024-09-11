@@ -11,7 +11,7 @@ Node继承至其祖先EventTarget,Element继承至其祖先Node
 平时使用html上的元素，即Element，是类型为ELEMENT_NODE的Node     
 
 ## EventTarget
-EventTarget是一个接口，它提供了一个标注的方法来处理事件     
+EventTarget是一个接口，它提供了一个标准的方法来处理事件     
 EventTarget.addEventListener() 在EventTarget上注册特定事件类型的事件处理程序      
 EventTarget.removeEventListener() 在EventTarget中删除事件侦听器      
 EventTarget.dispatchEvent() 将事件分派到此EventTarget       
@@ -110,13 +110,9 @@ document.body.oncontextmenu = null;
 伪类，以:开头,例如：    
 :first-child    
 :last-child    
-:only-child    
-:invalid    
 :hover   
 :focus   
 伪元素，以::开头，例如：   
-::first-line    
-::first-letter    
 ::before    
 ::after    
 
