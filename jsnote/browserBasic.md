@@ -162,11 +162,14 @@ PPI:屏幕像素密度，每英寸有多少个物理像素，PPI越高屏幕越�
 # 页面生命周期
 1.DOMContentLoaded  
 浏览器已完全加载HTML,并构建了DOM树，但像<img>和样式表之类的外部资源可能尚未加载完成  
-DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SPA无法查找，因为此时SPA只有一个ID为root的div元素）  
+DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SPA无法查找，因为此时SPA只有一个ID为root的div元素）    
+在此阶段，浏览器渲染树Render Tree尚未构建完成
 
 2.load  
 浏览器不仅加载完成了HTML,还加载完成了所有外部资源：图片，样式等  
 外部资源已加载完成，样式已被应用，图片大小也已知了  
+在此阶段，浏览器渲染树Render Tree构建完成
+
 
 3.beforeunloaded  
 用户正在离开  
@@ -176,10 +179,17 @@ DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SP
 用户几乎已经离开  
 我们仍然可以启动一些操作，例如发送统计数据  
 
+# 浏览器渲染树构建
+1. 构建DOM树：解析HTML,创建DOM节点      
+2. 构建CSSOM树：CSS Object Tree   
+3. 构建渲染树:Render Tree包含了DOM节点的样式和布局信息
+4. 布局（Layout）：浏览器根据渲染树计算每个节点的几何形象，如位置和大小
+5. 绘制（Painting）：浏览器根据布局信息在屏幕上绘制节点    
+
 # 页面性能分析
 Lighthouse工具分析   
 重要指标：   
-   1. FCP(First Contentful Paint):页面首次绘制文本，图片的时间   
+   1. FCP(First Contentful Paint):页面首次内容绘制时间   
    2. TTI(Time to Interactive):页面首次可交互可流程的交互时间   
    3. LCP(Largest Contentful Paint):最大内容绘制   
    4. FID(First Input Delay):首次输入延迟    
