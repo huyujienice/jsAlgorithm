@@ -186,6 +186,17 @@ DOM已经加载完毕，应用程序可查找DOM节点，并初始化接口（SP
 4. 布局（Layout）：浏览器根据渲染树计算每个节点的几何形象，如位置和大小
 5. 绘制（Painting）：浏览器根据布局信息在屏幕上绘制节点    
 
+# css,js加载顺序
+
+1.css外部样式无法使用异步加载逻辑，外联和内联的css是所有渲染的前提条件，css同步加载可避免页面样式闪烁           
+DOM Tree->CSSOM Tree->Render Tree->Layout->Paint      
+js可以通过domcument.styleSheets拿到css数据，所以css最好在js之前解析执行完毕k     
+
+2.js内联及不带属性的外联加载会中断解析渲染，立即下载执行  
+script带defer属性的会异步有序加载，不会阻止HTML解析，会在DOMContentLoaded事件完成加载和执行（执行的时候会保证DOM树已构建）             
+script带async属性的会异步无序加载    
+
+
 # 页面性能分析
 Lighthouse工具分析   
 重要指标：   
@@ -206,16 +217,6 @@ Lighthouse工具分析
    7.HTTP响应处理   
    8.DOM处理   
    9.文档装载完成    
-
-# css,js加载顺序
-
-1.css没有原生异步渲染方法，外联和内联的css是所有渲染的前提条件，因为    
-dom tree->cssom tree->layout->paint  
-js可以通过domcument.styleSheets拿到css数据，所以css一定在js之前解析执行完毕  
-
-2.js内联及不带属性的外联会中断解析渲染，立即下载执行  
-带defer属性的会异步有序执行，不会阻止HTML解析，会在DOMContentLoaded事件前执行  
-带async属性的会异步无序执行，    
 
 
 # preload prefetch
