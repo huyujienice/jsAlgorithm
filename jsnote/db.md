@@ -90,6 +90,17 @@ SELECT DISTINCT column1,column2 FROM table_name
 
 一般默认小库撞大库，即小库是a,大库是b，用LEFT JOIN
 
+### 查询优化
+EXPLAIN 语句可查询sql执行路径，从而优化查询      
+直接在sql语句前加入EXPLAIN即可，例如： EXPLAIN SELECT * FROM users WHERE age > 30;       
+
+查询优化方向：   
+1. 优化SQL语句，比如选择适当索引，避免SELECT *,优化WHERE    
+2. 索引优化   
+3. 适当使用查询缓存   
+4. 优化数据表结构，比如规划化与反规范化，分库分表    
+5. 监控与分析慢查询     
+
 
 ### 事务
 成批执行SQL语句    
@@ -98,7 +109,7 @@ SELECT DISTINCT column1,column2 FROM table_name
 2. 事务处理可以用来维护数据库的完整性，保证成批的SQL语句要么全部执行，要么全部不执行
 3. 事务用来管理INSERT,UPDATE,DELETE语句
 
-事务必须满足4个条件
+事务必须满足4个条件(ACID属性)
 1. 原子性
 2. 一致性
 3. 隔离性
@@ -110,13 +121,26 @@ ALTER用于修改数据库，表和索引等对象的结构
 ### 索引
 索引被用来快速找出在一个列上用一特定值的行。如果没有索引，MySQL必须从第一条记录开始一直读到相关行       
 
-1. KEY:索引
-2. PRIMARY KEY:主键索引,主键且唯一
-3. UNIQUE KEY:唯一索引
-4. FOREIGN KEY
+常见索引类型：
+1. PRIMARY KEY:主键索引  
+2. UNIQUE:唯一索引
+3. INDEX:普通索引
+4. FULLTEXT:用于搜索文本中关键字 
+
+创建普通索引：CREATE INDEX index_name ON table_name (column_name);      
+创建唯一索引：CREATE UNIQUE INDEX index_name ON table_name (column_name);     
+
+INDEX和KEY都可以代指索引，但是语法不相同       
+
+
+KEY类型：
+1. PRIMARY KEY:主键索引,主键且唯一
+2. UNIQUE KEY:唯一索引
+3. FOREIGN KEY
 
 PRIMARY KEY必须为NOT NULL    
 一个表只能有一个PRIMARY KEY,但可以有多个UNIQUE KEY      
+
 
 
 ### utf8 utf8mb4
@@ -136,3 +160,29 @@ JOIN用于将多个表中的数据根据一定关系进行组合
 UNION用于将多个SELECT语句的结果合并成为一个结果集,UNION要求SELECT语句中的列名，数据类型和顺序必须相同       
 
 日常使用JOIN情况较多         
+
+
+### 安全
+1. 用户权限控制
+2. 数据加密
+3. 日志记录及审计
+4. 服务器及网络安全    
+5. 定期更新及打补丁
+6. 备份与恢复
+
+
+### 备份与恢复
+
+备份：
+1. 使用mysqldump命令行进行热备份操作，将数据导出至SQL类型文件
+2. 停机物理备份
+
+恢复：
+1. 如果是SQL类型文件可将备份文件直接导入mysql
+2. 如果备份文件是CSV则使用mysqlimport工具进行导入
+3. 物理备份则直接复制进文件夹
+
+开发bash脚本实现定期自动备份数据库    
+为了最小化备份对系统性能造成影响，可采取以下策略：   
+1. 在业务低峰进行备份
+2. 将备份任务分散到一周内不同的时间点，以避免集中负载    
