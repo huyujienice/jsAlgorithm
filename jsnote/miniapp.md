@@ -28,10 +28,10 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 ### 小程序启动流程
 分为Native微信端，视图层View Thread，逻辑层AppService Thread      
 
-1. Native从微信后台或者本地缓存获取小程序基本信息(头像名称版本配置权限)及代码包，然后进行代码包下载与校验，View Thread同时进行Activity初始化，系统初始化和UI初始化，Webview容器和UI的初始化，AppService Thread同时进行资源准备   
-2. Native代码包准备完成之后，将代码包分别派发至View Thread和AppService Thread，进行前端框架初始化，插件，扩展库代码注入，开发者代码注入     
-3. AppService Thread经过App.onLaunch,App.onShow,路由事件navigationStart,初始化后等待View Thread初始化完毕通知，将结果数据传入View Thread进行页面初始化渲染   
-4. AppService Thread经过onLoad,onShow生命周期，将对应的渲染结果传入View Thread进行页面渲染，当渲染完毕后通知逻辑层，接收AppService Thread onReady渲染结果    
+1. Native从微信后台或者本地缓存获取小程序基本信息(头像名称版本配置权限)及代码包，然后进行代码包下载与校验，View Thread同时进行Activity初始化，系统进程初始化和UI初始化，Webview容器初始化，AppService Thread同时进行资源准备   
+2. Native代码包准备完成之后，将代码包分别派发至View Thread和AppService Thread，进行前端框架初始化，插件，基础库扩展库代码注入，开发者代码注入     
+3. AppService Thread经过App.onLaunch,App.onShow,路由事件navigationStart执行初始化后等待View Thread初始化完毕通知，将执行结果数据传入View Thread进行页面初始化渲染   
+4. AppService Thread经过页面onLoad,onShow生命周期执行，将对应执行的渲染结果传入View Thread进行页面渲染，当渲染完毕后通知逻辑层，接收AppService Thread onReady渲染结果    
 
 #### 小程序启动环境预加载
 微信客户端会依照一定策略在小程序启动前对运行环境进行部分预加载，以降低启动耗时   
