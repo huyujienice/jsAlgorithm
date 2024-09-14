@@ -69,7 +69,12 @@ MIME 类型是描述消息内容的标准，用来表示文档，文件或字节
 
 设置 content-type:application/octet-stream，响应为字节流，浏览器处理字节流的默认方式就是下载  
 配合设置 Content-Disposition 来实现图片文件下载（网页内联还是下载到本地）  
-例如：  
+
+Content-Disposition用于指示响应内容如何被处理，常见的有
+1. inline:默认值，表示响应内容应该在浏览器窗口显示
+2. attachment:表示响应内容应该被下载到本地    
+
+例如图片下载需设置：  
 Content-Type: application/octet-stream  
 Content-Disposition: attachment; filename="picture.png"
 
