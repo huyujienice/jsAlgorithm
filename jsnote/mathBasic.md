@@ -392,5 +392,5 @@ TCP 滑动窗口协议，网络数据传输流量控制，避免拥堵发生
 # random
 
 Math.random() -> [0,1)  
-Math.floor(Math.random() _ 3) -> 0,1,2  
-Math.floor(Math.random() _ 3 + 10) -> 10,11,12
+Math.floor(Math.random() * 3) -> 0,1,2  
+Math.floor(Math.random() * 3 + 10) -> 10,11,12
