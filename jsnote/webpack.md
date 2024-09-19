@@ -205,7 +205,9 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离 chunk
 
 ### source map
 
-source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的  
+source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的，源码最后会携带特殊注释//# sourceMappingURL 的属性指向sourcemap地址供浏览器下载        
+source map 是一个JSON文件，记录了代码转换前后的所有信息，其中mapping字段通过VLQ编码映射位置关系           
+      
 通过 webpack.config.js 中 devtool 字段配置  
 在开发环境可使用 eval 开头的 sourcemap 加快编译速度  
 在生产环境可以考虑使用：  
