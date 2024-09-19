@@ -160,10 +160,18 @@ compilation 对象记录了单次从源码构建到生成资源过程中的信�
 
 同步用 tap 来绑定，异步可以用 tapAsync 或 tapPromise 来绑定
 
-### runtime manifest
+### manifest
 
 当 compiler 开始执行，解析和映射时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
 runtime 会通过 manifest 来解析和加载模块。
+
+### runtime
+webpack 底层框架代码，包括模块化，异步加载，HMR等    
+编译结果bundle，整体是由一个IIFE包裹，包括
+1. __webpack_modules_ 对象，即所有模块对象，key为模块path,value为模块源码
+2. __webpack_module_cache__ 对象，存储已使用过的模块对象
+3. __webpack_require__ 函数，实现模块引用require逻辑   
+
 
 ### webpack 单独生成 chunk 方法
 
@@ -347,9 +355,4 @@ speed-measure-webpack-plugin 分析分析打包速度
 模块联邦能达到线上 Runtime 效果,让代码直接在项目间利用 CDN 直接共享，不再需要本地安装 Npm 包
 
 
-### webpack 运行时
-webpack 底层框架代码，包括模块化，异步加载，HMR等    
-编译结果bundle，整体是由一个IIFE包裹，包括
-1. __webpack_modules_ 对象，即所有模块对象，key为模块path,value为模块源码
-2. __webpack_module_cache__ 对象，存储已使用过的模块对象
-3. __webpack_require__ 函数，实现模块引用require逻辑    
+ 
