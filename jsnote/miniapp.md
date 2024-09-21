@@ -22,7 +22,9 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life
 3. View Thread进行First Render完毕之后通知AppService Thread，AppService Thread将onReady逻辑传递至View Thread进行执行渲染        
 4. onHide,onShow,onUnload都是通过AppService Thread传递至View Thread进行执行渲染      
 
-总的来说就是逻辑层初始化完毕等待渲染层初始化完毕通知，逻辑层将逻辑执行结果传递给渲染层执行，渲染层执行完毕之后会通知逻辑层  
+总的来说就是逻辑层初始化完毕等待渲染层初始化完毕通知，逻辑层将逻辑执行结果传递给渲染层执行，渲染层执行完毕之后会通知逻辑层
+
+js可通过创建web worker实现多Thread,web worker通过postMessage,onmessage实现线程通信    
 
 
 ### 小程序启动流程
