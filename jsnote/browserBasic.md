@@ -289,6 +289,14 @@ Just-In-Time编译，通过将字节码编译成机器码，提升js代码的执
 
 
 ### PWA
+渐进式应用
+必须包含以下内容：
+1. Service Worker:独立线程，提供缓存控制及自定义响应功能
+2. Web Manifest:添加至桌面功能
+3. HTTPS:保证通讯安全
+
+#### service worker
+
 
 
 
