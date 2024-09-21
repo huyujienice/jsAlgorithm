@@ -296,7 +296,11 @@ Just-In-Time编译，通过将字节码编译成机器码，提升js代码的执
 3. HTTPS:保证通讯安全
 
 #### service worker
-
+基本步骤：
+1. 主线程注册：使用navigator.serviceWorker.register()
+2. 安装：使用self.addEventListener('install',()=>{})来监听安装，在安装之前可以使用waitUntil来缓存应用所需资源
+3. 激活：使用self.addEventListener('activate',()=>{})来监听激活，在激活前可以使用waitUntil来清理旧缓存
+4. 激活后可拦截网络请求：使用self.addEventListener('fetch',()=>{})来拦截,实现自定义响应       
 
 
 
