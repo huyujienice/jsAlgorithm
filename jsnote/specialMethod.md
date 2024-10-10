@@ -2,6 +2,17 @@
 
 指标量化
 
+SSR 优化
+深圳前端服务器：8c16g*3  
+广州测试服务器：4c4g*1   
+优化成果   
+1. total performance:13%  
+2. FCP:7%
+3. LCP:18%
+4. total blocking time:100%
+
+
+
 ### 微信小程序底层原理简介
 
 https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f803b0086831c75140a

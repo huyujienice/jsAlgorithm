@@ -200,10 +200,11 @@ script带async属性的会异步无序加载
 # 页面性能分析
 Lighthouse工具分析   
 重要指标：   
-   1. FCP(First Contentful Paint):页面首次内容绘制时间   
-   2. TTI(Time to Interactive):页面首次可交互可流程的交互时间   
-   3. LCP(Largest Contentful Paint):最大内容绘制   
-   4. FID(First Input Delay):首次输入延迟    
+   1. FCP(First Contentful Paint):页面首次内容绘制时间,可通过加快Render Tree生成时间提高
+   2. SI(Speed Index):页面加载期间内容显示速度，可通过减少js主线程工作提高
+   3. LCP(Largest Contentful Paint):最大内容绘制,可通过优化图片等静态资源提高
+   4. TBT(Total Blocking Time):总阻塞时间，页面被阻塞响应用户交互的总时间
+   5. CLS(Cumulative Layout Shift):累计布局偏移,首页图片和视频包含尺寸，添加动画
 
 # H5 performance
 通过浏览器performance信息获取页面完整加载的时间信息   
