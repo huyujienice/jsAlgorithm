@@ -10,17 +10,17 @@ entry 字段指示 webpack 应该使用哪个模块，来作为其构建内部�
 1. 分离 app(应用程序)和 vendor(第三方库)入口
 2. 多页面应用程序
 
-在entry中使用对象语法：
-1. import: 需要加载的模块地址   
-2. runtime: 则会在 entry chunk 之外再增加一个专门容纳 runtime 的 chunk 对象，多个 entry 间可共享 runtime chunk 
-3. dependOn: 会设置当前入口所依赖的入口。它会在该入口被加载前加载       
+在 entry 中使用对象语法：
 
-runtime 和 dependOn 不应该在同一入口上使用，因为提前加载顺序问题冲突         
+1. import: 需要加载的模块地址
+2. runtime: 则会在 entry chunk 之外再增加一个专门容纳 runtime 的 chunk 对象，多个 entry 间可共享 runtime chunk
+3. dependOn: 会设置当前入口所依赖的入口。它会在该入口被加载前加载
 
+runtime 和 dependOn 不应该在同一入口上使用，因为提前加载顺序问题冲突
 
 # 输出 output
 
-ouput 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件(使用path及filename属性)     
+output 属性指示 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件(使用 path 及 filename 属性)  
 output 占位符：
 
 1. [id] 返回模块 id
@@ -29,19 +29,19 @@ output 占位符：
 4. [ext] 返回扩展名
 5. [hash] 返回整个构建 hash
 6. [chunkhash] 返回入口指定模块的 hash
-7. [contenehash] 返回文件内容 hash
+7. [contenthash] 返回文件内容 hash
 
 # 模块 module
-module属性选项决定了如何处理项目中不同类型的模块
 
-module.generator： 配置所有生成器选项    
-可以配置不同位置的模块生成不同的publicPath和outputPath,对于将资源文件放置在特定位置的场景非常有用      
+module 属性选项决定了如何处理项目中不同类型的模块
 
-module.parser：集中配置所有解析器的选项     
-例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为      
+module.generator： 配置所有生成器选项  
+可以配置不同位置的模块生成不同的 publicPath 和 outputPath,对于将资源文件放置在特定位置的场景非常有用
 
-module.rules: 配置不同模块需要不同的loader进行处理    
+module.parser：集中配置所有解析器的选项  
+例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为
 
+module.rules: 配置不同模块需要不同的 loader 进行处理
 
 # loader
 
@@ -49,33 +49,33 @@ webpack 开箱自带解析 js 和 JSON 文件的功能。loader 处理其他类�
 
 ```js
 module.exports = {
-  module: {
-    rules: [{ test: /\.txt$/, use: 'raw-loader' }],
-  },
+    module: {
+        rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+    },
 };
 ```
 
-test 为字符串时筛选匹配资源的绝对路径，为函数时，入参为资源的绝对路径，返回 boolean      
+test 为字符串时筛选匹配资源的绝对路径，为函数时，入参为资源的绝对路径，返回 boolean
 
 test 属性识别哪些文件会被转换  
-use 属性定义使用哪个 loader 进行转换     
+use 属性定义使用哪个 loader 进行转换
 
-有两种使用 loader 方式：     
+有两种使用 loader 方式：
 
-1. 配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)        
-2. 内联(inline)方式：在每个 import 语句中显示指定 loader           
+1. 配置方式：webpack.config.js 中通过 module.rules 中 test,use 指定(从右到左，从下到上地取值，执行)
+2. 内联(inline)方式：在每个 import 语句中显示指定 loader
 
 import 语句中，使用!将资源中的 loader 分开  
 例如：
 
 ```js
 // inline引入
-import "style-loader!css-loader!stylus-loader?a=b!../../common.css";
+import 'style-loader!css-loader!stylus-loader?a=b!../../common.css';
 // 相当于webpack.config.js中配置
 [
-  { loader: "style-loader", options: undefined },
-  { loader: "css-lodaer", options: undefined },
-  { loader: "stylus-loader", options: "?a=b" },
+    { loader: 'style-loader', options: undefined },
+    { loader: 'css-loader', options: undefined },
+    { loader: 'stylus-loader', options: '?a=b' },
 ];
 ```
 
@@ -88,24 +88,22 @@ import "style-loader!css-loader!stylus-loader?a=b!../../common.css";
  * @param {any} [meta] meta 数据，可以是任何内容
  */
 function aLoader(content, map, meta) {
-  // 省略部分代码
+    // 省略部分代码
 }
 /**
  * @param {string} loader链剩余部分及资源文件的绝对路径的字符串,类似inline写法
- * @param {object} loader链前置部分绝对路径字符串   
- * @param {any} [data] 在pitch阶段和normal阶段之间共享的对象    
+ * @param {object} loader链前置部分绝对路径字符串
+ * @param {any} [data] 在pitch阶段和normal阶段之间共享的对象
  */
-aLoader.pitch = function (remainingRequest, precedingRequest, data) {
-
-};
+aLoader.pitch = function (remainingRequest, precedingRequest, data) {};
 
 module.exports = aLoader;
 ```
 
-loader 函数中的 this 会指向 webpack，可以使用 this.callback,this.async 等访问一些方法或者属性     
-loader 配置了 options 对象的话，this.query 就指向这个对象，可以通过 options 传递配置参数    
+loader 函数中的 this 会指向 webpack，可以使用 this.callback,this.async 等访问一些方法或者属性  
+loader 配置了 options 对象的话，this.query 就指向这个对象，可以通过 options 传递配置参数
 
-Loader 在 pitch 阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本 Normal 阶段的下一个 Loader，类似于“不需要执行处理在我之前的Loader，以我返回的结果为准，将我的结果交给原来的下一个处理者”  
+Loader 在 pitch 阶段如果返回非 undefined 值的时候会出现熔断效果，且将返回值交给原本 Normal 阶段的下一个 Loader，类似于“不需要执行处理在我之前的 Loader，以我返回的结果为准，将我的结果交给原来的下一个处理者”  
 Loader 在 pitch 阶段传递给 pitch 函数的 data,在 normal 执行阶段也会暴露在 this.data 之中，可用于捕获共享 pitch 阶段的信息
 
 Loader 可以分为同步 Loader 和异步 Loader  
@@ -121,14 +119,14 @@ pre loader 和 post loader,可以通过 rule 数组对象内的子项 enforce �
 pitch 执行顺序跟正常 loader 执行顺序完全相反
 
 1. 不同阶段之间：post->inline->normal->pre
-2. 每个阶段内部：use 数组中，从左往右，从上到下    
+2. 每个阶段内部：use 数组中，从左往右，从上到下
 
-类似中间件洋葱模型     
-或者说类似浏览器事件传输 capture phase , target phase ,  bubbing phase
+类似中间件洋葱模型  
+或者说类似浏览器事件传输 capture phase , target phase , bubbing phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
 enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
-rule 中的 loader 不会进行去重     
+rule 中的 loader 不会进行去重
 
 # 插件
 
@@ -153,8 +151,8 @@ compiler 是 webpack 底层编译对象的引用
 webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对象记录了 webpack 运行环境的所有信息，  
 插件可以通过它获取到 webpack 的配置信息，如 entry,output,module 等配置(通过 compiler.options 获取完整的配置对象)，也可以直接通过 compiler.hooks 挂载生命周期钩子回调
 
-compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用    
-compilation 对象记录了单次从源码构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息      
+compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用  
+compilation 对象记录了单次从源码构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息
 
 ### 异步插件
 
@@ -166,12 +164,13 @@ compilation 对象记录了单次从源码构建到生成资源过程中的信�
 runtime 会通过 manifest 来解析和加载模块。
 
 ### runtime
-webpack 底层框架代码，包括模块化，异步加载，HMR等    
-编译结果bundle，整体是由一个IIFE包裹，包括
-1. __webpack_modules_ 对象，即所有模块对象，key为模块path,value为模块源码
-2. __webpack_module_cache__ 对象，存储已使用过的模块对象
-3. __webpack_require__ 函数，实现模块引用require逻辑   
 
+webpack 底层框架代码，包括模块化，异步加载，HMR 等  
+编译结果 bundle，整体是由一个 IIFE 包裹，包括
+
+1. \__webpack_modules_ 对象，即所有模块对象，key 为模块 path,value 为模块源码
+2. **webpack_module_cache** 对象，存储已使用过的模块对象
+3. **webpack_require** 函数，实现模块引用 require 逻辑
 
 ### webpack 单独生成 chunk 方法
 
@@ -194,7 +193,7 @@ optimization: {
 }
 ```
 
-3. import 动态导入(或使用Webpack专属语法require.ensure)   
+3. import 动态导入(或使用 Webpack 专属语法 require.ensure)
 
 ### chunk
 
@@ -213,14 +212,14 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离 chunk
 
 ### source map
 
-source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的，源码最后会携带特殊注释//# sourceMappingURL 的属性指向sourcemap地址供浏览器下载        
-source map 是一个JSON文件，记录了代码转换前后的所有信息，其中mapping字段通过VLQ编码映射位置关系           
-      
+source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的，源码最后会携带特殊注释//# sourceMappingURL 的属性指向 sourcemap 地址供浏览器下载  
+source map 是一个 JSON 文件，记录了代码转换前后的所有信息，其中 mapping 字段通过 VLQ 编码映射位置关系
+
 通过 webpack.config.js 中 devtool 字段配置  
 在开发环境可使用 eval 开头的 sourcemap 加快编译速度  
 在生产环境可以考虑使用：  
  1.nosources-source-map:只会显示具体行数以及查看源代码的错误栈。安全性比 source-map 高  
- 2.source-map:通过 ngnix 设置.map 文件只对白名单开放
+ 2.source-map:通过 nginx 设置.map 文件只对白名单开放
 
 ### webpack 运行流程
 
@@ -296,11 +295,11 @@ webpack 的 tree shaking 逻辑停留在代码静态分析层面，只判断
 
 ### 优化项目策略
 
-产品方向：    
+产品方向：
 
 1. 确定项目核心功能，非核心功能后置
 
-服务端方向：    
+服务端方向：
 
 1. 减少重定向
 2. 启用资源 gzip 压缩
@@ -309,12 +308,12 @@ webpack 的 tree shaking 逻辑停留在代码静态分析层面，只判断
 5. 优化图片等静态资源
 6. 升级 http2,http3
 
-客户端方向：    
+客户端方向：
 
-1. 打包分离(bundle spliting)  
+1. 打包分离(bundle splitting)  
    为了浏览器更好的缓存，合适地创建更多更小的文件
 
-2. 代码分离(code spliting)  
+2. 代码分离(code splitting)  
    动态加载代码，按需加载
 
 ### webpack 性能优化策略
@@ -353,6 +352,3 @@ speed-measure-webpack-plugin 分析分析打包速度
 ### webpack 模块联邦
 
 模块联邦能达到线上 Runtime 效果,让代码直接在项目间利用 CDN 直接共享，不再需要本地安装 Npm 包
-
-
- 
