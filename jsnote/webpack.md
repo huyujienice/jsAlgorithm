@@ -122,7 +122,7 @@ pitch 执行顺序跟正常 loader 执行顺序完全相反
 2. 每个阶段内部：use 数组中，从左往右，从上到下
 
 类似中间件洋葱模型  
-或者说类似浏览器事件传输 capture phase , target phase , bubbing phase
+或者说类似浏览器事件传输 capture phase , target phase , bubbling phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
 enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
@@ -344,7 +344,7 @@ speed-measure-webpack-plugin 分析分析打包速度
    5.2 mini-css-extract-plugin:抽离 css 至单独文件，可上传 CDN  
    5.3 DLLPlugin:提前将不会更改的框架公共代码打包，减少打包体积（VUE CLI 可以使用）
 6. 多线程打包：
-   6.1 Happypack  
+   6.1 happypack  
    6.2 thread-loader
 7. purgecss-webpack-plugin:对 css 文件进行 tree-shaking
 8. 通过 devtool 配置合适的 sourcemap:开发环境可配置 eval 开头的 sourcemap 加快编译速度
