@@ -213,13 +213,13 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离 chunk
 ### source map
 
 source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的，源码最后会携带特殊注释//# sourceMappingURL 的属性指向 sourcemap 地址供浏览器下载  
-source map 是一个 JSON 文件，记录了代码转换前后的所有信息，其中 mapping 字段通过 VLQ 编码映射位置关系
+source map 是一个 JSON 文件，通常以 .map 扩展名进行保存，记录了代码转换前后的所有信息，其中 mapping 字段通过 VLQ 编码映射位置关系，sourcesContent字段记录原始源文件内容   
 
 通过 webpack.config.js 中 devtool 字段配置  
 在开发环境可使用 eval 开头的 sourcemap 加快编译速度  
 在生产环境可以考虑使用：  
- 1.nosources-source-map:只会显示具体行数以及查看源代码的错误栈。安全性比 source-map 高  
- 2.source-map:通过 nginx 设置.map 文件只对白名单开放
+ 1.nosources-source-map:只会映射到具体文件和行数。安全性比 source-map 高  
+ 2.source-map:通过 nginx 设置 .map 文件只对白名单开放
 
 ### webpack 运行流程
 
@@ -246,8 +246,8 @@ source map 是一个 JSON 文件，记录了代码转换前后的所有信息，
 
 compilation
 
-1. compilation.hooks.buildModule: 在模块构建开始之前触发，可修改模块
-2. compilation.hooks.successdModule: 模块构建成功时执行
+1. compilation.hooks.buildModule: 在每个模块构建开始之前触发，可修改模块
+2. compilation.hooks.succeedModule: 在每个模块构建成功时执行
 3. compilation.hooks.seal: compilation 对象停止接收新的模块时触发
 4. compilation.hooks.processAssets: asset 处理
 
@@ -273,7 +273,7 @@ tree-shaking 是指在运行过程中静态分析模块之间的导入导出，�
 实现原理：  
 先标记出模块导出值中哪些没有被用过，再使用 Terser 插件删掉这些没有被用到的导出语句
 
-1. Make 阶段，收集模块导出变量并记录到模块依赖图 ModudleGraph 变量中
+1. Make 阶段，收集模块导出变量并记录到模块依赖图 ModuleGraph 变量中
 2. Seal 阶段，遍历 ModuleGraph 标记模块并判断导出变量是否有被其他模块引用且在其他模块正文中是否出现及使用，如果没有则进行标记
 3. 生成产物时，根据 Seal 阶段的标记，删除对应的导出语句
 
