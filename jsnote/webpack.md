@@ -35,8 +35,8 @@ output 占位符：
 
 module 属性选项决定了如何处理项目中不同类型的模块
 
-module.generator： 配置所有生成器选项  
-可以配置不同位置的模块生成不同的 publicPath 和 outputPath,对于将资源文件放置在特定位置的场景非常有用
+module.generator： 统一配置所有生成器选项  
+可以配置不同位置的模块生成不同的 output.publicPath (浏览器访问URL路径) 和 output.path (文件系统路径) ,对资源文件放置在特定位置的场景统一管理提供了解决方案
 
 module.parser：集中配置所有解析器的选项  
 例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为
@@ -145,7 +145,7 @@ assets 是一个包含 compilation 中所有静态资源的对象，该对象的
 2. compilation.addModule:添加自定义模块
 3. compilation.addEntry:添加入口，功能上与直接定义 entry 配置相同
 
-### Compiler 和 Compilation
+### compiler 和 compilation
 
 compiler 是 webpack 底层编译对象的引用  
 webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对象记录了 webpack 运行环境的所有信息，  
@@ -160,7 +160,7 @@ compilation 对象记录了单次从源码构建到生成资源过程中的信�
 
 ### manifest
 
-当 compiler 开始执行，解析和映射时，它会保留所有模块的详细要点。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
+当 compiler 开始执行，解析和映射时，它会保留所有模块的详细要点及依赖关系。这个数据集合称为“manifest”,当完成打包并发送到浏览器时，  
 runtime 会通过 manifest 来解析和加载模块。
 
 ### runtime
@@ -168,7 +168,7 @@ runtime 会通过 manifest 来解析和加载模块。
 webpack 底层框架代码，包括模块化，异步加载，HMR 等  
 编译结果 bundle，整体是由一个 IIFE 包裹，包括
 
-1. \__webpack_modules_ 对象，即所有模块对象，key 为模块 path,value 为模块源码
+1. **__webpack_modules__** 对象，即所有模块对象，key 为模块 path,value 为模块源码
 2. **webpack_module_cache** 对象，存储已使用过的模块对象
 3. **webpack_require** 函数，实现模块引用 require 逻辑
 
