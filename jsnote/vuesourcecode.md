@@ -111,8 +111,7 @@ computed及watch均是以此而来
 2. PatchFlag优化diff算法
 3. HoistStatic静态节点缓存优化    
 4. CacheHandler缓存事件优化  
-5. SSR优化  
-6. tree-shaking  
+5. tree-shaking底层框架支持  
 
 ## PatchFlag
 PatchFlag是一个标识，是一个枚举ID
@@ -151,7 +150,7 @@ vue2.0采用双端diff算法
 "头尾尾头"
 
 vue3.0采用快速diff算法  
-快速diff算法包含预处理步骤，使用了最长递增子序列来复用相对位置没有发生变化且相同的节点，这些节点不需要移动，能最快的进行复用和更新     
+快速diff算法包含预处理步骤，过滤静态节点，使用了最长递增子序列来优化dom复用移动过程（找到最佳的可复用且不需要移动位置的子序列）               
 最长递增子序列可采用暴力算法或者动态规划DP进行解决    
 动态规划的核心设计思想是数学归纳法     
 
@@ -216,8 +215,9 @@ vue2.0不允许在已经创建的实例上动态添加新的响应式属性
 3. this.forceUpdate()    
 
 ### $attrs
-inheritAttrs默认为true,默认将未声明为props或emit的attribute或者v-on监听器自动传递给子组件     
-将inheritAttrs设置为false,$attrs 可透传多级未声明props及emit,直接在模板中使用v-bind="$attrs"传递给有需要的组件或$attrs.onClick获取@click事件监听器          
+$attrs 是一个特殊的对象，包含了父组件未声明的所有属性，包括props和emit       
+可通过 v-bind="$attrs" 实现父孙组件属性透传        
+inheritAttrs控制 $attrs 对象属性，默认为true，自动将所有属性添加到子组件。设置为false则需要通过 $attrs 手动管理属性传递       
 
 
 ### slot插槽
