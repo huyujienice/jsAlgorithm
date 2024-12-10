@@ -11,8 +11,8 @@ v-model其实是双向绑定的语法糖，input相当于vue自带的组件
 <!-- 双向绑定 = 单向绑定 + UI事件监听 -->
 ```
 
-MVC：Model-View-Controller(模型-视图-控制器)是一种分层架构的思想 -> nestJs框架      
-MVVM:Model-View-ViewModel(模型-视图-视图控制器)是一种双向数据绑定模式，用ViewModel来建立起Model数据层和View视图层的连接，数据改变会影响视图，视图改变会影响数据 -> vueJs框架            
+MVC：Model-View-Controller(模型-视图-控制器)是一种分层架构的思想 -> NestJs框架      
+MVVM:Model-View-ViewModel(模型-视图-视图控制器)是一种双向数据绑定模式，用ViewModel来建立起Model数据层和View视图层的连接，数据改变会影响视图，视图改变会影响数据 -> VueJs框架            
 
 # vue 渲染流程  
 示例：https://juejin.cn/post/6844904031983239181#heading-19  
