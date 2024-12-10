@@ -17,8 +17,8 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
 预设条件：
 
 1. 同层 diff
-2. 类型不同直接删除新建 dom
-3. key 暗示可复用 dom
+2. dom类型及key值递归判断是否可复用dom
+
 
 整体逻辑：
 
@@ -100,8 +100,8 @@ function MyComponent() {
 
 ### Hook
 
-1. useCallback:多次渲染中缓存函数,可配合 memo 跳过函数重复渲染
-2. useMemo:多次渲染中缓存计算结果
+1. useCallback:多次渲染中缓存函数     
+2. useMemo:多次渲染中缓存计算结果     
 3. useContext:读取和订阅 context,实现更新数据传递
 4. useEffect
 
