@@ -9,7 +9,7 @@ js实现单线程异步执行的关键
         2.1.2 I/O phase:处理非setTimeout,setInterval,setImmediate,close的回调之外的所有I/O回调          
         2.1.3 idle phase:libuv内部调用      
         2.1.4 poll phase:轮询等待新I/O，如服务器回应，用户移动鼠标等     
-        2.1.5 check phase:执行setImmediate的回调     
+        2.1.5 check phase:执行setImmediate的回调     ****
         2.1.6 close phase:执行关闭请求(close)的回调     
 
     2.2. microtask       
