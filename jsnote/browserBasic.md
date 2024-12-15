@@ -17,7 +17,7 @@ EventTarget.removeEventListener() 在EventTarget中删除事件侦听器
 EventTarget.dispatchEvent() 将事件分派到此EventTarget       
 可参考创建和触发events:     
 https://developer.mozilla.org/zh-CN/docs/Web/Events/Creating_and_triggering_events      
-
+****
 当EventTarget对象接收到浏览器事件后，会生成一个event对象来描述该次交互事件         
 event对象会被作为第一个参数传递给事件监听的回调函数       
 event对象包含了与事件相关的所有信息,例如：    
@@ -134,8 +134,8 @@ box-sizing:border-box;
 
 1.Browser normal declarations  
 2.User normal declarations  
-3.Author normal declarations  
-4.Author important declarations  
+3.App normal declarations  
+4.App important declarations  
 5.User important declarations  
 
 a style  
