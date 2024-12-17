@@ -81,14 +81,14 @@ console.log(Object.prototype.toString.call(JSON)); // [object JSON]
 以下内容只是一个人的说法，原文链接：
 https://blog.bitsrc.io/understanding-execution-context-and-execution-stack-in-javascript-1c9ea8642dd0
 
-执行上下文是评估和执行 JavaScript 代码的环境的抽象概念  
+执行上下文简单来说就是js代码执行环境对象 
 4 种情况会创建新的执行上下文  
 1.进入全局代码  
 2.进入 function 函数体代码  
 3.进入 eval 函数参数指定的代码  
 4.进入 module 代码
 
-执行上下文负责存储 VO,AO,Scope,this.同时也创建执行上下文栈（ECStack,Execution Context Stack）来管理执行上下文的推入和弹出
+执行上下文本质是js引擎用来管理代码执行的内部机制，它提供了代码执行所需要的环境信息，包括VO,AO,Scope,this等。执行上下文的概念是通过js引擎内部的数据结构和算法实现的
 
 ## VO
 
