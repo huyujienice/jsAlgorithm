@@ -307,9 +307,9 @@ class Child extends Parent {
 # Module
 
 浏览器环境中， script 标签带 defer 或 async 属性，脚本就会异步加载。  
-defer(铁的)会等到整个页面在内存中正常渲染结束(DOM 结构完全生成，以及其他脚本执行完成),才会执行,即渲染完再执行  
-async 一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染，即下载完就执行  
-浏览器加载 ES6 模块，也使用 script 标签，但是要加入 type="module"属性，且渲染完再执行
+defer(铁的) 在DOMContentLoaded之前异步有序加载执行     
+async 异步无序加载执行，可能会阻塞页面，适用于独立脚本逻辑               
+浏览器加载 ES6 模块，使用```<script type="module">```标签，异步有序加载，等同于携带defer属性          
 
 ES6 模块与 CommonJS 模块的差异
 
@@ -345,14 +345,13 @@ CommonJS 底层加载原理：
 
 1. Nodejs 会为每个文件生成一个 module 实例，module 实例中会有关于整个模块文件的所有信息，包括 id,exports,parent,children,filename,paths,loaded 等信息
 2. Nodejs 中有个类似全局的对象，以文件路径名为键值，以生成的 module 为键值对，保存所有模块信息
-3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, **filename, **dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行， require 方法最终获取到的是 module.exports 对象（初始化新 module 实例对象或者获取缓存），模块内能够直接使用 exports, require, module  
-   (ermfd->exports require module **filename **dirname)
+3. 模块实例通过 file.readFileSync 等方法读取文件内容字符串，如果是后缀为.js 则将其处理成 function(exports, require, module, __filename, __dirname)的函数，并用 vm 内置模块(类似 eval，但不能用 eval，因为 eval 执行可以引用外部全局函数)将生成的 module 等信息传入函数中执行， require 方法最终获取到的是 module.exports 对象（初始化新 module 实例对象或者获取缓存），模块内能够直接使用 exports, require, module     
+exports require module __filename __dirname         
 
 ES6 模块底层原理：
 import 命令会被 js 引擎进行静态分析，先于模块内其他模块执行。  
-commonjs 类似 Nodejs 自行实现的一个轮子，而 es6 module 则是 js 引擎进行处理  
-import()是 webpack 提供的类似于 Node.js 的 require 加载，可以执行
-按需加载，条件加载，动态的模块路径
+commonjs 类似 Nodejs 自行实现的一个模块化轮子，而 es6 module 则是 js 引擎进行处理  
+import() 可执行按需加载，条件加载，动态的模块路径     
 
 ### commonjs 解决循环引用
 
@@ -365,29 +364,9 @@ ES6 不关心是否发生循环引用，只是生成了一个指向被加载模�
 直接使用 JSON.parse(JSON.stringify(obj))的方式会抛出错误,因为 stringify 遇到循序引用会抛异常  
 需要手动实现深拷贝函数
 
-1. 使用 WeakMap 来做缓存
+1. 使用缓存
 2. 当对象为对象类型时，提前存入空对象，防止递归拷贝时循环引用
 
-```js
-function deepCopy(obj, map = new Map()) {
-  if (typeof obj != "object") return;
-  let newObj = Array.isArray(obj) ? [] : {};
-  if (map.get(obj)) {
-    return map.get(obj);
-  }
-  map.set(obj, newObj);
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      if (typeof obj[key] == "object") {
-        newObj[key] = deepCopy(obj[key], map);
-      } else {
-        newObj[key] = obj[key];
-      }
-    }
-  }
-  return newObj;
-}
-```
 
 # ArrayBuffer,TypedArray,DataView
 
@@ -736,6 +715,8 @@ WeakRef 对象，用于直接创建对象的弱引用
 
 清理器注册表，用来指定目标对象被垃圾回收机制清除以后，所要执行的回调函数
 代码示例：
+
+```js
 let testObj = {};
 const registry = new FinalizationRegistry((value) => {
 alert(value);
@@ -744,6 +725,7 @@ registry.register(testObj, "clear testObj");
 setTimeout(() => {
 testObj = null;
 }, 1000);
+```
 
 ## Proxy
 
