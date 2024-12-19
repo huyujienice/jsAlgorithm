@@ -104,7 +104,6 @@ Array.isArray()
 用来判断某个变量是否是一个数组对象  
 Array.of()  
 根据一组参数来创建新的数组实例，作用类似字面量写法[]
-
 Array.prototype.length  
 数组中的元素个数，可以通过直接设置 lenght 实现截断数组  
 Array.prototype.concat()  
@@ -130,7 +129,6 @@ Array.prototpye.findLastIndex()
 Array.prototype.flat()  
 返回新数组，按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组的元素合并为一个新数组返回  
 Array.prototype.flatMap()
-
 Array.prototype.forEach()  
 对数组的每个元素执行一次给定的函数  
 Array.prototype.includes()  
