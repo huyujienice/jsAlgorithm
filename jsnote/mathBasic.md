@@ -105,7 +105,7 @@ Array.isArray()
 Array.of()  
 根据一组参数来创建新的数组实例，作用类似字面量写法[]
 Array.prototype.length  
-数组中的元素个数，可以通过直接设置 lenght 实现截断数组  
+数组中的元素个数，可以通过直接设置 length 实现截断数组  
 Array.prototype.concat()  
 返回一个新数组，用于合并两个或者多个数组，不会更改现有数组  
 Array.prototype.copyWithin()  
@@ -118,13 +118,13 @@ Array.prototype.fill()
 改变原有数组，用一个固定值填充一个数组从起始索引到终止索引内的全部元素。不包括终止索引  
 Array.prototype.filter()  
 返回一个新数组，其包含通过所提供的函数实现的测试的所有元素  
-Array.prototpye.find()  
+Array.prototype.find()  
 返回数组中满足提供的测试函数的第一个元素的值，否则返回 undefined  
 Array.prototype.findIndex()  
 返回数组中满足提供的测试函数的一个元素的索引，若没有找到对应元素则返回-1  
-Array.protopype.findLast()  
+Array.prototype.findLast()  
 返回满足提供的测试函数条件的最后一个元素的值，否则返回 undefined  
-Array.prototpye.findLastIndex()  
+Array.prototype.findLastIndex()  
 返回满足提供的测试函数条件的最后一个元素的索引，若没有找到对应元素则返回-1
 Array.prototype.flat()  
 返回新数组，按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组的元素合并为一个新数组返回  
