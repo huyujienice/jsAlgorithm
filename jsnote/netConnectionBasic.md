@@ -354,7 +354,8 @@ Netty
 如何解决浏览器跨域问题:
 
 1. JSONP:通过在 html 加入 script 元素，向服务器请求 JSON 数据，只支持 get 请求
-2. WebSocket 3.（速记 ACAO）服务端设置响应头 Access-Control-Allow-Origin:\*
+2. WebSocket 
+3. （速记 ACAO）服务端设置响应头 ```Access-Control-Allow-Origin:*```
 
 ### XMLHttpRequest Fetch
 
