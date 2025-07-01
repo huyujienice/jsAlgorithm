@@ -25,4 +25,5 @@ manifest 是整个项目的配置信息,content_scripts 配置内容脚本,backg
 
 1. 网页使用 window.addEventListener('message', handleMessage)监听消息，使用 window.postMessage({type: 'XXX',},'\*')传递消息至内容脚本
 2. 内容脚本通过 window.addEventListener 监听网页消息，通过 window.postMessage 传递消息给网页，通过 chrome.runtime.sendMessage 传递消息给注入脚本
-3. 注入脚本通过 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {})接受和返回消息，通过 chrome.storage.get 获取扩展中的信息，在扩展中通过 chrome.storage.onChanged.addListener(callback: function)触发扩展的行为
+3. 注入脚本通过 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {})接受和返回消息，通过 chrome.storage.get 获取扩展中的信息，在扩展中通过 chrome.action.openPopup 打开扩展
+4. 扩展脚本通过 chrome.runtime.onMessage.addListener 完成监听和路由跳转的动作，通过 chrome.runtime.sendMessage 传递消息至注入脚本
