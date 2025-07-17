@@ -38,3 +38,10 @@ eth --> 智能合约 ---> 桥接 --> L2 -->合约--> user 1eth
 5. `spl-token accounts --owner CLARKXjDhcpGMCN8gWBxkVFMKpLJga3fWud6Hfn6MjYV`查看指定账户底下所有的 token
 6. `spl-token address --verbose --token mtnTbWa2mq6apvaxATWZfMNqF3FpDBRxaz4XyZkYdY5 --owner CLARKXjDhcpGMCN8gWBxkVFMKpLJga3fWud6Hfn6MjYV`查看特定 token 的 ATA 账户的地址
 7. `spl-token mint --mint-authority /Users/clark/documents/keypair/solana-yhkd-token-v2/mtnTbWa2mq6apvaxATWZfMNqF3FpDBRxaz4XyZkYdY5.json mtnTbWa2mq6apvaxATWZfMNqF3FpDBRxaz4XyZkYdY5 1 6qt7e58xsY65YUvwC4bWpNs4TmRPoTUVSGn9qQ82dGq2`给 ATA 账户 Mint 一个单位的 token，即 0.000001 token
+
+
+### anchor项目重新生成新的program id
+1. 删除target文件夹
+2. 运行`anchor build`,会重新生成target/deploy
+3. 运行`anchor keys list`,会打印出新的program id
+4. 更新项目内所有文件中硬编码的program id内容，如lib.rs
