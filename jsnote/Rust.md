@@ -22,6 +22,8 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 3. to_le_bytes 将数字转为小端字节序字节数组
 4. from_le_bytes 将小端字节序字节数组转为数字   
 
+## 闭包
+lambda表达式，是一类能够捕获周围作用域中变量的函数    
 
 ### 解决IEEE 754浮点数计算问题
 1. 引入fixed模块解决
