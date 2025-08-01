@@ -29,7 +29,8 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 lambda 表达式，是一类能够捕获周围作用域中变量的函数
 
 ### 数组
-从根本上讲，Vec 始终是 (指针，容量，长度) 三元组，指针永远不为空     
+
+从根本上讲，Vec 始终是 (指针，容量，长度) 三元组，指针永远不为空  
 动态数组 Vec 常用方法：
 
 ```rust
@@ -44,6 +45,14 @@ let first = b[0];           // 索引访问（可能 panic）
 let first = b.get(0);       // 返回 Option<&T>
 let slice = &b[1..3];       // 切片
 b.sort();                   // 升序排序
+let len = b.len();          // 数组内元素个数
+assert!(b.is_empty());      // 数组是否为空
+let mut c = vec![1];
+c.extend_from_slice(&[2, 3, 4]);   // 克隆并将切片中的所有元素追加到c
+assert_eq!(c, [1, 2, 3, 4]);
+let mut d = vec![1, 2, 2, 3, 2];
+d.dedup();                          // 删除d中连续的重复元素
+assert_eq!(d, [1, 2, 3, 2]);
 ```
 
 ### 迭代器
