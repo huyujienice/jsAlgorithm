@@ -24,6 +24,10 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 3. to_le_bytes 将数字转为小端字节序字节数组
 4. from_le_bytes 将小端字节序字节数组转为数字
 
+### 字符串
+String被存储为由字节组成的vector(Vec<u8>)     
+&str是一个总是指向有效的UTF-8序列的切片(&[u8])    
+
 ## 闭包
 
 lambda 表达式，是一类能够捕获周围作用域中变量的函数
@@ -105,7 +109,9 @@ let is_empty = map.is_empty();          // 是否为空
 
 ### trait
 #[derive]可提供某些trait的基本实现      
-很多运算符可以通过trait进行重载。比如 a + b 会调用add方法，add方法是Add trait一部分，所以+运算符可以被任何Add trait的实现着使用       
+很多运算符可以通过trait进行重载。比如 a + b 会调用add方法，add方法是Add trait一部分，所以+运算符可以被任何Add trait的实现着使用   
+
+
 
 ### 解决 IEEE 754 浮点数计算问题
 
