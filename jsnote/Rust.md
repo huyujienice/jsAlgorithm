@@ -73,10 +73,10 @@ v.into_iter()    // T（消耗 Vec）
    enumerate() 带索引的元组  
    chain(other) 两个迭代器拼接
 
-3. 常用消费器（终结方法）
-   collect() 把迭代结果收集到集合  
-   count() 元素个数  
-   sum() / product() 求和 / 求积  
+3. 常用消费器（终结方法）     
+   collect() 把迭代结果收集到集合     
+   count() 元素个数    
+   sum() / product() 求和 / 求积    
    any(f) 任一满足？  
    all(f) 全部满足？  
    find(f) 返回第一个 Some(&T)  
@@ -102,6 +102,10 @@ let has = map.contains_key("a");        // 是否包含
 let len = map.len();                    // 长度
 let is_empty = map.is_empty();          // 是否为空
 ```
+
+### trait
+#[derive]可提供某些trait的基本实现      
+很多运算符可以通过trait进行重载。比如 a + b 会调用add方法，add方法是Add trait一部分，所以+运算符可以被任何Add trait的实现着使用       
 
 ### 解决 IEEE 754 浮点数计算问题
 
