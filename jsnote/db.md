@@ -23,6 +23,16 @@ RDBMS:Relational Database Management System,关系型数据库管理系统
 常用的有varchar,变长字符串，0-65535     
 varchar(32)，表示可以存储32个字符    
 
+### INT(5)
+INT存储空间是4byte,(5)只是“显示宽度”，只有在字段加上ZEROFILL才有效果
+```sql
+CREATE TABLE t1 (
+  a INT(5) ZEROFILL
+);
+INSERT INTO t1 VALUES (42);
+SELECT a;   -- 返回 00042（不足 5 位用 0 补齐）
+```
+
 ### char varchar text 对比
 1. 存储定长数据可使用char(0-255),索引速度极快（例如：手机号，身份证号）
 2. 长度255以上只能使用varchar或text,能用varchar尽量不要用text
