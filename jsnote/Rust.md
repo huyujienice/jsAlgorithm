@@ -25,8 +25,9 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 4. from_le_bytes 将小端字节序字节数组转为数字
 
 ### 字符串
-String被存储为由字节组成的vector(Vec<u8>)     
-&str是一个总是指向有效的UTF-8序列的切片(&[u8])    
+
+String 被存储为由字节组成的 vector(Vec<u8>)  
+&str 是一个总是指向有效的 UTF-8 序列的切片(&[u8])
 
 ## 闭包
 
@@ -77,10 +78,10 @@ v.into_iter()    // T（消耗 Vec）
    enumerate() 带索引的元组  
    chain(other) 两个迭代器拼接
 
-3. 常用消费器（终结方法）     
-   collect() 把迭代结果收集到集合     
-   count() 元素个数    
-   sum() / product() 求和 / 求积    
+3. 常用消费器（终结方法）  
+   collect() 把迭代结果收集到集合  
+   count() 元素个数  
+   sum() / product() 求和 / 求积  
    any(f) 任一满足？  
    all(f) 全部满足？  
    find(f) 返回第一个 Some(&T)  
@@ -108,10 +109,16 @@ let is_empty = map.is_empty();          // 是否为空
 ```
 
 ### trait
-#[derive]可提供某些trait的基本实现      
-很多运算符可以通过trait进行重载。比如 a + b 会调用add方法，add方法是Add trait一部分，所以+运算符可以被任何Add trait的实现着使用   
 
+#[derive]可提供某些 trait 的基本实现  
+很多运算符可以通过 trait 进行重载。比如 a + b 会调用 add 方法，add 方法是 Add trait 一部分，所以+运算符可以被任何 Add trait 的实现着使用
 
+### Result <-> Option 相互转化
+
+1. .ok(): Result<T,E> -> Option<T> 保留成功值
+2. .err(): Result<T,E> -> Option<E> 保留错误值
+3. .ok_or(err):Option<T> -> Result<T,E> 提供默认错误值
+4. .ok_or_else(f):Option<T> -> Result<T,E> 通过闭包生成错误值
 
 ### 解决 IEEE 754 浮点数计算问题
 
