@@ -113,6 +113,35 @@ let is_empty = map.is_empty();          // 是否为空
 #[derive]可提供某些 trait 的基本实现  
 很多运算符可以通过 trait 进行重载。比如 a + b 会调用 add 方法，add 方法是 Add trait 一部分，所以+运算符可以被任何 Add trait 的实现着使用
 
+### Result 与 Option
+
+```rust
+enum Option<T>{
+   Some(T),
+   None,
+}
+enum Result<T,E>{
+   Ok(T),
+   Err(E),
+}
+```
+
+拥有相似的方法:
+
+1. is_some() / is_ok() 是否存在/成功
+2. is_none() / is_err() 是否不存在/失败
+3. map() 转换成功存在值
+4. and_then() 链上操作成功存在值
+5. unwrap() 提取成功存在值，若没有则直接 panic
+6. unwrap_or() 提取成功存在值，或提供默认值
+7. 都支持使用?，函数提前返回失败错误值
+
+不同点：
+
+1. 语义：Option 用于值存在或缺失，Result 用于成功失败
+2. 类型参数：Option 只有一个参数，Result 有 2 个参数
+3. Option 多用于查找操作，配置项和数组访问；Result 多用于文件访问，网络请求，解析操作
+
 ### Result <-> Option 相互转化
 
 1. .ok(): Result<T,E> -> Option<T> 保留成功值
@@ -120,9 +149,10 @@ let is_empty = map.is_empty();          // 是否为空
 3. .ok_or(err):Option<T> -> Result<T,E> 提供默认错误值
 4. .ok_or_else(f):Option<T> -> Result<T,E> 通过闭包生成错误值
 
-### 使用?和unwrap()的区别
-使用?表示提前返回函数Err或者None的结果
-使用unwrap()表示出现Err或None,程序直接panic,使用unwrap_or可提供默认值
+### 使用?和 unwrap()的区别
+
+使用?表示提前返回函数 Err 或者 None 的结果
+使用 unwrap()表示出现 Err 或 None,程序直接 panic,使用 unwrap_or 可提供默认值
 
 ### 解决 IEEE 754 浮点数计算问题
 
