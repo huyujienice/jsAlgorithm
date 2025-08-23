@@ -120,6 +120,10 @@ let is_empty = map.is_empty();          // 是否为空
 3. .ok_or(err):Option<T> -> Result<T,E> 提供默认错误值
 4. .ok_or_else(f):Option<T> -> Result<T,E> 通过闭包生成错误值
 
+### 使用?和unwrap()的区别
+使用?表示提前返回函数Err或者None的结果
+使用unwrap()表示出现Err或None,程序直接panic,使用unwrap_or可提供默认值
+
 ### 解决 IEEE 754 浮点数计算问题
 
 1. 引入 fixed 模块解决
