@@ -108,10 +108,13 @@ let len = map.len();                    // 长度
 let is_empty = map.is_empty();          // 是否为空
 ```
 
-### trait
+## trait
 
 #[derive]可提供某些 trait 的基本实现  
 很多运算符可以通过 trait 进行重载。比如 a + b 会调用 add 方法，add 方法是 Add trait 一部分，所以+运算符可以被任何 Add trait 的实现着使用
+
+### 类型转换
+使用From和Into Traits来实现2个类型的相互转换
 
 ### Result 与 Option
 
