@@ -157,6 +157,14 @@ enum Result<T,E>{
 使用?表示提前返回函数 Err 或者 None 的结果
 使用 unwrap()表示出现 Err 或 None,程序直接 panic,使用 unwrap_or 可提供默认值
 
+### Rc,Arc,Cell,RefCell
+rust规则
+1. 一个数据只有一个所有者 -> Rc,Arc让一个数据拥有多个所有者
+2. 要么多个不可变借用，要么一个可变借用 -> RefCell实现编译期可变，不可变引用共存    
+
+当struct中有部分字段需要修改而有部分不需要修改的时候，通常需要将整个struct变为&mut      
+如果不想将整个struct设置为&mut,可将单个字段设置为Cell和RefCell,实现内部可变性     
+
 ### 解决 IEEE 754 浮点数计算问题
 
 1. 引入 fixed 模块解决
