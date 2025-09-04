@@ -114,7 +114,8 @@ let is_empty = map.is_empty();          // 是否为空
 很多运算符可以通过 trait 进行重载。比如 a + b 会调用 add 方法，add 方法是 Add trait 一部分，所以+运算符可以被任何 Add trait 的实现着使用
 
 ### 类型转换
-使用From和Into Traits来实现2个类型的相互转换
+
+使用 From 和 Into Traits 来实现 2 个类型的相互转换
 
 ### Result 与 Option
 
@@ -158,16 +159,23 @@ enum Result<T,E>{
 使用 unwrap()表示出现 Err 或 None,程序直接 panic,使用 unwrap_or 可提供默认值
 
 ### Rc,Arc,Cell,RefCell
-rust规则
-1. 一个数据只有一个所有者 -> Rc,Arc让一个数据拥有多个所有者
-2. 要么多个不可变借用，要么一个可变借用 -> RefCell实现编译期可变，不可变引用共存    
 
-当struct中有部分字段需要修改而有部分不需要修改的时候，通常需要将整个struct变为&mut      
-如果不想将整个struct设置为&mut,可将单个字段设置为Cell和RefCell,实现内部可变性     
+rust 规则
 
+1. 一个数据只有一个所有者 -> Rc,Arc 让一个数据拥有多个所有者
+2. 要么多个不可变借用，要么一个可变借用 -> RefCell 实现编译期可变，不可变引用共存
 
-#### rust规则1，所有权
-非Copy的类型，被整体当做右值使用时（赋值传参模式匹配），会发生所有权移动 -> &,as_ref(),Rc,Arc 解决
+当 struct 中有部分字段需要修改而有部分不需要修改的时候，通常需要将整个 struct 变为&mut  
+如果不想将整个 struct 设置为&mut,可将单个字段设置为 Cell 和 RefCell,实现内部可变性
+
+#### rust 规则 1，所有权
+
+非 Copy 的类型，被整体当做右值使用时（赋值传参模式匹配），会发生所有权移动 -> &,as_ref(),Rc,Arc 解决
+
+### 生命周期
+
+生命周期是为了确保引用在所需的时间内有效，其实指的就是引用有效的范围（作用域 Scope）  
+每个引用都有生命周期
 
 ### 解决 IEEE 754 浮点数计算问题
 
