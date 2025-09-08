@@ -196,11 +196,11 @@ DOM 已经加载完毕，应用程序可查找 DOM 节点，并初始化接口�
 
 # css,js 加载顺序
 
-1.css 外部样式无法使用异步加载逻辑，外联和内联的 css 是所有渲染的前提条件，css 同步加载可避免页面样式闪烁  
+1. css 外部样式无法使用异步加载逻辑，外联和内联的 css 是所有渲染的前提条件，css 同步加载可避免页面样式闪烁  
 DOM Tree->CSSOM Tree->Render Tree->Layout->Paint  
-js 可以通过 domcument.styleSheets 拿到 css 数据，所以 css 最好在 js 之前解析执行完毕 k
+js 可以通过 domcument.styleSheets 拿到 css 数据，所以 css 最好在 js 之前解析执行完毕
 
-2.js 内联及不带属性的外联加载会中断解析渲染，立即下载执行  
+2. js 内联及不带属性的外联加载会中断解析渲染，立即下载执行  
 script 带 defer 属性的会异步有序加载，不会阻止 HTML 解析，会在 DOMContentLoaded 事件完成加载和执行（执行的时候会保证 DOM 树已构建）  
 script 带 async 属性的会异步无序加载
 
