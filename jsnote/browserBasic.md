@@ -136,16 +136,17 @@ document.body.oncontextmenu = null;
 
 # CSS 生效是通过计算权重来实现的，权重最高就生效
 
-1.Browser normal declarations  
-2.User normal declarations  
-3.App normal declarations  
-4.App important declarations  
-5.User important declarations
+1. Browser normal declarations  
+2. User normal declarations  
+3. App normal declarations  
+4. App important declarations  
+5. User important declarations
 
-a style  
-b id attributes  
-c other attributes  
-d element names
+1. element names
+2. other attributes 
+3. id attributes
+4. style
+
 
 # BFC
 
