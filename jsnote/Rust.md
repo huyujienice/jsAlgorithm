@@ -118,7 +118,12 @@ let is_empty = map.is_empty();          // 是否为空
 
 ### 类型转换
 
-使用 From 和 Into Traits 来实现 2 个类型的相互转换
+使用 From 和 Into Traits 来实现 2 个类型的相互转换    
+1. From trait定义“怎么根据另一种类型生成自己”
+2. 当为自定义的类型实现了From trait,那么同时将免费获得Into trait，使用into()通常需要指明类型，因为编译器不能推断    
+
+自定义类型转为String: 为自定义类型实现Display trait，会提供to_string()方法，且可直接打印   
+&str转为数字：使用 parse::<i32>().unwrap()
 
 ### Result 与 Option
 
