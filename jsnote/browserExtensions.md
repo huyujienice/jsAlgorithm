@@ -7,10 +7,15 @@ manifest 是整个项目的配置信息,content_scripts 配置内容脚本,backg
 ## 内容脚本
 
 内容脚本可以做到每个网页都加载 js 和 css 文件，同网页交互都是都过内容脚本进行的
+可同时使用 window.可同时使用 window.postMessage.runtime 和 chrome.runtime.sendMessage
 
 ## 注入脚本
 
-注入脚本可通过 chrome.action,chrome.runtime,chrome.storage 监听，作为中间层传递网页与扩展的消息
+注入脚本可通过
+
+1. chrome.action.openPopup 打开扩展
+2. chrome.storage.local 存储消息
+3. chrome.runtime.onMessage.addListener,chrome.runtime.sendMessage 监听和传递消息
 
 ## 扩展储存
 
