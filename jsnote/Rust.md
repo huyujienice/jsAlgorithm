@@ -166,6 +166,20 @@ enum Result<T,E>{
 使用?表示提前返回函数 Err 或者 None 的结果
 使用 unwrap()表示出现 Err 或 None,程序直接 panic,使用 unwrap_or 可提供默认值
 
+### 引用，裸指针，智能指针
+在Rust中内存管理的核心概念
+1. 裸指针Raw Pointer
+所有用到的地方都需要使用unsafe块，可以指向null或者任意内存地址，不受约束没有生命周期
+
+2. 引用Reference
+一种安全指针类型，用于借用内存。编译器会通过借用规则和生命周期进行约束
+
+3. 智能指针Smart Pointer
+具有指针功能的结构体，不仅仅可存储指向某个数据的指针，还可以提供额外的功能   
+  - Box<T> 数据分配到堆上，且拥有数据所有权
+  - Rc<T>/Arc<T> 引用计数指针，允许多个所有者共享数据
+  - RefCell<T> 允许运行时检查作用规则
+
 ### Rc,Arc,Cell,RefCell
 
 rust 规则
