@@ -536,7 +536,7 @@ configureble enumerable get set
 enumerable 属性，称为“可枚举性”，如果该属性为 false，以下四个操作会忽略 enumerable 为 false 的属性
 
 1. for...in 循环：只循环对象自身的和可继承的可枚举的属性
-2. Object.keys():返回对象自身的所有可枚举的属性的键名
+2. Object.keys()/Object.entries():返回对象自身的所有可枚举的属性的键名
 3. JSON.stringify():只串化对象自身的可枚举的属性
 4. Object.assign():忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举属性
 
