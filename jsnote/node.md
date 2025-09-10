@@ -1,7 +1,7 @@
 # event loop
 js实现单线程异步执行的关键    
 1. 主线程存在一个执行栈(execution context stack)，同步且不停执行任务    
-2. 存在执行队列(task queue)，执行队列中的任务在合适的时刻可放入执行栈中执行      
+2. 存在执行队列(task queue)，本质上是单独的线程，执行队列中的任务在合适的时刻可放入执行栈中执行      
 
     2.1. macrotask       
          
