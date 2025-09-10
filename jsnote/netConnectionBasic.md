@@ -235,8 +235,8 @@ websocket 是基于 TCP 的一种新的持久化应用层网络协议。它实�
 主要流程：
 
 1. 客户端发起 HTTP 协议完成单次握手,协议新增请求头  
-   1.1 Connection:Upgrade
-   1.2 Upgrade:websocket
+   - Connection:Upgrade
+   - Upgrade:websocket
 2. 服务端返回 101,表示成功建立 websocket 协议
 3. 全双工 websocket 通讯
 
