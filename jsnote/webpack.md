@@ -125,8 +125,7 @@ pitch 执行顺序跟正常 loader 执行顺序完全相反
 或者说类似浏览器事件传输 capture phase , target phase , bubbling phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
-enforce 相对于 rule 数组中的每一项来说的，先根据 enforce 和书写方式对 rule 进行排序，然后对 rule 中的 loader 进行排序  
-rule 中的 loader 不会进行去重
+webpack会将相同匹配的rule合并成loader链，按照enforce阶段分组，每个阶段内按照匹配顺序和use数组进行顺序确定。
 
 # 插件
 
