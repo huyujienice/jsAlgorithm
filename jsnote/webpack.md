@@ -36,7 +36,7 @@ output 占位符：
 module 属性选项决定了如何处理项目中不同类型的模块
 
 module.generator： 统一配置所有生成器选项  
-可以配置不同位置的模块生成不同的 output.publicPath (浏览器访问URL路径) 和 output.path (文件系统路径) ,对资源文件放置在特定位置的场景统一管理提供了解决方案
+可以配置不同位置的模块生成不同的 output.publicPath (浏览器访问 URL 路径) 和 output.path (文件系统路径) ,对资源文件放置在特定位置的场景统一管理提供了解决方案
 
 module.parser：集中配置所有解析器的选项  
 例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为
@@ -125,7 +125,7 @@ pitch 执行顺序跟正常 loader 执行顺序完全相反
 或者说类似浏览器事件传输 capture phase , target phase , bubbling phase
 
 enforce 和 webpack.config.js 中 loader 配置执行顺序怎么确定？
-webpack会将相同匹配的rule合并成loader链，按照enforce阶段分组，每个阶段内按照匹配顺序和use数组进行顺序确定。
+webpack 会将相同匹配的 rule 合并成 loader 链，按照 enforce 阶段分组，每个阶段内按照匹配顺序和 use 数组进行顺序确定。
 
 # 插件
 
@@ -167,7 +167,7 @@ runtime 会通过 manifest 来解析和加载模块。
 webpack 底层框架代码，包括模块化，异步加载，HMR 等  
 编译结果 bundle，整体是由一个 IIFE 包裹，包括
 
-1. **__webpack_modules__** 对象，即所有模块对象，key 为模块 path,value 为模块源码
+1. ****webpack_modules**** 对象，即所有模块对象，key 为模块 path,value 为模块源码
 2. **webpack_module_cache** 对象，存储已使用过的模块对象
 3. **webpack_require** 函数，实现模块引用 require 逻辑
 
@@ -212,7 +212,7 @@ optimization.splitChunks.cacheGroups 允许自定义规则分离 chunk
 ### source map
 
 source map 是将编译打包压缩过后的代码映射回源代码的文件，是用来调试源码的，源码最后会携带特殊注释//# sourceMappingURL 的属性指向 sourcemap 地址供浏览器下载  
-source map 是一个 JSON 文件，通常以 .map 扩展名进行保存，记录了代码转换前后的所有信息，其中 mapping 字段通过 VLQ 编码映射位置关系，sourcesContent字段记录原始源文件内容   
+source map 是一个 JSON 文件，通常以 .map 扩展名进行保存，记录了代码转换前后的所有信息，其中 mapping 字段通过 VLQ 编码映射位置关系，sourcesContent 字段记录原始源文件内容
 
 通过 webpack.config.js 中 devtool 字段配置  
 在开发环境可使用 eval 开头的 sourcemap 加快编译速度  
@@ -326,27 +326,27 @@ speed-measure-webpack-plugin 分析分析打包速度
 例如：vue.config.js 通过 vue inspect > output.js 生成最终配置项
 
 1. 设置 cache 属性（默认生产模式为 false，开发模式为 true）
-2. resolve 部分优化(模块解析)：  
-   2.1 resolve.externals:对第三方包进行公共包 CDN 引用，降低包大小  
-   2.2 resolve.alias:使用别名缩短模块路径，降低文件解析成本  
-   2.3 resolve.mainFields:使用 npm 包中 package.json 中哪个字段(main || exports)来导入 npm 包，减少第三方模块搜索步骤  
-   3.4 resolve.extensions:为未标明后缀的文件引入提供解析文件的后缀
-3. module 优化:  
-   3.1 include 和 exclude:排除不需要处理的 loader 文件  
-   3.2 cache-loader:对 loader 解析过的文件进行缓存  
-   3.3 noParse:与 external 功能类似，且无法共存。主要作用就是防止 webpack 解析，跳过编译环节，忽略大型的 library 可以提高构建性能
-4. optimization 优化:  
-   4.1 splitChunks:代码分割  
-   4.2 runtimeChunk:创建一个额外的文件或者 chunk,减少 entry chunk 体积，提高性能
-5. Plugin 优化：  
-   5.1 eslint-webpack-plugin:可以配置 eslint 自动 fix 和多核编译  
-   5.2 mini-css-extract-plugin:抽离 css 至单独文件，可上传 CDN  
-   5.3 DLLPlugin:提前将不会更改的框架公共代码打包，减少打包体积（VUE CLI 可以使用）
+2. resolve 部分优化(模块解析)：
+    - resolve.externals:对第三方包进行公共包 CDN 引用，降低包大小
+    - resolve.alias:使用别名缩短模块路径，降低文件解析成本
+    - resolve.mainFields:使用 npm 包中 package.json 中哪个字段(main || exports)来导入 npm 包，减少第三方模块搜索步骤
+    - resolve.extensions:为未标明后缀的文件引入提供解析文件的后缀
+3. module 优化:
+    - include 和 exclude:排除不需要处理的 loader 文件
+    - cache-loader:对 loader 解析过的文件进行缓存
+    - noParse:与 external 功能类似，且无法共存。主要作用就是防止 webpack 解析，跳过编译环节，忽略大型的 library 可以提高构建性能
+4. optimization 优化:
+    - splitChunks:代码分割
+    - runtimeChunk:创建一个额外的文件或者 chunk,减少 entry chunk 体积，提高性能
+5. Plugin 优化：
+    - eslint-webpack-plugin:可以配置 eslint 自动 fix 和多核编译
+    - mini-css-extract-plugin:抽离 css 至单独文件，可上传 CDN
+    - DLLPlugin:提前将不会更改的框架公共代码打包，减少打包体积（VUE CLI 可以使用）
+    - purgecss-webpack-plugin:对 css 文件进行 tree-shaking
 6. 多线程打包：
-   6.1 happypack  
-   6.2 thread-loader
-7. purgecss-webpack-plugin:对 css 文件进行 tree-shaking
-8. 通过 devtool 配置合适的 sourcemap:开发环境可配置 eval 开头的 sourcemap 加快编译速度
+    - happypack
+    - thread-loader
+7. 通过 devtool 配置合适的 sourcemap:开发环境可配置 eval 开头的 sourcemap 加快编译速度
 
 ### webpack 模块联邦
 
