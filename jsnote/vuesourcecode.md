@@ -112,6 +112,11 @@ computed及watch均是以此而来
 3. HoistStatic静态节点缓存优化    
 4. CacheHandler缓存事件优化  
 5. tree-shaking底层框架支持  
+  
+## defineProperty对比Proxy
+1. 只能拦截已有属性，动态添加的属性无法监听，得使用Vue.set
+2. 数组需特殊处理，无法监听length变化也监听不到新下标出现，官方提供变异方法供使用,push,pop,shift,unshift,splice,sort,reverse
+3. 不支持Map,Set,defineProperty只支持对象
 
 ## PatchFlag
 PatchFlag是一个标识，是一个枚举ID
