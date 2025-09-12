@@ -213,11 +213,10 @@ window.onpopstate只能监听浏览器前进后退改变url，如果是a调整�
 
 
 ### vue2.0强制更新
-vue2.0不允许在已经创建的实例上动态添加新的响应式属性   
+vue2.0无法监听在已经创建的实例上动态添加新的响应式属性   
 若想实现数据与视图同步更新，可采取以下方案：
 1. Vue.set()
-2. Object.assign()
-3. this.forceUpdate()    
+
 
 ### $attrs
 $attrs 是一个特殊的对象，包含了父组件未声明的所有属性，包括props和emit       
