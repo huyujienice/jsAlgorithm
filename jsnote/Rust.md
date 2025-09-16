@@ -26,12 +26,12 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 2. from_utf8 将字节数组转为字符串
 3. to_le_bytes 将数字(整数浮点数都可以)转为小端字节序字节数组
 4. from_le_bytes 将小端字节序字节数组转为数字
-5. to_vec 将&[..]转为 vec
+5. to_vec 将&[]转为 vec
 
 ### 字符串
 
-String 被存储为由字节组成的 vector(Vec<u8>)  
-&str 是一个总是指向有效的 UTF-8 序列的切片(&[u8])
+String 存储有效的UTF-8编码的Vec(Vec<u8>)  
+&str 指向有效的UTF-8编码的切片(&[u8])
 
 ### usize
 指针大小的无符号整数类型
