@@ -3,9 +3,9 @@
 1. 二进制：以 0b 开头，例如 0b1010。
 2. 八进制：以 0o 开头，例如 0o123。
 3. 十六进制：以 0x 开头，例如 0x1A。
-   
-0b,0o,0x都是整型字面量，默认类型是i32,可与i32直接进行运算，或通过as转为其他整形类型进行运算   
-进制的前缀只影响“怎么看”，不影响“是什么类型”    
+
+0b,0o,0x 都是整型字面量，默认类型是 i32,可与 i32 直接进行运算，或通过 as 转为其他整形类型进行运算  
+进制的前缀只影响“怎么看”，不影响“是什么类型”
 
 ### 字节数组
 
@@ -23,10 +23,10 @@ let bytes_vec: Vec<u8> = vec![0x01, 0x02, 0x03, 0x04];
 &[u8] 常用方法：
 
 1. as_bytes 将字符串转为字节数组
-2. from_utf8 将字节数组转为字符串 
+2. from_utf8 将字节数组转为字符串
 3. to_le_bytes 将数字(整数浮点数都可以)转为小端字节序字节数组
 4. from_le_bytes 将小端字节序字节数组转为数字
-5. to_vec 将&[..]转为vec
+5. to_vec 将&[..]转为 vec
 
 ### 字符串
 
@@ -50,6 +50,7 @@ b.pop();                    // 删除并返回尾部元素
 b.insert(4, 5);             // 指定位置插入
 b.remove(1);                // 删除指定索引元素
 b.clear();                  // 清空所有元素
+b.swap(0,1);                // 交换下标0,1的元素
 let first = b[0];           // 索引访问（可能 panic）
 let first = b.get(0);       // 返回 Option<&T>
 let slice = &b[1..3];       // 切片
@@ -86,8 +87,8 @@ v.into_iter()    // T（消耗 Vec）
    collect() 把迭代结果收集到集合  
    count() 元素个数  
    sum() / product() 求和 / 求积  
-   any(f) 任一满足返回bool    
-   all(f) 全部满足返回bool    
+   any(f) 任一满足返回 bool  
+   all(f) 全部满足返回 bool  
    find(f) 返回第一个 Some(&T)  
    position(f) 返回首个索引 Some(usize)
 
@@ -119,12 +120,13 @@ let is_empty = map.is_empty();          // 是否为空
 
 ### 类型转换
 
-使用 From 和 Into Traits 来实现 2 个类型的相互转换    
-1. From trait定义“怎么根据另一种类型生成自己”
-2. 当为自定义的类型实现了From trait,那么同时将免费获得Into trait，使用into()通常需要指明类型，因为编译器不能推断    
+使用 From 和 Into Traits 来实现 2 个类型的相互转换
 
-自定义类型转为String: 为自定义类型实现Display trait，会提供to_string()方法，且可直接打印   
-&str转为数字：使用 parse::<i32>().unwrap()
+1. From trait 定义“怎么根据另一种类型生成自己”
+2. 当为自定义的类型实现了 From trait,那么同时将免费获得 Into trait，使用 into()通常需要指明类型，因为编译器不能推断
+
+自定义类型转为 String: 为自定义类型实现 Display trait，会提供 to_string()方法，且可直接打印  
+&str 转为数字：使用 parse::<i32>().unwrap()
 
 ### Result 与 Option
 
@@ -168,18 +170,21 @@ enum Result<T,E>{
 使用 unwrap()表示出现 Err 或 None,程序直接 panic,使用 unwrap_or 可提供默认值
 
 ### 引用，裸指针，智能指针
-在Rust中内存管理的核心概念
-1. 裸指针Raw Pointer
-所有用到的地方都需要使用unsafe块，可以指向null或者任意内存地址，不受约束没有生命周期
 
-2. 引用Reference
-一种安全指针类型，用于借用内存。编译器会通过借用规则和生命周期进行约束
+在 Rust 中内存管理的核心概念
 
-3. 智能指针Smart Pointer
-具有指针功能的结构体，不仅仅可存储指向某个数据的指针，还可以提供额外的功能   
-  - Box<T> 数据分配到堆上，且拥有数据所有权
-  - Rc<T>/Arc<T> 引用计数指针，允许多个所有者共享数据
-  - RefCell<T> 允许运行时检查作用规则
+1. 裸指针 Raw Pointer
+   所有用到的地方都需要使用 unsafe 块，可以指向 null 或者任意内存地址，不受约束没有生命周期
+
+2. 引用 Reference
+   一种安全指针类型，用于借用内存。编译器会通过借用规则和生命周期进行约束
+
+3. 智能指针 Smart Pointer
+   具有指针功能的结构体，不仅仅可存储指向某个数据的指针，还可以提供额外的功能
+
+-   Box<T> 数据分配到堆上，且拥有数据所有权
+-   Rc<T>/Arc<T> 引用计数指针，允许多个所有者共享数据
+-   RefCell<T> 允许运行时检查作用规则
 
 ### Rc,Arc,Cell,RefCell
 
