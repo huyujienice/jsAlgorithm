@@ -57,3 +57,7 @@ vite 的代码拆分是生产构建阶段，基于 Rollup 的
 6. transform:当模块内容被加载时，对模块源码进行转换
 7. handleHotUpdate:处理 HMR 逻辑
 8. renderChunk:生产构建阶段对 chunk 进行最后处理
+
+
+### Rolldown
+rust开发的js打包工具，在下个阶段代替esbuild和rollup，实现vite框架更快更强的性能   
