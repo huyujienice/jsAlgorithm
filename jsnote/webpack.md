@@ -39,7 +39,8 @@ module.generator： 统一配置所有生成器选项
 可以配置不同位置的模块生成不同的 output.publicPath (浏览器访问 URL 路径) 和 output.path (文件系统路径) ,对资源文件放置在特定位置的场景统一管理提供了解决方案
 
 module.parser：集中配置所有解析器的选项  
-例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为
+例如，对于 JavaScript 模块，你可以设置 module.parser.javascript 来配置 JavaScript 解析器的行为    
+module.parse.json 配置 JSON 解析器行为   
 
 module.rules: 配置不同模块需要不同的 loader 进行处理
 
@@ -136,13 +137,6 @@ webpack 会将相同匹配的 rule 合并成 loader 链，按照 enforce 阶段�
 一个 class 类，定义 apply 方法，以 compiler 为参数，指定挂载到 webpack 自身的事件钩子  
 自定义插件举例：https://webpack.docschina.org/contribute/writing-a-plugin/#example
 
-compilation 常用方法：
-
-assets 是一个包含 compilation 中所有静态资源的对象，该对象的键是资源路径，值是文件的源码
-
-1. compilation.emitAsset:可以向 compilation 添加新的资源
-2. compilation.addModule:添加自定义模块
-3. compilation.addEntry:添加入口，功能上与直接定义 entry 配置相同
 
 ### compiler 和 compilation
 
@@ -152,6 +146,14 @@ webpack 从开始执行到结束，compiler 只会实例化一次。compiler 对
 
 compilation 对象，提供了 webpack 大部分生命周期 Hook API 供自定义扩展处理使用  
 compilation 对象记录了单次从源码构建到生成资源过程中的信息，它储存了当前的模块资源，编译生成的资源，变化的文件以及被跟踪依赖的状态信息
+
+### compilation 常用方法：
+
+assets 是一个包含 compilation 中所有静态资源的对象，该对象的键是资源路径，值是文件的源码
+
+1. compilation.emitAsset:可以向 compilation 添加新的资源
+2. compilation.addModule:添加自定义模块
+3. compilation.addEntry:添加入口，功能上与直接定义 entry 配置相同
 
 ### 异步插件
 
