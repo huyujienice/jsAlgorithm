@@ -56,7 +56,7 @@ vite 的代码拆分是生产构建阶段，基于 Rollup 的
 1. config:vite 读取配置文件后调用，可以用来修改配置
 2. configureServer:在开发阶段调用，用于配置开发服务器，如添加自定义中间件
 3. transformIndexHtml:用于转换 index.html 的内容
-4. resolveId:用于解析模块的标识符，返回模块 ID
+4. resolveId:用于解析模块的标识符，返回模块 ID，此步骤可以进行虚拟模块拆分
 5. load:当 resolvedId 返回有效模块 ID 后，load 来加载模块内容
 6. transform:当模块内容被加载时，对模块源码进行转换
 7. handleHotUpdate:处理 HMR 逻辑
