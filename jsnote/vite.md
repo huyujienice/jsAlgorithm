@@ -1,11 +1,15 @@
 vite 是新一代打包构建工具，专注于快速开发体验和优化的构建速度
 
 ### 如何制定 vite 插件的执行顺序
+vite.config.js中plugins数组顺序，从上往下依次注册
 
 设置 enforce 修饰符来强制插件位置
 
-1. pre:在 vite 核心插件之前调用该插件
-2. post:在 vite 构建插件之后调用该插件
+1. pre:在 vite 普通插件之前调用该插件
+2. post:在 vite 普通插件之后调用该插件
+   
+插件执行顺序受enforce,插件挂载生命周期钩子函数，vite.config.js中plugins数组注册顺序影响       
+生命周期>enforce>plugins注册    
 
 ### vite 是否支持 commonjs 写法
 
