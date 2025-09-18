@@ -30,7 +30,7 @@ vite 开发阶段冷启动过程：
 综上所述，开发模式 vite 比 webpack 快的原因：
 
 1. vite 不需要全量打包，这是比 webpack 快的主要原因，vite 为按需加载
-2. vite 在编译引擎利用了 esbuild,更快(esbuild 使用 GO 编写)
+2. vite 在编译引擎利用了 esbuild,更快(esbuild 使用 GO 编写)，vite下一代使用rolldown进行编译，rust编写，性能更强    
 3. vite 充分利用浏览器缓存。业务源码模块使用协商缓存，本地依赖模块使用强缓存
 
 ### vite 对比 webpack 优缺点
