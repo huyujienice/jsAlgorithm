@@ -30,6 +30,12 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 2. webpack 中使用 import(/_ webpackPrefetch: true _/ './sub1.js')，import(/_ webpackPreload: true _/ './sub2.js')
 3. canvas 提前生成背景底图
 
+
+### 小程序性能监控体系搭建
+1. grafana + Promethues 完成采集展示
+2. 服务定期扫描nginx访问日志access_log,nginx通过log_format记录请求头信息，处理解析数据并提供metrics数据源
+3. 客户端将监控数据格式化至请求头，访问固定的图片连接
+
 ### 复杂业务分层
 
 1. 小程序异步 canvas 生成图片分享，分为数据层和视图层模块
