@@ -7,7 +7,7 @@ manifest 是整个项目的配置信息,content_scripts 配置内容脚本,backg
 ## 内容脚本
 
 内容脚本可以做到每个网页都加载 js 和 css 文件，同网页交互都是都过内容脚本进行的
-可同时使用 window.可同时使用 window.postMessage.runtime 和 chrome.runtime.sendMessage
+可同时使用 window.可同时使用 window.postMessage 和 chrome.runtime.sendMessage
 
 ## 注入脚本
 
