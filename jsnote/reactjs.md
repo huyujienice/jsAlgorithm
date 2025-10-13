@@ -17,8 +17,7 @@ JSX(JavaScript XML)是一种语法扩展，运行在 js 中开发 html 结构
 预设条件：
 
 1. 同层 diff
-2. dom类型及key值递归判断是否可复用dom
-
+2. dom 类型及 key 值递归判断是否可复用 dom
 
 整体逻辑：
 
@@ -38,8 +37,7 @@ Reactjs 中 Fiber 架构可实现多阶段渲染，提高性能和响应性
 2. 双缓冲机制：reactjs 维护 2 个 Fiber 树，显示树与计算树。当更新完成后，计算树变成新的显示树
 3. 工作循环：合作调度处理工作单元，可暂停和恢复工作
 4. 优先级：为不同类型更新分配了优先级，比如用户交互更新优于网络更新
-5. 两个阶段：Fiber 分为两个主要阶段，render 阶段及 commit 阶段。render 阶段可中断，用于计算需要更新的 dom。commit 阶段不可中断，用于将计算结果应用到 dom 上  
-
+5. 两个阶段：Fiber 分为两个主要阶段，render 阶段及 commit 阶段。render 阶段可中断，用于计算需要更新的 dom。commit 阶段不可中断，用于将计算结果应用到 dom 上
 
 ## Reactjs diff vs Vue diff
 
@@ -51,6 +49,11 @@ Reactjs 中 Fiber 架构可实现多阶段渲染，提高性能和响应性
 
 1. 整体逻辑不同，reactjs 实现双层遍历，vue 实现双端 diff 及预处理 diff
 2. 提高性能方式不同，reactjs 引入 Fiber 架构实现多阶段渲染，vue 引入 nexttick 渲染队列实现延迟去重渲染
+
+### React 实现 vue 中 computed 和 watch
+
+1. useMemo 实现类似 computed 效果
+2. useEffect 实现类似 watch 效果
 
 ## React 生命周期
 
@@ -100,8 +103,8 @@ function MyComponent() {
 
 ### Hook
 
-1. useCallback:多次渲染中缓存函数     
-2. useMemo:多次渲染中缓存计算结果     
+1. useCallback:多次渲染中缓存函数
+2. useMemo:多次渲染中缓存计算结果
 3. useContext:读取和订阅 context,实现更新数据传递
 4. useEffect
 
