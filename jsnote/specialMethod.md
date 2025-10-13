@@ -34,7 +34,7 @@ https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0004a2ef9b8f80
 ### 小程序性能监控体系搭建
 1. grafana + Promethues 完成采集展示
 2. 服务定期扫描nginx访问日志access_log,nginx通过log_format记录请求携带的信息，处理解析数据并提供metrics数据源
-3. 客户端将监控数据格式化，携带数据访问固定的图片连接
+3. 客户端将监控数据格式化，携带数据访问固定的图片链接
 
 ### 复杂业务分层
 
