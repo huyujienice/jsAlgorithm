@@ -96,6 +96,8 @@ document.body.oncut = null;
 document.body.onselectstart = null;  
 document.body.oncontextmenu = null;
 
+恢复复制剪切事件对于CSDN无效，待解决
+
 ### preventDefault
 
 取消默认操作，使用 peventDefault  
