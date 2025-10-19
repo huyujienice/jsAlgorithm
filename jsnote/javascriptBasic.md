@@ -791,6 +791,55 @@ Promise.reject()
 
 Promise.try()
 
+### 简单实现Promise
+```js
+class simplePromise {
+    constructor(exec) {
+        this.status = 'pending';
+        this.value = undefined;
+        this.reason = undefined;
+        this.onResolveCallbacks = [];
+        this.onRejectCallbacks = [];
+        const resolve = (value) => {
+            if (this.status === 'pending') {
+                this.value = value;
+                this.status = 'resolve';
+                this.onResolveCallbacks.forEach((fn) => fn());
+            }
+        };
+        const reject = (reason) => {
+            if (this.status === 'pending') {
+                this.reason = reason;
+                this.status = 'reject';
+                this.onRejectCallbacks.forEach((fn) => fn());
+            }
+        };
+        try {
+            exec(resolve, reject);
+        } catch (error) {
+            reject(error);
+        }
+    }
+    then(onResolve, onReject) {
+        if (this.status === 'resolve') {
+            onResolve(this.value);
+        }
+        if (this.status === 'reject') {
+            onReject(this.reason);
+        }
+        if (this.status === 'pending') {
+            this.onResolveCallbacks.push(() => {
+                onResolve(this.value);
+            });
+            this.onRejectCallbacks.push(() => {
+                onReject(this.reason);
+            });
+        }
+    }
+}
+
+```
+
 ## Generator
 
 Generator 函数是 ES6 提供的一种异步编程的解决方案
