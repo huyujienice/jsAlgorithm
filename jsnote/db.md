@@ -11,6 +11,23 @@ RDBMS:Relational Database Management System,关系型数据库管理系统
 6. 复合键：复合键（组合键）将多个列作为一个索引键，一般用于复合索引
 7. 完整性参照：参照的完整性要求关系中不允许引用不存在的实体。与实体的完整性是关系模型必须满足的完整性约束条件，目的是保证数据的一致性  
 
+## 关键字执行顺序
+1. FROM:确定数据来源
+2. ON:执行JOIN条件
+3. JOIN
+4. WHERE:执行过滤条件
+5. GROUP BY:根据指定的列分组结果集合
+6. HAVING:执行分组过滤条件
+7. SELECT:选取指定列
+8. DISTINCT:去除重复数据
+9. ORDER BY:最后对结果进行排序
+10. LIMIT:限制结果集数量
+
+### DROP,DELETE,TRUNCATE区别
+DROP 删除表结构和表数据
+DELETE 删除表内的部分数据，并带上WHERE子句
+TRUNCATE 保留表结构，删除表数据 
+
 
 ## 数据类型
 1. 数值类型
