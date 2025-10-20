@@ -41,7 +41,7 @@ TRUNCATE 保留表结构，删除表数据
 varchar(32)，表示可以存储32个字符    
 
 ### INT(5)
-INT存储空间是4byte,(5)只是“显示宽度”，只有在字段加上ZEROFILL才有效果
+INT存储空间是4 Byte,(5)只是“显示宽度”，只有在字段加上ZEROFILL才有效果
 ```sql
 CREATE TABLE t1 (
   a INT(5) ZEROFILL
